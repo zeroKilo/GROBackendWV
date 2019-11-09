@@ -11,3 +11,11 @@ to make the game use this backend make sure following lines are set in yeti.ini
 > OnlineAccessKey=8dtRv2oj
 
 [![Alt text](https://img.youtube.com/vi/7Gix54amKxk/0.jpg)](https://www.youtube.com/watch?v=7Gix54amKxk)
+
+
+
+Credits:
+
+LifeCoder - For helping with reversing
+
+Kinnay - For the helpful wiki and the predone RE work
