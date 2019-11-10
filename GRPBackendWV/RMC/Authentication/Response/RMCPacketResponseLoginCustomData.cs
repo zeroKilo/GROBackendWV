@@ -15,7 +15,7 @@ namespace GRPBackendWV
         public KerberosTicket ticket;
         public string address = Global.serverBindAddress;
         public ushort port = UDPMainServer.listenPort;
-        public uint serverID = 0x1000;
+        public uint serverID = UDPMainServer.serverPID;
         public string pConnectionData = "prudps:/address=#ADDRESS#;port=#PORT#;CID=1;PID=#SERVERID#;sid=1;stream=3;type=2";
         public uint unk2 = 0;
         public ushort unk3 = 0;

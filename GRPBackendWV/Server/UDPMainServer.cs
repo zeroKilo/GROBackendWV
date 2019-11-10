@@ -11,7 +11,7 @@ namespace GRPBackendWV
 {
     public static class UDPMainServer
     {
-        public static readonly uint serverPID = 2;
+        public static readonly uint serverPID = 0x1000;
         public static readonly object _sync = new object();
         public static bool _exit = false;
         public static ushort listenPort = 21031;
