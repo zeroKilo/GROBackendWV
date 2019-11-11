@@ -63,9 +63,36 @@
     <Compile Include="Global.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Kerberos\KerberosTicket.cs" />
+    <Compile Include="LogFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogFilter.Designer.cs">
+      <DependentUpon>LogFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="QPacketHandler.cs" />
+    <Compile Include="RMC\Unknown24\Request\RMCPacketRequestUnknown24.cs" />
+    <Compile Include="RMC\Unknown24\Response\RMCPacketResponseUnknown24.cs" />
+    <Compile Include="RMC\Unknown67\Response\RMCPacketResponseUnknown67.cs" />
+    <Compile Include="RMC\Unknown6B\Response\RMCPacketResponseUnknown6B.cs" />
+    <Compile Include="RMC\Unknown69\Response\RMCPacketResponseUnknown69.cs" />
+    <Compile Include="RMC\Unknown6A\Response\RMCPacketResponseUnknown6A.cs" />
+    <Compile Include="RMC\Unknown6E\Response\RMCPacketResponseUnknown6E.cs" />
+    <Compile Include="RMC\Unknown6F\Response\RMCPacketResponseUnknown6F.cs" />
+    <Compile Include="RMC\Unknown70\Response\RMCPacketResponseUnknown70.cs" />
     <Compile Include="RMC\Secure\Request\RMCPacketRequestRegisterEx.cs" />
     <Compile Include="RMC\Secure\Response\RMCPacketResponseRegisterEx.cs" />
+    <Compile Include="RMC\AMMGameClient\Response\RMCPacktResponseAMM_Method7.cs" />
+    <Compile Include="RMC\Unknown74\Response\RMCPacketResponseUnknown74.cs" />
+    <Compile Include="RMC\Unknown76\Response\RMCPacketResponseUnknown76.cs" />
+    <Compile Include="RMC\Unknown7A\Response\RMCPacketResponseUnknown7A.cs" />
+    <Compile Include="RMC\Unknown7B\Response\RMCPacketResponseUnknown7B.cs" />
+    <Compile Include="RMC\Unknown7D\Response\RMCPacketResponseUnknown7D.cs" />
+    <Compile Include="RMC\Unknown80\Response\RMCPacketResponseUnknown80.cs" />
+    <Compile Include="RMC\Unknown82\Response\RMCPacketResponseUnknown82.cs" />
+    <Compile Include="RMC\Unknown83\Response\RMCPacketResponseUnknown83.cs" />
+    <Compile Include="RMC\Unknown86\Response\RMCPacketResponseUnknown86.cs" />
+    <Compile Include="RMC\Unknown87\Response\RMCPacketResponseUnknown87.cs" />
+    <Compile Include="RMC\Unknown89\Response\RMCPacketResponseUnknown89.cs" />
     <Compile Include="Server\UDPMainServer.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Program.cs" />
@@ -86,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LogFilter.resx">
+      <DependentUpon>LogFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -109,6 +139,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

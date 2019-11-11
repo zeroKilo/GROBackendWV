@@ -55,5 +55,10 @@ namespace GRPBackendWV
         {
             Global.useDetailedLog = toolStripButton4.Checked;
         }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            new LogFilter().Show();
+        }
     }
 }
