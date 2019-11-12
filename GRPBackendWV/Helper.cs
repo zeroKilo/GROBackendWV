@@ -13,6 +13,10 @@ namespace GRPBackendWV
     {
         public static Random rnd = new Random();
 
+        public static bool ReadBool(Stream s)
+        {
+            return s.ReadByte() != 0;
+        }
         public static byte ReadU8(Stream s)
         {
             return (byte)s.ReadByte();
@@ -26,6 +30,20 @@ namespace GRPBackendWV
         public static uint ReadU32(Stream s)
         {
             return (uint)((byte)s.ReadByte() | ((byte)s.ReadByte() << 8) | ((byte)s.ReadByte() << 16) | ((byte)s.ReadByte() << 24));
+        }
+
+        public static float ReadFloat(Stream s)
+        {
+            byte[] b = new byte[4];
+            s.Read(b, 0, 4);
+            return BitConverter.ToSingle(b, 0);
+        }
+
+        public static double ReadDouble(Stream s)
+        {
+            byte[] b = new byte[8];
+            s.Read(b, 0, 8);
+            return BitConverter.ToDouble(b, 0);
         }
 
         public static string ReadString(Stream s)
@@ -52,6 +70,11 @@ namespace GRPBackendWV
             s.WriteByte(v);
         }
 
+        public static void WriteBool(Stream s, bool v)
+        {
+            s.WriteByte((byte)(v ? 1 : 0));
+        }
+
         public static void WriteU16(Stream s, ushort v)
         {
             s.WriteByte((byte)v);
@@ -66,12 +89,33 @@ namespace GRPBackendWV
             s.WriteByte((byte)(v >> 24));
         }
 
+        public static void WriteFloat(Stream s, float v)
+        {
+            byte[] b = BitConverter.GetBytes(v);
+            s.Write(b, 0, 4);
+        }
+
+        public static void WriteDouble(Stream s, double v)
+        {
+            byte[] b = BitConverter.GetBytes(v);
+            s.Write(b, 0, 8);
+        }
+
         public static void WriteString(Stream s, string v)
         {
-            WriteU16(s, (ushort)(v.Length + 1));
-            foreach (char c in v)
-                s.WriteByte((byte)c);
-            s.WriteByte(0);
+            if (v != null)
+            {
+                WriteU16(s, (ushort)(v.Length + 1));
+                foreach (char c in v)
+                    s.WriteByte((byte)c);
+                s.WriteByte(0);
+            }
+            else
+            {
+                s.WriteByte(1);
+                s.WriteByte(0);
+                s.WriteByte(0);
+            }
         }
 
         public static void WriteStringList(Stream s, List<string> v)

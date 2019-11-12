@@ -60,5 +60,10 @@ namespace GRPBackendWV
         {
             new LogFilter().Show();
         }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+        }
     }
 }

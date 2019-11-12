@@ -13,26 +13,26 @@ namespace GRPBackendWV
         {
             Authentication = 0xA,
             Secure = 0xB,
-            Unknown24 = 0x24,
+            Telemetry = 0x24,
             AMMGameClient = 0x65,
-            Unknown67 = 0x67,
-            Unknown69 = 0x69,
+            PlayerProfileService = 0x67,
+            InventoryService = 0x69,
             Unknown6A = 0x6A,
             Unknown6B = 0x6B,
-            Unknown6E = 0x6E,
+            ChatService = 0x6E,
             Unknown6F = 0x6F,
-            Unknown70 = 0x70,
-            Unknown74 = 0x74,
-            Unknown76 = 0x76,
+            PartyService = 0x70,
+            ProgressionService = 0x74,
+            RewardService = 0x76,
             Unknown7A = 0x7A,
-            Unknown7B = 0x7B,
-            Unknown7D = 0x7D,
-            Unknown80 = 0x80,
-            Unknown82 = 0x82,
+            Loadout = 0x7B,
+            UnlockService = 0x7D,
+            OpsProtocolService = 0x80,
+            ServerInfo = 0x82,
             Unknown83 = 0x83,
             Unknown86 = 0x86,
-            Unknown87 = 0x87,
-            Unknown89 = 0x89
+            ProfanityFilterService = 0x87,
+            AbilityService = 0x89
         }
 
         public PROTOCOL proto;
@@ -78,28 +78,28 @@ namespace GRPBackendWV
                 case PROTOCOL.Secure:
                     HandleSecureMethods(m);
                     break;
-                case PROTOCOL.Unknown24:
-                    HandleUnknown24Methods(m);
+                case PROTOCOL.Telemetry:
+                    HandleTelemetryMethods(m);
                     break;
                 case PROTOCOL.AMMGameClient:
-                case PROTOCOL.Unknown67:
-                case PROTOCOL.Unknown69:
+                case PROTOCOL.PlayerProfileService:
+                case PROTOCOL.InventoryService:
                 case PROTOCOL.Unknown6A:
                 case PROTOCOL.Unknown6B:
-                case PROTOCOL.Unknown6E:
+                case PROTOCOL.ChatService:
                 case PROTOCOL.Unknown6F:
-                case PROTOCOL.Unknown70:
-                case PROTOCOL.Unknown74:
-                case PROTOCOL.Unknown76:
+                case PROTOCOL.PartyService:
+                case PROTOCOL.ProgressionService:
+                case PROTOCOL.RewardService:
                 case PROTOCOL.Unknown7A:
-                case PROTOCOL.Unknown7B:
-                case PROTOCOL.Unknown7D:
-                case PROTOCOL.Unknown80:
-                case PROTOCOL.Unknown82:
+                case PROTOCOL.Loadout:
+                case PROTOCOL.UnlockService:
+                case PROTOCOL.OpsProtocolService:
+                case PROTOCOL.ServerInfo:
                 case PROTOCOL.Unknown83:
                 case PROTOCOL.Unknown86:
-                case PROTOCOL.Unknown87:
-                case PROTOCOL.Unknown89:
+                case PROTOCOL.ProfanityFilterService:
+                case PROTOCOL.AbilityService:
                     break;
                 default:
                     WriteLog("Error: No reader implemented for packet protocol " + proto);
@@ -136,12 +136,12 @@ namespace GRPBackendWV
             }
         }
 
-        private void HandleUnknown24Methods(Stream s)
+        private void HandleTelemetryMethods(Stream s)
         {
             switch (methodID)
             {
                 case 1:
-                    header = new RMCPacketRequestUnknown24(s);
+                    header = new RMCPacketRequestTelemetry_Method1(s);
                     break;
                 default:
                     WriteLog("Error: Unknown RMC Packet Method 0x" + methodID.ToString("X"));

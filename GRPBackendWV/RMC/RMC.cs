@@ -29,17 +29,17 @@ namespace GRPBackendWV
                 case RMCPacket.PROTOCOL.Secure:
                     ProcessSecure(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown24:
-                    ProcessUnknown24(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.Telemetry:
+                    ProcessTelemetry(udp, p, rmc, client);
                     break;
                 case RMCPacket.PROTOCOL.AMMGameClient:
                     ProcessAMMGameClient(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown67:
-                    ProcessUnknown67(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.PlayerProfileService:
+                    ProcessPlayerProfileService(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown69:
-                    ProcessUnknown69(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.InventoryService:
+                    ProcessInventoryService(udp, p, rmc, client);
                     break;
                 case RMCPacket.PROTOCOL.Unknown6A:
                     ProcessUnknown6A(udp, p, rmc, client);
@@ -47,35 +47,35 @@ namespace GRPBackendWV
                 case RMCPacket.PROTOCOL.Unknown6B:
                     ProcessUnknown6B(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown6E:
-                    ProcessUnknown6E(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.ChatService:
+                    ProcessChatService(udp, p, rmc, client);
                     break;
                 case RMCPacket.PROTOCOL.Unknown6F:
                     ProcessUnknown6F(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown70:
-                    ProcessUnknown70(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.PartyService:
+                    ProcessPartyService(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown74:
-                    ProcessUnknown74(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.ProgressionService:
+                    ProcessProgressionService(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown76:
-                    ProcessUnknown76(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.RewardService:
+                    ProcessRewardService(udp, p, rmc, client);
                     break;
                 case RMCPacket.PROTOCOL.Unknown7A:
                     ProcessUnknown7A(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown7B:
-                    ProcessUnknown7B(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.Loadout:
+                    ProcessLoadout(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown7D:
-                    ProcessUnknown7D(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.UnlockService:
+                    ProcessUnlockService(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown80:
-                    ProcessUnknown80(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.OpsProtocolService:
+                    ProcessOpsProtocolService(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown82:
-                    ProcessUnknown82(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.ServerInfo:
+                    ProcessServerInfo(udp, p, rmc, client);
                     break;
                 case RMCPacket.PROTOCOL.Unknown83:
                     ProcessUnknown83(udp, p, rmc, client);
@@ -83,11 +83,11 @@ namespace GRPBackendWV
                 case RMCPacket.PROTOCOL.Unknown86:
                     ProcessUnknown86(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown87:
-                    ProcessUnknown87(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.ProfanityFilterService:
+                    ProcessProfanityFilterService(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown89:
-                    ProcessUnknown89(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.AbilityService:
+                    ProcessAbilityService(udp, p, rmc, client);
                     break;
                 default:
                     WriteLog("No handler implemented for packet protocol " + rmc.proto);
@@ -163,13 +163,13 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown24(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessTelemetry(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseUnknown24();
+                    reply = new RMCPacketResponseTelemetry_Method1();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -178,13 +178,14 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown67(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessPlayerProfileService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 18:
-                    reply = new RMCPacketResponseUnknown67();
+                    reply = new RMCPacketResponsePlayerProfileService_Method18();
+                    ((RMCPacketResponsePlayerProfileService_Method18)reply).chars.Add(new RMCPacketResponsePlayerProfileService_Method18.Character());
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -193,15 +194,17 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown69(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessInventoryService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 1:
+                    reply = new RMCPacketResponseInventoryService_Method1();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 case 4:
-                case 16:
-                    reply = new RMCPacketResponseUnknown69();
+                    reply = new RMCPacketResponseInventoryService_Method4();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -240,13 +243,13 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown6E(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessChatService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 14:
-                    reply = new RMCPacketResponseUnknown6E();
+                    reply = new RMCPacketResponseChatService_Method14();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -270,13 +273,13 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown70(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessPartyService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseUnknown70();
+                    reply = new RMCPacketResponsePartyService_Method1();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -285,13 +288,13 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown74(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessProgressionService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseUnknown74();
+                    reply = new RMCPacketResponseProgressionService_Method1();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -300,13 +303,13 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown76(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessRewardService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseUnknown76();
+                    reply = new RMCPacketResponseRewardService_Method1();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -330,13 +333,13 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown7B(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessLoadout(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 3:
-                    reply = new RMCPacketResponseUnknown7B();
+                    reply = new RMCPacketResponseLoadout_Method3();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -345,13 +348,13 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown7D(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessUnlockService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseUnknown7D();
+                    reply = new RMCPacketResponseUnlockService_Method1();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -360,14 +363,17 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown80(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessOpsProtocolService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 19:
+                    reply = new RMCPacketResponseOpsProtocolService_Method19();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 case 23:
-                    reply = new RMCPacketResponseUnknown80();
+                    reply = new RMCPacketResponseOpsProtocolService_Method23();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -376,15 +382,21 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown82(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessServerInfo(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 1:
+                    reply = new RMCPacketResponseServerInfo_Method1();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 case 2:
+                    reply = new RMCPacketResponseServerInfo_Method2();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 case 5:
-                    reply = new RMCPacketResponseUnknown82();
+                    reply = new RMCPacketResponseServerInfo_Method5();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -423,13 +435,13 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown87(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessProfanityFilterService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseUnknown87();
+                    reply = new RMCPacketResponseProfanityFilterService_Method1();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -438,13 +450,13 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown89(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessAbilityService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseUnknown89();
+                    reply = new RMCPacketResponseAbilityService_Method1();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
