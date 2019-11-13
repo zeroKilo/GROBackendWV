@@ -16,21 +16,24 @@ namespace GRPBackendWV
             Telemetry = 0x24,
             AMMGameClient = 0x65,
             PlayerProfileService = 0x67,
+            ArmorService = 0x68,
             InventoryService = 0x69,
-            Unknown6A = 0x6A,
-            Unknown6B = 0x6B,
+            LootService = 0x6A,
+            WeaponService = 0x6B,
             ChatService = 0x6E,
-            Unknown6F = 0x6F,
+            MissionService = 0x6F,
             PartyService = 0x70,
+            Unknown73 = 0x73,
             ProgressionService = 0x74,
             RewardService = 0x76,
-            Unknown7A = 0x7A,
+            Unknown77 = 0x77,
+            SkillsService = 0x7A,
             Loadout = 0x7B,
             UnlockService = 0x7D,
             OpsProtocolService = 0x80,
             ServerInfo = 0x82,
-            Unknown83 = 0x83,
-            Unknown86 = 0x86,
+            LeaderboardService = 0x83,
+            InboxMessageService = 0x86,
             ProfanityFilterService = 0x87,
             AbilityService = 0x89
         }
@@ -83,21 +86,24 @@ namespace GRPBackendWV
                     break;
                 case PROTOCOL.AMMGameClient:
                 case PROTOCOL.PlayerProfileService:
+                case PROTOCOL.ArmorService:
                 case PROTOCOL.InventoryService:
-                case PROTOCOL.Unknown6A:
-                case PROTOCOL.Unknown6B:
+                case PROTOCOL.LootService:
+                case PROTOCOL.WeaponService:
                 case PROTOCOL.ChatService:
-                case PROTOCOL.Unknown6F:
+                case PROTOCOL.MissionService:
                 case PROTOCOL.PartyService:
+                case PROTOCOL.Unknown73:
                 case PROTOCOL.ProgressionService:
                 case PROTOCOL.RewardService:
-                case PROTOCOL.Unknown7A:
+                case PROTOCOL.Unknown77:
+                case PROTOCOL.SkillsService:
                 case PROTOCOL.Loadout:
                 case PROTOCOL.UnlockService:
                 case PROTOCOL.OpsProtocolService:
                 case PROTOCOL.ServerInfo:
-                case PROTOCOL.Unknown83:
-                case PROTOCOL.Unknown86:
+                case PROTOCOL.LeaderboardService:
+                case PROTOCOL.InboxMessageService:
                 case PROTOCOL.ProfanityFilterService:
                 case PROTOCOL.AbilityService:
                     break;

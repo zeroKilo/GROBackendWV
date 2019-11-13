@@ -62,6 +62,7 @@ namespace GRPBackendWV
             TcpClient client = (TcpClient)obj;
             NetworkStream ns = client.GetStream();
             MemoryStream m = new MemoryStream();
+            Thread.Sleep(500);
             //Read Content
             while (ns.DataAvailable)
                 m.WriteByte((byte)ns.ReadByte());
