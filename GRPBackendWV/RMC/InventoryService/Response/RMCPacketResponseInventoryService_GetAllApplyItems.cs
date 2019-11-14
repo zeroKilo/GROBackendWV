@@ -21,6 +21,10 @@ namespace GRPBackendWV
 
         public List<ApplyItem> items = new List<ApplyItem>();
 
+        public RMCPacketResponseInventoryService_GetAllApplyItems()
+        {
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

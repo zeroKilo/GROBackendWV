@@ -70,12 +70,23 @@
       <DependentUpon>LogFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="QPacketHandler.cs" />
+    <Compile Include="RMC\AdvertisementsService\Response\RMCPacketResponseAdvertisementsService_Method2.cs" />
+    <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_Method1.cs" />
+    <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_Method2.cs" />
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits.cs" />
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetAllApplyItems.cs" />
     <Compile Include="RMC\ArmorService\Response\RMCPacketResponseArmorService_GetPersonaArmorTiers.cs" />
-    <Compile Include="RMC\Unknown77\Response\RMCPacketResponseUnknown77_Method1.cs" />
+    <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_Method2.cs" />
+    <Compile Include="RMC\AdvertisementsService\Response\RMCPacketResponseAdvertisementsService_Method1.cs" />
+    <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method9.cs" />
+    <Compile Include="RMC\PveArchetypeService\Response\RMCPacketResponsePveArchetypeService_Method1.cs" />
+    <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_Method4.cs" />
+    <Compile Include="RMC\SurveyService\Response\RMCPacketResponseSurveyService_Method1.cs" />
+    <Compile Include="RMC\WeaponProficiencyService\Response\RMCPacketResponseWeaponProficiencyService_Method3.cs" />
+    <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_GetModifiers.cs" />
+    <Compile Include="RMC\StoreService\Response\RMCPacketResponseStoreService_Method1.cs" />
     <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_GetSkills.cs" />
-    <Compile Include="RMC\Unknown73\Response\RMCPacketResponseUnknown73_Method12.cs" />
+    <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method12.cs" />
     <Compile Include="RMC\OpsProtocolService\Response\RMCPacketResponseOpsProtocolService_GetAllPriorityBroadcasts.cs" />
     <Compile Include="RMC\ServerInfo\Response\RMCPacketResponseServerInfo_GetServerTime.cs" />
     <Compile Include="RMC\ServerInfo\Response\RMCPacketResponseServerInfo_Method1.cs" />

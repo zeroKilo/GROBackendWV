@@ -21,6 +21,10 @@ namespace GRPBackendWV
 
         public List<LoadoutKit> kits = new List<LoadoutKit>();
 
+        public RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits()
+        {
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

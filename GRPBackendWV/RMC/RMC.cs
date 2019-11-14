@@ -59,8 +59,8 @@ namespace GRPBackendWV
                 case RMCPacket.PROTOCOL.PartyService:
                     ProcessPartyService(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown73:
-                    ProcessUnknown73(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.AchievementsService:
+                    ProcessAchievementsService(udp, p, rmc, client);
                     break;
                 case RMCPacket.PROTOCOL.ProgressionService:
                     ProcessProgressionService(udp, p, rmc, client);
@@ -68,8 +68,11 @@ namespace GRPBackendWV
                 case RMCPacket.PROTOCOL.RewardService:
                     ProcessRewardService(udp, p, rmc, client);
                     break;
-                case RMCPacket.PROTOCOL.Unknown77:
-                    ProcessUnknown77(udp, p, rmc, client);
+                case RMCPacket.PROTOCOL.StoreService:
+                    ProcessStoreService(udp, p, rmc, client);
+                    break;
+                case RMCPacket.PROTOCOL.AdvertisementsService:
+                    ProcessAdvertisementsService(udp, p, rmc, client);
                     break;
                 case RMCPacket.PROTOCOL.SkillsService:
                     ProcessSkillsService(udp, p, rmc, client);
@@ -80,6 +83,12 @@ namespace GRPBackendWV
                 case RMCPacket.PROTOCOL.UnlockService:
                     ProcessUnlockService(udp, p, rmc, client);
                     break;
+                case RMCPacket.PROTOCOL.AvatarService:
+                    ProcessAvatarService(udp, p, rmc, client);
+                    break;
+                case RMCPacket.PROTOCOL.WeaponProficiencyService:
+                    ProcessWeaponProficiencyService(udp, p, rmc, client);
+                    break;
                 case RMCPacket.PROTOCOL.OpsProtocolService:
                     ProcessOpsProtocolService(udp, p, rmc, client);
                     break;
@@ -89,6 +98,9 @@ namespace GRPBackendWV
                 case RMCPacket.PROTOCOL.LeaderboardService:
                     ProcessLeaderboardService(udp, p, rmc, client);
                     break;
+                case RMCPacket.PROTOCOL.PveArchetypeService:
+                    ProcessPveArchetypeService(udp, p, rmc, client);
+                    break;
                 case RMCPacket.PROTOCOL.InboxMessageService:
                     ProcessInboxMessageService(udp, p, rmc, client);
                     break;
@@ -97,6 +109,9 @@ namespace GRPBackendWV
                     break;
                 case RMCPacket.PROTOCOL.AbilityService:
                     ProcessAbilityService(udp, p, rmc, client);
+                    break;
+                case RMCPacket.PROTOCOL.SurveyService:
+                    ProcessSurveyService(udp, p, rmc, client);
                     break;
                 default:
                     WriteLog("No handler implemented for packet protocol " + rmc.proto);
@@ -130,6 +145,7 @@ namespace GRPBackendWV
                     {
                         case "UbiAuthenticationLoginCustomData":
                             reply = new RMCPacketResponseLoginCustomData(client.PID);
+                            client.name = h.username;
                             client.sessionKey = ((RMCPacketResponseLoginCustomData)reply).ticket.sessionKey;
                             SendReply(udp, p, rmc, client, reply);
                             break;
@@ -194,7 +210,11 @@ namespace GRPBackendWV
             {
                 case 18:
                     reply = new RMCPacketResponsePlayerProfileService_LoadCharacterProfiles();
-                    ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).chars.Add(new RMCPacketResponsePlayerProfileService_LoadCharacterProfiles.Character());
+                    RMCPacketResponsePlayerProfileService_LoadCharacterProfiles.Character c = new RMCPacketResponsePlayerProfileService_LoadCharacterProfiles.Character();
+                    c.PersonaID = client.PID;
+                    ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).chars.Add(c);
+                    ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).PersonaID = client.PID;
+                    ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).PlayerName = client.name;
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -225,6 +245,10 @@ namespace GRPBackendWV
             {
                 case 1:
                     reply = new RMCPacketResponseInventoryService_GetTemplateItems();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 2:
+                    reply = new RMCPacketResponseInventoryService_Method2();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 4:
@@ -316,13 +340,17 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown73(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessAchievementsService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
+                case 9:
+                    reply = new RMCPacketResponseAchievementsService_Method9();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 case 12:
-                    reply = new RMCPacketResponseUnknown73_Method12();
+                    reply = new RMCPacketResponseAchievementsService_Method12();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -361,13 +389,32 @@ namespace GRPBackendWV
             }
         }
 
-        private static void ProcessUnknown77(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        private static void ProcessStoreService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseUnknown77_Method1();
+                    reply = new RMCPacketResponseStoreService_Method1();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                default:
+                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    break;
+            }
+        }
+
+        private static void ProcessAdvertisementsService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        {
+            RMCPacketReply reply;
+            switch (rmc.methodID)
+            {
+                case 1:
+                    reply = new RMCPacketResponseAdvertisementsService_Method1();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 2:
+                    reply = new RMCPacketResponseAdvertisementsService_Method2();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -387,6 +434,14 @@ namespace GRPBackendWV
                     break;
                 case 2:
                     reply = new RMCPacketResponseSkillsService_GetSkills();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 4:
+                    reply = new RMCPacketResponseSkillsService_Method4();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 5:
+                    reply = new RMCPacketResponseSkillsService_GetModifiers();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -417,6 +472,40 @@ namespace GRPBackendWV
             {
                 case 1:
                     reply = new RMCPacketResponseUnlockService_GetCurrentUserUnlock();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                default:
+                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    break;
+            }
+        }
+
+        private static void ProcessAvatarService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        {
+            RMCPacketReply reply;
+            switch (rmc.methodID)
+            {
+                case 1: 
+                    reply = new RMCPacketResponseAvatarService_Method1();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 2:
+                    reply = new RMCPacketResponseAvatarService_Method2();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                default:
+                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    break;
+            }
+        }
+
+        private static void ProcessWeaponProficiencyService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        {
+            RMCPacketReply reply;
+            switch (rmc.methodID)
+            {
+                case 3:
+                    reply = new RMCPacketResponseWeaponProficiencyService_Method3();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -482,6 +571,21 @@ namespace GRPBackendWV
             }
         }
 
+        private static void ProcessPveArchetypeService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        {
+            RMCPacketReply reply;
+            switch (rmc.methodID)
+            {
+                case 1:
+                    reply = new RMCPacketResponsePveArchetypeService_Method1();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                default:
+                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    break;
+            }
+        }
+
         private static void ProcessInboxMessageService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
@@ -519,6 +623,21 @@ namespace GRPBackendWV
             {
                 case 1:
                     reply = new RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                default:
+                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    break;
+            }
+        }
+
+        private static void ProcessSurveyService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        {
+            RMCPacketReply reply;
+            switch (rmc.methodID)
+            {
+                case 1:
+                    reply = new RMCPacketResponseSurveyService_Method1();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:

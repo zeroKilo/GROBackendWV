@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,16 +7,18 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseUnknown73_Method12 : RMCPacketReply
+    public class RMCPacketResponseAdvertisementsService_Method2 : RMCPacketReply
     {
+
         public override byte[] ToBuffer()
         {
-            return new byte[0];
+            MemoryStream m = new MemoryStream();
+            return m.ToArray();
         }
 
         public override string ToString()
         {
-            return "[RMCPacketResponseUnknown73_Method12]";
+            return "[RMCPacketResponseAdvertisementsService_Method2]";
         }
     }
 }

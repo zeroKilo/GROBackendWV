@@ -23,19 +23,24 @@ namespace GRPBackendWV
             ChatService = 0x6E,
             MissionService = 0x6F,
             PartyService = 0x70,
-            Unknown73 = 0x73,
+            AchievementsService = 0x73,
             ProgressionService = 0x74,
             RewardService = 0x76,
-            Unknown77 = 0x77,
+            StoreService = 0x77,
+            AdvertisementsService = 0x79,
             SkillsService = 0x7A,
             Loadout = 0x7B,
             UnlockService = 0x7D,
+            AvatarService = 0x7E,
+            WeaponProficiencyService = 0x7F,
             OpsProtocolService = 0x80,
             ServerInfo = 0x82,
             LeaderboardService = 0x83,
+            PveArchetypeService = 0x85,
             InboxMessageService = 0x86,
             ProfanityFilterService = 0x87,
-            AbilityService = 0x89
+            AbilityService = 0x89,
+            SurveyService = 0x8B
         }
 
         public PROTOCOL proto;
@@ -93,19 +98,24 @@ namespace GRPBackendWV
                 case PROTOCOL.ChatService:
                 case PROTOCOL.MissionService:
                 case PROTOCOL.PartyService:
-                case PROTOCOL.Unknown73:
+                case PROTOCOL.AchievementsService:
                 case PROTOCOL.ProgressionService:
                 case PROTOCOL.RewardService:
-                case PROTOCOL.Unknown77:
+                case PROTOCOL.StoreService:
+                case PROTOCOL.AdvertisementsService:
                 case PROTOCOL.SkillsService:
                 case PROTOCOL.Loadout:
                 case PROTOCOL.UnlockService:
+                case PROTOCOL.AvatarService:
+                case PROTOCOL.WeaponProficiencyService:
                 case PROTOCOL.OpsProtocolService:
                 case PROTOCOL.ServerInfo:
                 case PROTOCOL.LeaderboardService:
+                case PROTOCOL.PveArchetypeService:
                 case PROTOCOL.InboxMessageService:
                 case PROTOCOL.ProfanityFilterService:
                 case PROTOCOL.AbilityService:
+                case PROTOCOL.SurveyService:
                     break;
                 default:
                     WriteLog("Error: No reader implemented for packet protocol " + proto);

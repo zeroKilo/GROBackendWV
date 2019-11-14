@@ -46,6 +46,10 @@ namespace GRPBackendWV
 
         public List<TemplateItem> items = new List<TemplateItem>();
 
+        public RMCPacketResponseInventoryService_GetTemplateItems()
+        {
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

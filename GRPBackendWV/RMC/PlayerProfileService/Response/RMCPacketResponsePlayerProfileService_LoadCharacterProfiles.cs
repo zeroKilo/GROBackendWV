@@ -11,16 +11,16 @@ namespace GRPBackendWV
     {
         public class Character
         {
-            public uint PersonaID = 10;
-            public uint unk2 = 11;
-            public uint unk3 = 12;
-            public uint unk4 = 13;
-            public uint unk5 = 14;
-            public uint unk6 = 15;
-            public uint unk7 = 16;
-            public byte unk8 = 17;
-            public byte unk9 = 18;
-            public byte unk10 = 19;
+            public uint PersonaID;
+            public uint unk2;
+            public uint unk3;
+            public uint unk4;
+            public uint unk5;
+            public uint unk6;
+            public uint unk7;
+            public byte unk8;
+            public byte unk9;
+            public byte unk10;
             public void toBuffer(Stream s)
             {
                 Helper.WriteU32(s, PersonaID);
@@ -36,26 +36,26 @@ namespace GRPBackendWV
             }
         }
 
-        public uint PersonaID = 123;
-        public string unk2 = "testest";
-        public uint unk3 = 124;
-        public uint unk4 = 125;
-        public uint unk5 = 126;
-        public uint unk6 = 127;
-        public uint unk7 = 128;
-        public uint unk8 = 129;
-        public byte unk9 = 130;
-        public uint unk10 = 131;
-        public uint unk11 = 132;
-        public uint GhostRank = 133;
-        public uint unk13 = 134;
+        public uint PersonaID;
+        public string PlayerName;
+        public uint unk3;
+        public uint unk4;
+        public uint unk5;
+        public uint unk6;
+        public uint unk7;
+        public uint unk8;
+        public byte unk9;
+        public uint unk10;
+        public uint unk11;
+        public uint GhostRank;
+        public uint unk13;
         public List<Character> chars = new List<Character>();
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, PersonaID);
-            Helper.WriteString(m, unk2);
+            Helper.WriteString(m, PlayerName);
             Helper.WriteU32(m, unk3);
             Helper.WriteU32(m, unk4);
             Helper.WriteU32(m, unk5);
