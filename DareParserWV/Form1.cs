@@ -45,6 +45,40 @@ namespace DareParserWV
             }
         }
 
+        private void scanDLLEXEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog d = new OpenFileDialog();
+            d.Filter = "*.exe,*.dll|*.exe;*.dll";
+            if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                byte[] data = File.ReadAllBytes(d.FileName);
+                hb1.ByteProvider = new DynamicByteProvider(data);
+                MemoryStream m = new MemoryStream(data);
+                sb = new StringBuilder();
+                try
+                {
+
+                    while (m.Position < data.Length)
+                    {
+                        uint magic = ReadU32(m);
+                        if (magic == 0xCD652312)
+                        {
+                            m.Seek(17, SeekOrigin.Current);
+                            Parse(m);
+                            while ((m.Position % 4) != 0)
+                                m.ReadByte();
+                        }
+                    }
+                }
+                catch
+                {
+                    Log("Position = 0x" + m.Position.ToString("X8"));
+                }
+                rtb1.Text = sb.ToString();
+            }
+
+        }
+
         public string ReadString(Stream s)
         {
             string result = "";
@@ -90,11 +124,20 @@ namespace DareParserWV
                 byte type = (byte)m.ReadByte();
                 switch (type)
                 {
+                    case 3:
+                        ParseDOClassDeclaration(m, depth);
+                        break;
+                    case 4:
+                        ParseDatasetDeclaration(m, depth);
+                        break;
                     case 6:
                         ParseVariable(m, depth);
                         break;
                     case 8:
                         ParseUnknown8(m, depth);
+                        break;
+                    case 0xA:
+                        ParseUnknownA(m, depth);
                         break;
                     case 0xB:
                         ParsePropertyDeclaration(m, depth);
@@ -105,14 +148,26 @@ namespace DareParserWV
                     case 0xD:
                         ParseUnknownD(m, depth);
                         break;
+                    case 0xE:
+                        ParseUnknownE(m, depth);
+                        break;
                     case 0xF:
                         ParseUnknownF(m, depth);
+                        break;
+                    case 0x10:
+                        ParseUnknown10(m, depth);
+                        break;
+                    case 0x11:
+                        ParseUnknown11(m, depth);
                         break;
                     case 0x12:
                         ParseUnknown12(m, depth);
                         break;
                     case 0x13:
                         ParseUnitDeclaration(m, depth);
+                        break;
+                    case 0x14:
+                        ParseUnknown14(m, depth);
                         break;
                     default:
                         Log("Unknown type found: 0x" + type.ToString("X2"));
@@ -249,6 +304,64 @@ namespace DareParserWV
             ParseDeclarationUse(m, depth + 1);
             Log(tabs + "\t[0x" + ReadU32(m).ToString("X8") + "]");
             Log(tabs + "\t[0x" + ((byte)m.ReadByte()).ToString("X8") + "]");
+        }
+
+        public void ParseUnknownE(Stream m, int depth = 0)
+        {
+            string tabs = MakeTabs(depth);
+            Log(tabs + "[Unknown_E]");
+            ParseVariable(m, depth + 1);
+            ParseDeclarationUse(m, depth + 1);
+            Log(tabs + "\t[0x" + ReadU32(m).ToString("X8") + "]");
+        }
+
+        public void ParseUnknown10(Stream m, int depth = 0)
+        {
+            string tabs = MakeTabs(depth);
+            Log(tabs + "[Unknown_10]");
+            ParseDeclaration(m, depth + 1);
+            Log(tabs + "\t[0x" + ReadU32(m).ToString("X8") + "]");
+        }
+
+        public void ParseUnknown11(Stream m, int depth = 0)
+        {
+            string tabs = MakeTabs(depth);
+            Log(tabs + "[Unknown_11]");
+            ParseDeclaration(m, depth + 1);
+        }
+
+        public void ParseDatasetDeclaration(Stream m, int depth = 0)
+        {
+            string tabs = MakeTabs(depth);
+            Log(tabs + "[Dataset Declaration]");
+            ParseNamespaceItem(m, depth + 1);
+            ParseNamespace(m, depth + 1);
+            Parse(m, depth + 1);
+        }
+
+        public void ParseDOClassDeclaration(Stream m, int depth = 0)
+        {
+            string tabs = MakeTabs(depth);
+            Log(tabs + "[DO Class Declaration]");
+            ParseNamespaceItem(m, depth + 1);
+            ParseNamespace(m, depth + 1);
+            Log(tabs + "\t[" + ReadString(m) + "]");
+            Log(tabs + "\t[0x" + ReadU32(m).ToString("X8") + "]");
+            Parse(m, depth + 1);
+        }
+
+        public void ParseUnknownA(Stream m, int depth = 0)
+        {
+            string tabs = MakeTabs(depth);
+            Log(tabs + "[Unknown_A]");
+            ParseDeclaration(m, depth + 1);
+        }
+
+        public void ParseUnknown14(Stream m, int depth = 0)
+        {
+            string tabs = MakeTabs(depth);
+            Log(tabs + "[Unknown_14]");
+            ParseDeclaration(m, depth + 1);
         }
     }
 }
