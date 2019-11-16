@@ -11,15 +11,24 @@ namespace GRPBackendWV
     {
         public class Leaderboard
         {
-            public uint unk1;
-            public string unk2;
-            public uint[] unk3 = new uint[6];
+            public uint m_ID;
+            public string m_Name;
+            public uint m_ClassID;
+            public uint m_OasisNameID;
+            public uint m_OasisDescriptionID;
+            public uint m_Flags;
+            public uint m_DesignerStatisticID;
+            public uint m_SortOrder;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteString(s, unk2);
-                foreach (uint u in unk3)
-                    Helper.WriteU32(s, u);
+                Helper.WriteU32(s, m_ID);
+                Helper.WriteString(s, m_Name);
+                Helper.WriteU32(s, m_ClassID);
+                Helper.WriteU32(s, m_OasisNameID);
+                Helper.WriteU32(s, m_OasisDescriptionID);
+                Helper.WriteU32(s, m_Flags);
+                Helper.WriteU32(s, m_DesignerStatisticID);
+                Helper.WriteU32(s, m_SortOrder);
             }
         }
 

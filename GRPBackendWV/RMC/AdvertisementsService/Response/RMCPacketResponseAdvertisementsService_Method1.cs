@@ -11,22 +11,22 @@ namespace GRPBackendWV
     {
         public class Advertisement
         {
-            public uint unk1;
-            public uint unk2;
-            public uint unk3;
-            public byte unk4;
-            public byte unk5;
-            public uint unk6;
-            public string unk7;
+            public uint m_ID;
+            public uint m_StoreItemID;
+            public uint m_AssetId;
+            public byte m_Layout;
+            public byte m_Action;
+            public uint m_OasisName;
+            public string m_Criteria;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU32(s, unk2);
-                Helper.WriteU32(s, unk3);
-                Helper.WriteU8(s, unk4);
-                Helper.WriteU8(s, unk5);
-                Helper.WriteU32(s, unk6);
-                Helper.WriteString(s, unk7);
+                Helper.WriteU32(s, m_ID);
+                Helper.WriteU32(s, m_StoreItemID);
+                Helper.WriteU32(s, m_AssetId);
+                Helper.WriteU8(s, m_Layout);
+                Helper.WriteU8(s, m_Action);
+                Helper.WriteU32(s, m_OasisName);
+                Helper.WriteString(s, m_Criteria);
             }
         }
 

@@ -11,14 +11,14 @@ namespace GRPBackendWV
     {
         public class ProfaneWord
         {
-            public uint unk1;
-            public byte unk2;
-            public string unk3;
+            public uint mId;
+            public byte mType;
+            public string mWord;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU8(s, unk2);
-                Helper.WriteString(s, unk3);
+                Helper.WriteU32(s, mId);
+                Helper.WriteU8(s, mType);
+                Helper.WriteString(s, mWord);
             }
         }
 

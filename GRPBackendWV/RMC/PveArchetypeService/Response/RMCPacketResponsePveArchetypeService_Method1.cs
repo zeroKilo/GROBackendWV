@@ -11,30 +11,30 @@ namespace GRPBackendWV
     {
         public class PveArchetype
         {
-            public uint unk1;
-            public uint unk2;
-            public float unk3;
-            public float unk4;
-            public uint unk5;
-            public uint unk6;
-            public float unk7;
-            public float unk8;
-            public float unk9;
-            public byte unk10;
-            public float unk11;
+            public uint m_ArchetypeID;
+            public uint m_WeaponID;
+            public float m_InitialHealth;
+            public float m_InitialArmor;
+            public uint m_BankNumber;
+            public uint m_IndexInBank;
+            public float m_WpnDmgMultiplier;
+            public float m_WpnDispersionMultiplier;
+            public float m_WpnBloomMultiplier;
+            public byte m_WpnBurstCount;
+            public float m_WpnBurstDelay;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU32(s, unk2);
-                Helper.WriteFloat(s, unk3);
-                Helper.WriteFloat(s, unk4);
-                Helper.WriteU32(s, unk5);
-                Helper.WriteU32(s, unk6);
-                Helper.WriteFloat(s, unk7);
-                Helper.WriteFloat(s, unk8);
-                Helper.WriteFloat(s, unk9);
-                Helper.WriteU8(s, unk10);
-                Helper.WriteFloat(s, unk11);
+                Helper.WriteU32(s, m_ArchetypeID);
+                Helper.WriteU32(s, m_WeaponID);
+                Helper.WriteFloat(s, m_InitialHealth);
+                Helper.WriteFloat(s, m_InitialArmor);
+                Helper.WriteU32(s, m_BankNumber);
+                Helper.WriteU32(s, m_IndexInBank);
+                Helper.WriteFloat(s, m_WpnDmgMultiplier);
+                Helper.WriteFloat(s, m_WpnDispersionMultiplier);
+                Helper.WriteFloat(s, m_WpnBloomMultiplier);
+                Helper.WriteU8(s, m_WpnBurstCount);
+                Helper.WriteFloat(s, m_WpnBurstDelay);
             }
         }
 

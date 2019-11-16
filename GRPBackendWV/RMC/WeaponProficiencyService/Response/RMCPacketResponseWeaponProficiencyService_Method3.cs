@@ -11,25 +11,25 @@ namespace GRPBackendWV
     {
         public class WeaponXPLevelInfo
         {
-            public uint unk1;
-            public uint unk2;
-            public uint unk3;
-            public uint unk4;
+            public uint id;
+            public uint xp;
+            public uint level;
+            public uint weaponClass;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU32(s, unk2);
-                Helper.WriteU32(s, unk3);
-                Helper.WriteU32(s, unk4);
+                Helper.WriteU32(s, id);
+                Helper.WriteU32(s, xp);
+                Helper.WriteU32(s, level);
+                Helper.WriteU32(s, weaponClass);
             }
         }
 
-        public List<WeaponXPLevelInfo> infos = new List<WeaponXPLevelInfo>();
+        public List<WeaponXPLevelInfo> _outXPLevels = new List<WeaponXPLevelInfo>();
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)infos.Count);
-            foreach (WeaponXPLevelInfo info in infos)
+            Helper.WriteU32(m, (uint)_outXPLevels.Count);
+            foreach (WeaponXPLevelInfo info in _outXPLevels)
                 info.toBuffer(m);
             return m.ToArray();
         }

@@ -212,9 +212,9 @@ namespace GRPBackendWV
                     reply = new RMCPacketResponsePlayerProfileService_LoadCharacterProfiles();
                     RMCPacketResponsePlayerProfileService_LoadCharacterProfiles.Character c = new RMCPacketResponsePlayerProfileService_LoadCharacterProfiles.Character();
                     c.PersonaID = client.PID;
-                    ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).chars.Add(c);
+                    ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).Characters.Add(c);
                     ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).PersonaID = client.PID;
-                    ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).PlayerName = client.name;
+                    ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).Name = client.name;
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:

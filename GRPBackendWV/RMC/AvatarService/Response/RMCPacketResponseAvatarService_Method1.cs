@@ -11,12 +11,12 @@ namespace GRPBackendWV
     {
         public class AvatarDecorator
         {
-            public uint unk1;
-            public uint unk2;
+            public uint mItemID;
+            public uint mDecoratorID;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU32(s, unk2);
+                Helper.WriteU32(s, mItemID);
+                Helper.WriteU32(s, mDecoratorID);
             }
         }
 

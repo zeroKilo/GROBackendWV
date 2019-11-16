@@ -11,25 +11,25 @@ namespace GRPBackendWV
     {
         public class Survey
         {
-            public uint unk1;
-            public byte unk2;
-            public string unk3;
-            public string unk4;
+            public uint mId;
+            public byte mWeight;
+            public string mSurveyTrigger;
+            public string mSurveyURL;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU8(s, unk2);
-                Helper.WriteString(s, unk3);
-                Helper.WriteString(s, unk4);
+                Helper.WriteU32(s, mId);
+                Helper.WriteU8(s, mWeight);
+                Helper.WriteString(s, mSurveyTrigger);
+                Helper.WriteString(s, mSurveyURL);
             }
         }
 
-        public List<Survey> list = new List<Survey>();
+        public List<Survey> _outSurveys = new List<Survey>();
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)list.Count);
-            foreach (Survey s in list)
+            Helper.WriteU32(m, (uint)_outSurveys.Count);
+            foreach (Survey s in _outSurveys)
                 s.toBuffer(m);
             return m.ToArray();
         }

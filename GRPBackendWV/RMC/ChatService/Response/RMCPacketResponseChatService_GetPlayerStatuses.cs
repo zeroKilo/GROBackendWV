@@ -11,24 +11,24 @@ namespace GRPBackendWV
     {
         public class BasicPersona
         {
-            public uint unk1;
-            public string unk2;
-            public byte unk3;
-            public uint unk4;
-            public uint unk5;
-            public uint unk6;
-            public byte unk7;
-            public byte unk8;
+            public uint PersonaID;
+            public string PersonaName;
+            public byte PersonaStatus;
+            public uint AvatarPortraitID;
+            public uint AvatarDecoratorID;
+            public uint AvatarBackgroundColor;
+            public byte CurrentCharacterID;
+            public byte CurrentCharacterLevel;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteString(s, unk2);
-                Helper.WriteU8(s, unk3);
-                Helper.WriteU32(s, unk4);
-                Helper.WriteU32(s, unk5);
-                Helper.WriteU32(s, unk6);
-                Helper.WriteU8(s, unk7);
-                Helper.WriteU8(s, unk8);
+                Helper.WriteU32(s, PersonaID);
+                Helper.WriteString(s, PersonaName);
+                Helper.WriteU8(s, PersonaStatus);
+                Helper.WriteU32(s, AvatarPortraitID);
+                Helper.WriteU32(s, AvatarDecoratorID);
+                Helper.WriteU32(s, AvatarBackgroundColor);
+                Helper.WriteU8(s, CurrentCharacterID);
+                Helper.WriteU8(s, CurrentCharacterLevel);
             }
         }
 

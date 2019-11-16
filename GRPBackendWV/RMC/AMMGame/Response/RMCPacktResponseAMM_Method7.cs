@@ -11,76 +11,122 @@ namespace GRPBackendWV
     {
         public class AMM_PlaylistEntry
         {
-            public uint[] unk1 = new uint[3];
+            public uint uiMapId;
+            public uint uiGameMode;
+            public uint uiMatchDetail;
             public void toBuffer(Stream s)
             {
-                for (int i = 0; i < 3; i++)
-                    Helper.WriteU32(s, unk1[i]);
+                Helper.WriteU32(s, uiMapId);
+                Helper.WriteU32(s, uiGameMode);
+                Helper.WriteU32(s, uiMatchDetail);
             }
         }
 
         public class AMM_Playlist
         {
-            public uint[] unk1 = new uint[9];
-            public List<AMM_PlaylistEntry> entries = new List<AMM_PlaylistEntry>();
+            public uint uiId;
+            public uint uiNodeType;
+            public uint uiMaxTeamSize;
+            public uint uiMinTeamSize;
+            public uint uiOasisNameId;
+            public uint uiOasisDescriptionId;
+            public uint uiIsRepeatable;
+            public uint uiIsRandom;
+            public uint uiThumbnailId;
+            public List<AMM_PlaylistEntry> m_PlaylistEntryVector = new List<AMM_PlaylistEntry>();
             public void toBuffer(Stream s)
             {
-                for (int i = 0; i < 9; i++)
-                    Helper.WriteU32(s, unk1[i]);
-                Helper.WriteU32(s, (uint)entries.Count);
-                foreach (AMM_PlaylistEntry e in entries)
+                Helper.WriteU32(s, uiId);
+                Helper.WriteU32(s, uiNodeType);
+                Helper.WriteU32(s, uiMaxTeamSize);
+                Helper.WriteU32(s, uiMinTeamSize);
+                Helper.WriteU32(s, uiOasisNameId);
+                Helper.WriteU32(s, uiOasisDescriptionId);
+                Helper.WriteU32(s, uiIsRepeatable);
+                Helper.WriteU32(s, uiIsRandom);
+                Helper.WriteU32(s, uiThumbnailId);
+                Helper.WriteU32(s, (uint)m_PlaylistEntryVector.Count);
+                foreach (AMM_PlaylistEntry e in m_PlaylistEntryVector)
                     e.toBuffer(s);
             }
         }
 
         public class AMM_Modifier
         {
-            public uint[] unk1 = new uint[4];
+            public uint uiId;
+            public uint uiParentId;
+            public uint uiType;
+            public uint uiValue;
             public void toBuffer(Stream s)
             {
-                for (int i = 0; i < 4; i++)
-                    Helper.WriteU32(s, unk1[i]);
+                Helper.WriteU32(s, uiId);
+                Helper.WriteU32(s, uiParentId);
+                Helper.WriteU32(s, uiType);
+                Helper.WriteU32(s, uiValue);
             }
         }
 
         public class AMM_Map
         {
-            public uint[] unk1 = new uint[6];
-            public List<AMM_Modifier> mods = new List<AMM_Modifier>();
+            public uint uiId;
+            public uint uiRootModifierId;
+            public uint uiMapKey;
+            public uint uiOasisNameId;
+            public uint uiOasisDescriptionId;
+            public uint uiThumbnailId;
+            public List<AMM_Modifier> m_ModifierVector = new List<AMM_Modifier>();
             public void toBuffer(Stream s)
             {
-                for (int i = 0; i < 6; i++)
-                    Helper.WriteU32(s, unk1[i]);
-                Helper.WriteU32(s, (uint)mods.Count);
-                foreach (AMM_Modifier mod in mods)
+                Helper.WriteU32(s, uiId);
+                Helper.WriteU32(s, uiRootModifierId);
+                Helper.WriteU32(s, uiMapKey);
+                Helper.WriteU32(s, uiOasisNameId);
+                Helper.WriteU32(s, uiOasisDescriptionId);
+                Helper.WriteU32(s, uiThumbnailId);
+                Helper.WriteU32(s, (uint)m_ModifierVector.Count);
+                foreach (AMM_Modifier mod in m_ModifierVector)
                     mod.toBuffer(s);
             }
         }
 
         public class AMM_GameMode
         {
-            public uint[] unk1 = new uint[6];
-            public List<AMM_Modifier> mods = new List<AMM_Modifier>();
+            public uint uiId;
+            public uint uiRootModifierId;
+            public uint uiType;
+            public uint uiOasisNameId;
+            public uint uiOasisDescriptionId;
+            public uint uiThumbnailId;
+            public List<AMM_Modifier> m_ModifierVector = new List<AMM_Modifier>();
             public void toBuffer(Stream s)
             {
-                for (int i = 0; i < 6; i++)
-                    Helper.WriteU32(s, unk1[i]);
-                Helper.WriteU32(s, (uint)mods.Count);
-                foreach (AMM_Modifier mod in mods)
+                Helper.WriteU32(s, uiId);
+                Helper.WriteU32(s, uiRootModifierId);
+                Helper.WriteU32(s, uiType);
+                Helper.WriteU32(s, uiOasisNameId);
+                Helper.WriteU32(s, uiOasisDescriptionId);
+                Helper.WriteU32(s, uiThumbnailId);
+                Helper.WriteU32(s, (uint)m_ModifierVector.Count);
+                foreach (AMM_Modifier mod in m_ModifierVector)
                     mod.toBuffer(s);
             }
         }
 
         public class AMM_GameDetail
         {
-            public uint[] unk1 = new uint[4];
-            public List<AMM_Modifier> mods = new List<AMM_Modifier>();
+            public uint uiId;
+            public uint uiRootModifierId;
+            public uint uiOasisNameId;
+            public uint uiOasisDescriptionId;
+            public List<AMM_Modifier> m_ModifierVector = new List<AMM_Modifier>();
             public void toBuffer(Stream s)
             {
-                for (int i = 0; i < 4; i++)
-                    Helper.WriteU32(s, unk1[i]);
-                Helper.WriteU32(s, (uint)mods.Count);
-                foreach (AMM_Modifier mod in mods)
+                Helper.WriteU32(s, uiId);
+                Helper.WriteU32(s, uiRootModifierId);
+                Helper.WriteU32(s, uiOasisNameId);
+                Helper.WriteU32(s, uiOasisDescriptionId);
+                Helper.WriteU32(s, (uint)m_ModifierVector.Count);
+                foreach (AMM_Modifier mod in m_ModifierVector)
                     mod.toBuffer(s);
             }
         }

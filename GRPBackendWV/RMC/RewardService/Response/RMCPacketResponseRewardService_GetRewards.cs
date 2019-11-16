@@ -11,26 +11,26 @@ namespace GRPBackendWV
     {
         public class Reward
         {
-            public uint unk1;
-            public uint unk2;
-            public byte unk3;
-            public byte unk4;
-            public uint unk5;
-            public uint unk6;
-            public uint unk7;
-            public uint unk8;
-            public uint unk9;
+            public uint mRewardID;
+            public uint mRewardItem;
+            public byte mRewardType;
+            public byte mIsUniqueReward;
+            public uint mAchievementID;
+            public uint mAchievementGroupID;
+            public uint mAchievementPoints;
+            public uint mClassID;
+            public uint mClassLevel;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU32(s, unk2);
-                Helper.WriteU8(s, unk3);
-                Helper.WriteU8(s, unk4);
-                Helper.WriteU32(s, unk5);
-                Helper.WriteU32(s, unk6);
-                Helper.WriteU32(s, unk7);
-                Helper.WriteU32(s, unk8);
-                Helper.WriteU32(s, unk9);
+                Helper.WriteU32(s, mRewardID);
+                Helper.WriteU32(s, mRewardItem);
+                Helper.WriteU8(s, mRewardType);
+                Helper.WriteU8(s, mIsUniqueReward);
+                Helper.WriteU32(s, mAchievementID);
+                Helper.WriteU32(s, mAchievementGroupID);
+                Helper.WriteU32(s, mAchievementPoints);
+                Helper.WriteU32(s, mClassID);
+                Helper.WriteU32(s, mClassLevel);
             }
         }
 

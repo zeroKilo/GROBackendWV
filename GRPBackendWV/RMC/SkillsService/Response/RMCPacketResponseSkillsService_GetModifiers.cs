@@ -11,18 +11,18 @@ namespace GRPBackendWV
     {
         public class SkillModifier
         {
-            public uint unk1;
-            public byte unk2;
-            public byte unk3;
-            public byte unk4;
-            public string unk5;
+            public uint m_ModifierID;
+            public byte m_ModifierType;
+            public byte m_PropertyType;
+            public byte m_MethodType;
+            public string m_MethodValue;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU8(s, unk2);
-                Helper.WriteU8(s, unk3);
-                Helper.WriteU8(s, unk4);
-                Helper.WriteString(s, unk5);
+                Helper.WriteU32(s, m_ModifierID);
+                Helper.WriteU8(s, m_ModifierType);
+                Helper.WriteU8(s, m_PropertyType);
+                Helper.WriteU8(s, m_MethodType);
+                Helper.WriteString(s, m_MethodValue);
             }
         }
 

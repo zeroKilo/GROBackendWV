@@ -11,36 +11,36 @@ namespace GRPBackendWV
     {
         public class GameClass
         {
-            public uint unk1;
-            public uint unk2;
-            public uint unk3;
-            public string unk4;
-            public List<uint> unk5 = new List<uint>();
-            public List<uint> unk6 = new List<uint>();
-            public uint unk7;
+            public uint m_ID;
+            public uint m_ModifierListID;
+            public uint m_OasisID;
+            public string m_Name;
+            public List<uint> m_EquippableWeaponIDVector = new List<uint>();
+            public List<uint> m_DefaultSkillNodeIDVector = new List<uint>();
+            public uint m_LoadoutID;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU32(s, unk2);
-                Helper.WriteU32(s, unk3);
-                Helper.WriteString(s, unk4);
-                Helper.WriteU32(s, (uint)unk5.Count);
-                foreach (uint u in unk5)
+                Helper.WriteU32(s, m_ID);
+                Helper.WriteU32(s, m_ModifierListID);
+                Helper.WriteU32(s, m_OasisID);
+                Helper.WriteString(s, m_Name);
+                Helper.WriteU32(s, (uint)m_EquippableWeaponIDVector.Count);
+                foreach (uint u in m_EquippableWeaponIDVector)
                     Helper.WriteU32(s, u);
-                Helper.WriteU32(s, (uint)unk6.Count);
-                foreach (uint u in unk6)
+                Helper.WriteU32(s, (uint)m_DefaultSkillNodeIDVector.Count);
+                foreach (uint u in m_DefaultSkillNodeIDVector)
                     Helper.WriteU32(s, u);
-                Helper.WriteU32(s, unk7);
+                Helper.WriteU32(s, m_LoadoutID);
             }
         }
 
-        public List<GameClass> classes = new List<GameClass>();
+        public List<GameClass> _GameClassVector = new List<GameClass>();
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)classes.Count);
-            foreach (GameClass g in classes)
+            Helper.WriteU32(m, (uint)_GameClassVector.Count);
+            foreach (GameClass g in _GameClassVector)
                 g.toBuffer(m);
             return m.ToArray();
         }

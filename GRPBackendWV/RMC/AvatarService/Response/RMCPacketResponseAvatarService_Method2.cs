@@ -11,12 +11,12 @@ namespace GRPBackendWV
     {
         public class AvatarPortrait
         {
-            public uint unk1;
-            public uint unk2;
+            public uint mItemID;
+            public uint mPortraitID;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU32(s, unk2);
+                Helper.WriteU32(s, mItemID);
+                Helper.WriteU32(s, mPortraitID);
             }
         }
 

@@ -11,48 +11,86 @@ namespace GRPBackendWV
     {
         public class Mission
         {
-            public uint unk1;
-            public string unk2;
-            public uint[] unk3 = new uint[4];
-            public byte[] unk4 = new byte[7];
-            public uint unk5;
+            public uint mID;
+            public string mCriteria;
+            public uint mOasisName;
+            public uint mOasisDescription;
+            public uint mOasisRequirement;
+            public uint mOasisDebrief;
+            public byte mMinLevel;
+            public byte mMaxLevel;
+            public byte mMinParty;
+            public byte mCommandoRequired;
+            public byte mReconRequired;
+            public byte mSpecialistRequired;
+            public byte mFlags;
+            public uint mAssetId;
 
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteString(s, unk2);
-                foreach (uint u in unk3)
-                    Helper.WriteU32(s, u);
-                s.Write(unk4, 0, 7);
-                Helper.WriteU32(s, unk5);
+                Helper.WriteU32(s, mID);
+                Helper.WriteString(s, mCriteria);
+                Helper.WriteU32(s, mOasisName);
+                Helper.WriteU32(s, mOasisDescription);
+                Helper.WriteU32(s, mOasisRequirement);
+                Helper.WriteU32(s, mOasisDebrief);
+                Helper.WriteU8(s, mMinLevel);
+                Helper.WriteU8(s, mMaxLevel);
+                Helper.WriteU8(s, mMinParty);
+                Helper.WriteU8(s, mCommandoRequired);
+                Helper.WriteU8(s, mReconRequired);
+                Helper.WriteU8(s, mSpecialistRequired);
+                Helper.WriteU8(s, mFlags);
+                Helper.WriteU32(s, mAssetId);
             }
         }
 
         public class MissionArc
         {
-            public uint[] unk1 = new uint[4];
-            public byte[] unk2 = new byte[4];
+            public uint mID;
+            public uint mOasisNameID;
+            public uint mOasisDescriptionID;
+            public uint mClassRequired;
+            public byte mFlags;
+            public byte mIsLoop;
+            public byte mCategory;
+            public byte mIsAutoAccept;
             public void toBuffer(Stream s)
             {
-                foreach (uint u in unk1)
-                    Helper.WriteU32(s, u);
-                s.Write(unk2, 0, 4);
+                Helper.WriteU32(s, mID);
+                Helper.WriteU32(s, mOasisNameID);
+                Helper.WriteU32(s, mOasisDescriptionID);
+                Helper.WriteU32(s, mClassRequired);
+                Helper.WriteU8(s, mFlags);
+                Helper.WriteU8(s, mIsLoop);
+                Helper.WriteU8(s, mCategory);
+                Helper.WriteU8(s, mIsAutoAccept);
             }
         }
 
         public class MissionSequence
         {
-            public uint[] unk1 = new uint[4];
-            public byte unk2;
-            public uint[] unk3 = new uint[4];
+            public uint mID;
+            public uint mMissionArcId;
+            public uint mMissionId;
+            public uint mOrder;
+            public byte mCompleteRequired;
+            public uint mStartTime;
+            public uint mEndTime;
+            public uint mTimeLimit;
+            public uint mSKUId;
 
             public void toBuffer(Stream s)
             {
-                foreach (uint u in unk1)
-                    Helper.WriteU32(s, u);
-                Helper.WriteU8(s, unk2);
-                foreach (uint u in unk3)
-                    Helper.WriteU32(s, u);
+                Helper.WriteU32(s, mID);
+                Helper.WriteU32(s, mMissionArcId);
+                Helper.WriteU32(s, mMissionId);
+                Helper.WriteU32(s, mOrder);
+                Helper.WriteU8(s, mCompleteRequired);
+                Helper.WriteU32(s, mStartTime);
+                Helper.WriteU32(s, mEndTime);
+                Helper.WriteU32(s, mTimeLimit);
+                Helper.WriteU32(s, mSKUId);
             }
         }
 

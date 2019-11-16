@@ -11,14 +11,14 @@ namespace GRPBackendWV
     {
         public class Level
         {
-            public uint unk1;
-            public uint unk2;
-            public uint unk3;
+            public uint m_Id;
+            public uint m_TotalPEC;
+            public uint m_Level;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU32(s, unk2);
-                Helper.WriteU32(s, unk3);
+                Helper.WriteU32(s, m_Id);
+                Helper.WriteU32(s, m_TotalPEC);
+                Helper.WriteU32(s, m_Level);
             }
         }
 

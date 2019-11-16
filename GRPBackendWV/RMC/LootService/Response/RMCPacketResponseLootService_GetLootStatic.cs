@@ -11,11 +11,16 @@ namespace GRPBackendWV
     {
         public class LootItem
         {
-            public uint[] unk1 = new uint[4];
+            public uint mID;
+            public uint mLootID;
+            public uint mLootItemSku;
+            public uint mPercentage;
             public void toBuffer(Stream s)
             {
-                foreach (uint u in unk1)
-                    Helper.WriteU32(s, u);
+                Helper.WriteU32(s, mID);
+                Helper.WriteU32(s, mLootID);
+                Helper.WriteU32(s, mLootItemSku);
+                Helper.WriteU32(s, mPercentage);
             }
         }
 

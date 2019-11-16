@@ -11,11 +11,20 @@ namespace GRPBackendWV
     {
         public class RCHeader
         {
-            public uint[] unk1 = new uint[6];
+            public uint m_MethodId;
+            public uint m_Checksum;
+            public uint m_Property;
+            public uint m_Version;
+            public uint m_Size;
+            public uint m_OriginalSize;
             public void toBuffer(Stream s)
             {
-                foreach (uint u in unk1)
-                    Helper.WriteU32(s, u);
+                Helper.WriteU32(s, m_MethodId);
+                Helper.WriteU32(s, m_Checksum);
+                Helper.WriteU32(s, m_Property);
+                Helper.WriteU32(s, m_Version);
+                Helper.WriteU32(s, m_Size);
+                Helper.WriteU32(s, m_OriginalSize);
             }
         }
 
