@@ -395,7 +395,7 @@ namespace GRPBackendWV
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseStoreService_Method1();
+                    reply = new RMCPacketResponseStoreService_GetSKUs();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:

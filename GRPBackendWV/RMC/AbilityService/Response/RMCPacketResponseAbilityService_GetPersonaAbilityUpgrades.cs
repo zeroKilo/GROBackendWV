@@ -11,50 +11,50 @@ namespace GRPBackendWV
     {
         public class Ability
         {
-            public uint unk1;
-            public byte unk2;
-            public byte unk3;
-            public byte unk4;
-            public uint unk5;
+            public uint Id;
+            public byte SlotCount;
+            public byte ClassID;
+            public byte AbilityType;
+            public uint ModifierListId;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU8(s, unk2);
-                Helper.WriteU8(s, unk3);
-                Helper.WriteU8(s, unk4); 
-                Helper.WriteU32(s, unk5);
+                Helper.WriteU32(s, Id);
+                Helper.WriteU8(s, SlotCount);
+                Helper.WriteU8(s, ClassID);
+                Helper.WriteU8(s, AbilityType); 
+                Helper.WriteU32(s, ModifierListId);
             }
         }
 
         public class AbilityUpgrade
         {
-            public uint unk1;
-            public byte unk2;
-            public byte unk3;
-            public uint unk4;
+            public uint Id;
+            public byte AbilityUpgradeType;
+            public byte CompatibleAbilityType;
+            public uint ModifierListID;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU8(s, unk2);
-                Helper.WriteU8(s, unk3);
-                Helper.WriteU32(s, unk4);
+                Helper.WriteU32(s, Id);
+                Helper.WriteU8(s, AbilityUpgradeType);
+                Helper.WriteU8(s, CompatibleAbilityType);
+                Helper.WriteU32(s, ModifierListID);
             }
         }
 
         public class PassiveAbility
         {
-            public uint unk1;
-            public byte unk2;
-            public uint unk3;
-            public uint unk4;
-            public uint unk5;
+            public uint Id;
+            public byte ClassID;
+            public uint ModifierListID;
+            public uint Type;
+            public uint AssetKey;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU8(s, unk2);
-                Helper.WriteU32(s, unk3);
-                Helper.WriteU32(s, unk4);
-                Helper.WriteU32(s, unk5);
+                Helper.WriteU32(s, Id);
+                Helper.WriteU8(s, ClassID);
+                Helper.WriteU32(s, ModifierListID);
+                Helper.WriteU32(s, Type);
+                Helper.WriteU32(s, AssetKey);
             }
         }
 

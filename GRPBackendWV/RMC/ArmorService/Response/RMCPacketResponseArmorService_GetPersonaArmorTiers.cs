@@ -11,58 +11,58 @@ namespace GRPBackendWV
     {
         public class ArmorTier
         {
-            public uint unk1;
-            public byte unk2;
-            public byte unk3;
-            public byte unk4;
-            public byte unk5;
-            public byte unk6;
-            public uint unk7;
-            public uint unk8;
+            public uint Id;
+            public byte Type;
+            public byte Tier;
+            public byte ClassID;
+            public byte UnlockLevel;
+            public byte InsertSlots;
+            public uint AssetKey;
+            public uint ModifierListId;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU8(s, unk2);
-                Helper.WriteU8(s, unk3);
-                Helper.WriteU8(s, unk4);
-                Helper.WriteU8(s, unk5);
-                Helper.WriteU8(s, unk6);
-                Helper.WriteU32(s, unk7);
-                Helper.WriteU32(s, unk8);
+                Helper.WriteU32(s, Id);
+                Helper.WriteU8(s, Type);
+                Helper.WriteU8(s, Tier);
+                Helper.WriteU8(s, ClassID);
+                Helper.WriteU8(s, UnlockLevel);
+                Helper.WriteU8(s, InsertSlots);
+                Helper.WriteU32(s, AssetKey);
+                Helper.WriteU32(s, ModifierListId);
             }
         }
 
         public class ArmorInsert
         {
-            public uint unk1;
-            public byte unk2;
-            public uint unk3;
-            public uint unk4;
-            public byte unk5;
+            public uint Id;
+            public byte Type;
+            public uint AssetKey;
+            public uint ModifierListID;
+            public byte CharacterID;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU8(s, unk2);
-                Helper.WriteU32(s, unk3);
-                Helper.WriteU32(s, unk4);
-                Helper.WriteU8(s, unk5);
+                Helper.WriteU32(s, Id);
+                Helper.WriteU8(s, Type);
+                Helper.WriteU32(s, AssetKey);
+                Helper.WriteU32(s, ModifierListID);
+                Helper.WriteU8(s, CharacterID);
             }
         }
 
         public class ArmorItem
         {
-            public uint unk1;
-            public byte unk2;
-            public uint unk3;
-            public uint unk4;
-            public byte unk5;
+            public uint Id;
+            public byte Type;
+            public uint AssetKey;
+            public uint ModifierListID;
+            public byte CharacterID;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU8(s, unk2);
-                Helper.WriteU32(s, unk3);
-                Helper.WriteU32(s, unk4);
-                Helper.WriteU8(s, unk5);
+                Helper.WriteU32(s, Id);
+                Helper.WriteU8(s, Type);
+                Helper.WriteU32(s, AssetKey);
+                Helper.WriteU32(s, ModifierListID);
+                Helper.WriteU8(s, CharacterID);
             }
         }
 

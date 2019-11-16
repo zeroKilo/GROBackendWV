@@ -84,7 +84,7 @@
     <Compile Include="RMC\SurveyService\Response\RMCPacketResponseSurveyService_Method1.cs" />
     <Compile Include="RMC\WeaponProficiencyService\Response\RMCPacketResponseWeaponProficiencyService_Method3.cs" />
     <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_GetModifiers.cs" />
-    <Compile Include="RMC\StoreService\Response\RMCPacketResponseStoreService_Method1.cs" />
+    <Compile Include="RMC\StoreService\Response\RMCPacketResponseStoreService_GetSKUs.cs" />
     <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_GetSkills.cs" />
     <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method12.cs" />
     <Compile Include="RMC\OpsProtocolService\Response\RMCPacketResponseOpsProtocolService_GetAllPriorityBroadcasts.cs" />
