@@ -46,6 +46,12 @@ namespace GRPBackendWV
 
         public RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits()
         {
+            for (int i = 0; i < 3; i++)
+            {
+                LoadoutKit kit = new LoadoutKit();
+                kit.m_LoadoutKitID = kit.m_ClassID = (uint)i;
+                kits.Add(kit);
+            }
         }
 
         public override byte[] ToBuffer()

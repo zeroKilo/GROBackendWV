@@ -29,7 +29,22 @@ namespace GRPBackendWV
 
         public static uint ReadU32(Stream s)
         {
-            return (uint)((byte)s.ReadByte() | ((byte)s.ReadByte() << 8) | ((byte)s.ReadByte() << 16) | ((byte)s.ReadByte() << 24));
+            return (uint)((byte)s.ReadByte() | 
+                         ((byte)s.ReadByte() << 8) | 
+                         ((byte)s.ReadByte() << 16) | 
+                         ((byte)s.ReadByte() << 24));
+        }
+
+        public static ulong ReadU64(Stream s)
+        {
+            return (ulong)((byte)s.ReadByte() | 
+                          ((byte)s.ReadByte() << 8) | 
+                          ((byte)s.ReadByte() << 16) |
+                          ((byte)s.ReadByte() << 24) |
+                          ((byte)s.ReadByte() << 32) |
+                          ((byte)s.ReadByte() << 40) |
+                          ((byte)s.ReadByte() << 48) |
+                          ((byte)s.ReadByte() << 56));
         }
 
         public static float ReadFloat(Stream s)
@@ -87,6 +102,18 @@ namespace GRPBackendWV
             s.WriteByte((byte)(v >> 8));
             s.WriteByte((byte)(v >> 16));
             s.WriteByte((byte)(v >> 24));
+        }
+
+        public static void WriteU64(Stream s, ulong v)
+        {
+            s.WriteByte((byte)v);
+            s.WriteByte((byte)(v >> 8));
+            s.WriteByte((byte)(v >> 16));
+            s.WriteByte((byte)(v >> 24));
+            s.WriteByte((byte)(v >> 32));
+            s.WriteByte((byte)(v >> 40));
+            s.WriteByte((byte)(v >> 48));
+            s.WriteByte((byte)(v >> 56));
         }
 
         public static void WriteFloat(Stream s, float v)

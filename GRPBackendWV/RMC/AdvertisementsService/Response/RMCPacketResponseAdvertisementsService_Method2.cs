@@ -12,8 +12,9 @@ namespace GRPBackendWV
 
         public override byte[] ToBuffer()
         {
-            MemoryStream m = new MemoryStream();
-            return m.ToArray();
+            MemoryStream m = new MemoryStream();            
+            //return m.ToArray();
+            return new byte[16];
         }
 
         public override string ToString()

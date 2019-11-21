@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseAchievementsService_Method12 : RMCPacketReply
+    public class RMCPacketResponseEmpty : RMCPacketReply
     {
         public override byte[] ToBuffer()
         {
@@ -15,7 +15,7 @@ namespace GRPBackendWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponseAchievementsService_Method12]";
+            return "[RMCPacketResponseEmpty]";
         }
     }
 }

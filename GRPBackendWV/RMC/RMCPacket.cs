@@ -20,9 +20,11 @@ namespace GRPBackendWV
             InventoryService = 0x69,
             LootService = 0x6A,
             WeaponService = 0x6B,
+            FriendsService = 0x6C,
             ChatService = 0x6E,
             MissionService = 0x6F,
             PartyService = 0x70,
+            StatisticsService = 0x72,
             AchievementsService = 0x73,
             ProgressionService = 0x74,
             RewardService = 0x76,
@@ -40,7 +42,8 @@ namespace GRPBackendWV
             InboxMessageService = 0x86,
             ProfanityFilterService = 0x87,
             AbilityService = 0x89,
-            SurveyService = 0x8B
+            SurveyService = 0x8B,
+            OverlordNewsProtocol = 0x138A
         }
 
         public PROTOCOL proto;
@@ -95,9 +98,11 @@ namespace GRPBackendWV
                 case PROTOCOL.InventoryService:
                 case PROTOCOL.LootService:
                 case PROTOCOL.WeaponService:
+                case PROTOCOL.FriendsService:
                 case PROTOCOL.ChatService:
                 case PROTOCOL.MissionService:
                 case PROTOCOL.PartyService:
+                case PROTOCOL.StatisticsService:
                 case PROTOCOL.AchievementsService:
                 case PROTOCOL.ProgressionService:
                 case PROTOCOL.RewardService:
@@ -116,6 +121,7 @@ namespace GRPBackendWV
                 case PROTOCOL.ProfanityFilterService:
                 case PROTOCOL.AbilityService:
                 case PROTOCOL.SurveyService:
+                case PROTOCOL.OverlordNewsProtocol:
                     break;
                 default:
                     WriteLog("Error: No reader implemented for packet protocol " + proto);
