@@ -92,6 +92,7 @@
     <Compile Include="RMC\LootService\Response\RMCPacketResponseLootService_Method5.cs" />
     <Compile Include="RMC\MissionService\Response\RMCPacketResponseMissionService_Method3.cs" />
     <Compile Include="RMC\OverlordNewsProtocol\Response\RMCPacketResponseOverlordNewsProtocol_Method1.cs" />
+    <Compile Include="RMC\PartyService\Response\RMCPacketResponsePartyService_GetInviteList.cs" />
     <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_Method11.cs" />
     <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_MethodF.cs" />
     <Compile Include="RMC\PveArchetypeService\Response\RMCPacketResponsePveArchetypeService_Method1.cs" />

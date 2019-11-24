@@ -407,6 +407,10 @@ namespace GRPBackendWV
                     reply = new RMCPacketResponsePartyService_GetInviteeList();
                     SendReply(udp, p, rmc, client, reply);
                     break;
+                case 4:
+                    reply = new RMCPacketResponsePartyService_GetInviteList();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 default:
                     WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
@@ -773,6 +777,23 @@ namespace GRPBackendWV
             {
                 case 1:
                     reply = new RMCPacketResponseOverlordNewsProtocol_Method1();
+                    for (int i = 0; i < 5; i++)
+                    {
+                        var message = new RMCPacketResponseOverlordNewsProtocol_Method1.NewsMessage();
+                        message.header = new RMCPacketResponseOverlordNewsProtocol_Method1.NewsHeader();
+                        message.header.m_title = "test-" + i;
+                        message.header.m_recipientType = 0;
+                        message.header.m_recipientID = client.PID;
+                        message.header.m_publisherPID = 1;
+                        message.header.m_publisherName = "System";
+                        message.header.m_publicationTime = (ulong)DateTime.UtcNow.Ticks;
+                        message.header.m_link = "1234";
+                        message.header.m_ID = (uint)i;
+                        message.header.m_expirationTime = (ulong)DateTime.UtcNow.AddDays(5).Ticks;
+                        message.header.m_displayTime = (ulong)DateTime.UtcNow.Ticks;
+                        message.m_body = "Just some data " + i;
+                        ((RMCPacketResponseOverlordNewsProtocol_Method1)reply).news.Add(message);
+                    }
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
