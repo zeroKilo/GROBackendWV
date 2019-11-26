@@ -13,7 +13,7 @@ namespace GRPBackendWV
         {
             public uint m_LoadoutKitID;
             public uint m_ClassID;
-            public uint m_Weapon1ID;
+            public uint m_Weapon1ID = 0x1000;
             public uint m_Weapon2ID;
             public uint m_Weapon3ID;
             public uint m_Item1ID;
@@ -49,7 +49,7 @@ namespace GRPBackendWV
             for (int i = 0; i < 3; i++)
             {
                 LoadoutKit kit = new LoadoutKit();
-                kit.m_LoadoutKitID = kit.m_ClassID = (uint)i;
+                kit.m_ClassID = (uint)i;
                 kits.Add(kit);
             }
         }

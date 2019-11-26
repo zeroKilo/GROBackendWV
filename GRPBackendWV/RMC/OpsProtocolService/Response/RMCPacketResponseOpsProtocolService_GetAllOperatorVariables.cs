@@ -33,7 +33,7 @@ namespace GRPBackendWV
 
         public override string ToString()
         {
-            return "[RMCPacketTesponseOpsProtocolService_GetAllOperatorVariables]";
+            return "[RMCPacketResponseOpsProtocolService_GetAllOperatorVariables]";
         }
     }
 }

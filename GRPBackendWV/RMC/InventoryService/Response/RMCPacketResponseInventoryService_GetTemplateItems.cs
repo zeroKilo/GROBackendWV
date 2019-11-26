@@ -48,12 +48,12 @@ namespace GRPBackendWV
 
         public RMCPacketResponseInventoryService_GetTemplateItems()
         {
-            /*
             TemplateItem item = new TemplateItem();
-            item.m_ItemID = 0x5D1745D;
+            item.m_ItemID = 0x1000;
             item.m_ItemName = "Test";
+            item.m_OasisDesc = 70870;
+            item.m_OasisName = 70870;
             items.Add(item);
-             * */
         }
 
         public override byte[] ToBuffer()

@@ -37,7 +37,7 @@ namespace GRPBackendWV
 
         public override string ToString()
         {
-            return "[RMCPacketTesponseOpsProtocolService_GetAllPriorityBroadcasts]";
+            return "[RMCPacketResponseOpsProtocolService_GetAllPriorityBroadcasts]";
         }
     }
 }
