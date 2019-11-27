@@ -10,6 +10,11 @@ to make the game use this backend make sure following lines are set in yeti.ini
 
 > OnlineAccessKey=8dtRv2oj
 
+- DareDebuggerWV : tool to interface the daredebug port of the game
+- DareParserWV : Extracts custom RTTI information found in different exe and dll
+- GRPBackendWV : experimental backend for GRP
+- GRPExplorerWV : tool to browse the yeti.big file for game content
+
 [![Alt text](https://img.youtube.com/vi/7Gix54amKxk/0.jpg)](https://www.youtube.com/watch?v=7Gix54amKxk)
 
 
