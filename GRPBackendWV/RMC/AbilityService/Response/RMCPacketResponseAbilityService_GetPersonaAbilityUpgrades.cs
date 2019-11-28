@@ -62,6 +62,13 @@ namespace GRPBackendWV
         public List<AbilityUpgrade> abups = new List<AbilityUpgrade>();
         public List<PassiveAbility> pabs = new List<PassiveAbility>();
 
+        public RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades()
+        {
+            abs.Add(new Ability());
+            abups.Add(new AbilityUpgrade());
+            pabs.Add(new PassiveAbility());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

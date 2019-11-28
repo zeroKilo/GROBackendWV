@@ -36,6 +36,12 @@ namespace GRPBackendWV
             }
         }
         public List<Invitation> _InvitesList = new List<Invitation>();
+
+        public RMCPacketResponsePartyService_GetInviteList()
+        {
+            _InvitesList.Add(new Invitation());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

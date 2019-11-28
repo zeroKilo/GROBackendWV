@@ -18,7 +18,7 @@ namespace GRPBackendWV
             public uint m_Level;
             public uint m_AchievementPoints;
             public uint m_Icon;
-            public string m_Expression;
+            public string m_Expression = "1";
             public uint m_OasisNameID;
             public uint m_OasisDescriptionID;
             public uint m_StartDate;
@@ -107,6 +107,13 @@ namespace GRPBackendWV
         public List<Achievement> achs = new List<Achievement>();
         public List<AchievementGroup> groups = new List<AchievementGroup>();
         public List<AchievementCategory> cats = new List<AchievementCategory>();
+
+        public RMCPacketResponseAchievementsService_Method9()
+        {
+            achs.Add(new Achievement());
+            groups.Add(new AchievementGroup());
+            cats.Add(new AchievementCategory());
+        }
 
         public override byte[] ToBuffer()
         {

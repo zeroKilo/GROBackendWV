@@ -36,6 +36,11 @@ namespace GRPBackendWV
 
         public List<GameClass> _GameClassVector = new List<GameClass>();
 
+        public RMCPacketResponseSkillsService_GetGameClass()
+        {
+            _GameClassVector.Add(new GameClass());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

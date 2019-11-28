@@ -26,6 +26,11 @@ namespace GRPBackendWV
 
         public List<FaceSkinTone> list = new List<FaceSkinTone>();
 
+        public RMCPacketResponsePlayerProfileService_MethodF()
+        {
+            list.Add(new FaceSkinTone());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

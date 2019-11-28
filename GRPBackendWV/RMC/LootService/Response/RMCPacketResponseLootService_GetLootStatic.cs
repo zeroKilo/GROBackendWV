@@ -26,6 +26,11 @@ namespace GRPBackendWV
 
         public List<LootItem> items = new List<LootItem>();
 
+        public RMCPacketResponseLootService_GetLootStatic()
+        {
+            items.Add(new LootItem());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

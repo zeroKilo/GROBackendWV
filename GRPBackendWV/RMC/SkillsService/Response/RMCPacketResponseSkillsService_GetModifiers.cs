@@ -28,6 +28,11 @@ namespace GRPBackendWV
 
         public List<SkillModifier> mods = new List<SkillModifier>();
 
+        public RMCPacketResponseSkillsService_GetModifiers()
+        {
+            mods.Add(new SkillModifier());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

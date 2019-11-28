@@ -30,6 +30,11 @@ namespace GRPBackendWV
 
         public List<RCHeader> headers = new List<RCHeader>();
 
+        public RMCPacketResponseLoadout_GetLoadoutPowers()
+        {
+            headers.Add(new RCHeader());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

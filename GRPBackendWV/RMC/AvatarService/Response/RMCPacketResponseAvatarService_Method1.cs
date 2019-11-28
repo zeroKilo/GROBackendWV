@@ -23,6 +23,12 @@ namespace GRPBackendWV
         public List<AvatarDecorator> decos = new List<AvatarDecorator>();
         public List<uint> unk1 = new List<uint>();
 
+        public RMCPacketResponseAvatarService_Method1()
+        {
+            decos.Add(new AvatarDecorator());
+            unk1.Add(0);
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

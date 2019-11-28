@@ -23,6 +23,12 @@ namespace GRPBackendWV
         public List<AvatarPortrait> portraits = new List<AvatarPortrait>();
         public List<uint> unk1 = new List<uint>();
 
+        public RMCPacketResponseAvatarService_Method2()
+        {
+            portraits.Add(new AvatarPortrait());
+            unk1.Add(0);
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

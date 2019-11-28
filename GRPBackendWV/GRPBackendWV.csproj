@@ -76,6 +76,7 @@
     <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_Method1.cs" />
     <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_Method5.cs" />
     <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_Method10.cs" />
+    <Compile Include="RMC\DBGTelemetry\Response\RMCPacketResponseDBGTelemetry_Method1.cs" />
     <Compile Include="RMC\FriendsService\Response\RMCPacketResponseFriendsService_Method5.cs" />
     <Compile Include="RMC\InboxMessageService\Response\RMCPacketResponseInboxMessageService_Method2.cs" />
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_Method6.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_MethodF.cs" />
     <Compile Include="RMC\PveArchetypeService\Response\RMCPacketResponsePveArchetypeService_Method1.cs" />
     <Compile Include="RMC\RewardService\Response\RMCPacketResponseRewardService_Method2.cs" />
+    <Compile Include="RMC\RewardService\Response\RMCPacketResponseRewardService_Method3.cs" />
     <Compile Include="RMC\RMCPacketResponseEmpty.cs" />
     <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_Method3.cs" />
     <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_Method4.cs" />

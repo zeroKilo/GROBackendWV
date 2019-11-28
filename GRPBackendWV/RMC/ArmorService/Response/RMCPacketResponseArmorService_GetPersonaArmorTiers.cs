@@ -70,6 +70,13 @@ namespace GRPBackendWV
         public List<ArmorInsert> inserts = new List<ArmorInsert>();
         public List<ArmorItem> items = new List<ArmorItem>();
 
+        public RMCPacketResponseArmorService_GetPersonaArmorTiers()
+        {
+            tiers.Add(new ArmorTier());
+            inserts.Add(new ArmorInsert());
+            items.Add(new ArmorItem());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

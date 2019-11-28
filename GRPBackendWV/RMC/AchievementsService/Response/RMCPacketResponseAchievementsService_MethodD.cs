@@ -10,6 +10,12 @@ namespace GRPBackendWV
     public class RMCPacketResponseAchievementsService_MethodD : RMCPacketReply
     {
         List<uint> unk1 = new List<uint>();
+
+        public RMCPacketResponseAchievementsService_MethodD()
+        {
+            unk1.Add(0);
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

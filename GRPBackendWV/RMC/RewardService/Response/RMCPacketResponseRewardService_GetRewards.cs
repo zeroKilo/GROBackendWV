@@ -36,6 +36,11 @@ namespace GRPBackendWV
 
         public List<Reward> rewards = new List<Reward>();
 
+        public RMCPacketResponseRewardService_GetRewards()
+        {
+            rewards.Add(new Reward());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

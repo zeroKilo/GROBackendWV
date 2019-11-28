@@ -30,6 +30,11 @@ namespace GRPBackendWV
 
         public List<SkillPower> list = new List<SkillPower>();
 
+        public RMCPacketResponseSkillsService_Method3()
+        {
+            list.Add(new SkillPower());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

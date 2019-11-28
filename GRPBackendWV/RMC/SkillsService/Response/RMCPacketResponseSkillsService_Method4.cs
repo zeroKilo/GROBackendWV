@@ -24,6 +24,11 @@ namespace GRPBackendWV
 
         public List<SkillModifierList> sml = new List<SkillModifierList>();
 
+        public RMCPacketResponseSkillsService_Method4()
+        {
+            sml.Add(new SkillModifierList());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

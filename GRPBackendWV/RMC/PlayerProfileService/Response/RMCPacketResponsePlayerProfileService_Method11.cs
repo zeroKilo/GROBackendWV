@@ -30,6 +30,11 @@ namespace GRPBackendWV
 
         public List<Notification> list = new List<Notification>();
 
+        public RMCPacketResponsePlayerProfileService_Method11()
+        {
+            list.Add(new Notification());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

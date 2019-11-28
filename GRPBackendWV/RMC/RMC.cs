@@ -71,6 +71,9 @@ namespace GRPBackendWV
                 case RMCPacket.PROTOCOL.ProgressionService:
                     ProcessProgressionService(udp, p, rmc, client);
                     break;
+                case RMCPacket.PROTOCOL.DBGTelemetry:
+                    DBGTelemetry(udp, p, rmc, client);
+                    break;
                 case RMCPacket.PROTOCOL.RewardService:
                     ProcessRewardService(udp, p, rmc, client);
                     break;
@@ -411,6 +414,15 @@ namespace GRPBackendWV
                     reply = new RMCPacketResponsePartyService_GetInviteList();
                     SendReply(udp, p, rmc, client, reply);
                     break;
+                case 7:
+                case 8:
+                case 9:
+                case 0xB:
+                case 0xC:
+                case 0xD:
+                    reply = new RMCPacketResponseEmpty();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 default:
                     WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
@@ -474,6 +486,21 @@ namespace GRPBackendWV
             }
         }
 
+        private static void DBGTelemetry(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
+        {
+            RMCPacketReply reply;
+            switch (rmc.methodID)
+            {
+                case 1:
+                    reply = new RMCPacketResponseDBGTelemetry_Method1();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                default:
+                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    break;
+            }
+        }
+
         private static void ProcessRewardService(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client)
         {
             RMCPacketReply reply;
@@ -485,6 +512,10 @@ namespace GRPBackendWV
                     break;
                 case 2:
                     reply = new RMCPacketResponseRewardService_Method2();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 3:
+                    reply = new RMCPacketResponseRewardService_Method3();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:

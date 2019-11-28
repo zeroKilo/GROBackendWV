@@ -28,6 +28,11 @@ namespace GRPBackendWV
 
         public List<Boost> boosts = new List<Boost>();
 
+        public RMCPacketResponseInventoryService_Method2()
+        {
+            boosts.Add(new Boost());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

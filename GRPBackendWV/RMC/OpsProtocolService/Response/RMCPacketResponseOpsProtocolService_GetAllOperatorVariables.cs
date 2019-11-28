@@ -22,6 +22,11 @@ namespace GRPBackendWV
 
         public List<OperatorVariable> ops = new List<OperatorVariable>();
 
+        public RMCPacketResponseOpsProtocolService_GetAllOperatorVariables()
+        {
+            ops.Add(new OperatorVariable());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

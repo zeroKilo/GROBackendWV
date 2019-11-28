@@ -34,6 +34,7 @@ namespace GRPBackendWV
 
         public RMCPacketResponseInventoryService_GetAllApplyItems()
         {
+            items.Add(new ApplyItem());
         }
 
         public override byte[] ToBuffer()

@@ -32,6 +32,11 @@ namespace GRPBackendWV
 
         public List<InboxMessage> msgs = new List<InboxMessage>();
 
+        public RMCPacketResponseInboxMessageService_Method2()
+        {
+            msgs.Add(new InboxMessage());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

@@ -25,6 +25,12 @@ namespace GRPBackendWV
         }
 
         public List<WeaponXPLevelInfo> _outXPLevels = new List<WeaponXPLevelInfo>();
+
+        public RMCPacketResponseWeaponProficiencyService_Method3()
+        {
+            _outXPLevels.Add(new WeaponXPLevelInfo());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

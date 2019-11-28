@@ -61,6 +61,13 @@ namespace GRPBackendWV
 
         public List<SKU> skus = new List<SKU>();
 
+        public RMCPacketResponseStoreService_GetSKUs()
+        {
+            SKU s = new SKU();
+            s.m_ItemVector.Add(new SKUItem());
+            skus.Add(s);
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

@@ -22,6 +22,11 @@ namespace GRPBackendWV
 
         public List<Unknown1> unk1 = new List<Unknown1>();
 
+        public RMCPacketResponseInboxMessageService_Method1()
+        {
+            unk1.Add(new Unknown1());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

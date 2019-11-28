@@ -60,6 +60,12 @@ namespace GRPBackendWV
         public List<Skill> skills = new List<Skill>();
         public List<SkillUpgrade> upgrades = new List<SkillUpgrade>();
 
+        public RMCPacketResponseSkillsService_GetSkills()
+        {
+            skills.Add(new Skill());
+            upgrades.Add(new SkillUpgrade());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

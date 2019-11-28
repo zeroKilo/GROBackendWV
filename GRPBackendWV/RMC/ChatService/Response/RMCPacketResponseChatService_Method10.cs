@@ -24,6 +24,11 @@ namespace GRPBackendWV
 
         public List<ChatChannelMute> list = new List<ChatChannelMute>();
 
+        public RMCPacketResponseChatService_Method10()
+        {
+            list.Add(new ChatChannelMute());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

@@ -22,6 +22,11 @@ namespace GRPBackendWV
 
         public List<unknown> list = new List<unknown>();
 
+        public RMCPacketResponseLootService_Method5()
+        {
+            list.Add(new unknown());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

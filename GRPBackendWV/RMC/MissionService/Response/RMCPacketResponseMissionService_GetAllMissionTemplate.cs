@@ -97,6 +97,14 @@ namespace GRPBackendWV
         public List<Mission> missions = new List<Mission>();
         public List<MissionArc> missionArcs = new List<MissionArc>();
         public List<MissionSequence> missionSeqs = new List<MissionSequence>();
+
+        public RMCPacketResponseMissionService_GetAllMissionTemplate()
+        {
+            missions.Add(new Mission());
+            missionArcs.Add(new MissionArc());
+            missionSeqs.Add(new MissionSequence());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

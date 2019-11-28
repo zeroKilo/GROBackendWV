@@ -17,7 +17,7 @@ namespace GRPBackendWV
             public uint m_DefaultValue;
             public uint m_OasisNameId;
             public uint m_OasisDescriptionId;
-            public string m_Expression;
+            public string m_Expression = "1";
             public string m_Name;
             public void toBuffer(Stream s)
             {
@@ -33,6 +33,11 @@ namespace GRPBackendWV
         }
 
         public List<DesignerStatistics> list = new List<DesignerStatistics>();
+
+        public RMCPacketResponseStatisticsService_Method1()
+        {
+            list.Add(new DesignerStatistics());
+        }
 
         public override byte[] ToBuffer()
         {

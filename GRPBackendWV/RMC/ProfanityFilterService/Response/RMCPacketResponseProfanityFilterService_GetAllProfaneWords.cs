@@ -24,6 +24,11 @@ namespace GRPBackendWV
 
         public List<ProfaneWord> words = new List<ProfaneWord>();
 
+        public RMCPacketResponseProfanityFilterService_GetAllProfaneWords()
+        {
+            words.Add(new ProfaneWord());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

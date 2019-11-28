@@ -24,6 +24,11 @@ namespace GRPBackendWV
 
         public List<Level> levels = new List<Level>();
 
+        public RMCPacketResponseProgressionService_GetLevels()
+        {
+            levels.Add(new Level());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

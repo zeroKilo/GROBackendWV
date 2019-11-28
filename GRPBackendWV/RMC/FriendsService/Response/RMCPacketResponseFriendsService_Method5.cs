@@ -44,6 +44,11 @@ namespace GRPBackendWV
 
         public List<FriendData> list = new List<FriendData>();
 
+        public RMCPacketResponseFriendsService_Method5()
+        {
+            list.Add(new FriendData());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

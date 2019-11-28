@@ -136,6 +136,14 @@ namespace GRPBackendWV
         public List<AMM_GameMode> amm_gamemodes = new List<AMM_GameMode>();
         public List<AMM_GameDetail> amm_gamedetails = new List<AMM_GameDetail>();
 
+        public RMCPacktResponseAMM_Method7()
+        {
+            amm_playlists.Add(new AMM_Playlist());
+            amm_maps.Add(new AMM_Map());
+            amm_gamemodes.Add(new AMM_GameMode());
+            amm_gamedetails.Add(new AMM_GameDetail());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

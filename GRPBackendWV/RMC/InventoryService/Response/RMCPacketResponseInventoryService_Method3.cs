@@ -31,6 +31,11 @@ namespace GRPBackendWV
 
         public List<Consumable> cons = new List<Consumable>();
 
+        public RMCPacketResponseInventoryService_Method3()
+        {
+            cons.Add(new Consumable());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

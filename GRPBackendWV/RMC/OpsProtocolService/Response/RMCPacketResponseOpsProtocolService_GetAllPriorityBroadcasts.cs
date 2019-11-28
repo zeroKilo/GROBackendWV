@@ -26,6 +26,11 @@ namespace GRPBackendWV
 
         public List<PriorityBroadcast> pbs = new List<PriorityBroadcast>();
 
+        public RMCPacketResponseOpsProtocolService_GetAllPriorityBroadcasts()
+        {
+            pbs.Add(new PriorityBroadcast());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

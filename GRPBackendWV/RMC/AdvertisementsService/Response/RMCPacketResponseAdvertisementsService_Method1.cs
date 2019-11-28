@@ -32,6 +32,11 @@ namespace GRPBackendWV
 
         public List<Advertisement> ads = new List<Advertisement>();
 
+        public RMCPacketResponseAdvertisementsService_Method1()
+        {
+            ads.Add(new Advertisement());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

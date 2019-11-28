@@ -37,6 +37,13 @@ namespace GRPBackendWV
 
         public List<PersonaArmorTier> list = new List<PersonaArmorTier>();
 
+        public RMCPacketResponseArmorService_Method2()
+        {
+            PersonaArmorTier p = new PersonaArmorTier();
+            p.Inserts.Add(new ArmorInsertSlot());
+            list.Add(p);
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

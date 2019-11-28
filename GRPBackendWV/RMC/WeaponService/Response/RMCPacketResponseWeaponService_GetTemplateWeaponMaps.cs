@@ -62,6 +62,13 @@ namespace GRPBackendWV
         public List<Unknown1> unk2 = new List<Unknown1>();
         public List<Component> components = new List<Component>();
 
+        public RMCPacketResponseWeaponService_GetTemplateWeaponMaps()
+        {
+            weapons.Add(new Weapon());
+            unk1.Add(new Unknown1());
+            unk2.Add(new Unknown1());
+            components.Add(new Component());
+        }
 
         public override byte[] ToBuffer()
         {

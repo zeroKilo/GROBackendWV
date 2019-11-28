@@ -36,6 +36,13 @@ namespace GRPBackendWV
 
         public List<PersonaAbilityUpgrade> list = new List<PersonaAbilityUpgrade>();
 
+        public RMCPacketResponseAbilityService_Method2()
+        {
+            PersonaAbilityUpgrade p = new PersonaAbilityUpgrade();
+            p.slots.Add(new AbilityUpgradeSlot());
+            list.Add(p);
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

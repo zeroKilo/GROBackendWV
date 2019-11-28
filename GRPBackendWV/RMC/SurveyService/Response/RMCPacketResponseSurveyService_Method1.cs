@@ -25,6 +25,12 @@ namespace GRPBackendWV
         }
 
         public List<Survey> _outSurveys = new List<Survey>();
+
+        public RMCPacketResponseSurveyService_Method1()
+        {
+            _outSurveys.Add(new Survey());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

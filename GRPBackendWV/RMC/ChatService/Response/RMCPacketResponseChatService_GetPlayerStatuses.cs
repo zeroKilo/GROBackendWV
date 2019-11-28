@@ -34,6 +34,11 @@ namespace GRPBackendWV
 
         public List<BasicPersona> personas = new List<BasicPersona>();
 
+        public RMCPacketResponseChatService_GetPlayerStatuses()
+        {
+            personas.Add(new BasicPersona());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

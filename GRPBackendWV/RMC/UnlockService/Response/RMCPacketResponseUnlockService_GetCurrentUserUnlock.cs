@@ -51,6 +51,11 @@ namespace GRPBackendWV
 
         List<Unlock> _outUnlockList = new List<Unlock>();
 
+        public RMCPacketResponseUnlockService_GetCurrentUserUnlock()
+        {
+            _outUnlockList.Add(new Unlock());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

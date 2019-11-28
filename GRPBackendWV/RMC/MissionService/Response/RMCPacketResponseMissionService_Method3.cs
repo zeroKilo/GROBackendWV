@@ -26,6 +26,12 @@ namespace GRPBackendWV
         public uint unk1;
         public uint unk2;
         public uint unk3;
+
+        public RMCPacketResponseMissionService_Method3()
+        {
+            list.Add(new PersonaMission());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

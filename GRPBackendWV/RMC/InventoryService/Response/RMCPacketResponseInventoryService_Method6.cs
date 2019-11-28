@@ -71,6 +71,15 @@ namespace GRPBackendWV
         public List<InventoryBag> bags = new List<InventoryBag>();
         public List<unknown> unk1 = new List<unknown>();
 
+        public RMCPacketResponseInventoryService_Method6()
+        {
+            items.Add(new UserItem());
+            InventoryBag b = new InventoryBag();
+            b.m_InventoryBagSlotVector.Add(new InventoryBagSlot());
+            bags.Add(b);
+            unk1.Add(new unknown());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

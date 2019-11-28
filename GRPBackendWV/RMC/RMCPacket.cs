@@ -27,6 +27,7 @@ namespace GRPBackendWV
             StatisticsService = 0x72,
             AchievementsService = 0x73,
             ProgressionService = 0x74,
+            DBGTelemetry = 0x75,
             RewardService = 0x76,
             StoreService = 0x77,
             AdvertisementsService = 0x79,
@@ -105,6 +106,7 @@ namespace GRPBackendWV
                 case PROTOCOL.StatisticsService:
                 case PROTOCOL.AchievementsService:
                 case PROTOCOL.ProgressionService:
+                case PROTOCOL.DBGTelemetry:
                 case PROTOCOL.RewardService:
                 case PROTOCOL.StoreService:
                 case PROTOCOL.AdvertisementsService:

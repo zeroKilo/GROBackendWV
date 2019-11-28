@@ -39,6 +39,13 @@ namespace GRPBackendWV
 
         public List<PlayerInstancedStatisticsBlock> list = new List<PlayerInstancedStatisticsBlock>();
 
+        public RMCPacketResponseStatisticsService_Method3()
+        {
+            PlayerInstancedStatisticsBlock b = new PlayerInstancedStatisticsBlock();
+            b.m_StatisticVector.Add(new InstancedStatistic());
+            list.Add(b);
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

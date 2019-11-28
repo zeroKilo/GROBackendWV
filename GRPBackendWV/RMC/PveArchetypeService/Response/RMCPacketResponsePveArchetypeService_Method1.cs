@@ -39,6 +39,12 @@ namespace GRPBackendWV
         }
 
         public List<PveArchetype> types = new List<PveArchetype>();
+
+        public RMCPacketResponsePveArchetypeService_Method1()
+        {
+            types.Add(new PveArchetype());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

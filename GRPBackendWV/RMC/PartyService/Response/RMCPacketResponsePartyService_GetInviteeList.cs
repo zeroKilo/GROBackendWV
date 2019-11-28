@@ -103,6 +103,12 @@ namespace GRPBackendWV
         public List<Invitee> invitees = new List<Invitee>();
         public Unknown unk1 = new Unknown();
 
+        public RMCPacketResponsePartyService_GetInviteeList()
+        {
+            members.Add(new PartyMember());
+            invitees.Add(new Invitee());
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

@@ -34,6 +34,13 @@ namespace GRPBackendWV
 
         public List<Leaderboard> boards = new List<Leaderboard>();
 
+        public RMCPacketResponseLeaderboardService_GetLeaderboards()
+        {
+            Leaderboard lb = new Leaderboard();
+            lb.m_OasisDescriptionID = lb.m_OasisNameID = 70870;
+            boards.Add(lb);
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
