@@ -14,12 +14,15 @@ to make the game use this backend make sure following lines are set in yeti.ini
 - DareParserWV : Extracts custom RTTI information found in different exe and dll
 - GRPBackendWV : experimental backend for GRP
 - GRPExplorerWV : tool to browse the yeti.big file for game content
+- GRP_Hook : proxy dll for easy code injection, hooks currently fire script event functions
 
 [![Alt text](https://img.youtube.com/vi/7Gix54amKxk/0.jpg)](https://www.youtube.com/watch?v=7Gix54amKxk)
 
 
 [![Alt text](https://img.youtube.com/vi/_MaOtB4U2RM/0.jpg)](https://www.youtube.com/watch?v=_MaOtB4U2RM)
 
+
+[![Alt text](https://img.youtube.com/vi/TL2OUyEL0xw/0.jpg)](https://www.youtube.com/watch?v=TL2OUyEL0xw)
 
 Credits:
 
