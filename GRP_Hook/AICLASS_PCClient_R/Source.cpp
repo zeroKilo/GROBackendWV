@@ -89,7 +89,7 @@ void DetourMain()
 	Log("Hooked AIDLL::FIR_GetPackageKeyFromBank\n");
 	org_FIR_GetASDataManager = (DWORD(__cdecl*) ()) DetourFunction((PBYTE)(baseAddress + 0x10B590),(PBYTE)FIR_GetASDataManager);
 	Log("Hooked AIDLL::FIR_GetASDataManager\n");
-	org_UI_DispatchEvent = (DWORD(__fastcall*) (void*,void*,int,int,int)) DetourFunction((PBYTE)(baseAddress + 0x15E350),(PBYTE)UI_DispatchEvent);
+	org_UI_DispatchEvent = (DWORD(__fastcall*) (EventCaller*,void*,int,int,int)) DetourFunction((PBYTE)(baseAddress + 0x15E350),(PBYTE)UI_DispatchEvent);
 	Log("Hooked AIDLL::UI_DispatchEvent\n");
 	org_UI_HandleEvent = (DWORD(__fastcall*) (void*,void*,AIEvent*)) DetourFunction((PBYTE)(baseAddress + 0x109930),(PBYTE)UI_HandleEvent);
 	Log("Hooked AIDLL::UI_HandleEvent\n");

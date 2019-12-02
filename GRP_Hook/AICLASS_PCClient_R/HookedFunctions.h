@@ -10,6 +10,13 @@ struct AIEvent
   DWORD unk1;
 };
 
+struct EventCaller
+{
+  DWORD *pVMT;
+  DWORD modelID;
+};
+
+
 DWORD (__cdecl* org_FIR_SendEvent)(int, char*);
 DWORD (__cdecl* org_FIR_SetVariableString)(int, char*, char*);
 DWORD (__cdecl* org_FIR_SetVariableUniString)(int, char*, wchar_t*);
@@ -21,7 +28,7 @@ DWORD (__cdecl* org_FIR_UnloadPackage)(int);
 DWORD (__cdecl* org_FIR_GetPackageKeyFromBank)(int, int);
 DWORD (__cdecl* org_FIR_GetASDataManager)();
 
-DWORD (__fastcall* org_UI_DispatchEvent)(void*, void*, int, int, int);
+DWORD (__fastcall* org_UI_DispatchEvent)(EventCaller*, void*, int, int, int);
 DWORD (__fastcall* org_UI_HandleEvent)(void*, void*, AIEvent*);
 
 DWORD caller = 0;
@@ -121,10 +128,10 @@ void __cdecl FIR_GetASDataManager()
 	org_FIR_GetASDataManager();
 }
 
-DWORD __fastcall UI_DispatchEvent(void* THIS, void* EDX, int a1, int a2, int a3)
+DWORD __fastcall UI_DispatchEvent(EventCaller* THIS, void* EDX, int a1, int a2, int a3)
 {	
 	GetCaller();
-	sprintf(buffer,"0x%08X -> AIDLL::UI_DispatchEvent           (0x%08X, 0x%08X, 0x%08X)\n\0", caller, a1, a2, a3);
+	sprintf(buffer,"0x%08X -> AIDLL::UI_DispatchEvent           (0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, THIS->modelID, a1, a2, a3);
 	Log(buffer);
 	return org_UI_DispatchEvent(THIS, EDX, a1, a2, a3);
 }
