@@ -29,7 +29,18 @@ DWORD (__cdecl* org_FIR_GetPackageKeyFromBank)(int, int);
 DWORD (__cdecl* org_FIR_GetASDataManager)();
 
 DWORD (__fastcall* org_UI_DispatchEvent)(EventCaller*, void*, int, int, int);
-DWORD (__fastcall* org_UI_HandleEvent)(void*, void*, AIEvent*);
+DWORD (__fastcall* org_FIR_FireEvent)(void*, void*);
+DWORD (__fastcall* org_AI_GlobalUI_OnBusEvent)(void*, void*, AIEvent*);
+DWORD (__fastcall* org_AI_Login_OnBusEvent)(void*, void*, AIEvent*);
+DWORD (__fastcall* org_AI_FriendList_OnBusEvent)(void*, void*, AIEvent*);
+DWORD (__fastcall* org_AI_NetworkManager_OnBusEvent)(void*, void*, AIEvent*);
+DWORD (__fastcall* org_AI_HudChatPanel_OnBusEvent)(void*, void*, AIEvent*);
+DWORD (__fastcall* org_AI_PartyWidget_OnBusEvent)(void*, void*, AIEvent*);
+DWORD (__fastcall* org_AI_InGameScore_OnBusEvent)(void*, void*, AIEvent*);
+DWORD (__fastcall* org_AI_InGameAchievement_OnBusEvent)(void*, void*, AIEvent*);
+DWORD (__fastcall* org_AI_IgnoreList_OnBusEvent)(void*, void*, AIEvent*);
+DWORD (__fastcall* org_AI_GameSessionModel_OnBusEvent)(void*, void*, AIEvent*);
+DWORD (__fastcall* org_WebBrowserManager_OnBusEvent)(void*, void*, AIEvent*);
 
 DWORD caller = 0;
 DWORD baseAddress = 0;
@@ -48,10 +59,38 @@ __declspec(naked) void GetCaller()
 	}
 }
 
+__declspec(naked) void GetCaller2()
+{
+	_asm
+	{
+		push eax
+		mov eax, [esp+0x10];
+		sub eax, baseAddress;
+		add eax, 0x10000000;
+		mov caller, eax;
+		pop eax
+		ret;
+	}
+}
+
+__declspec(naked) void GetCaller3()
+{
+	_asm
+	{
+		push eax
+		mov eax, [esp+0x14];
+		sub eax, baseAddress;
+		add eax, 0x10000000;
+		mov caller, eax;
+		pop eax
+		ret;
+	}
+}
+
 DWORD __cdecl FIR_SendEvent(int unk, char* name)
 {
 	GetCaller();
-	sprintf(buffer,"0x%08X -> AIDLL::FIR_SendEvent              (0x%08X, \"%s\")\n\0", caller, unk, name);
+	sprintf(buffer,"0x%08X -> AIDLL::FIR_SendEvent                   (0x%08X, \"%s\")\n\0", caller, unk, name);
 	Log(buffer);
 	return org_FIR_SendEvent(unk, name);
 }
@@ -59,7 +98,7 @@ DWORD __cdecl FIR_SendEvent(int unk, char* name)
 DWORD __cdecl FIR_SetVariableString(int unk, char* name, char* value)
 {
 	GetCaller();
-	sprintf(buffer,"0x%08X -> AIDLL::FIR_SetVariableString      (0x%08X, \"%s\", \"%s\")\n\0", caller, unk, name, value);
+	sprintf(buffer,"0x%08X -> AIDLL::FIR_SetVariableString           (0x%08X, \"%s\", \"%s\")\n\0", caller, unk, name, value);
 	Log(buffer);
 	return org_FIR_SetVariableString(unk, name, value);
 }
@@ -67,15 +106,15 @@ DWORD __cdecl FIR_SetVariableString(int unk, char* name, char* value)
 DWORD __cdecl FIR_SetVariableUniString(int unk, char* name, wchar_t* value)
 {
 	GetCaller();
-	sprintf(buffer,"0x%08X -> AIDLL::FIR_SetVariableUniString   (0x%08X, \"%s\", \"%S\")\n\0", caller, unk, name, value);
+	sprintf(buffer,"0x%08X -> AIDLL::FIR_SetVariableUniString        (0x%08X, \"%s\", \"%S\")\n\0", caller, unk, name, value);
 	Log(buffer);
 	return org_FIR_SetVariableUniString(unk, name, value);
 }
 
 DWORD __cdecl FIR_SetVariableBool(int unk, char* name, bool value)
 {
-	GetCaller();
-	sprintf(buffer,"0x%08X -> AIDLL::FIR_SetVariableBool        (0x%08X, \"%s\", \"%s\")\n\0", caller, unk, name, value ? "TRUE" : "FALSE");
+	GetCaller2();
+	sprintf(buffer,"0x%08X -> AIDLL::FIR_SetVariableBool             (0x%08X, \"%s\", \"%s\")\n\0", caller, unk, name, value ? "TRUE" : "FALSE");
 	Log(buffer);
 	return org_FIR_SetVariableBool(unk, name, value);
 }
@@ -83,7 +122,7 @@ DWORD __cdecl FIR_SetVariableBool(int unk, char* name, bool value)
 DWORD __cdecl FIR_SetVariableInt(int unk, char* name, int value)
 {
 	GetCaller();
-	sprintf(buffer,"0x%08X -> AIDLL::FIR_SetVariableInt         (0x%08X, \"%s\", 0x%08X)\n\0", caller, unk, name, value);
+	sprintf(buffer,"0x%08X -> AIDLL::FIR_SetVariableInt              (0x%08X, \"%s\", 0x%08X)\n\0", caller, unk, name, value);
 	Log(buffer);
 	return org_FIR_SetVariableInt(unk, name, value);
 }
@@ -91,7 +130,7 @@ DWORD __cdecl FIR_SetVariableInt(int unk, char* name, int value)
 DWORD __cdecl FIR_SetVariableFloat(int unk, char* name, float value)
 {
 	GetCaller();
-	sprintf(buffer,"0x%08X -> AIDLL::FIR_SetVariableFloat       (0x%08X, \"%s\", %f)\n\0", caller, unk, name, value);
+	sprintf(buffer,"0x%08X -> AIDLL::FIR_SetVariableFloat            (0x%08X, \"%s\", %f)\n\0", caller, unk, name, value);
 	Log(buffer);
 	return org_FIR_SetVariableFloat(unk, name, value);
 }
@@ -99,7 +138,7 @@ DWORD __cdecl FIR_SetVariableFloat(int unk, char* name, float value)
 DWORD __cdecl FIR_LoadPackage(int unk)
 {
 	GetCaller();
-	sprintf(buffer,"0x%08X -> AIDLL::FIR_LoadPackage            (0x%08X)\n\0", caller, unk);
+	sprintf(buffer,"0x%08X -> AIDLL::FIR_LoadPackage                 (0x%08X)\n\0", caller, unk);
 	Log(buffer);
 	return org_FIR_LoadPackage(unk);
 }
@@ -107,7 +146,7 @@ DWORD __cdecl FIR_LoadPackage(int unk)
 DWORD __cdecl FIR_UnloadPackage(int unk)
 {
 	GetCaller();
-	sprintf(buffer,"0x%08X -> AIDLL::FIR_UnloadPackage          (0x%08X)\n\0", caller, unk);
+	sprintf(buffer,"0x%08X -> AIDLL::FIR_UnloadPackage               (0x%08X)\n\0", caller, unk);
 	Log(buffer);
 	return org_FIR_UnloadPackage(unk);
 }
@@ -115,7 +154,7 @@ DWORD __cdecl FIR_UnloadPackage(int unk)
 DWORD __cdecl FIR_GetPackageKeyFromBank(int unk1, int unk2)
 {
 	GetCaller();
-	sprintf(buffer,"0x%08X -> AIDLL::FIR_GetPackageKeyFromBank  (0x%08X, 0x%08X)\n\0", caller, unk1, unk2);
+	sprintf(buffer,"0x%08X -> AIDLL::FIR_GetPackageKeyFromBank       (0x%08X, 0x%08X)\n\0", caller, unk1, unk2);
 	Log(buffer);
 	return org_FIR_GetPackageKeyFromBank(unk1, unk2);
 }
@@ -123,23 +162,111 @@ DWORD __cdecl FIR_GetPackageKeyFromBank(int unk1, int unk2)
 void __cdecl FIR_GetASDataManager()
 {
 	GetCaller();
-	sprintf(buffer,"0x%08X -> AIDLL::FIR_GetASDataManager       ()\n\0", caller);
+	sprintf(buffer,"0x%08X -> AIDLL::FIR_GetASDataManager            ()\n\0", caller);
 	Log(buffer);
 	org_FIR_GetASDataManager();
 }
 
 DWORD __fastcall UI_DispatchEvent(EventCaller* THIS, void* EDX, int a1, int a2, int a3)
 {	
-	GetCaller();
-	sprintf(buffer,"0x%08X -> AIDLL::UI_DispatchEvent           (0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, THIS->modelID, a1, a2, a3);
+	GetCaller3();
+	sprintf(buffer,"0x%08X -> AIDLL::UI_DispatchEvent                (0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, THIS->modelID, a1, a2, a3);
 	Log(buffer);
 	return org_UI_DispatchEvent(THIS, EDX, a1, a2, a3);
 }
 
-DWORD __fastcall UI_HandleEvent(void* THIS, void* EDX, AIEvent* e)
+DWORD __fastcall FIR_FireEvent(void* THIS, void* EDX)
+{	
+	GetCaller3();
+	sprintf(buffer,"0x%08X -> AIDLL::FIR_FireEvent                   ()\n\0", caller);
+	Log(buffer);
+	return org_FIR_FireEvent(THIS, EDX);
+}
+
+DWORD __fastcall AI_GlobalUI_OnBusEvent(void* THIS, void* EDX, AIEvent* e)
 {	
 	GetCaller();
-	sprintf(buffer,"0x%08X -> AIDLL::UI_HandleEvent             (0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, e->modelID, e->eventID, e->param1, e->param2, e->unk1);
+	sprintf(buffer,"0x%08X -> AIDLL::AI_GlobalUI::OnBusEvent         (0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, e->modelID, e->eventID, e->param1, e->param2, e->unk1);
 	Log(buffer);
-	return org_UI_HandleEvent(THIS, EDX, e);
+	return org_AI_GlobalUI_OnBusEvent(THIS, EDX, e);
+}
+
+DWORD __fastcall AI_Login_OnBusEvent(void* THIS, void* EDX, AIEvent* e)
+{	
+	GetCaller();
+	sprintf(buffer,"0x%08X -> AIDLL::AI_Login::OnBusEvent            (0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, e->modelID, e->eventID, e->param1, e->param2, e->unk1);
+	Log(buffer);
+	return org_AI_Login_OnBusEvent(THIS, EDX, e);
+}
+
+DWORD __fastcall AI_FriendList_OnBusEvent(void* THIS, void* EDX, AIEvent* e)
+{	
+	GetCaller();
+	sprintf(buffer,"0x%08X -> AIDLL::AI_FriendList::OnBusEvent       (0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, e->modelID, e->eventID, e->param1, e->param2, e->unk1);
+	Log(buffer);
+	return org_AI_FriendList_OnBusEvent(THIS, EDX, e);
+}
+
+DWORD __fastcall AI_NetworkManager_OnBusEvent(void* THIS, void* EDX, AIEvent* e)
+{	
+	GetCaller();
+	sprintf(buffer,"0x%08X -> AIDLL::AI_NetworkManager::OnBusEvent   (0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, e->modelID, e->eventID, e->param1, e->param2, e->unk1);
+	Log(buffer);
+	return org_AI_NetworkManager_OnBusEvent(THIS, EDX, e);
+}
+
+DWORD __fastcall AI_HudChatPanel_OnBusEvent(void* THIS, void* EDX, AIEvent* e)
+{	
+	GetCaller();
+	sprintf(buffer,"0x%08X -> AIDLL::AI_HudChatPanel::OnBusEvent     (0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, e->modelID, e->eventID, e->param1, e->param2, e->unk1);
+	Log(buffer);
+	return org_AI_HudChatPanel_OnBusEvent(THIS, EDX, e);
+}
+
+DWORD __fastcall AI_PartyWidget_OnBusEvent(void* THIS, void* EDX, AIEvent* e)
+{	
+	GetCaller();
+	sprintf(buffer,"0x%08X -> AIDLL::AI_PartyWidget::OnBusEvent      (0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, e->modelID, e->eventID, e->param1, e->param2, e->unk1);
+	Log(buffer);
+	return org_AI_PartyWidget_OnBusEvent(THIS, EDX, e);
+}
+
+DWORD __fastcall AI_InGameScore_OnBusEvent(void* THIS, void* EDX, AIEvent* e)
+{	
+	GetCaller();
+	sprintf(buffer,"0x%08X -> AIDLL::AI_InGameScore::OnBusEvent      (0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, e->modelID, e->eventID, e->param1, e->param2, e->unk1);
+	Log(buffer);
+	return org_AI_InGameScore_OnBusEvent(THIS, EDX, e);
+}
+
+DWORD __fastcall AI_InGameAchievement_OnBusEvent(void* THIS, void* EDX, AIEvent* e)
+{	
+	GetCaller();
+	sprintf(buffer,"0x%08X -> AIDLL::AI_InGameAchievement::OnBusEvent(0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, e->modelID, e->eventID, e->param1, e->param2, e->unk1);
+	Log(buffer);
+	return org_AI_InGameAchievement_OnBusEvent(THIS, EDX, e);
+}
+
+DWORD __fastcall AI_IgnoreList_OnBusEvent(void* THIS, void* EDX, AIEvent* e)
+{	
+	GetCaller();
+	sprintf(buffer,"0x%08X -> AIDLL::AI_IgnoreList::OnBusEvent       (0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, e->modelID, e->eventID, e->param1, e->param2, e->unk1);
+	Log(buffer);
+	return org_AI_IgnoreList_OnBusEvent(THIS, EDX, e);
+}
+
+DWORD __fastcall AI_GameSessionModel_OnBusEvent(void* THIS, void* EDX, AIEvent* e)
+{	
+	GetCaller();
+	sprintf(buffer,"0x%08X -> AIDLL::AI_GameSessionModel::OnBusEvent (0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, e->modelID, e->eventID, e->param1, e->param2, e->unk1);
+	Log(buffer);
+	return org_AI_GameSessionModel_OnBusEvent(THIS, EDX, e);
+}
+
+DWORD __fastcall WebBrowserManager_OnBusEvent(void* THIS, void* EDX, AIEvent* e)
+{	
+	GetCaller();
+	sprintf(buffer,"0x%08X -> AIDLL::WebBrowserManager::OnBusEvent   (0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", caller, e->modelID, e->eventID, e->param1, e->param2, e->unk1);
+	Log(buffer);
+	return org_WebBrowserManager_OnBusEvent(THIS, EDX, e);
 }
