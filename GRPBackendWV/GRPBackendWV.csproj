@@ -105,6 +105,7 @@
     <Compile Include="RMC\StatisticsServer\Response\RMCPacketResponseStatisticsService_Method3.cs" />
     <Compile Include="RMC\StatisticsServer\Response\RMCPacketResponseStatisticsService_Method1.cs" />
     <Compile Include="RMC\SurveyService\Response\RMCPacketResponseSurveyService_Method1.cs" />
+    <Compile Include="RMC\UnlockService\Response\RMCPacketResponseUnlockService_Method3.cs" />
     <Compile Include="RMC\UnlockService\Response\RMCPacketResponseUnlockService_Method2.cs" />
     <Compile Include="RMC\WeaponProficiencyService\Response\RMCPacketResponseWeaponProficiencyService_Method3.cs" />
     <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_GetModifiers.cs" />

@@ -224,6 +224,10 @@ namespace GRPBackendWV
                     reply = new RMCPacketResponsePlayerProfileService_MethodF();
                     SendReply(udp, p, rmc, client, reply);
                     break;
+                case 0x10:
+                    reply = new RMCPacketResponseEmpty();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 case 0x11:
                     reply = new RMCPacketResponsePlayerProfileService_Method11();
                     SendReply(udp, p, rmc, client, reply);
@@ -235,7 +239,13 @@ namespace GRPBackendWV
                         RMCPacketResponsePlayerProfileService_LoadCharacterProfiles.Character c = new RMCPacketResponsePlayerProfileService_LoadCharacterProfiles.Character();
                         c.PersonaID = client.PID + i;
                         c.ClassID = i;
+                        c.LoadoutKitID = (byte)i;
                         c.Level = 1;
+                        c.UpgradePoints = 5;
+                        c.CurrentLevelPEC = 10;
+                        c.NextLevelPEC = 15;
+                        c.FaceID = 1;
+                        c.SkinToneID = 1;
                         ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).Characters.Add(c);
                     }
                     ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).PersonaID = client.PID;
@@ -364,14 +374,15 @@ namespace GRPBackendWV
                     reply = new RMCPacketResponseChatService_Method5();
                     SendReply(udp, p, rmc, client, reply);
                     break;
+                case 0x9:
                 case 0xA:
                     reply = new RMCPacketResponseEmpty();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 0xE:
                     reply = new RMCPacketResponseChatService_GetPlayerStatuses();
-                    SendReply(udp, p, rmc, client, reply);
-                    break;
+                    SendReply(udp, p, rmc, client, reply);                    
+                    break;                    
                 case 0x10:
                     reply = new RMCPacketResponseChatService_Method10();
                     SendReply(udp, p, rmc, client, reply);
@@ -619,6 +630,10 @@ namespace GRPBackendWV
                     break;
                 case 2:
                     reply = new RMCPacketResponseUnlockService_Method2();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 3:
+                    reply = new RMCPacketResponseUnlockService_Method3();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:

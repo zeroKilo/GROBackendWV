@@ -1,4 +1,5 @@
 #include "detours.h"
+#include <stdlib.h> 
 extern char* logFilename;
 
 void OpenConsole();
