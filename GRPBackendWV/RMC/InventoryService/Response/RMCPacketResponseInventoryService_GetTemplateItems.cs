@@ -9,58 +9,13 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseInventoryService_GetTemplateItems : RMCPacketReply
     {
-        public class TemplateItem
-        {
-            public uint m_ItemID;
-            public byte m_ItemType;
-            public string m_ItemName;
-            public byte m_DurabilityType;
-            public bool m_IsInInventory;
-            public bool m_IsSellable;
-            public bool m_IsLootable;
-            public bool m_IsRewardable;
-            public bool m_IsUnlockable;
-            public uint m_MaxItemInSlot;
-            public uint m_GearScore;
-            public float m_IGCValue;
-            public uint m_OasisName;
-            public uint m_OasisDesc;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, m_ItemID);
-                Helper.WriteU8(s, m_ItemType);
-                Helper.WriteString(s, m_ItemName);
-                Helper.WriteU8(s, m_DurabilityType);
-                Helper.WriteBool(s, m_IsInInventory);
-                Helper.WriteBool(s, m_IsSellable);
-                Helper.WriteBool(s, m_IsLootable);
-                Helper.WriteBool(s, m_IsRewardable);
-                Helper.WriteBool(s, m_IsUnlockable);
-                Helper.WriteU32(s, m_MaxItemInSlot);
-                Helper.WriteU32(s, m_GearScore);
-                Helper.WriteFloat(s, m_IGCValue);
-                Helper.WriteU32(s, m_OasisName);
-                Helper.WriteU32(s, m_OasisDesc);
-            }
-        }
-
-        public List<TemplateItem> items = new List<TemplateItem>();
-
-        public RMCPacketResponseInventoryService_GetTemplateItems()
-        {
-            TemplateItem item = new TemplateItem();
-            item.m_ItemID = 0x1000;
-            item.m_ItemName = "Test";
-            item.m_OasisDesc = 70870;
-            item.m_OasisName = 70870;
-            items.Add(item);
-        }
-
+        public List<GR5_TemplateItem> items = new List<GR5_TemplateItem>();
+        
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)items.Count);
-            foreach (TemplateItem item in items)
+            foreach (GR5_TemplateItem item in items)
                 item.toBuffer(m);
             return m.ToArray();
         }

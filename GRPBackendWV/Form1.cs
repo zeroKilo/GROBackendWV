@@ -19,6 +19,7 @@ namespace GRPBackendWV
                 File.Delete("log.txt");
             InitializeComponent();
             Log.box = richTextBox1;
+            DBHelper.Init();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)

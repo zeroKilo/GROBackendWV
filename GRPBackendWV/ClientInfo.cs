@@ -15,6 +15,7 @@ namespace GRPBackendWV
         public uint IDsend;
         public byte[] sessionKey;
         public string name;
+        public string pass;
         public IPEndPoint ep;
     }
 }

@@ -9,34 +9,11 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseLeaderboardService_GetLeaderboards : RMCPacketReply
     {
-        public class Leaderboard
-        {
-            public uint m_ID;
-            public string m_Name;
-            public uint m_ClassID;
-            public uint m_OasisNameID;
-            public uint m_OasisDescriptionID;
-            public uint m_Flags;
-            public uint m_DesignerStatisticID;
-            public uint m_SortOrder;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, m_ID);
-                Helper.WriteString(s, m_Name);
-                Helper.WriteU32(s, m_ClassID);
-                Helper.WriteU32(s, m_OasisNameID);
-                Helper.WriteU32(s, m_OasisDescriptionID);
-                Helper.WriteU32(s, m_Flags);
-                Helper.WriteU32(s, m_DesignerStatisticID);
-                Helper.WriteU32(s, m_SortOrder);
-            }
-        }
-
-        public List<Leaderboard> boards = new List<Leaderboard>();
+        public List<GR5_Leaderboard> boards = new List<GR5_Leaderboard>();
 
         public RMCPacketResponseLeaderboardService_GetLeaderboards()
         {
-            Leaderboard lb = new Leaderboard();
+            GR5_Leaderboard lb = new GR5_Leaderboard();
             lb.m_OasisDescriptionID = lb.m_OasisNameID = 70870;
             boards.Add(lb);
         }
@@ -45,7 +22,7 @@ namespace GRPBackendWV
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)boards.Count);
-            foreach (Leaderboard b in boards)
+            foreach (GR5_Leaderboard b in boards)
                 b.toBuffer(m);
             return m.ToArray();
         }

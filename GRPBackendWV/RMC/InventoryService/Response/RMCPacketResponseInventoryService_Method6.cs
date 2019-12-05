@@ -9,52 +9,6 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseInventoryService_Method6 : RMCPacketReply
     {
-        public class UserItem
-        {
-            public uint InventoryID;
-            public uint PersonaID;
-            public byte ItemType;
-            public uint ItemID;
-            public uint OasisName;
-            public float IGCPrice;
-            public float GRCashPrice;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, InventoryID);
-                Helper.WriteU32(s, PersonaID);
-                Helper.WriteU8(s, ItemType);
-                Helper.WriteU32(s, ItemID);
-                Helper.WriteU32(s, OasisName);
-                Helper.WriteFloat(s, IGCPrice);
-                Helper.WriteFloat(s, GRCashPrice);
-            }
-        }
-        public class InventoryBagSlot
-        {
-            public uint InventoryID;
-            public uint SlotID;
-            public uint Durability;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, InventoryID);
-                Helper.WriteU32(s, SlotID);
-                Helper.WriteU32(s, Durability);
-            }
-        }
-        public class InventoryBag
-        {
-            public uint m_PersonaID;
-            public uint m_InventoryBagType;
-            public List<InventoryBagSlot> m_InventoryBagSlotVector = new List<InventoryBagSlot>();
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, m_PersonaID);
-                Helper.WriteU32(s, m_InventoryBagType);
-                Helper.WriteU32(s, (uint)m_InventoryBagSlotVector.Count);
-                foreach (InventoryBagSlot c in m_InventoryBagSlotVector)
-                    c.toBuffer(s);
-            }
-        }
         public class unknown
         {
             public uint unk1;
@@ -67,15 +21,15 @@ namespace GRPBackendWV
                     Helper.WriteU32(s, u);
             }
         }
-        public List<UserItem> items = new List<UserItem>();
-        public List<InventoryBag> bags = new List<InventoryBag>();
+        public List<GR5_UserItem> items = new List<GR5_UserItem>();
+        public List<GR5_InventoryBag> bags = new List<GR5_InventoryBag>();
         public List<unknown> unk1 = new List<unknown>();
 
         public RMCPacketResponseInventoryService_Method6()
         {
-            items.Add(new UserItem());
-            InventoryBag b = new InventoryBag();
-            b.m_InventoryBagSlotVector.Add(new InventoryBagSlot());
+            items.Add(new GR5_UserItem());
+            GR5_InventoryBag b = new GR5_InventoryBag();
+            b.m_InventoryBagSlotVector.Add(new GR5_InventoryBagSlot());
             bags.Add(b);
             unk1.Add(new unknown());
         }
@@ -84,10 +38,10 @@ namespace GRPBackendWV
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)items.Count);
-            foreach (UserItem c in items)
+            foreach (GR5_UserItem c in items)
                 c.toBuffer(m);
             Helper.WriteU32(m, (uint)bags.Count);
-            foreach (InventoryBag c in bags)
+            foreach (GR5_InventoryBag c in bags)
                 c.toBuffer(m);
             Helper.WriteU32(m, (uint)unk1.Count);
             foreach (unknown u in unk1)

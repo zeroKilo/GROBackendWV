@@ -9,33 +9,18 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseSurveyService_Method1 : RMCPacketReply
     {
-        public class Survey
-        {
-            public uint mId;
-            public byte mWeight;
-            public string mSurveyTrigger;
-            public string mSurveyURL;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, mId);
-                Helper.WriteU8(s, mWeight);
-                Helper.WriteString(s, mSurveyTrigger);
-                Helper.WriteString(s, mSurveyURL);
-            }
-        }
-
-        public List<Survey> _outSurveys = new List<Survey>();
+        public List<GR5_Survey> _outSurveys = new List<GR5_Survey>();
 
         public RMCPacketResponseSurveyService_Method1()
         {
-            _outSurveys.Add(new Survey());
+            _outSurveys.Add(new GR5_Survey());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)_outSurveys.Count);
-            foreach (Survey s in _outSurveys)
+            foreach (GR5_Survey s in _outSurveys)
                 s.toBuffer(m);
             return m.ToArray();
         }

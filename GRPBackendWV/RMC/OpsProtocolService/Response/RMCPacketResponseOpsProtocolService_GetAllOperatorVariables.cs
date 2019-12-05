@@ -9,29 +9,18 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseOpsProtocolService_GetAllOperatorVariables : RMCPacketReply
     {
-        public class OperatorVariable
-        {
-            public uint unk1;
-            public string unk2;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteString(s, unk2);
-            }
-        }
-
-        public List<OperatorVariable> ops = new List<OperatorVariable>();
+        public List<GR5_OperatorVariable> ops = new List<GR5_OperatorVariable>();
 
         public RMCPacketResponseOpsProtocolService_GetAllOperatorVariables()
         {
-            ops.Add(new OperatorVariable());
+            ops.Add(new GR5_OperatorVariable());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)ops.Count);
-            foreach (OperatorVariable v in ops)
+            foreach (GR5_OperatorVariable v in ops)
                 v.toBuffer(m);
             return m.ToArray();
         }

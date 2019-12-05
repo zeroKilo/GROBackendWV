@@ -9,55 +9,23 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseRewardService_Method3 : RMCPacketReply
     {
-        public class RewardUserResult
-        {
-            public uint unk1;
-            public byte unk2;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU8(s, unk2);
-            }
-        }
-
-        public class UserItem
-        {
-            public uint unk1;
-            public uint unk2;
-            public byte unk3;
-            public uint unk4;
-            public uint unk5;
-            public float unk6;
-            public float unk7;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU32(s, unk2);
-                Helper.WriteU8(s, unk3);
-                Helper.WriteU32(s, unk4);
-                Helper.WriteU32(s, unk5);
-                Helper.WriteFloat(s, unk6);
-                Helper.WriteFloat(s, unk7);
-            }
-        }
-
-        public List<RewardUserResult> unk1 = new List<RewardUserResult>();
-        public List<UserItem> unk2 = new List<UserItem>();
+        public List<GR5_RewardUserResult> unk1 = new List<GR5_RewardUserResult>();
+        public List<GR5_UserItem> unk2 = new List<GR5_UserItem>();
 
         public RMCPacketResponseRewardService_Method3()
         {
-            unk1.Add(new RewardUserResult());
-            unk2.Add(new UserItem());
+            unk1.Add(new GR5_RewardUserResult());
+            unk2.Add(new GR5_UserItem());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)unk1.Count);
-            foreach (RewardUserResult u in unk1)
+            foreach (GR5_RewardUserResult u in unk1)
                 u.toBuffer(m);
             Helper.WriteU32(m, (uint)unk2.Count);
-            foreach (UserItem u in unk2)
+            foreach (GR5_UserItem u in unk2)
                 u.toBuffer(m);
             return m.ToArray();
         }

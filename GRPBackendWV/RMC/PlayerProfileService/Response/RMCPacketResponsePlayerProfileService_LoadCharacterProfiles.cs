@@ -9,33 +9,6 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponsePlayerProfileService_LoadCharacterProfiles : RMCPacketReply
     {
-        public class Character
-        {
-            public uint PersonaID;
-            public uint ClassID;
-            public uint PEC;
-            public uint Level;
-            public uint UpgradePoints;
-            public uint CurrentLevelPEC;
-            public uint NextLevelPEC;
-            public byte FaceID;
-            public byte SkinToneID;
-            public byte LoadoutKitID;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, PersonaID);
-                Helper.WriteU32(s, ClassID);
-                Helper.WriteU32(s, PEC);
-                Helper.WriteU32(s, Level);
-                Helper.WriteU32(s, UpgradePoints);
-                Helper.WriteU32(s, CurrentLevelPEC);
-                Helper.WriteU32(s, NextLevelPEC);
-                Helper.WriteU8(s, FaceID);
-                Helper.WriteU8(s, SkinToneID);
-                Helper.WriteU8(s, LoadoutKitID);
-            }
-        }
-
         public uint PersonaID;
         public string Name;
         public uint PortraitID;
@@ -49,7 +22,7 @@ namespace GRPBackendWV
         public uint MaxScrapYardSlot;
         public uint GhostRank;
         public uint Flag;
-        public List<Character> Characters = new List<Character>();
+        public List<GR5_Character> Characters = new List<GR5_Character>();
 
         public override byte[] ToBuffer()
         {
@@ -68,7 +41,7 @@ namespace GRPBackendWV
             Helper.WriteU32(m, GhostRank);
             Helper.WriteU32(m, Flag);
             Helper.WriteU32(m, (uint)Characters.Count);
-            foreach (Character c in Characters)
+            foreach (GR5_Character c in Characters)
                 c.toBuffer(m);
             return m.ToArray();
         }

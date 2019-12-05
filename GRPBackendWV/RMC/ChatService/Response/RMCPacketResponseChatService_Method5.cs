@@ -9,33 +9,7 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseChatService_Method5 : RMCPacketReply
     {
-        public class Gathering
-        {
-            public uint unk1;
-            public uint unk2;
-            public uint unk3;
-            public ushort unk4;
-            public ushort unk5;
-            public uint unk6;
-            public uint unk7;
-            public uint unk8;
-            public uint unk9;
-            public string unk10;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU32(s, unk2);
-                Helper.WriteU32(s, unk3);
-                Helper.WriteU16(s, unk4);
-                Helper.WriteU16(s, unk5);
-                Helper.WriteU32(s, unk6);
-                Helper.WriteU32(s, unk7);
-                Helper.WriteU32(s, unk8);
-                Helper.WriteU32(s, unk9);
-                Helper.WriteString(s, unk10);
-            }
-        }
-        public Gathering unk1 = new Gathering();
+        public GR5_Gathering unk1 = new GR5_Gathering();
         public string unk2;
         public byte unk3;
         public byte unk4;

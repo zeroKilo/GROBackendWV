@@ -9,37 +9,18 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponsePlayerProfileService_Method11 : RMCPacketReply
     {
-        public class Notification
-        {
-            public uint m_MajorType;
-            public uint m_MinorType;
-            public uint m_Param1;
-            public uint m_Param2;
-            public string m_String;
-            public uint m_Param3;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, m_MajorType);
-                Helper.WriteU32(s, m_MinorType);
-                Helper.WriteU32(s, m_Param1);
-                Helper.WriteU32(s, m_Param2);
-                Helper.WriteString(s, m_String);
-                Helper.WriteU32(s, m_Param3);
-            }
-        }
-
-        public List<Notification> list = new List<Notification>();
+        public List<GR5_Notification> list = new List<GR5_Notification>();
 
         public RMCPacketResponsePlayerProfileService_Method11()
         {
-            list.Add(new Notification());
+            list.Add(new GR5_Notification());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)list.Count);
-            foreach (Notification n in list)
+            foreach (GR5_Notification n in list)
                 n.toBuffer(m);
             return m.ToArray();
         }

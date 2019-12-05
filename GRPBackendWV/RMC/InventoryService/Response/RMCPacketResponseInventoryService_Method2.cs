@@ -9,35 +9,18 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseInventoryService_Method2 : RMCPacketReply
     {
-        public class Boost
-        {
-            public uint m_ItemID;
-            public uint m_AssetKey;
-            public uint m_ModifierList;
-            public uint m_Type;
-            public string m_Name;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, m_ItemID);
-                Helper.WriteU32(s, m_AssetKey);
-                Helper.WriteU32(s, m_ModifierList);
-                Helper.WriteU32(s, m_Type);
-                Helper.WriteString(s, m_Name);
-            }
-        }
-
-        public List<Boost> boosts = new List<Boost>();
+        public List<GR5_Boost> boosts = new List<GR5_Boost>();
 
         public RMCPacketResponseInventoryService_Method2()
         {
-            boosts.Add(new Boost());
+            boosts.Add(new GR5_Boost());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)boosts.Count);
-            foreach (Boost b in boosts)
+            foreach (GR5_Boost b in boosts)
                 b.toBuffer(m);
             return m.ToArray();
         }

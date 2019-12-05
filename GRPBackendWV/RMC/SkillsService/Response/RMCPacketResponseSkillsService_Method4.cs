@@ -9,31 +9,18 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseSkillsService_Method4 : RMCPacketReply
     {
-        public class SkillModifierList
-        {
-            public uint unk1;
-            public List<uint> unk2 = new List<uint>();
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU32(s, (uint)unk2.Count);
-                foreach (uint u in unk2)
-                    Helper.WriteU32(s, u);
-            }
-        }
-
-        public List<SkillModifierList> sml = new List<SkillModifierList>();
+        public List<GR5_SkillModifierList> sml = new List<GR5_SkillModifierList>();
 
         public RMCPacketResponseSkillsService_Method4()
         {
-            sml.Add(new SkillModifierList());
+            sml.Add(new GR5_SkillModifierList());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)sml.Count);
-            foreach (SkillModifierList s in sml)
+            foreach (GR5_SkillModifierList s in sml)
                 s.toBuffer(m);
             return m.ToArray();
         }

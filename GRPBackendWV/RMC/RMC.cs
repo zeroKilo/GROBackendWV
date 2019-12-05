@@ -136,6 +136,10 @@ namespace GRPBackendWV
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
+                case 4:
+                    reply = new RMCPacktResponseAMM_Method4();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 case 7:
                     reply = new RMCPacktResponseAMM_Method7();
                     SendReply(udp, p, rmc, client, reply);
@@ -156,10 +160,27 @@ namespace GRPBackendWV
                     switch (h.className)
                     {
                         case "UbiAuthenticationLoginCustomData":
-                            reply = new RMCPacketResponseLoginCustomData(client.PID);
-                            client.name = h.username;
-                            client.sessionKey = ((RMCPacketResponseLoginCustomData)reply).ticket.sessionKey;
-                            SendReply(udp, p, rmc, client, reply);
+                            reply = new RMCPacketResponseEmpty();
+                            ClientInfo user = DBHelper.GetUserByName(h.username);
+                            if (user != null)
+                            {
+                                if (user.pass == h.password)
+                                {
+                                    reply = new RMCPacketResponseLoginCustomData(client.PID);
+                                    client.name = h.username;
+                                    client.pass = h.password;
+                                    client.sessionKey = ((RMCPacketResponseLoginCustomData)reply).ticket.sessionKey;
+                                    SendReply(udp, p, rmc, client, reply);
+                                }
+                                else
+                                {
+                                    SendReply(udp, p, rmc, client, reply, true, 0x80030065);
+                                }
+                            }
+                            else
+                            {
+                                SendReply(udp, p, rmc, client, reply, true, 0x80030064);
+                            }
                             break;
                         default:
                             WriteLog("Error: Unknown RMC Packet Authentication Custom Data class " + h.className);
@@ -234,20 +255,8 @@ namespace GRPBackendWV
                     break;
                 case 0x12:
                     reply = new RMCPacketResponsePlayerProfileService_LoadCharacterProfiles();
-                    for (uint i = 0; i < 3; i++)
-                    {
-                        RMCPacketResponsePlayerProfileService_LoadCharacterProfiles.Character c = new RMCPacketResponsePlayerProfileService_LoadCharacterProfiles.Character();
-                        c.PersonaID = client.PID + i;
-                        c.ClassID = i;
-                        c.LoadoutKitID = (byte)i;
-                        c.Level = 1;
-                        c.UpgradePoints = 5;
-                        c.CurrentLevelPEC = 10;
-                        c.NextLevelPEC = 15;
-                        c.FaceID = 1;
-                        c.SkinToneID = 1;
-                        ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).Characters.Add(c);
-                    }
+                    List<GR5_Character> list = DBHelper.GetUserCharacters(client.PID);
+                    ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).Characters.AddRange(list);
                     ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).PersonaID = client.PID;
                     ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).Name = client.name;
                     SendReply(udp, p, rmc, client, reply);
@@ -284,6 +293,8 @@ namespace GRPBackendWV
             {
                 case 1:
                     reply = new RMCPacketResponseInventoryService_GetTemplateItems();
+                    List<GR5_TemplateItem> items = DBHelper.GetTemplateItems();
+                    ((RMCPacketResponseInventoryService_GetTemplateItems)reply).items.AddRange(items);
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 2:
@@ -449,8 +460,16 @@ namespace GRPBackendWV
                     reply = new RMCPacketResponseStatisticsService_Method1();
                     SendReply(udp, p, rmc, client, reply);
                     break;
+                case 2:
+                    reply = new RMCPacketResponseStatisticsService_Method2();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 case 3:
                     reply = new RMCPacketResponseStatisticsService_Method3();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 4:
+                    reply = new RMCPacketResponseStatisticsService_Method4();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -464,6 +483,14 @@ namespace GRPBackendWV
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
+                case 2:
+                    reply = new RMCPacketResponseAchievementsService_Method2();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 4:
+                    reply = new RMCPacketResponseAchievementsService_Method4();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 case 9:
                     reply = new RMCPacketResponseAchievementsService_Method9();
                     SendReply(udp, p, rmc, client, reply);
@@ -544,6 +571,10 @@ namespace GRPBackendWV
                     reply = new RMCPacketResponseStoreService_GetSKUs();
                     SendReply(udp, p, rmc, client, reply);
                     break;
+                case 0xB:
+                    reply = new RMCPacketResponseStoreService_MethodB();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 default:
                     WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
@@ -592,6 +623,10 @@ namespace GRPBackendWV
                     break;
                 case 5:
                     reply = new RMCPacketResponseSkillsService_GetModifiers();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 7:
+                    reply = new RMCPacketResponseEmpty();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -666,6 +701,10 @@ namespace GRPBackendWV
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
+                case 1:
+                    reply = new RMCPacketResponseWeaponProficiencyService_Method1();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 case 3:
                     reply = new RMCPacketResponseWeaponProficiencyService_Method3();
                     SendReply(udp, p, rmc, client, reply);
@@ -725,6 +764,18 @@ namespace GRPBackendWV
             {
                 case 1:
                     reply = new RMCPacketResponseLeaderboardService_GetLeaderboards();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 2:
+                    reply = new RMCPacketResponseLeaderboardService_Method2();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 3:
+                    reply = new RMCPacketResponseLeaderboardService_Method2();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 4:
+                    reply = new RMCPacketResponseLeaderboardService_Method4();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -823,23 +874,8 @@ namespace GRPBackendWV
             {
                 case 1:
                     reply = new RMCPacketResponseOverlordNewsProtocol_Method1();
-                    for (int i = 0; i < 5; i++)
-                    {
-                        var message = new RMCPacketResponseOverlordNewsProtocol_Method1.NewsMessage();
-                        message.header = new RMCPacketResponseOverlordNewsProtocol_Method1.NewsHeader();
-                        message.header.m_title = "test-" + i;
-                        message.header.m_recipientType = 0;
-                        message.header.m_recipientID = client.PID;
-                        message.header.m_publisherPID = 1;
-                        message.header.m_publisherName = "System";
-                        message.header.m_publicationTime = (ulong)DateTime.UtcNow.Ticks;
-                        message.header.m_link = "1234";
-                        message.header.m_ID = (uint)i;
-                        message.header.m_expirationTime = (ulong)DateTime.UtcNow.AddDays(5).Ticks;
-                        message.header.m_displayTime = (ulong)DateTime.UtcNow.Ticks;
-                        message.m_body = "Just some data " + i;
-                        ((RMCPacketResponseOverlordNewsProtocol_Method1)reply).news.Add(message);
-                    }
+                    List<GR5_NewsMessage> news = DBHelper.GetNews(client.PID);
+                    ((RMCPacketResponseOverlordNewsProtocol_Method1)reply).news.AddRange(news);
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -849,10 +885,10 @@ namespace GRPBackendWV
         }
 
 
-        private static void SendReply(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client, RMCPacketReply reply, bool useCompression = true)
+        private static void SendReply(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client, RMCPacketReply reply, bool useCompression = true, uint error = 0)
         {
             SendACK(udp, p, client);
-            SendReplyPacket(udp, p, rmc, client, reply, useCompression);
+            SendReplyPacket(udp, p, rmc, client, reply, useCompression, error);
         }
 
         private static void SendACK(UdpClient udp, QPacket p, ClientInfo client)
@@ -868,7 +904,7 @@ namespace GRPBackendWV
             Send(udp, np, client);
         }
 
-        private static void SendReplyPacket(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client, RMCPacketReply reply, bool useCompression)
+        private static void SendReplyPacket(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client, RMCPacketReply reply, bool useCompression, uint error)
         {
             QPacket np = new QPacket(p.toBuffer());
             np.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_NEED_ACK };
@@ -886,11 +922,21 @@ namespace GRPBackendWV
                 Helper.WriteU8(m, 0x7F);
                 Helper.WriteU16(m, (ushort)rmc.proto);
             }
-            Helper.WriteU8(m, 0x1);
-            Helper.WriteU32(m, rmc.callID);
-            Helper.WriteU32(m, rmc.methodID | 0x8000);
-            byte[] buff = reply.ToBuffer();
-            m.Write(buff, 0, buff.Length);
+            byte[] buff;
+            if (error == 0)
+            {
+                Helper.WriteU8(m, 0x1);
+                Helper.WriteU32(m, rmc.callID);
+                Helper.WriteU32(m, rmc.methodID | 0x8000);
+                buff = reply.ToBuffer();
+                m.Write(buff, 0, buff.Length);                
+            }
+            else
+            {
+                Helper.WriteU8(m, 0);
+                Helper.WriteU32(m, error);
+                Helper.WriteU32(m, rmc.callID);
+            } 
             buff = m.ToArray();
             m = new MemoryStream();
             Helper.WriteU32(m, (uint)buff.Length);

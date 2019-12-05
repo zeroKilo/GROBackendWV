@@ -9,23 +9,12 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseAvatarService_Method1 : RMCPacketReply
     {
-        public class AvatarDecorator
-        {
-            public uint mItemID;
-            public uint mDecoratorID;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, mItemID);
-                Helper.WriteU32(s, mDecoratorID);
-            }
-        }
-
-        public List<AvatarDecorator> decos = new List<AvatarDecorator>();
+        public List<GR5_AvatarDecorator> decos = new List<GR5_AvatarDecorator>();
         public List<uint> unk1 = new List<uint>();
 
         public RMCPacketResponseAvatarService_Method1()
         {
-            decos.Add(new AvatarDecorator());
+            decos.Add(new GR5_AvatarDecorator());
             unk1.Add(0);
         }
 
@@ -33,7 +22,7 @@ namespace GRPBackendWV
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)decos.Count);
-            foreach (AvatarDecorator d in decos)
+            foreach (GR5_AvatarDecorator d in decos)
                 d.toBuffer(m);
             Helper.WriteU32(m, (uint)unk1.Count);
             foreach (uint u in unk1)

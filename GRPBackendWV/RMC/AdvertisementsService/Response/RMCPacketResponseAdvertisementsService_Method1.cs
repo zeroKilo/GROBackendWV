@@ -9,39 +9,18 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseAdvertisementsService_Method1 : RMCPacketReply
     {
-        public class Advertisement
-        {
-            public uint m_ID;
-            public uint m_StoreItemID;
-            public uint m_AssetId;
-            public byte m_Layout;
-            public byte m_Action;
-            public uint m_OasisName;
-            public string m_Criteria;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, m_ID);
-                Helper.WriteU32(s, m_StoreItemID);
-                Helper.WriteU32(s, m_AssetId);
-                Helper.WriteU8(s, m_Layout);
-                Helper.WriteU8(s, m_Action);
-                Helper.WriteU32(s, m_OasisName);
-                Helper.WriteString(s, m_Criteria);
-            }
-        }
-
-        public List<Advertisement> ads = new List<Advertisement>();
+        public List<GR5_Advertisement> ads = new List<GR5_Advertisement>();
 
         public RMCPacketResponseAdvertisementsService_Method1()
         {
-            ads.Add(new Advertisement());
+            ads.Add(new GR5_Advertisement());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)ads.Count);
-            foreach (Advertisement a in ads)
+            foreach (GR5_Advertisement a in ads)
                 a.toBuffer(m);
             return m.ToArray();
         }

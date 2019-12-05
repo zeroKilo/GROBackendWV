@@ -9,31 +9,18 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseProgressionService_GetLevels : RMCPacketReply
     {
-        public class Level
-        {
-            public uint m_Id;
-            public uint m_TotalPEC;
-            public uint m_Level;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, m_Id);
-                Helper.WriteU32(s, m_TotalPEC);
-                Helper.WriteU32(s, m_Level);
-            }
-        }
-
-        public List<Level> levels = new List<Level>();
+        public List<GR5_Level> levels = new List<GR5_Level>();
 
         public RMCPacketResponseProgressionService_GetLevels()
         {
-            levels.Add(new Level());
+            levels.Add(new GR5_Level());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)levels.Count);
-            foreach (Level l in levels)
+            foreach (GR5_Level l in levels)
                 l.toBuffer(m);
             return m.ToArray();
         }

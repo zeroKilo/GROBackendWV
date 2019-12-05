@@ -9,23 +9,12 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseAvatarService_Method2 : RMCPacketReply
     {
-        public class AvatarPortrait
-        {
-            public uint mItemID;
-            public uint mPortraitID;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, mItemID);
-                Helper.WriteU32(s, mPortraitID);
-            }
-        }
-
-        public List<AvatarPortrait> portraits = new List<AvatarPortrait>();
+        public List<GR5_AvatarPortrait> portraits = new List<GR5_AvatarPortrait>();
         public List<uint> unk1 = new List<uint>();
 
         public RMCPacketResponseAvatarService_Method2()
         {
-            portraits.Add(new AvatarPortrait());
+            portraits.Add(new GR5_AvatarPortrait());
             unk1.Add(0);
         }
 
@@ -33,7 +22,7 @@ namespace GRPBackendWV
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)portraits.Count);
-            foreach (AvatarPortrait p in portraits)
+            foreach (GR5_AvatarPortrait p in portraits)
                 p.toBuffer(m);
             Helper.WriteU32(m, (uint)unk1.Count);
             foreach (uint u in unk1)

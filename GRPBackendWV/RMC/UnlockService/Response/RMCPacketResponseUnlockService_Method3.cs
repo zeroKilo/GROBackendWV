@@ -9,26 +9,15 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseUnlockService_Method3 : RMCPacketReply
     {
-        public class UserUnlockResult
-        {
-            public uint unlockID;
-            public byte result;
-            public void ToBuffer(Stream stream)
-            {
-                Helper.WriteU32(stream, unlockID);
-                Helper.WriteU8(stream, result);
-            }
-        }
-        public List<UserUnlockResult> results = new List<UserUnlockResult>();
+        public List<GR5_UserUnlockResult> results = new List<GR5_UserUnlockResult>();
+
         public override byte[] ToBuffer()
         {
-            using (var mem = new MemoryStream())
-            {
-                Helper.WriteU32(mem, (uint)results.Count);
-                foreach (var result in results)
-                    result.ToBuffer(mem);
-                return mem.ToArray();
-            }
+            MemoryStream mem = new MemoryStream();
+            Helper.WriteU32(mem, (uint)results.Count);
+            foreach (GR5_UserUnlockResult result in results)
+                result.ToBuffer(mem);
+            return mem.ToArray();
         }
 
         public override string ToString()

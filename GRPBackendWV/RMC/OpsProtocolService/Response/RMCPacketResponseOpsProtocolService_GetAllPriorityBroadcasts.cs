@@ -9,33 +9,18 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseOpsProtocolService_GetAllPriorityBroadcasts: RMCPacketReply
     {
-        public class PriorityBroadcast
-        {
-            public uint unk1;
-            public string unk2;
-            public uint unk3;
-            public uint unk4;
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteString(s, unk2);
-                Helper.WriteU32(s, unk3);
-                Helper.WriteU32(s, unk4);
-            }
-        }
-
-        public List<PriorityBroadcast> pbs = new List<PriorityBroadcast>();
+        public List<GR5_PriorityBroadcast> pbs = new List<GR5_PriorityBroadcast>();
 
         public RMCPacketResponseOpsProtocolService_GetAllPriorityBroadcasts()
         {
-            pbs.Add(new PriorityBroadcast());
+            pbs.Add(new GR5_PriorityBroadcast());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)pbs.Count);
-            foreach (PriorityBroadcast pb in pbs)
+            foreach (GR5_PriorityBroadcast pb in pbs)
                 pb.toBuffer(m);
             return m.ToArray();
         }

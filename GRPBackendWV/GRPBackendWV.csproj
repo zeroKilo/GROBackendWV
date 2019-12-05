@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GRPBackendWV</RootNamespace>
     <AssemblyName>GRPBackendWV</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,6 +38,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.105.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,7 +52,100 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\GR5_Ability.cs" />
+    <Compile Include="Classes\GR5_Character.cs" />
+    <Compile Include="Classes\GR5_Coupon.cs" />
+    <Compile Include="Classes\GR5_LeaderboardReadResult.cs" />
+    <Compile Include="Classes\GR5_LeaderboardRow.cs" />
+    <Compile Include="Classes\GR5_NewsHeader.cs" />
+    <Compile Include="Classes\GR5_NewsMessage.cs" />
+    <Compile Include="Classes\GR5_PlayerAchievement.cs" />
+    <Compile Include="Classes\GR5_PlayerAchievementGroup.cs" />
+    <Compile Include="Classes\GR5_PlayerStatisticsBlock.cs" />
+    <Compile Include="Classes\GR5_PlayerTimedStatisticsBlock.cs" />
+    <Compile Include="Classes\GR5_SKUModifier.cs" />
+    <Compile Include="Classes\GR5_SKUModifierCondition.cs" />
+    <Compile Include="Classes\GR5_SKUModifierOutput.cs" />
+    <Compile Include="Classes\GR5_Statistic.cs" />
+    <Compile Include="Classes\GR5_TemplateItem.cs" />
+    <Compile Include="Classes\GR5_TimedStatistic.cs" />
+    <Compile Include="Classes\GR5_AbilityUpgrade.cs" />
+    <Compile Include="Classes\GR5_PassiveAbility.cs" />
+    <Compile Include="Classes\GR5_AbilityUpgradeSlot.cs" />
+    <Compile Include="Classes\GR5_PersonaAbilityUpgrade.cs" />
+    <Compile Include="Classes\GR5_Achievement.cs" />
+    <Compile Include="Classes\GR5_AchievementGroup.cs" />
+    <Compile Include="Classes\GR5_AchievementCategory.cs" />
+    <Compile Include="Classes\GR5_Advertisement.cs" />
+    <Compile Include="Classes\GR5_AdContainer.cs" />
+    <Compile Include="Classes\GR5_AdServer.cs" />
+    <Compile Include="Classes\GR5_AdStaticList.cs" />
+    <Compile Include="Classes\GR5_AdRecommender.cs" />
+    <Compile Include="Classes\GR5_AMM_PlaylistEntry.cs" />
+    <Compile Include="Classes\GR5_AMM_Playlist.cs" />
+    <Compile Include="Classes\GR5_AMM_Modifier.cs" />
+    <Compile Include="Classes\GR5_AMM_Map.cs" />
+    <Compile Include="Classes\GR5_AMM_GameMode.cs" />
+    <Compile Include="Classes\GR5_AMM_GameDetail.cs" />
+    <Compile Include="Classes\GR5_ArmorTier.cs" />
+    <Compile Include="Classes\GR5_ArmorInsert.cs" />
+    <Compile Include="Classes\GR5_ArmorItem.cs" />
+    <Compile Include="Classes\GR5_ArmorInsertSlot.cs" />
+    <Compile Include="Classes\GR5_PersonaArmorTier.cs" />
+    <Compile Include="Classes\GR5_AvatarDecorator.cs" />
+    <Compile Include="Classes\GR5_AvatarPortrait.cs" />
+    <Compile Include="Classes\GR5_BasicPersona.cs" />
+    <Compile Include="Classes\GR5_ChatChannelMute.cs" />
+    <Compile Include="Classes\GR5_Gathering.cs" />
+    <Compile Include="Classes\GR5_FriendData.cs" />
+    <Compile Include="Classes\GR5_InboxMessage.cs" />
+    <Compile Include="Classes\GR5_ApplyItem.cs" />
+    <Compile Include="Classes\GR5_LoadoutKit.cs" />
+    <Compile Include="Classes\GR5_Boost.cs" />
+    <Compile Include="Classes\GR5_Consumable.cs" />
+    <Compile Include="Classes\GR5_UserItem.cs" />
+    <Compile Include="Classes\GR5_InventoryBagSlot.cs" />
+    <Compile Include="Classes\GR5_InventoryBag.cs" />
+    <Compile Include="Classes\GR5_Leaderboard.cs" />
+    <Compile Include="Classes\GR5_RCHeader.cs" />
+    <Compile Include="Classes\GR5_LootItem.cs" />
+    <Compile Include="Classes\GR5_Mission.cs" />
+    <Compile Include="Classes\GR5_MissionArc.cs" />
+    <Compile Include="Classes\GR5_MissionSequence.cs" />
+    <Compile Include="Classes\GR5_PersonaMission.cs" />
+    <Compile Include="Classes\GR5_OperatorVariable.cs" />
+    <Compile Include="Classes\GR5_PriorityBroadcast.cs" />
+    <Compile Include="Classes\GR5_PartyMember.cs" />
+    <Compile Include="Classes\GR5_Invitee.cs" />
+    <Compile Include="Classes\GR5_Invitation.cs" />
+    <Compile Include="Classes\GR5_Notification.cs" />
+    <Compile Include="Classes\GR5_FaceSkinTone.cs" />
+    <Compile Include="Classes\GR5_ProfaneWord.cs" />
+    <Compile Include="Classes\GR5_Level.cs" />
+    <Compile Include="Classes\GR5_PveArchetype.cs" />
+    <Compile Include="Classes\GR5_Reward.cs" />
+    <Compile Include="Classes\GR5_RewardUserResult.cs" />
+    <Compile Include="Classes\GR5_TimeInfo.cs" />
+    <Compile Include="Classes\GR5_TimeZoneInfo.cs" />
+    <Compile Include="Classes\GR5_GameClass.cs" />
+    <Compile Include="Classes\GR5_SkillModifier.cs" />
+    <Compile Include="Classes\GR5_Skill.cs" />
+    <Compile Include="Classes\GR5_SkillUpgrade.cs" />
+    <Compile Include="Classes\GR5_SkillPower.cs" />
+    <Compile Include="Classes\GR5_SkillModifierList.cs" />
+    <Compile Include="Classes\GR5_DesignerStatistics.cs" />
+    <Compile Include="Classes\GR5_InstancedStatistic.cs" />
+    <Compile Include="Classes\GR5_PlayerInstancedStatisticsBlock.cs" />
+    <Compile Include="Classes\GR5_SKUItem.cs" />
+    <Compile Include="Classes\GR5_SKU.cs" />
+    <Compile Include="Classes\GR5_Survey.cs" />
+    <Compile Include="Classes\GR5_Unlock.cs" />
+    <Compile Include="Classes\GR5_UserUnlockResult.cs" />
+    <Compile Include="Classes\GR5_WeaponXPLevelInfo.cs" />
+    <Compile Include="Classes\GR5_Weapon.cs" />
+    <Compile Include="Classes\GR5_Component.cs" />
     <Compile Include="ClientInfo.cs" />
+    <Compile Include="DBHelper.cs" />
     <Compile Include="DecryptTool.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,7 +169,10 @@
     </Compile>
     <Compile Include="QPacketHandler.cs" />
     <Compile Include="RMC\AbilityService\Response\RMCPacketResponseAbilityService_Method2.cs" />
+    <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method4.cs" />
+    <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method2.cs" />
     <Compile Include="RMC\AdvertisementsService\Response\RMCPacketResponseAdvertisementsService_Method2.cs" />
+    <Compile Include="RMC\AMMGame\Response\RMCPacktResponseAMM_Method4.cs" />
     <Compile Include="RMC\ArmorService\Response\RMCPacketResponseArmorService_Method2.cs" />
     <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_Method1.cs" />
     <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_Method5.cs" />
@@ -88,6 +189,9 @@
     <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_Method2.cs" />
     <Compile Include="RMC\AdvertisementsService\Response\RMCPacketResponseAdvertisementsService_Method1.cs" />
     <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method9.cs" />
+    <Compile Include="RMC\LeaderboardService\Response\RMCPacketResponseLeaderboardService_Method3.cs" />
+    <Compile Include="RMC\LeaderboardService\Response\RMCPacketResponseLeaderboardService_Method4.cs" />
+    <Compile Include="RMC\LeaderboardService\Response\RMCPacketResponseLeaderboardService_Method2.cs" />
     <Compile Include="RMC\Loadout\Response\RMCPacketResponseLoadout_Method5.cs" />
     <Compile Include="RMC\LootService\Response\RMCPacketResponseLootService_Method4.cs" />
     <Compile Include="RMC\LootService\Response\RMCPacketResponseLootService_Method5.cs" />
@@ -102,11 +206,15 @@
     <Compile Include="RMC\RMCPacketResponseEmpty.cs" />
     <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_Method3.cs" />
     <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_Method4.cs" />
-    <Compile Include="RMC\StatisticsServer\Response\RMCPacketResponseStatisticsService_Method3.cs" />
-    <Compile Include="RMC\StatisticsServer\Response\RMCPacketResponseStatisticsService_Method1.cs" />
+    <Compile Include="RMC\StatisticsService\Response\RMCPacketResponseStatisticsService_Method4.cs" />
+    <Compile Include="RMC\StatisticsService\Response\RMCPacketResponseStatisticsService_Method2.cs" />
+    <Compile Include="RMC\StatisticsService\Response\RMCPacketResponseStatisticsService_Method3.cs" />
+    <Compile Include="RMC\StatisticsService\Response\RMCPacketResponseStatisticsService_Method1.cs" />
+    <Compile Include="RMC\StoreService\Response\RMCPacketResponseStoreService_MethodB.cs" />
     <Compile Include="RMC\SurveyService\Response\RMCPacketResponseSurveyService_Method1.cs" />
     <Compile Include="RMC\UnlockService\Response\RMCPacketResponseUnlockService_Method3.cs" />
     <Compile Include="RMC\UnlockService\Response\RMCPacketResponseUnlockService_Method2.cs" />
+    <Compile Include="RMC\WeaponProficiencyService\Response\RMCPacketResponseWeaponProficiencyService_Method1.cs" />
     <Compile Include="RMC\WeaponProficiencyService\Response\RMCPacketResponseWeaponProficiencyService_Method3.cs" />
     <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_GetModifiers.cs" />
     <Compile Include="RMC\StoreService\Response\RMCPacketResponseStoreService_GetSKUs.cs" />
@@ -170,6 +278,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

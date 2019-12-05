@@ -28,6 +28,8 @@ namespace GRPBackendWV
                             c = (Color)color;
                         else
                             c = Color.Black;
+                        if (s.ToLower().Contains("error"))
+                            c = Color.Red;
                         box.SelectionStart = box.TextLength;
                         box.SelectionLength = 0;
                         box.SelectionColor = c;
