@@ -20,6 +20,7 @@ namespace GRPBackendWV
             InitializeComponent();
             Log.box = richTextBox1;
             DBHelper.Init();
+            toolStripComboBox1.SelectedIndex = 0;
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -52,11 +53,6 @@ namespace GRPBackendWV
             new DecryptTool().Show();
         }
 
-        private void toolStripButton4_Click(object sender, EventArgs e)
-        {
-            Global.useDetailedLog = toolStripButton4.Checked;
-        }
-
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
             new LogFilter().Show();
@@ -65,6 +61,26 @@ namespace GRPBackendWV
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
             richTextBox1.Text = "";
+        }
+
+        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (toolStripComboBox1.SelectedIndex)
+            {
+                default:
+                case 0:
+                    Log.MinPriority = 1;
+                    break;
+                case 1:
+                    Log.MinPriority = 2;
+                    break;
+                case 2:
+                    Log.MinPriority = 5;
+                    break;
+                case 3:
+                    Log.MinPriority = 10;
+                    break;
+            }
         }
     }
 }

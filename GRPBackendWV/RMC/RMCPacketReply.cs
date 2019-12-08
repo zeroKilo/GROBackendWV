@@ -9,6 +9,7 @@ namespace GRPBackendWV
     public abstract class RMCPacketReply
     {
         public abstract override string ToString();
+        public abstract string PayloadToString();
         public abstract byte[] ToBuffer();
     }
 }

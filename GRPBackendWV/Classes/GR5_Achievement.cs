@@ -17,8 +17,8 @@ namespace GRPBackendWV
         public uint m_AchievementPoints;
         public uint m_Icon;
         public string m_Expression = "1";
-        public uint m_OasisNameID;
-        public uint m_OasisDescriptionID;
+        public uint m_OasisNameID = 70870;
+        public uint m_OasisDescriptionID = 70870;
         public uint m_StartDate;
         public uint m_EndDate;
         public byte m_MinLevel;

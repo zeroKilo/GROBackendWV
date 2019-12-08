@@ -29,6 +29,11 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponsePlayerProfileService_MethodF]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 
 }

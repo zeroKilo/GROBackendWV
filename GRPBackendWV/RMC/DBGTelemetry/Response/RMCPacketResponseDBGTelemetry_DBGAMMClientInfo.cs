@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseDBGTelemetry_Method1 : RMCPacketReply
+    public class RMCPacketResponseDBGTelemetry_DBGAMMClientInfo : RMCPacketReply
     {
         public string unk1;
 
@@ -20,7 +20,12 @@ namespace GRPBackendWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponseDBGTelemetry_Method1]";
+            return "[RMCPacketResponseDBGTelemetry_DBGAMMClientInfo]";
+        }
+
+        public override string PayloadToString()
+        {
+            return "";
         }
     }
 }

@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseUnlockService_GetCurrentUserUnlock]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

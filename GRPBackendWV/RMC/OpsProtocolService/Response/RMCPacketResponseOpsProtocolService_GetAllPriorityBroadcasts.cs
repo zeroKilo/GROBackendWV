@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseOpsProtocolService_GetAllPriorityBroadcasts]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

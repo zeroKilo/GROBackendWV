@@ -39,5 +39,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseAchievementsService_Method9]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

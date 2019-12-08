@@ -17,5 +17,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseEmpty]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

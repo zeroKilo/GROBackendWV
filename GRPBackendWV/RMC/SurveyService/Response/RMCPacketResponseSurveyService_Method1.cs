@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseSurveyService_Method1]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

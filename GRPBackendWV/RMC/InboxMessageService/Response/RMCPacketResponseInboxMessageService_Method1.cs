@@ -40,5 +40,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseInboxMessageService_Method1]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

@@ -22,5 +22,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseServerInfo_GetServerTime]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseSkillsService_GetGameClass]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

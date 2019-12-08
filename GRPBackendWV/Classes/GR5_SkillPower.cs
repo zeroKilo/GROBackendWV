@@ -11,8 +11,8 @@ namespace GRPBackendWV
     {
         public uint m_ID;
         public uint m_ModifierListID;
-        public uint m_NameOasisID;
-        public uint m_DescriptionOasisID;
+        public uint m_NameOasisID = 70870;
+        public uint m_DescriptionOasisID = 70870;
         public string m_Name;
         public string m_Description;
         public void toBuffer(Stream s)

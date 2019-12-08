@@ -12,8 +12,8 @@ namespace GRPBackendWV
         public uint m_ID;
         public string m_Name;
         public uint m_ClassID;
-        public uint m_OasisNameID;
-        public uint m_OasisDescriptionID;
+        public uint m_OasisNameID = 70870;
+        public uint m_OasisDescriptionID = 70870;
         public uint m_Flags;
         public uint m_DesignerStatisticID;
         public uint m_SortOrder;

@@ -11,8 +11,8 @@ namespace GRPBackendWV
     {
         public uint uiId;
         public uint uiRootModifierId;
-        public uint uiOasisNameId;
-        public uint uiOasisDescriptionId;
+        public uint uiOasisNameId = 70870;
+        public uint uiOasisDescriptionId = 70870;
         public List<GR5_AMM_Modifier> m_ModifierVector = new List<GR5_AMM_Modifier>();
         public void toBuffer(Stream s)
         {

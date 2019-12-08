@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseProfanityFilterService_GetAllProfaneWords]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

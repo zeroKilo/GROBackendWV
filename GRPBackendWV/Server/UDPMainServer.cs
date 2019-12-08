@@ -35,7 +35,7 @@ namespace GRPBackendWV
 
         public static void tMainThread(object obj)
         {
-            WriteLog("Server started");
+            WriteLog(1, "Server started");
             listener = new UdpClient(listenPort);
             IPEndPoint ep = new IPEndPoint(IPAddress.Any, 0);
             while (true)
@@ -52,7 +52,7 @@ namespace GRPBackendWV
                 }
                 catch { }
             }
-            WriteLog("Server stopped");
+            WriteLog(1, "Server stopped");
         }
 
         public static void ProcessPacket(byte[] data, IPEndPoint ep)
@@ -60,10 +60,10 @@ namespace GRPBackendWV
             StringBuilder sb = new StringBuilder();
             foreach (byte b in data)
                 sb.Append(b.ToString("X2") + " ");
-            WriteLog("received : " + sb.ToString(), !Global.useDetailedLog);
             QPacket p = new QPacket(data);
-            WriteLog("received : " + p.ToStringDetailed(), !Global.useDetailedLog);
-            WriteLog("received : " + p.ToStringShort(), Global.useDetailedLog);
+            WriteLog(5, "received : " + p.ToStringShort());
+            WriteLog(10, "received : " + sb.ToString());
+            WriteLog(10, "received : " + p.ToStringDetailed());
             QPacket reply = null;
             ClientInfo client = null;
             if (p.type != QPacket.PACKETTYPE.SYN)
@@ -99,15 +99,15 @@ namespace GRPBackendWV
             StringBuilder sb = new StringBuilder();
             foreach (byte b in data)
                 sb.Append(b.ToString("X2") + " ");
-            WriteLog("send : " + sb.ToString(), !Global.useDetailedLog);
-            WriteLog("send : " + p.ToStringDetailed(), !Global.useDetailedLog);
-            WriteLog("send : " + p.ToStringShort(), Global.useDetailedLog);
+            WriteLog(5, "send : " + p.ToStringShort());
+            WriteLog(10, "send : " + sb.ToString());
+            WriteLog(10, "send : " + p.ToStringDetailed());
             listener.Send(data, data.Length, client.ep);
         }
 
-        private static void WriteLog(string s, bool toFileOnly = false)
+        private static void WriteLog(int priority, string s)
         {
-            Log.WriteLine("[UDP Main] " + s, toFileOnly);
+            Log.WriteLine(priority, "[UDP Main] " + s);
         }
     }
 }

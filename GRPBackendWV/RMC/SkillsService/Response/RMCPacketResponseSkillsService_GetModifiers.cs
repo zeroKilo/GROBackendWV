@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseSkillsService_GetModifiers]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

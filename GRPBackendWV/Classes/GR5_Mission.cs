@@ -11,10 +11,10 @@ namespace GRPBackendWV
     {
         public uint mID;
         public string mCriteria;
-        public uint mOasisName;
-        public uint mOasisDescription;
-        public uint mOasisRequirement;
-        public uint mOasisDebrief;
+        public uint mOasisName = 70870;
+        public uint mOasisDescription = 70870;
+        public uint mOasisRequirement = 70870;
+        public uint mOasisDebrief = 70870;
         public byte mMinLevel;
         public byte mMaxLevel;
         public byte mMinParty;

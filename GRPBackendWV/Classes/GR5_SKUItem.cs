@@ -12,7 +12,7 @@ namespace GRPBackendWV
         public uint m_ItemID;
         public uint m_DurabilityValue;
         public uint m_DurabilityValue2;
-        public uint m_OasisName;
+        public uint m_OasisName = 70870;
         public float m_IGCPrice;
         public float m_GRCashPrice;
         public void toBuffer(Stream s)

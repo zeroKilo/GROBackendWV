@@ -30,5 +30,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseStoreService_MethodB]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

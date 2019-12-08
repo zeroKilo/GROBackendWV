@@ -13,8 +13,8 @@ namespace GRPBackendWV
         public uint uiNodeType;
         public uint uiMaxTeamSize;
         public uint uiMinTeamSize;
-        public uint uiOasisNameId;
-        public uint uiOasisDescriptionId;
+        public uint uiOasisNameId = 70870;
+        public uint uiOasisDescriptionId = 70870;
         public uint uiIsRepeatable;
         public uint uiIsRandom;
         public uint uiThumbnailId;

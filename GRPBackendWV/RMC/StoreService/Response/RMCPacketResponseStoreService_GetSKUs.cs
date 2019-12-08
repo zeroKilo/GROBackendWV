@@ -31,5 +31,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseStoreService_GetSKUs]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

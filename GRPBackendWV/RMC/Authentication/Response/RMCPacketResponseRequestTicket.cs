@@ -34,8 +34,12 @@ namespace GRPBackendWV
 
         public override string ToString()
         {
+            return "[RequestTicket Response]";
+        }
+
+        public override string PayloadToString()
+        {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[RequestTicket Response]");
             sb.AppendLine("\t[Result Code   : 0x" + resultCode.ToString("X8") + "]");
             sb.Append("\t[Ticket Buffer : { ");
             foreach (byte b in ticketBuffer)

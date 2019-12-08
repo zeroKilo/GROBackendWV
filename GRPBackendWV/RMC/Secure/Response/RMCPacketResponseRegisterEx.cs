@@ -28,8 +28,12 @@ namespace GRPBackendWV
 
         public override string ToString()
         {
+            return "[RegisterEx Response]";
+        }
+
+        public override string PayloadToString()
+        {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[RegisterEx Response]");
             sb.AppendLine("\t[Result Code   : 0x" + resultCode.ToString("X8") + "]");
             sb.AppendLine("\t[Connection Id : 0x" + connectionId.ToString("X8") + "]");
             sb.AppendLine("\t[Client Url    : " + clientUrl + "]");

@@ -39,5 +39,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseArmorService_GetPersonaArmorTiers]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

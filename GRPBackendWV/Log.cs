@@ -12,16 +12,17 @@ namespace GRPBackendWV
     public static class Log
     {
         public static RichTextBox box = null;
+        public static int MinPriority = 10; //1..10 1=less, 10=all
 
-        public static void WriteLine(string s, bool onlyToFile = false, object color = null)
+        public static void WriteLine(int priority, string s, object color = null)
         {
             if (box == null) return;
             try
             {
                 box.Invoke(new Action(delegate
                 {
-                    string stamp = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString() + " : ";
-                    if (!onlyToFile)
+                    string stamp = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString() + " : [" + priority.ToString("D2") + "]";
+                    if (priority <= MinPriority)
                     {
                         Color c;
                         if (color != null)

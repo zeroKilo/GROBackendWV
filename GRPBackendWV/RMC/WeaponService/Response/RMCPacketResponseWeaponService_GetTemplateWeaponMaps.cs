@@ -68,5 +68,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseWeaponService_GetTemplateWeaponMaps]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

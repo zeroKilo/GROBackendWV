@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseLootService_GetLootStatic]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

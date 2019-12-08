@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseLoadout_GetLoadoutPowers]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

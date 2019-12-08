@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseFriendsService_Method5]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

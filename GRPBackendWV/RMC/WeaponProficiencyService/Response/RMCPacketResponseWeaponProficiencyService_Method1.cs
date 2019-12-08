@@ -37,5 +37,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseWeaponProficiencyService_Method1]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

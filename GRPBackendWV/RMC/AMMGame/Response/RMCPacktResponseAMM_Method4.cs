@@ -7,24 +7,29 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacktResponseAMM_Method4 : RMCPacketReply
+    public class RMCPacktResponseAMM_RequestAMMSearch : RMCPacketReply
     {
-        public uint unk1;
+        public uint count = 1;
 
-        public RMCPacktResponseAMM_Method4()
+        public RMCPacktResponseAMM_RequestAMMSearch()
         {
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, unk1);
+            Helper.WriteU32(m, count);
             return m.ToArray();
         }
 
         public override string ToString()
         {
-            return "[RMCPacketResponseAMM_Method4]";
+            return "[RMCPacketResponseAMM_RequestAMMSearch]";
+        }
+
+        public override string PayloadToString()
+        {
+            return "";
         }
     }
 }

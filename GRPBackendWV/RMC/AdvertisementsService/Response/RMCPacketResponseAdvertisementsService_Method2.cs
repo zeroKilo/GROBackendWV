@@ -57,5 +57,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseAdvertisementsService_Method2]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

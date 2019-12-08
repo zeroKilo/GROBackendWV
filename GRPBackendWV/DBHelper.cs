@@ -15,7 +15,7 @@ namespace GRPBackendWV
         {
             connection.ConnectionString = "Data Source=database.sqlite";
             connection.Open();
-            Log.WriteLine("DB loaded...");
+            Log.WriteLine(1, "DB loaded...");
         }
 
         public static ClientInfo GetUserByName(string name)
@@ -85,6 +85,7 @@ namespace GRPBackendWV
                 message.header.m_title = reader[4].ToString();
                 message.header.m_link = reader[5].ToString();
                 message.m_body = reader[6].ToString();
+                result.Add(message);
             }
             reader.Close();
             reader.Dispose();
@@ -95,6 +96,61 @@ namespace GRPBackendWV
         public static List<GR5_TemplateItem> GetTemplateItems()
         {
             List<GR5_TemplateItem> result = new List<GR5_TemplateItem>();
+            SQLiteCommand command = new SQLiteCommand(connection);
+            command.CommandText = "SELECT * FROM templateitems";
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                GR5_TemplateItem item = new GR5_TemplateItem();
+                item.m_ItemID = Convert.ToUInt32(reader[0].ToString());
+                item.m_ItemType = Convert.ToByte(reader[1].ToString());
+                item.m_ItemName = reader[2].ToString();
+                item.m_DurabilityType = Convert.ToByte(reader[3].ToString());
+                item.m_IsInInventory = reader[4].ToString() == "True";
+                item.m_IsSellable = reader[5].ToString() == "True";
+                item.m_IsLootable = reader[6].ToString() == "True";
+                item.m_IsRewardable = reader[7].ToString() == "True";
+                item.m_IsUnlockable = reader[8].ToString() == "True";
+                item.m_MaxItemInSlot = Convert.ToUInt32(reader[9].ToString());
+                item.m_GearScore = Convert.ToUInt32(reader[10].ToString());
+                item.m_IGCValue = Convert.ToUInt32(reader[11].ToString()) / 100f;
+                item.m_OasisName = Convert.ToUInt32(reader[12].ToString());
+                item.m_OasisDesc = Convert.ToUInt32(reader[13].ToString());
+                result.Add(item);
+            }
+            reader.Close();
+            reader.Dispose();
+            command.Dispose();
+            return result;
+        }
+
+        public static List<GR5_LoadoutKit> GetLoadoutKits(uint pid)
+        {
+            List<GR5_LoadoutKit> result = new List<GR5_LoadoutKit>();
+            SQLiteCommand command = new SQLiteCommand(connection);
+            command.CommandText = "SELECT * FROM loadoutkits WHERE pid=" + pid;
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                GR5_LoadoutKit kit = new GR5_LoadoutKit();
+                kit.m_LoadoutKitID = Convert.ToUInt32(reader[1].ToString());
+                kit.m_ClassID = Convert.ToUInt32(reader[2].ToString());
+                kit.m_Weapon1ID = Convert.ToUInt32(reader[3].ToString());
+                kit.m_Weapon2ID = Convert.ToUInt32(reader[4].ToString());
+                kit.m_Weapon3ID = Convert.ToUInt32(reader[5].ToString());
+                kit.m_Item1ID = Convert.ToUInt32(reader[6].ToString());
+                kit.m_Item2ID = Convert.ToUInt32(reader[7].ToString());
+                kit.m_Item3ID = Convert.ToUInt32(reader[8].ToString());
+                kit.m_PowerID = Convert.ToUInt32(reader[9].ToString());
+                kit.m_HelmetID = Convert.ToUInt32(reader[10].ToString());
+                kit.m_ArmorID = Convert.ToUInt32(reader[11].ToString());
+                kit.m_OasisDesc = Convert.ToUInt32(reader[12].ToString());
+                kit.m_Flag = Convert.ToUInt32(reader[13].ToString());
+                result.Add(kit);
+            }
+            reader.Close();
+            reader.Dispose();
+            command.Dispose();
             return result;
         }
     }

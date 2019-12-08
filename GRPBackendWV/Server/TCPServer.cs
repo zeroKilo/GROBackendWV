@@ -38,7 +38,7 @@ namespace GRPBackendWV
         {
             listener = new TcpListener(IPAddress.Parse(ip), listenPort);
             listener.Start();
-            Log.WriteLine("[TCP Webserver] Server started");
+            Log.WriteLine(1, "[TCP Webserver] Server started");
             while (true)
             {
                 lock (_sync)
@@ -49,12 +49,12 @@ namespace GRPBackendWV
                 try
                 {
                     TcpClient client = listener.AcceptTcpClient();
-                    Log.WriteLine("[TCP] Client connected");
+                    Log.WriteLine(1, "[TCP] Client connected");
                     new Thread(tClientHandler).Start(client);
                 }
                 catch { }
             }
-            Log.WriteLine("[TCP Webserver] Server stopped");
+            Log.WriteLine(1, "[TCP Webserver] Server stopped");
         }
 
         public static void tClientHandler(object obj)
@@ -66,7 +66,7 @@ namespace GRPBackendWV
             //Read Content
             while (ns.DataAvailable)
                 m.WriteByte((byte)ns.ReadByte());
-            Log.WriteLine("[TCP Webserver] Received " + m.Length + " bytes");
+            Log.WriteLine(2, "[TCP Webserver] Received " + m.Length + " bytes");
             //Create Response
             StringBuilder sb = new StringBuilder();
             sb.Append("[");
@@ -88,7 +88,7 @@ namespace GRPBackendWV
             ns.Write(buff, 0, buff.Length);
             ns.Flush();
             ns.Close();
-            Log.WriteLine("[TCP Webserver] Send " + buff.Length + " bytes");
+            Log.WriteLine(2, "[TCP Webserver] Send " + buff.Length + " bytes");
         }
 
         private static void AddHttpHeader(StringBuilder sb, int contentlen)

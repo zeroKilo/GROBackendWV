@@ -31,5 +31,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseLeaderboardService_GetLeaderboards]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

@@ -24,5 +24,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseOverlordNewsProtocol_Method1]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

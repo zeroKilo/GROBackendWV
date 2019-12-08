@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseChatService_Method10]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

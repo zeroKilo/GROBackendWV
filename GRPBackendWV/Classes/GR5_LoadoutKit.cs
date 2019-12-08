@@ -11,7 +11,7 @@ namespace GRPBackendWV
     {
         public uint m_LoadoutKitID;
         public uint m_ClassID;
-        public uint m_Weapon1ID = 0x1000;
+        public uint m_Weapon1ID;
         public uint m_Weapon2ID;
         public uint m_Weapon3ID;
         public uint m_Item1ID;

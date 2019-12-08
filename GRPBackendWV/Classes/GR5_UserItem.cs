@@ -13,7 +13,7 @@ namespace GRPBackendWV
         public uint PersonaID;
         public byte ItemType;
         public uint ItemID;
-        public uint OasisName;
+        public uint OasisName = 70870;
         public float IGCPrice;
         public float GRCashPrice;
         public void toBuffer(Stream s)

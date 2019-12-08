@@ -40,5 +40,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

@@ -60,8 +60,12 @@ namespace GRPBackendWV
 
         public override string ToString()
         {
+            return "[LoginCustomData Response]";
+        }
+
+        public override string PayloadToString()
+        {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[LoginCustomData Response]");
             sb.AppendLine("\t[Result code       : 0x" + resultCode.ToString("X8") + "]");
             sb.AppendLine("\t[PID               : 0x" + PID.ToString("X8") + "]");
             sb.AppendLine(ticket.ToString());
@@ -70,7 +74,7 @@ namespace GRPBackendWV
             sb.AppendLine("\t[Unknown3          : 0x" + unk3.ToString("X4") + "]");
             sb.AppendLine("\t[Unknown4          : 0x" + unk4.ToString("X4") + "]");
             sb.AppendLine("\t[Unknown5          : 0x" + unk5.ToString("X4") + "]");
-            sb.AppendLine("\t[Unknown6          : 0x" + unk6.ToString("X4") + "]");            
+            sb.AppendLine("\t[Unknown6          : 0x" + unk6.ToString("X4") + "]");
             return sb.ToString();
         }
     }

@@ -12,7 +12,7 @@ namespace GRPBackendWV
         public uint id;
         public byte objectType;
         public uint objectKey;
-        public uint oasisName;
+        public uint oasisName = 70870;
         public void toBuffer(Stream s)
         {
             Helper.WriteU32(s, id);

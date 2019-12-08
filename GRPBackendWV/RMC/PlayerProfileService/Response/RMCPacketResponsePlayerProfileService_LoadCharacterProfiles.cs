@@ -50,5 +50,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponsePlayerProfileService_LoadCharacterProfiles]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

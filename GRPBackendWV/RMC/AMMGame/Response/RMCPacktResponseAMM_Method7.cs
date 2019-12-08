@@ -44,5 +44,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseAMM_Method7]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

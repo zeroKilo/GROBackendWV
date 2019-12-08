@@ -22,19 +22,22 @@ namespace GRPBackendWV
             targetPID = Helper.ReadU32(s);
         }
 
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("\t[RequestTicket Request : PID Source=0x" + sourcePID.ToString("X8") + " PID Target=" + targetPID.ToString("X8") + "]");
-            return sb.ToString();
-        }
-
         public override byte[] ToBuffer()
         {
             MemoryStream result = new MemoryStream();
             Helper.WriteU32(result, sourcePID);
             Helper.WriteU32(result, targetPID);
             return result.ToArray();
+        }
+
+        public override string ToString()
+        {
+            return "[RequestTicket Request : PID Source=0x" + sourcePID.ToString("X8") + " PID Target=" + targetPID.ToString("X8") + "]";
+        }
+
+        public override string PayloadToString()
+        {
+            return "";
         }
     }
 }

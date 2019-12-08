@@ -21,8 +21,8 @@ namespace GRPBackendWV
         public uint m_MaxItemInSlot;
         public uint m_GearScore;
         public float m_IGCValue;
-        public uint m_OasisName;
-        public uint m_OasisDesc;
+        public uint m_OasisName = 70870;
+        public uint m_OasisDesc = 70870;
         public void toBuffer(Stream s)
         {
             Helper.WriteU32(s, m_ItemID);

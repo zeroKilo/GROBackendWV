@@ -18,9 +18,12 @@ namespace GRPBackendWV
                 return;
             if (p.flags.Contains(QPacket.PACKETFLAG.FLAG_ACK))
                 return;
-            WriteLog("Handling packet...");
+            WriteLog(10, "Handling packet...");
             RMCPacket rmc = new RMCPacket(p);
-            WriteLog("Received packet :\n" + rmc);
+            WriteLog(1, "Received packet : " + rmc.ToString());
+            string payload = rmc.PayLoadToString();
+            if(payload != "")
+                WriteLog(5, payload);
             switch (rmc.proto)
             {
                 case RMCPacket.PROTOCOL.Authentication:
@@ -126,7 +129,7 @@ namespace GRPBackendWV
                     ProcessOverlordNewsProtocol(udp, p, rmc, client);
                     break;
                 default:
-                    WriteLog("No handler implemented for packet protocol " + rmc.proto);
+                    WriteLog(1, "Error: No handler implemented for packet protocol " + rmc.proto);
                     break;
             }
         }
@@ -137,7 +140,7 @@ namespace GRPBackendWV
             switch (rmc.methodID)
             {
                 case 4:
-                    reply = new RMCPacktResponseAMM_Method4();
+                    reply = new RMCPacktResponseAMM_RequestAMMSearch();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 7:
@@ -145,7 +148,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -183,7 +186,7 @@ namespace GRPBackendWV
                             }
                             break;
                         default:
-                            WriteLog("Error: Unknown RMC Packet Authentication Custom Data class " + h.className);
+                            WriteLog(1, "Error: Unknown RMC Packet Authentication Custom Data class " + h.className);
                             break;
                     }
                     break;
@@ -192,7 +195,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown RMC Packet Authentication Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown RMC Packet Authentication Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -211,12 +214,12 @@ namespace GRPBackendWV
                             SendReply(udp, p, rmc, client, reply);
                             break;
                         default:
-                            WriteLog("Error: Unknown RMC Packet Secure Custom Data class " + h.className);
+                            WriteLog(1, "Error: Unknown RMC Packet Secure Custom Data class " + h.className);
                             break;
                     }
                     break;
                 default:
-                    WriteLog("Error: Unknown RMC Packet Secure Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown RMC Packet Secure Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -231,7 +234,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -262,7 +265,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -281,7 +284,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -315,10 +318,12 @@ namespace GRPBackendWV
                     break;
                 case 16:
                     reply = new RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits();
+                    List<GR5_LoadoutKit> kits = DBHelper.GetLoadoutKits(client.PID);
+                    ((RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits)reply).kits.AddRange(kits);
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -341,7 +346,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -356,7 +361,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -371,7 +376,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -399,7 +404,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -418,7 +423,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -446,7 +451,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -473,7 +478,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -504,7 +509,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -519,7 +524,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -530,11 +535,11 @@ namespace GRPBackendWV
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseDBGTelemetry_Method1();
+                    reply = new RMCPacketResponseDBGTelemetry_DBGAMMClientInfo();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -557,7 +562,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -576,7 +581,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -595,7 +600,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -630,7 +635,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -649,7 +654,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -672,7 +677,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -691,7 +696,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -710,7 +715,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -729,7 +734,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -752,7 +757,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -779,7 +784,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -794,7 +799,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -813,7 +818,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -828,7 +833,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -847,7 +852,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -862,7 +867,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -875,11 +880,11 @@ namespace GRPBackendWV
                 case 1:
                     reply = new RMCPacketResponseOverlordNewsProtocol_Method1();
                     List<GR5_NewsMessage> news = DBHelper.GetNews(client.PID);
-                    ((RMCPacketResponseOverlordNewsProtocol_Method1)reply).news.AddRange(news);
+                    //((RMCPacketResponseOverlordNewsProtocol_Method1)reply).news.AddRange(news);
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
-                    WriteLog("Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }
@@ -887,6 +892,10 @@ namespace GRPBackendWV
 
         private static void SendReply(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client, RMCPacketReply reply, bool useCompression = true, uint error = 0)
         {
+            WriteLog(2, "Response : " + reply.ToString());
+            string payload = reply.PayloadToString();
+            if (payload != "")
+                WriteLog(5, "Response Data Content : \n" + payload);
             SendACK(udp, p, client);
             SendReplyPacket(udp, p, rmc, client, reply, useCompression, error);
         }
@@ -900,7 +909,7 @@ namespace GRPBackendWV
             np.m_uiSignature = client.IDsend;
             np.payload = new byte[0];
             np.payloadSize = 0;
-            WriteLog("send ACK packet");
+            WriteLog(10, "send ACK packet");
             Send(udp, np, client);
         }
 
@@ -943,9 +952,8 @@ namespace GRPBackendWV
             m.Write(buff, 0, buff.Length);
             np.payload = m.ToArray();
             np.payloadSize = (ushort)np.payload.Length;
-            WriteLog("send response packet");
+            WriteLog(10, "send response packet");
             Send(udp, np, client);
-            WriteLog("Response Data Content : \n" + reply.ToString());
         }
 
         public static void Send(UdpClient udp, QPacket p, ClientInfo client)
@@ -954,15 +962,15 @@ namespace GRPBackendWV
             StringBuilder sb = new StringBuilder();
             foreach (byte b in data)
                 sb.Append(b.ToString("X2") + " ");
-            WriteLog("send : " + sb.ToString(), !Global.useDetailedLog);
-            WriteLog("send : " + p.ToStringDetailed(), !Global.useDetailedLog);
-            WriteLog("send : " + p.ToStringShort(), Global.useDetailedLog);
+            WriteLog(5, "send : " + p.ToStringShort());
+            WriteLog(10, "send : " + sb.ToString());
+            WriteLog(10, "send : " + p.ToStringDetailed());
             udp.Send(data, data.Length, client.ep);
         }
 
-        private static void WriteLog(string s, bool toFileOnly = false)
+        private static void WriteLog(int priority, string s)
         {
-            Log.WriteLine("[RMC] " + s, toFileOnly);
+            Log.WriteLine(priority, "[RMC] " + s);
         }
 
     }

@@ -13,8 +13,8 @@ namespace GRPBackendWV
         public uint m_AggregationType;
         public uint m_Flags;
         public uint m_DefaultValue;
-        public uint m_OasisNameId;
-        public uint m_OasisDescriptionId;
+        public uint m_OasisNameId = 70870;
+        public uint m_OasisDescriptionId = 70870;
         public string m_Expression = "1";
         public string m_Name;
         public void toBuffer(Stream s)

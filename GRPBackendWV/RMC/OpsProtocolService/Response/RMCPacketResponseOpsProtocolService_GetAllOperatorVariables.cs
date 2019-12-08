@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseOpsProtocolService_GetAllOperatorVariables]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

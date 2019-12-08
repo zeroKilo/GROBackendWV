@@ -15,7 +15,7 @@ namespace GRPBackendWV
             client = Global.GetClientByEndPoint(ep);
             if (client == null)
             {
-                Log.WriteLine("Creating new client data...");
+                Log.WriteLine(2, "[QAZAL] Creating new client data...");
                 client = new ClientInfo();
                 client.ep = ep;
                 client.IDrecv = Global.idCounter++;
@@ -68,7 +68,7 @@ namespace GRPBackendWV
             Helper.ReadU32(m);
             Helper.ReadU32(m);
             uint responseCode = Helper.ReadU32(m);
-            Log.WriteLine("Got response code 0x" + responseCode.ToString("X8"));
+            Log.WriteLine(2, "[QAZAL] Got response code 0x" + responseCode.ToString("X8"));
             m = new MemoryStream();
             Helper.WriteU32(m, 4);
             Helper.WriteU32(m, responseCode + 1);

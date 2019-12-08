@@ -22,17 +22,6 @@ namespace GRPBackendWV
             unk4 = Helper.ReadU32(s);
         }
 
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("\t[RMC Packet Request Telemetry_Method1]");
-            sb.AppendLine("\t\t[Unknown 1 : " + unk1 + "]");
-            sb.AppendLine("\t\t[Unknown 2 : " + unk2 + "]");
-            sb.AppendLine("\t\t[Unknown 3 : " + unk3 + "]");
-            sb.AppendLine("\t\t[Unknown 4 : 0x" + unk4.ToString("X8") + "]");
-            return sb.ToString();
-        }
-
         public override byte[] ToBuffer()
         {
             MemoryStream result = new MemoryStream();
@@ -41,6 +30,21 @@ namespace GRPBackendWV
             Helper.WriteString(result, unk3);
             Helper.WriteU32(result, unk4);
             return result.ToArray();
+        }
+
+        public override string ToString()
+        {
+            return "[RMC Packet Request Telemetry_Method1]";
+        }
+
+        public override string PayloadToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("\t[Unknown 1 : " + unk1 + "]");
+            sb.AppendLine("\t[Unknown 2 : " + unk2 + "]");
+            sb.AppendLine("\t[Unknown 3 : " + unk3 + "]");
+            sb.AppendLine("\t[Unknown 4 : 0x" + unk4.ToString("X8") + "]");
+            return sb.ToString();
         }
     }
 }

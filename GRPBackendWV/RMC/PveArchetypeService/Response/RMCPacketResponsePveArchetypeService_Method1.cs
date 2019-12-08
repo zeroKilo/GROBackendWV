@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponsePveArchetypeService_Method1]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

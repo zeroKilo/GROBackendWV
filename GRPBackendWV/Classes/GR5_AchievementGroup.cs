@@ -15,8 +15,8 @@ namespace GRPBackendWV
         public uint m_Flags;
         public uint m_AchievementPoints;
         public uint m_Icon;
-        public uint m_OasisNameID;
-        public uint m_OasisDescriptionID;
+        public uint m_OasisNameID = 70870;
+        public uint m_OasisDescriptionID = 70870;
         public uint m_ParentGroupID;
         public List<uint> m_AchievementIDVector = new List<uint>();
         public List<uint> m_RewardIDVector = new List<uint>();

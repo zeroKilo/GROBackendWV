@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseInventoryService_Method3]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

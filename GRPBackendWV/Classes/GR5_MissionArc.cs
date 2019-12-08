@@ -10,8 +10,8 @@ namespace GRPBackendWV
     public class GR5_MissionArc
     {
         public uint mID;
-        public uint mOasisNameID;
-        public uint mOasisDescriptionID;
+        public uint mOasisNameID = 70870;
+        public uint mOasisDescriptionID = 70870;
         public uint mClassRequired;
         public byte mFlags;
         public byte mIsLoop;

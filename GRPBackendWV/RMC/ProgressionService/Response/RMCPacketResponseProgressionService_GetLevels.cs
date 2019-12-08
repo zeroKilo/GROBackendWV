@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseProgressionService_GetLevels]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

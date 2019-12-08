@@ -14,7 +14,7 @@ namespace GRPBackendWV
         public uint m_AssetId;
         public byte m_Layout;
         public byte m_Action;
-        public uint m_OasisName;
+        public uint m_OasisName = 70870;
         public string m_Criteria;
         public void toBuffer(Stream s)
         {

@@ -23,5 +23,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseTelemetry_TrackGameSession]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

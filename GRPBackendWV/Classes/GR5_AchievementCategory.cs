@@ -10,7 +10,7 @@ namespace GRPBackendWV
     public class GR5_AchievementCategory
     {
         public uint m_ID;
-        public uint m_OasisNameID;
+        public uint m_OasisNameID = 70870;
         public uint m_Category;
         public void toBuffer(Stream s)
         {

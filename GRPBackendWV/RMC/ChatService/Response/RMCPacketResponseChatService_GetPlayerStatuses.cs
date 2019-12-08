@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseChatService_GetPlayerStatuses]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

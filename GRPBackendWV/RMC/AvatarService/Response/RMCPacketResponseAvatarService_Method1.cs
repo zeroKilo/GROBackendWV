@@ -34,5 +34,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseAvatarService_Method1]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

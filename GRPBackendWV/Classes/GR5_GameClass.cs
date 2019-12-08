@@ -11,7 +11,7 @@ namespace GRPBackendWV
     {
         public uint m_ID;
         public uint m_ModifierListID;
-        public uint m_OasisID;
+        public uint m_OasisID = 70870;
         public string m_Name;
         public List<uint> m_EquippableWeaponIDVector = new List<uint>();
         public List<uint> m_DefaultSkillNodeIDVector = new List<uint>();

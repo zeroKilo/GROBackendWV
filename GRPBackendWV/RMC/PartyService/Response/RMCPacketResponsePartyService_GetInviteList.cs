@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponsePartyService_GetInviteList]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

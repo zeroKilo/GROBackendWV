@@ -77,7 +77,7 @@ namespace GRPBackendWV
             {
                 callID = Helper.ReadU32(m);
                 methodID = Helper.ReadU32(m); 
-                WriteLog("Error: Unknown RMC packet protocol 0x" + b.ToString("X2"));
+                WriteLog(1, "Error: Unknown RMC packet protocol 0x" + b.ToString("X2"));
                 return;
             }
             callID = Helper.ReadU32(m);
@@ -126,7 +126,7 @@ namespace GRPBackendWV
                 case PROTOCOL.OverlordNewsProtocol:
                     break;
                 default:
-                    WriteLog("Error: No reader implemented for packet protocol " + proto);
+                    WriteLog(1, "Error: No reader implemented for packet protocol " + proto);
                     break;
             }
         }
@@ -142,7 +142,7 @@ namespace GRPBackendWV
                     header = new RMCPacketRequestRequestTicket(s);
                     break;
                 default:
-                    WriteLog("Error: Unknown RMC Packet Authentication Method 0x" + methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown RMC Packet Authentication Method 0x" + methodID.ToString("X"));
                     break;
             }
         }
@@ -155,7 +155,7 @@ namespace GRPBackendWV
                     header = new RMCPacketRequestRegisterEx(s);
                     break;
                 default:
-                    WriteLog("Error: Unknown RMC Packet Secure Method 0x" + methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown RMC Packet Secure Method 0x" + methodID.ToString("X"));
                     break;
             }
         }
@@ -168,16 +168,20 @@ namespace GRPBackendWV
                     header = new RMCPacketRequestTelemetry_Method1(s);
                     break;
                 default:
-                    WriteLog("Error: Unknown RMC Packet Method 0x" + methodID.ToString("X"));
+                    WriteLog(1, "Error: Unknown RMC Packet Method 0x" + methodID.ToString("X"));
                     break;
             }
         }
 
         public override string ToString()
         {
+            return "[RMC Packet : Proto = " + proto + " CallID=" + callID + " MethodID=" + methodID + "]";
+        }
+
+        public string PayLoadToString()
+        {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[RMC Packet : Proto = " + proto + " CallID=" + callID + " MethodID=" + methodID+"]");
-            if(header != null)
+            if (header != null)
                 sb.Append(header);
             return sb.ToString();
         }
@@ -197,9 +201,9 @@ namespace GRPBackendWV
             return result.ToArray();
         }
 
-        private static void WriteLog(string s)
+        private static void WriteLog(int priority, string s)
         {
-            Log.WriteLine("[RMC Packet] " + s);
+            Log.WriteLine(priority, "[RMC Packet] " + s);
         }
     }
 }

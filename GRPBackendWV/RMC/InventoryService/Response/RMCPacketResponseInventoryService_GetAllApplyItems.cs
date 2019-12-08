@@ -29,5 +29,10 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseInventoryService_GetAllApplyItems]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 }

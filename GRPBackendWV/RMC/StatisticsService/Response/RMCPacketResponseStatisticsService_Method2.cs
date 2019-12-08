@@ -23,6 +23,11 @@ namespace GRPBackendWV
         {
             return "[RMCPacketResponseStatisticsService_Method2]";
         }
+
+        public override string PayloadToString()
+        {
+            return "";
+        }
     }
 
 }

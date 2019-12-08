@@ -11,16 +11,6 @@ namespace GRPBackendWV
     {
         public List<GR5_LoadoutKit> kits = new List<GR5_LoadoutKit>();
 
-        public RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                GR5_LoadoutKit kit = new GR5_LoadoutKit();
-                kit.m_ClassID = (uint)i;
-                kits.Add(kit);
-            }
-        }
-
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
@@ -33,6 +23,11 @@ namespace GRPBackendWV
         public override string ToString()
         {
             return "[RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits]";
+        }
+
+        public override string PayloadToString()
+        {
+            return "";
         }
     }
 }

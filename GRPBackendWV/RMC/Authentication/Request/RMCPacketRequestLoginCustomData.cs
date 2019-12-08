@@ -40,16 +40,6 @@ namespace GRPBackendWV
             }
         }
 
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("\t[LoginCustomData Request : user=" + user + " className=" + className + "]");
-            sb.AppendLine("\t\t[Username   : " + username + "]");
-            sb.AppendLine("\t\t[Online Key : " + onlineKey + "]");
-            sb.AppendLine("\t\t[Password   : " + password + "]");
-            return sb.ToString();
-        }
-
         public override byte[] ToBuffer()
         {
             MemoryStream result = new MemoryStream();
@@ -64,6 +54,20 @@ namespace GRPBackendWV
             Helper.WriteU32(result, (uint)buff.Length);
             result.Write(buff, 0, buff.Length);
             return result.ToArray();
+        }
+
+        public override string ToString()
+        {
+            return "[LoginCustomData Request : user=" + user + " className=" + className + "]";
+        }
+
+        public override string PayloadToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("\t[Username   : " + username + "]");
+            sb.AppendLine("\t[Online Key : " + onlineKey + "]");
+            sb.AppendLine("\t[Password   : " + password + "]");
+            return "";
         }
     }
 }
