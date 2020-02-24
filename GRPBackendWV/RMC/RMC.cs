@@ -880,7 +880,7 @@ namespace GRPBackendWV
                 case 1:
                     reply = new RMCPacketResponseOverlordNewsProtocol_Method1();
                     List<GR5_NewsMessage> news = DBHelper.GetNews(client.PID);
-                    //((RMCPacketResponseOverlordNewsProtocol_Method1)reply).news.AddRange(news);
+                    ((RMCPacketResponseOverlordNewsProtocol_Method1)reply).news.AddRange(news);
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -915,12 +915,6 @@ namespace GRPBackendWV
 
         private static void SendReplyPacket(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client, RMCPacketReply reply, bool useCompression, uint error)
         {
-            QPacket np = new QPacket(p.toBuffer());
-            np.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_NEED_ACK };
-            np.m_oSourceVPort = p.m_oDestinationVPort;
-            np.m_oDestinationVPort = p.m_oSourceVPort;
-            np.m_uiSignature = client.IDsend;
-            np.uiSeqId++;
             MemoryStream m = new MemoryStream();
             if ((ushort)rmc.proto < 0x7F)
             {
@@ -950,10 +944,49 @@ namespace GRPBackendWV
             m = new MemoryStream();
             Helper.WriteU32(m, (uint)buff.Length);
             m.Write(buff, 0, buff.Length);
-            np.payload = m.ToArray();
-            np.payloadSize = (ushort)np.payload.Length;
-            WriteLog(10, "send response packet");
-            Send(udp, np, client);
+            int total = (int)m.Length;
+            QPacket np = new QPacket(p.toBuffer());
+            np.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_NEED_ACK };
+            np.m_oSourceVPort = p.m_oDestinationVPort;
+            np.m_oDestinationVPort = p.m_oSourceVPort;
+            np.m_uiSignature = client.IDsend;
+            if (total < 0x3C3)
+            {
+                np.uiSeqId++;
+                np.payload = m.ToArray();
+                np.payloadSize = (ushort)np.payload.Length;
+                WriteLog(10, "send response packet");
+                Send(udp, np, client);
+            }
+            else
+            {
+                np.flags.Add(QPacket.PACKETFLAG.FLAG_HAS_SIZE);
+                int pos = 0;
+                m.Seek(0, 0);
+                np.m_byPartNumber = 0;
+                while (pos < total)
+                {
+                    np.uiSeqId++;
+                    bool isLast = false;
+                    int len = 0x3C3;
+                    if (len + pos >= total)
+                    {
+                        len = total - pos;
+                        isLast = true;
+                    }
+                    if (!isLast)
+                        np.m_byPartNumber++;
+                    else
+                        np.m_byPartNumber = 0;
+                    buff = new byte[len];
+                    m.Read(buff, 0, len);
+                    np.payload = buff;
+                    np.payloadSize = (ushort)np.payload.Length;
+                    Send(udp, np, client);
+                    pos += len;
+                }
+                WriteLog(10, "send response packets");
+            }
         }
 
         public static void Send(UdpClient udp, QPacket p, ClientInfo client)
