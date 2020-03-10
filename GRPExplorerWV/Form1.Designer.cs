@@ -31,13 +31,14 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openYetibigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportHEXPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tv1 = new System.Windows.Forms.TreeView();
             this.hb1 = new Be.Windows.Forms.HexBox();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportHEXPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.processLoadReporttxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -49,7 +50,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.viewToolStripMenuItem});
+            this.viewToolStripMenuItem,
+            this.processLoadReporttxtToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(580, 24);
@@ -62,15 +64,37 @@
             this.openYetibigToolStripMenuItem,
             this.exportHEXPreviewToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openYetibigToolStripMenuItem
             // 
             this.openYetibigToolStripMenuItem.Name = "openYetibigToolStripMenuItem";
-            this.openYetibigToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.openYetibigToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.openYetibigToolStripMenuItem.Text = "Open yeti.big ...";
             this.openYetibigToolStripMenuItem.Click += new System.EventHandler(this.openYetibigToolStripMenuItem_Click);
+            // 
+            // exportHEXPreviewToolStripMenuItem
+            // 
+            this.exportHEXPreviewToolStripMenuItem.Name = "exportHEXPreviewToolStripMenuItem";
+            this.exportHEXPreviewToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.exportHEXPreviewToolStripMenuItem.Text = "Export HEX Preview...";
+            this.exportHEXPreviewToolStripMenuItem.Click += new System.EventHandler(this.exportHEXPreviewToolStripMenuItem_Click);
+            // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sortTreeToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // sortTreeToolStripMenuItem
+            // 
+            this.sortTreeToolStripMenuItem.Name = "sortTreeToolStripMenuItem";
+            this.sortTreeToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.sortTreeToolStripMenuItem.Text = "Sort Tree";
+            this.sortTreeToolStripMenuItem.Click += new System.EventHandler(this.sortTreeToolStripMenuItem_Click);
             // 
             // progressBar1
             // 
@@ -124,27 +148,12 @@
             this.hb1.UseFixedBytesPerLine = true;
             this.hb1.VScrollBarVisible = true;
             // 
-            // viewToolStripMenuItem
+            // processLoadReporttxtToolStripMenuItem
             // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sortTreeToolStripMenuItem});
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.viewToolStripMenuItem.Text = "View";
-            // 
-            // sortTreeToolStripMenuItem
-            // 
-            this.sortTreeToolStripMenuItem.Name = "sortTreeToolStripMenuItem";
-            this.sortTreeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.sortTreeToolStripMenuItem.Text = "Sort Tree";
-            this.sortTreeToolStripMenuItem.Click += new System.EventHandler(this.sortTreeToolStripMenuItem_Click);
-            // 
-            // exportHEXPreviewToolStripMenuItem
-            // 
-            this.exportHEXPreviewToolStripMenuItem.Name = "exportHEXPreviewToolStripMenuItem";
-            this.exportHEXPreviewToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.exportHEXPreviewToolStripMenuItem.Text = "Export HEX Preview...";
-            this.exportHEXPreviewToolStripMenuItem.Click += new System.EventHandler(this.exportHEXPreviewToolStripMenuItem_Click);
+            this.processLoadReporttxtToolStripMenuItem.Name = "processLoadReporttxtToolStripMenuItem";
+            this.processLoadReporttxtToolStripMenuItem.Size = new System.Drawing.Size(133, 20);
+            this.processLoadReporttxtToolStripMenuItem.Text = "Process LoadReport.txt";
+            this.processLoadReporttxtToolStripMenuItem.Click += new System.EventHandler(this.processLoadReporttxtToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -180,6 +189,7 @@
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sortTreeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportHEXPreviewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem processLoadReporttxtToolStripMenuItem;
     }
 }
 

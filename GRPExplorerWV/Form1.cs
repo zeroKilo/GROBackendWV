@@ -142,5 +142,44 @@ namespace GRPExplorerWV
                 MessageBox.Show("Done.");
             }
         }
+
+        private void processLoadReporttxtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (yeti == null)
+                return;
+            OpenFileDialog d = new OpenFileDialog();
+            d.Filter = "LoadReport.txt|LoadReport.txt";
+            if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                StringBuilder sb = new StringBuilder();
+                string[] lines = File.ReadAllLines(d.FileName);
+                try
+                {
+                    foreach (string line in lines)
+                        if (line.StartsWith("LOAD"))
+                        {
+                            string tmp = line;
+                            string[] parts = line.Split(' ');
+                            string ext = parts[1].Substring(5, 3);
+                            uint key = Convert.ToUInt32(parts[3].Replace("]", ""), 16);
+                            if (parts[3].Length != 9)
+                                tmp = "LOAD type(" + ext + ") [key: " + key.ToString("x8") + "]  " + parts[5];
+                            string info = " //";
+                            foreach (YETIFile.YETIFileEntry file in yeti.files)
+                                if (file.key == key)
+                                {
+                                    info += file.path + "/" + file.name + "." + ext;
+                                    break;
+                                }
+                            sb.AppendLine(tmp + info);
+                        }
+                        else
+                            sb.AppendLine(line);
+                }
+                catch { }
+                File.WriteAllText(d.FileName + ".fixed.txt", sb.ToString());
+                MessageBox.Show("Done.");
+            }
+        }
     }
 }

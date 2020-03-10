@@ -18,10 +18,12 @@ namespace GRPExplorerWV
             public ushort folder;
             public uint flags;
             public uint zip;
+            public uint key;
             public YETIFileEntry(Stream s)
             {
                 offset = ReadU32(s);
-                s.Read(new byte[10], 0, 10);
+                key = ReadU32(s);
+                s.Read(new byte[6], 0, 6);
                 folder = ReadU16(s);
                 ReadU32(s);
                 flags = ReadU32(s);
