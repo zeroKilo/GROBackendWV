@@ -880,7 +880,7 @@ namespace GRPBackendWV
                 case 1:
                     reply = new RMCPacketResponseOverlordNewsProtocol_Method1();
                     List<GR5_NewsMessage> news = DBHelper.GetNews(client.PID);
-                    ((RMCPacketResponseOverlordNewsProtocol_Method1)reply).news.AddRange(news);
+                    //((RMCPacketResponseOverlordNewsProtocol_Method1)reply).news.AddRange(news);
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
