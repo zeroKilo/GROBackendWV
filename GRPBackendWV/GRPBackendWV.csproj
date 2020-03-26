@@ -141,6 +141,7 @@
     <Compile Include="Classes\GR5_Survey.cs" />
     <Compile Include="Classes\GR5_Unlock.cs" />
     <Compile Include="Classes\GR5_UserUnlockResult.cs" />
+    <Compile Include="Classes\GR5_WeaponConfiguration.cs" />
     <Compile Include="Classes\GR5_WeaponXPLevelInfo.cs" />
     <Compile Include="Classes\GR5_Weapon.cs" />
     <Compile Include="Classes\GR5_Component.cs" />

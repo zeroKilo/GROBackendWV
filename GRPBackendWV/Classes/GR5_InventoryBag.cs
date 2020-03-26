@@ -9,8 +9,8 @@ namespace GRPBackendWV
 {
     public class GR5_InventoryBag
     {
-        public uint m_PersonaID;
-        public uint m_InventoryBagType;
+        public uint m_PersonaID = 0x6666;
+        public uint m_InventoryBagType = 0x6666;
         public List<GR5_InventoryBagSlot> m_InventoryBagSlotVector = new List<GR5_InventoryBagSlot>();
         public void toBuffer(Stream s)
         {
