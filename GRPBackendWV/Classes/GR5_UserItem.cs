@@ -9,13 +9,13 @@ namespace GRPBackendWV
 {
     public class GR5_UserItem
     {
-        public uint InventoryID = 0x7777;
-        public uint PersonaID = 0x7777;
-        public byte ItemType = 0x77;
-        public uint ItemID = 0x7777;
+        public uint InventoryID;
+        public uint PersonaID;
+        public byte ItemType;
+        public uint ItemID;
         public uint OasisName = 70870;
-        public float IGCPrice = 3.1415f;
-        public float GRCashPrice = 3.1415f;
+        public float IGCPrice;
+        public float GRCashPrice;
         public void toBuffer(Stream s)
         {
             Helper.WriteU32(s, InventoryID);

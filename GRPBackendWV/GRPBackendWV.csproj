@@ -181,7 +181,7 @@
     <Compile Include="RMC\DBGTelemetry\Response\RMCPacketResponseDBGTelemetry_DBGAMMClientInfo.cs" />
     <Compile Include="RMC\FriendsService\Response\RMCPacketResponseFriendsService_Method5.cs" />
     <Compile Include="RMC\InboxMessageService\Response\RMCPacketResponseInboxMessageService_Method2.cs" />
-    <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_Method6.cs" />
+    <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetUserInventoryByBagType.cs" />
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_Method3.cs" />
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_Method2.cs" />
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits.cs" />

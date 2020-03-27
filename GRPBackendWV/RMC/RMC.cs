@@ -313,7 +313,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 6:
-                    reply = new RMCPacketResponseInventoryService_Method6(p.payload[21], p.payload[17]);
+                    reply = new RMCPacketResponseInventoryService_GetUserInventoryByBagType(p.payload[21], p.payload[17]);
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 16:
