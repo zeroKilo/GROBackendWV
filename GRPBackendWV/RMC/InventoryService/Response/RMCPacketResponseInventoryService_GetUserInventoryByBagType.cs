@@ -26,7 +26,7 @@ namespace GRPBackendWV
                 slot.SlotID = i;
                 b.m_InventoryBagSlotVector.Add(slot);
                 GR5_UserItem item = new GR5_UserItem();
-                item.ItemID = 0x7777;
+                item.ItemID = i;
                 item.InventoryID = i;
                 item.ItemType = (byte)(bagType + offset);
                 item.PersonaID = 0x1234;
