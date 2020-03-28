@@ -15,9 +15,9 @@ namespace GRPBackendWV
 
         public RMCPacketResponseArmorService_GetPersonaArmorTiers()
         {
-            tiers.Add(new GR5_ArmorTier());
-            inserts.Add(new GR5_ArmorInsert());
-            items.Add(new GR5_ArmorItem());
+            tiers = DBHelper.GetArmorTiers();
+            inserts = DBHelper.GetArmorInserts();
+            items = DBHelper.GetArmorItems();
         }
 
         public override byte[] ToBuffer()

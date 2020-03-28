@@ -236,5 +236,74 @@ namespace GRPBackendWV
             command.Dispose();
             return result;
         }
+
+        public static List<GR5_ArmorInsert> GetArmorInserts()
+        {
+            List<GR5_ArmorInsert> result = new List<GR5_ArmorInsert>();
+            SQLiteCommand command = new SQLiteCommand(connection);
+            command.CommandText = "SELECT * FROM armorinserts";
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                GR5_ArmorInsert insert = new GR5_ArmorInsert();
+                insert.Id = Convert.ToUInt32(reader[1].ToString());
+                insert.Type = Convert.ToByte(reader[2].ToString());
+                insert.AssetKey = Convert.ToUInt32(reader[3].ToString());
+                insert.ModifierListID = Convert.ToUInt32(reader[4].ToString());
+                insert.CharacterID = Convert.ToByte(reader[5].ToString());
+                result.Add(insert);
+            }
+            reader.Close();
+            reader.Dispose();
+            command.Dispose();
+            return result;
+        }
+
+        public static List<GR5_ArmorItem> GetArmorItems()
+        {
+            List<GR5_ArmorItem> result = new List<GR5_ArmorItem>();
+            SQLiteCommand command = new SQLiteCommand(connection);
+            command.CommandText = "SELECT * FROM armoritems";
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                GR5_ArmorItem item = new GR5_ArmorItem();
+                item.Id = Convert.ToUInt32(reader[1].ToString());
+                item.Type = Convert.ToByte(reader[2].ToString());
+                item.AssetKey = Convert.ToUInt32(reader[3].ToString());
+                item.ModifierListID = Convert.ToUInt32(reader[4].ToString());
+                item.CharacterID = Convert.ToByte(reader[5].ToString());
+                result.Add(item);
+            }
+            reader.Close();
+            reader.Dispose();
+            command.Dispose();
+            return result;
+        }
+
+        public static List<GR5_ArmorTier> GetArmorTiers()
+        {
+            List<GR5_ArmorTier> result = new List<GR5_ArmorTier>();
+            SQLiteCommand command = new SQLiteCommand(connection);
+            command.CommandText = "SELECT * FROM armortiers";
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                GR5_ArmorTier tier = new GR5_ArmorTier();
+                tier.Id = Convert.ToUInt32(reader[1].ToString());
+                tier.Type = Convert.ToByte(reader[2].ToString());
+                tier.Tier = Convert.ToByte(reader[3].ToString());
+                tier.ClassID = Convert.ToByte(reader[4].ToString());
+                tier.UnlockLevel = Convert.ToByte(reader[5].ToString());
+                tier.InsertSlots = Convert.ToByte(reader[6].ToString());
+                tier.AssetKey = Convert.ToUInt32(reader[7].ToString());
+                tier.ModifierListId = Convert.ToUInt32(reader[8].ToString());
+                result.Add(tier);
+            }
+            reader.Close();
+            reader.Dispose();
+            command.Dispose();
+            return result;
+        }
     }
 }
