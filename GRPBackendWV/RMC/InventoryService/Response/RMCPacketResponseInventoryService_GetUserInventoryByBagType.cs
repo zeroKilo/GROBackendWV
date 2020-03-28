@@ -15,24 +15,8 @@ namespace GRPBackendWV
 
         public RMCPacketResponseInventoryService_GetUserInventoryByBagType(byte bagType, byte offset)
         {
-            GR5_InventoryBag b = new GR5_InventoryBag();
-            b.m_PersonaID = 0x1234;
-            b.m_InventoryBagType = (uint)(bagType + offset);
-            for (uint i = 7; i < 10; i++)
-            {
-                GR5_InventoryBagSlot slot = new GR5_InventoryBagSlot();
-                slot.Durability = 99;
-                slot.InventoryID = i;
-                slot.SlotID = i;
-                b.m_InventoryBagSlotVector.Add(slot);
-                GR5_UserItem item = new GR5_UserItem();
-                item.ItemID = i;
-                item.InventoryID = i;
-                item.ItemType = (byte)(bagType + offset);
-                item.PersonaID = 0x1234;
-                items.Add(item);
-            }
-            bags.Add(b);
+            items = DBHelper.GetUserItems(0x1234, (byte)(bagType + offset));
+            bags = DBHelper.GetInventoryBags(0x1234, (byte)(bagType + offset));
             weaponConfig.Add(new GR5_WeaponConfiguration());
         }
 

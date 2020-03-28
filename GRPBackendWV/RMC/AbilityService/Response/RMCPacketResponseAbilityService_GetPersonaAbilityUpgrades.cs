@@ -16,15 +16,7 @@ namespace GRPBackendWV
 
         public RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades()
         {
-            for (uint i = 7; i < 10; i++)
-            {
-                GR5_Ability a = new GR5_Ability();
-                a.Id = i;
-                a.ModifierListId = i;
-                a.AbilityType = 0x77;
-                a.ClassID = (byte)i;
-                abs.Add(a);
-            }
+            abs = DBHelper.GetAbilities();
             abups.Add(new GR5_AbilityUpgrade());
             pabs.Add(new GR5_PassiveAbility());
         }

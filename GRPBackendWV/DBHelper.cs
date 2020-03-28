@@ -124,6 +124,89 @@ namespace GRPBackendWV
             return result;
         }
 
+        public static List<GR5_InventoryBag> GetInventoryBags(uint pid, byte type)
+        {
+            List<GR5_InventoryBag> result = new List<GR5_InventoryBag>();
+            SQLiteCommand command = new SQLiteCommand(connection);
+            command.CommandText = "SELECT * FROM inventorybags WHERE pid=" + pid + " AND bagtype =" + type;
+            SQLiteDataReader reader = command.ExecuteReader();
+            List<int> bagIDs = new List<int>();
+            while (reader.Read())
+                bagIDs.Add(Convert.ToInt32(reader[0].ToString()));
+            reader.Close();
+            reader.Dispose();
+            command.Dispose();
+            foreach (int bagID in bagIDs)
+            {
+                GR5_InventoryBag bag = new GR5_InventoryBag();
+                bag.m_PersonaID = pid;
+                bag.m_InventoryBagType = type;
+                command = new SQLiteCommand(connection);
+                command.CommandText = "SELECT * FROM inventorybagslots WHERE bagid=" + bagID;
+                reader = command.ExecuteReader();
+                bag.m_InventoryBagSlotVector = new List<GR5_InventoryBagSlot>();
+                while (reader.Read())
+                {
+                    GR5_InventoryBagSlot slot = new GR5_InventoryBagSlot();
+                    slot.InventoryID = Convert.ToUInt32(reader[1].ToString());
+                    slot.SlotID = Convert.ToUInt32(reader[2].ToString());
+                    slot.Durability = Convert.ToUInt32(reader[3].ToString());
+                    bag.m_InventoryBagSlotVector.Add(slot);
+                }
+                reader.Close();
+                reader.Dispose();
+                command.Dispose();
+                result.Add(bag);
+            }
+            return result;
+        }
+
+        public static List<GR5_UserItem> GetUserItems(uint pid, byte type)
+        {
+            List<GR5_UserItem> result = new List<GR5_UserItem>();
+            SQLiteCommand command = new SQLiteCommand(connection);
+            command.CommandText = "SELECT * FROM useritems WHERE pid=" + pid + " AND itemtype =" + type;
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                GR5_UserItem item = new GR5_UserItem();
+                item.InventoryID = Convert.ToUInt32(reader[1].ToString());
+                item.PersonaID = pid;
+                item.ItemType = type;
+                item.ItemID = Convert.ToUInt32(reader[4].ToString());
+                item.OasisName = Convert.ToUInt32(reader[5].ToString());
+                item.IGCPrice = Convert.ToUInt32(reader[6].ToString());
+                item.GRCashPrice = Convert.ToUInt32(reader[7].ToString());
+                result.Add(item);
+            }
+            reader.Close();
+            reader.Dispose();
+            command.Dispose();
+            return result;
+        }
+
+        public static List<GR5_Ability> GetAbilities()
+        {
+            List<GR5_Ability> result = new List<GR5_Ability>();
+            SQLiteCommand command = new SQLiteCommand(connection);
+            command.CommandText = "SELECT * FROM abilities";
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                GR5_Ability a = new GR5_Ability();
+                a.Id = Convert.ToUInt32(reader[1].ToString());
+                a.SlotCount = Convert.ToByte(reader[2].ToString());
+                a.ClassID = Convert.ToByte(reader[3].ToString());
+                a.AbilityType = Convert.ToByte(reader[4].ToString());
+                a.ModifierListId = Convert.ToUInt32(reader[5].ToString());
+                result.Add(a);
+            }
+            reader.Close();
+            reader.Dispose();
+            command.Dispose();
+            return result;
+        }
+
         public static List<GR5_LoadoutKit> GetLoadoutKits(uint pid)
         {
             List<GR5_LoadoutKit> result = new List<GR5_LoadoutKit>();
