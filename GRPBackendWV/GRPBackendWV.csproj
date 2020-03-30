@@ -174,7 +174,7 @@
     <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method2.cs" />
     <Compile Include="RMC\AdvertisementsService\Response\RMCPacketResponseAdvertisementsService_Method2.cs" />
     <Compile Include="RMC\AMMGame\Response\RMCPacktResponseAMM_Method4.cs" />
-    <Compile Include="RMC\ArmorService\Response\RMCPacketResponseArmorService_Method2.cs" />
+    <Compile Include="RMC\ArmorService\Response\RMCPacketResponseArmorService_GetPersonaArmorTiers.cs" />
     <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_Method1.cs" />
     <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_Method5.cs" />
     <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_Method10.cs" />
@@ -186,7 +186,7 @@
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_Method2.cs" />
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits.cs" />
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetAllApplyItems.cs" />
-    <Compile Include="RMC\ArmorService\Response\RMCPacketResponseArmorService_GetPersonaArmorTiers.cs" />
+    <Compile Include="RMC\ArmorService\Response\RMCPacketResponseArmorService_GetTemplateArmor.cs" />
     <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_Method2.cs" />
     <Compile Include="RMC\AdvertisementsService\Response\RMCPacketResponseAdvertisementsService_Method1.cs" />
     <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method9.cs" />

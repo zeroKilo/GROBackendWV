@@ -276,11 +276,11 @@ namespace GRPBackendWV
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseArmorService_GetPersonaArmorTiers();
+                    reply = new RMCPacketResponseArmorService_GetTemplateArmor();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 2:
-                    reply = new RMCPacketResponseArmorService_Method2();
+                    reply = new RMCPacketResponseArmorService_GetPersonaArmorTiers(p.payload);
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:

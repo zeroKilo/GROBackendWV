@@ -9,29 +9,21 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseArmorService_GetPersonaArmorTiers : RMCPacketReply
     {
-        public List<GR5_ArmorTier> tiers = new List<GR5_ArmorTier>();
-        public List<GR5_ArmorInsert> inserts = new List<GR5_ArmorInsert>();
-        public List<GR5_ArmorItem> items = new List<GR5_ArmorItem>();
+        public List<GR5_PersonaArmorTier> list = new List<GR5_PersonaArmorTier>();
 
-        public RMCPacketResponseArmorService_GetPersonaArmorTiers()
+        public RMCPacketResponseArmorService_GetPersonaArmorTiers(byte[] payload)
         {
-            tiers = DBHelper.GetArmorTiers();
-            inserts = DBHelper.GetArmorInserts();
-            items = DBHelper.GetArmorItems();
+            uint tierID = BitConverter.ToUInt32(payload, 0xD);
+            uint pID = BitConverter.ToUInt32(payload, 0x11);
+            list = DBHelper.GetPersonaArmorTiers(pID, tierID);
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)tiers.Count);
-            foreach (GR5_ArmorTier t in tiers)
-                t.toBuffer(m);
-            Helper.WriteU32(m, (uint)inserts.Count);
-            foreach (GR5_ArmorInsert i in inserts)
-                i.toBuffer(m);
-            Helper.WriteU32(m, (uint)items.Count);
-            foreach (GR5_ArmorItem i in items)
-                i.toBuffer(m);
+            Helper.WriteU32(m, (uint)list.Count);
+            foreach (GR5_PersonaArmorTier p in list)
+                p.toBuffer(m);
             return m.ToArray();
         }
 

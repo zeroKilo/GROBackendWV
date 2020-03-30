@@ -305,5 +305,45 @@ namespace GRPBackendWV
             command.Dispose();
             return result;
         }
+
+        public static List<GR5_PersonaArmorTier> GetPersonaArmorTiers(uint pid, uint tier)
+        {
+            List<GR5_PersonaArmorTier> result = new List<GR5_PersonaArmorTier>();
+            SQLiteCommand command = new SQLiteCommand(connection);
+            command.CommandText = "SELECT * FROM personaarmortiers WHERE tierid=" + tier;
+            SQLiteDataReader reader = command.ExecuteReader();
+            List<int> IDs = new List<int>();
+            List<uint> tierIDs = new List<uint>();
+            while (reader.Read())
+            {
+                IDs.Add(Convert.ToInt32(reader[0].ToString()));
+                tierIDs.Add(Convert.ToUInt32(reader[1].ToString()));
+            }
+            reader.Close();
+            reader.Dispose();
+            command.Dispose();
+            for(int i = 0; i < IDs.Count;i++)
+            {
+                GR5_PersonaArmorTier pat = new GR5_PersonaArmorTier();
+                pat.ArmorTierID = tierIDs[i];
+                command = new SQLiteCommand(connection);
+                command.CommandText = "SELECT * FROM armorinsertslots WHERE patid=" + IDs[i];
+                reader = command.ExecuteReader();
+                pat.Inserts = new List<GR5_ArmorInsertSlot>();
+                while (reader.Read())
+                {
+                    GR5_ArmorInsertSlot slot = new GR5_ArmorInsertSlot();
+                    slot.InsertID = Convert.ToUInt32(reader[2].ToString());
+                    slot.Durability = Convert.ToUInt32(reader[3].ToString());
+                    slot.SlotID = Convert.ToByte(reader[4].ToString());
+                    pat.Inserts.Add(slot);
+                }
+                reader.Close();
+                reader.Dispose();
+                command.Dispose();
+                result.Add(pat);
+            }
+            return result;
+        }
     }
 }
