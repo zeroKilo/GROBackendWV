@@ -15,7 +15,7 @@ namespace GRPBackendWV
         {
             uint tierID = BitConverter.ToUInt32(payload, 0xD);
             uint pID = BitConverter.ToUInt32(payload, 0x11);
-            list = DBHelper.GetPersonaArmorTiers(pID, tierID);
+            list = DBHelper.GetPersonaArmorTiers(pID, tierID + 2); //sounds stupid, but works
         }
 
         public override byte[] ToBuffer()

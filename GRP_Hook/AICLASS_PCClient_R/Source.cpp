@@ -84,7 +84,7 @@ void DetourMain()
 	WORD* patchPos = (WORD*)(baseAddressAI + 0x153491);	
 	DWORD old;
 	VirtualProtect(patchPos,2,PAGE_EXECUTE_READWRITE,&old);
-	*patchPos = 0x9090;
+	//*patchPos = 0x9090;
 	Log("Patched position 1\n");
 	DWORD* patchPos2 = (DWORD*)(baseAddressAI + 0x28681);	
 	VirtualProtect(patchPos2,8,PAGE_EXECUTE_READWRITE,&old);
