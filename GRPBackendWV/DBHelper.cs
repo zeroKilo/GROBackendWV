@@ -148,9 +148,9 @@ namespace GRPBackendWV
                 while (reader.Read())
                 {
                     GR5_InventoryBagSlot slot = new GR5_InventoryBagSlot();
-                    slot.InventoryID = Convert.ToUInt32(reader[1].ToString());
-                    slot.SlotID = Convert.ToUInt32(reader[2].ToString());
-                    slot.Durability = Convert.ToUInt32(reader[3].ToString());
+                    slot.InventoryID = Convert.ToUInt32(reader[2].ToString());
+                    slot.SlotID = Convert.ToUInt32(reader[3].ToString());
+                    slot.Durability = Convert.ToUInt32(reader[4].ToString());
                     bag.m_InventoryBagSlotVector.Add(slot);
                 }
                 reader.Close();
