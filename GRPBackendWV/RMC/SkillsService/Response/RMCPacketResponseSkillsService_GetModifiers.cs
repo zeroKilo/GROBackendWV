@@ -13,7 +13,7 @@ namespace GRPBackendWV
 
         public RMCPacketResponseSkillsService_GetModifiers()
         {
-            mods.Add(new GR5_SkillModifier());
+            mods = DBHelper.GetSkillModefiers();
         }
 
         public override byte[] ToBuffer()

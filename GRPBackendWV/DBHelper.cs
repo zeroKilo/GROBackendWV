@@ -345,5 +345,57 @@ namespace GRPBackendWV
             }
             return result;
         }
+
+        public static List<GR5_SkillModifier> GetSkillModefiers()
+        {
+            List<GR5_SkillModifier> result = new List<GR5_SkillModifier>();
+            SQLiteCommand command = new SQLiteCommand(connection);
+            command.CommandText = "SELECT * FROM skillmodifiers";
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                GR5_SkillModifier mod = new GR5_SkillModifier();
+                mod.m_ModifierID = Convert.ToUInt32(reader[1].ToString());
+                mod.m_ModifierType = Convert.ToByte(reader[2].ToString());
+                mod.m_PropertyType = Convert.ToByte(reader[3].ToString());
+                mod.m_MethodType = Convert.ToByte(reader[4].ToString());
+                mod.m_MethodValue = reader[5].ToString();
+                result.Add(mod);
+            }
+            reader.Close();
+            reader.Dispose();
+            command.Dispose();
+            return result;
+        }
+
+        public static List<GR5_SkillModifierList> GetSkillModefierLists()
+        {
+            List<GR5_SkillModifierList> result = new List<GR5_SkillModifierList>();
+            SQLiteCommand command = new SQLiteCommand(connection);
+            command.CommandText = "SELECT * FROM skillmodifierlists";
+            SQLiteDataReader reader = command.ExecuteReader();
+            List<uint> IDs = new List<uint>();
+            while (reader.Read())
+                IDs.Add(Convert.ToUInt32(reader[1].ToString()));
+            reader.Close();
+            reader.Dispose();
+            command.Dispose();
+            foreach (uint id in IDs)
+            {
+                GR5_SkillModifierList list = new GR5_SkillModifierList();
+                list.m_ID = id;
+                list.m_ModifierIDVector = new List<uint>();
+                command = new SQLiteCommand(connection);
+                command.CommandText = "SELECT * FROM skillmodifierlistentries WHERE listid=" + id;
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                    list.m_ModifierIDVector.Add(Convert.ToUInt32(reader[2].ToString()));
+                reader.Close();
+                reader.Dispose();
+                command.Dispose();
+                result.Add(list);
+            }
+            return result;
+        }
     }
 }

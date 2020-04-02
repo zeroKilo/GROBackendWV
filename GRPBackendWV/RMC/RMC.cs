@@ -623,7 +623,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 4:
-                    reply = new RMCPacketResponseSkillsService_Method4();
+                    reply = new RMCPacketResponseSkillsService_GetModifierLists();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 5:

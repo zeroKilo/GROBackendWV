@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseSkillsService_Method4 : RMCPacketReply
+    public class RMCPacketResponseSkillsService_GetModifierLists : RMCPacketReply
     {
         public List<GR5_SkillModifierList> sml = new List<GR5_SkillModifierList>();
 
-        public RMCPacketResponseSkillsService_Method4()
+        public RMCPacketResponseSkillsService_GetModifierLists()
         {
-            sml.Add(new GR5_SkillModifierList());
+            sml = DBHelper.GetSkillModefierLists();
         }
 
         public override byte[] ToBuffer()
@@ -27,7 +27,7 @@ namespace GRPBackendWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponseSkillsService_Method4]";
+            return "[RMCPacketResponseSkillsService_GetModifierLists]";
         }
 
         public override string PayloadToString()

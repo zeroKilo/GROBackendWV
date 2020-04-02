@@ -9,13 +9,13 @@ namespace GRPBackendWV
 {
     public class GR5_SkillModifierList
     {
-        public uint unk1;
-        public List<uint> unk2 = new List<uint>();
+        public uint m_ID;
+        public List<uint> m_ModifierIDVector = new List<uint>();
         public void toBuffer(Stream s)
         {
-            Helper.WriteU32(s, unk1);
-            Helper.WriteU32(s, (uint)unk2.Count);
-            foreach (uint u in unk2)
+            Helper.WriteU32(s, m_ID);
+            Helper.WriteU32(s, (uint)m_ModifierIDVector.Count);
+            foreach (uint u in m_ModifierIDVector)
                 Helper.WriteU32(s, u);
         }
     }
