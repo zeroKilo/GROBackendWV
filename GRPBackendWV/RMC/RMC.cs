@@ -244,6 +244,9 @@ namespace GRPBackendWV
             RMCPacketReply reply;
             switch (rmc.methodID)
             {
+                case 2:
+                    reply = new RMCPacketResponseEmpty();
+                    break;
                 case 0xF:
                     reply = new RMCPacketResponsePlayerProfileService_MethodF();
                     SendReply(udp, p, rmc, client, reply);
@@ -258,10 +261,7 @@ namespace GRPBackendWV
                     break;
                 case 0x12:
                     reply = new RMCPacketResponsePlayerProfileService_LoadCharacterProfiles();
-                    List<GR5_Character> list = DBHelper.GetUserCharacters(client.PID);
-                    ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).Characters.AddRange(list);
-                    ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).PersonaID = client.PID;
-                    ((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply).Name = client.name;
+                    DBHelper.LoadCharacterProfile((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply, client.PID, client.name);
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
