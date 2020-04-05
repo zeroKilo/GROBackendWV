@@ -10,6 +10,11 @@ namespace GRPBackendWV
     public class RMCPacketResponseInventoryService_GetTemplateItems : RMCPacketReply
     {
         public List<GR5_TemplateItem> items = new List<GR5_TemplateItem>();
+
+        public RMCPacketResponseInventoryService_GetTemplateItems()
+        {
+            items = DBHelper.GetTemplateItems();
+        }
         
         public override byte[] ToBuffer()
         {

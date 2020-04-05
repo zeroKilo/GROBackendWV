@@ -11,6 +11,11 @@ namespace GRPBackendWV
     {
         public List<GR5_LoadoutKit> kits = new List<GR5_LoadoutKit>();
 
+        public RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits(ClientInfo client)
+        {
+            kits = DBHelper.GetLoadoutKits(client.PID);
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

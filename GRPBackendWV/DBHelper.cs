@@ -50,27 +50,29 @@ namespace GRPBackendWV
             return result;
         }
 
-        public static void LoadCharacterProfile(RMCPacketResponsePlayerProfileService_LoadCharacterProfiles result, uint pid, string name)
+        public static GR5_Persona GetPersona(uint pid)
         {
-            result.PersonaID = pid;
-            result.Name = name;
-            List<List<string>> results = GetQueryResults("SELECT * FROM characterprofiles WHERE pid=" + pid);
-            List<string> entry = results[0];
-            result.PortraitID = Convert.ToUInt32(entry[3]);
-            result.DecoratorID = Convert.ToUInt32(entry[4]);
-            result.AvatarBackgroundColor = Convert.ToUInt32(entry[5]);
-            result.GRCash = Convert.ToUInt32(entry[6]);
-            result.IGC = Convert.ToUInt32(entry[7]);
-            result.AchievementPoints = Convert.ToUInt32(entry[8]);
-            result.LastUsedCharacterID = Convert.ToByte(entry[9]);
-            result.MaxInventorySlot = Convert.ToUInt32(entry[10]);
-            result.MaxScrapYardSlot = Convert.ToUInt32(entry[11]);
-            result.GhostRank = Convert.ToUInt32(entry[12]);
-            result.Flag = Convert.ToUInt32(entry[13]);
-            result.Characters = GetCharacters(pid, Convert.ToUInt32(entry[0]));
+            List<List<string>> results = GetQueryResults("SELECT * FROM personas WHERE pid=" + pid);
+            foreach (List<string> entry in results)
+            {
+                GR5_Persona p = new GR5_Persona();
+                p.PortraitID = Convert.ToUInt32(entry[3]);
+                p.DecoratorID = Convert.ToUInt32(entry[4]);
+                p.AvatarBackgroundColor = Convert.ToUInt32(entry[5]);
+                p.GRCash = Convert.ToUInt32(entry[6]);
+                p.IGC = Convert.ToUInt32(entry[7]);
+                p.AchievementPoints = Convert.ToUInt32(entry[8]);
+                p.LastUsedCharacterID = Convert.ToByte(entry[9]);
+                p.MaxInventorySlot = Convert.ToUInt32(entry[10]);
+                p.MaxScrapYardSlot = Convert.ToUInt32(entry[11]);
+                p.GhostRank = Convert.ToUInt32(entry[12]);
+                p.Flag = Convert.ToUInt32(entry[13]);
+                return p;
+            }
+            return null;
         }
 
-        public static List<GR5_Character> GetCharacters(uint pid, uint cpid)
+        public static List<GR5_Character> GetCharacters(uint pid)
         {
             List<GR5_Character> result = new List<GR5_Character>();
             List<List<string>> results = GetQueryResults("SELECT * FROM characters WHERE pid=" + pid);
@@ -100,17 +102,17 @@ namespace GRPBackendWV
             {
                 GR5_NewsMessage message = new GR5_NewsMessage();
                 message.header = new GR5_NewsHeader();
-                message.header.m_ID = Convert.ToUInt32(entry[0]);
+                message.header.m_ID = Convert.ToUInt32(entry[1]);
                 message.header.m_recipientID = pid;
-                message.header.m_recipientType = Convert.ToUInt32(entry[1]);
-                message.header.m_publisherPID = Convert.ToUInt32(entry[2]);
-                message.header.m_publisherName = entry[3];
+                message.header.m_recipientType = Convert.ToUInt32(entry[2]);
+                message.header.m_publisherPID = Convert.ToUInt32(entry[3]);
+                message.header.m_publisherName = entry[4];
                 message.header.m_displayTime = (ulong)DateTime.UtcNow.Ticks;
                 message.header.m_publicationTime = (ulong)DateTime.UtcNow.Ticks;
                 message.header.m_expirationTime = (ulong)DateTime.UtcNow.AddDays(5).Ticks;
-                message.header.m_title = entry[4];
-                message.header.m_link = entry[5];
-                message.m_body = entry[6];
+                message.header.m_title = entry[5];
+                message.header.m_link = entry[6];
+                message.m_body = entry[7];
                 result.Add(message);
             }
             return result;
@@ -123,20 +125,20 @@ namespace GRPBackendWV
             foreach (List<string> entry in results)
             {
                 GR5_TemplateItem item = new GR5_TemplateItem();
-                item.m_ItemID = Convert.ToUInt32(entry[0]);
-                item.m_ItemType = Convert.ToByte(entry[1]);
-                item.m_ItemName = entry[2];
-                item.m_DurabilityType = Convert.ToByte(entry[3]);
-                item.m_IsInInventory = entry[4] == "True";
-                item.m_IsSellable = entry[5] == "True";
-                item.m_IsLootable = entry[6] == "True";
-                item.m_IsRewardable = entry[7] == "True";
-                item.m_IsUnlockable = entry[8] == "True";
-                item.m_MaxItemInSlot = Convert.ToUInt32(entry[9]);
-                item.m_GearScore = Convert.ToUInt32(entry[10]);
-                item.m_IGCValue = Convert.ToUInt32(entry[11]) / 100f;
-                item.m_OasisName = Convert.ToUInt32(entry[12]);
-                item.m_OasisDesc = Convert.ToUInt32(entry[13]);
+                item.m_ItemID = Convert.ToUInt32(entry[1]);
+                item.m_ItemType = Convert.ToByte(entry[2]);
+                item.m_ItemName = entry[3];
+                item.m_DurabilityType = Convert.ToByte(entry[4]);
+                item.m_IsInInventory = entry[5] == "True";
+                item.m_IsSellable = entry[6] == "True";
+                item.m_IsLootable = entry[7] == "True";
+                item.m_IsRewardable = entry[8] == "True";
+                item.m_IsUnlockable = entry[9] == "True";
+                item.m_MaxItemInSlot = Convert.ToUInt32(entry[10]);
+                item.m_GearScore = Convert.ToUInt32(entry[11]);
+                item.m_IGCValue = Convert.ToUInt32(entry[12]) / 100f;
+                item.m_OasisName = Convert.ToUInt32(entry[13]);
+                item.m_OasisDesc = Convert.ToUInt32(entry[14]);
                 result.Add(item);
             }
             return result;
@@ -212,19 +214,19 @@ namespace GRPBackendWV
             foreach (List<string> entry in results)
             {
                 GR5_LoadoutKit kit = new GR5_LoadoutKit();
-                kit.m_LoadoutKitID = Convert.ToUInt32(entry[1]);
-                kit.m_ClassID = Convert.ToUInt32(entry[2]);
-                kit.m_Weapon1ID = Convert.ToUInt32(entry[3]);
-                kit.m_Weapon2ID = Convert.ToUInt32(entry[4]);
-                kit.m_Weapon3ID = Convert.ToUInt32(entry[5]);
-                kit.m_Item1ID = Convert.ToUInt32(entry[6]);
-                kit.m_Item2ID = Convert.ToUInt32(entry[7]);
-                kit.m_Item3ID = Convert.ToUInt32(entry[8]);
-                kit.m_PowerID = Convert.ToUInt32(entry[9]);
-                kit.m_HelmetID = Convert.ToUInt32(entry[10]);
-                kit.m_ArmorID = Convert.ToUInt32(entry[11]);
-                kit.m_OasisDesc = Convert.ToUInt32(entry[12]);
-                kit.m_Flag = Convert.ToUInt32(entry[13]);
+                kit.m_LoadoutKitID = Convert.ToUInt32(entry[2]);
+                kit.m_ClassID = Convert.ToUInt32(entry[3]);
+                kit.m_Weapon1ID = Convert.ToUInt32(entry[4]);
+                kit.m_Weapon2ID = Convert.ToUInt32(entry[5]);
+                kit.m_Weapon3ID = Convert.ToUInt32(entry[6]);
+                kit.m_Item1ID = Convert.ToUInt32(entry[7]);
+                kit.m_Item2ID = Convert.ToUInt32(entry[8]);
+                kit.m_Item3ID = Convert.ToUInt32(entry[9]);
+                kit.m_PowerID = Convert.ToUInt32(entry[10]);
+                kit.m_HelmetID = Convert.ToUInt32(entry[11]);
+                kit.m_ArmorID = Convert.ToUInt32(entry[12]);
+                kit.m_OasisDesc = Convert.ToUInt32(entry[13]);
+                kit.m_Flag = Convert.ToUInt32(entry[14]);
                 result.Add(kit);
             }
             return result;

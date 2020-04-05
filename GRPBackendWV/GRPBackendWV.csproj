@@ -59,6 +59,7 @@
     <Compile Include="Classes\GR5_LeaderboardRow.cs" />
     <Compile Include="Classes\GR5_NewsHeader.cs" />
     <Compile Include="Classes\GR5_NewsMessage.cs" />
+    <Compile Include="Classes\GR5_Persona.cs" />
     <Compile Include="Classes\GR5_PlayerAchievement.cs" />
     <Compile Include="Classes\GR5_PlayerAchievementGroup.cs" />
     <Compile Include="Classes\GR5_PlayerStatisticsBlock.cs" />

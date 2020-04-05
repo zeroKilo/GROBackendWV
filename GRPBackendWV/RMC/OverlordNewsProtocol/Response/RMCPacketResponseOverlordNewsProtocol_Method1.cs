@@ -9,8 +9,13 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseOverlordNewsProtocol_Method1 : RMCPacketReply
     {
-
         public List<GR5_NewsMessage> news = new List<GR5_NewsMessage>();
+
+        public RMCPacketResponseOverlordNewsProtocol_Method1(ClientInfo client)
+        {
+            news = DBHelper.GetNews(client.PID);
+        }
+
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();

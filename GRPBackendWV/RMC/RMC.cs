@@ -260,8 +260,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 0x12:
-                    reply = new RMCPacketResponsePlayerProfileService_LoadCharacterProfiles();
-                    DBHelper.LoadCharacterProfile((RMCPacketResponsePlayerProfileService_LoadCharacterProfiles)reply, client.PID, client.name);
+                    reply = new RMCPacketResponsePlayerProfileService_LoadCharacterProfiles(client);
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -296,8 +295,6 @@ namespace GRPBackendWV
             {
                 case 1:
                     reply = new RMCPacketResponseInventoryService_GetTemplateItems();
-                    List<GR5_TemplateItem> items = DBHelper.GetTemplateItems();
-                    ((RMCPacketResponseInventoryService_GetTemplateItems)reply).items.AddRange(items);
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 2:
@@ -317,9 +314,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 16:
-                    reply = new RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits();
-                    List<GR5_LoadoutKit> kits = DBHelper.GetLoadoutKits(client.PID);
-                    ((RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits)reply).kits.AddRange(kits);
+                    reply = new RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits(client);
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
@@ -878,9 +873,7 @@ namespace GRPBackendWV
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseOverlordNewsProtocol_Method1();
-                    List<GR5_NewsMessage> news = DBHelper.GetNews(client.PID);
-                    //((RMCPacketResponseOverlordNewsProtocol_Method1)reply).news.AddRange(news);
+                    reply = new RMCPacketResponseOverlordNewsProtocol_Method1(client);
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:
