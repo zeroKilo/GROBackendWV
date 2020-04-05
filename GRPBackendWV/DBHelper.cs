@@ -50,12 +50,14 @@ namespace GRPBackendWV
             return result;
         }
 
-        public static GR5_Persona GetPersona(uint pid)
+        public static GR5_Persona GetPersona(ClientInfo client)
         {
-            List<List<string>> results = GetQueryResults("SELECT * FROM personas WHERE pid=" + pid);
+            List<List<string>> results = GetQueryResults("SELECT * FROM personas WHERE pid=" + client.PID);
             foreach (List<string> entry in results)
             {
                 GR5_Persona p = new GR5_Persona();
+                p.PersonaID = client.PID;
+                p.Name = client.name;
                 p.PortraitID = Convert.ToUInt32(entry[3]);
                 p.DecoratorID = Convert.ToUInt32(entry[4]);
                 p.AvatarBackgroundColor = Convert.ToUInt32(entry[5]);

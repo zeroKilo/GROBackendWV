@@ -14,7 +14,7 @@ namespace GRPBackendWV
 
         public RMCPacketResponsePlayerProfileService_LoadCharacterProfiles(ClientInfo client)
         {
-            persona = DBHelper.GetPersona(client.PID);
+            persona = DBHelper.GetPersona(client);
             characters = DBHelper.GetCharacters(client.PID);
         }
 
