@@ -60,8 +60,8 @@ void DetourEventHandlerFunctions();
 void DetourMain()
 {
 	char buffer[512];
-	ClearFile(logFilename);
 	OpenConsole();
+	ClearFile(logFilename);
 	Log("GRP Hook made by Warranty Voider\n");
 	baseAddressAI = (DWORD)GetModuleHandleA("AICLASS_PCClient_R_org.dll");
 	if(!baseAddressAI)

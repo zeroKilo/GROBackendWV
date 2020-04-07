@@ -77,6 +77,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="defines.h" />
     <ClInclude Include="detours.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="HookedFunctions.h" />

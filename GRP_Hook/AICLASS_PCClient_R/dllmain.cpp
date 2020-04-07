@@ -5,15 +5,19 @@
 #include "Header.h"
 #pragma pack(1)
 
-
+LPCWSTR dllName = _T(".\\AICLASS_PCClient_R_org.dll");
 
 extern "C" BOOL WINAPI DllMain(HINSTANCE hInst,DWORD reason,LPVOID)
 {
 	static HINSTANCE hL;
 	if (reason == DLL_PROCESS_ATTACH)
 	{
-		hL = LoadLibrary(_T(".\\AICLASS_PCClient_R_org.dll"));
-		if (!hL) return false;
+		hL = GetModuleHandle(dllName);
+		if(!hL)
+		{
+			hL = LoadLibrary(dllName);
+			if (!hL) return false;
+		}
 		if(!FileExists("firstrun"))
 			ClearFile("firstrun");
 		else
@@ -22,8 +26,6 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hInst,DWORD reason,LPVOID)
 			DetourMain();
 		}
 	}
-	if (reason == DLL_PROCESS_DETACH)
-		FreeLibrary(hL);
 	return TRUE;
 }
 

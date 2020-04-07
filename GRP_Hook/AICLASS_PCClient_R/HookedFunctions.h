@@ -1,4 +1,5 @@
 #include "Header.h"
+#include "defines.h";
 char buffer[1024];
 char buffer2[1024];
 char buffer3[1024];
@@ -106,7 +107,7 @@ DWORD __fastcall BusEventHandler(void* THIS, void* EDX, AIEvent* e)
 {	
 	GetCallerAndHandler();
 	sprintf(buffer2,"AIDLL::%s::OnBusEvent\0", handlerName[handler]);
-	sprintf(buffer,"%s -> %-48s (0x%08X, 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", getCallerString(), buffer2, e->modelID, e->eventID, e->param1, e->param2, e->unk1);
+	sprintf(buffer,"%s -> %-48s (\"%s\", 0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", getCallerString(), buffer2, modelNames[e->modelID], e->eventID, e->param1, e->param2, e->unk1);
 	Log(buffer);
 	return ((BUSEVENTHANDLER)orgBusEventHandler[handler])(THIS, EDX, e);
 }
@@ -161,11 +162,12 @@ void AddHandler(DWORD* pVMT, char* name)
 	*(DWORD*)(&trampolineStub[1]) = nHandler;
 	*(DWORD*)(&trampolineStub[6]) = (DWORD)&EventHandlerW;
 	pVMT[7] = (DWORD)trampolineStub;
-	sprintf(buffer,"Replaced handlers OnBusEvent(0x%08X), OnEvent(0x%08X), OnEventW(0x%08X) for %s\n\0", 
+	sprintf(buffer,"Replaced handlers OnBusEvent(0x%08X), OnEvent(0x%08X), OnEventW(0x%08X) for %s (pVMT=0x%08X)\n\0", 
 		orgBusEventHandler[nHandler] - baseAddressAI + 0x10000000, 
 		orgEventHandler[nHandler] - baseAddressAI + 0x10000000, 
 		orgEventHandlerW[nHandler] - baseAddressAI + 0x10000000, 
-		name);
+		name,
+		pVMT);
 	Log(buffer);
 	nHandler++;
 }
@@ -289,7 +291,7 @@ void __cdecl FIR_GetASDataManager()
 DWORD __fastcall UI_DispatchEvent(EventCaller* THIS, void* EDX, int a1, int a2, int a3)
 {	
 	GetCaller3();
-	sprintf(buffer,"%s -> AIDLL::UI_DispatchEvent                          (0x%08X, 0x%08X, 0x%08X, 0x%08X)\n\0", getCallerString(), THIS->modelID, a1, a2, a3);
+	sprintf(buffer,"%s -> AIDLL::UI_DispatchEvent                          (\"%s\", 0x%08X, 0x%08X, 0x%08X)\n\0", getCallerString(), modelNames[THIS->modelID], a1, a2, a3);
 	Log(buffer);
 	return org_UI_DispatchEvent(THIS, EDX, a1, a2, a3);
 }
