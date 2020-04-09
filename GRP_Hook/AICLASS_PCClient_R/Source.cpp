@@ -86,18 +86,6 @@ void DetourMain()
 	VirtualProtect(patchPos,2,PAGE_EXECUTE_READWRITE,&old);
 	*patchPos = 0x9090;
 	Log("Patched position 1\n");
-	DWORD* patchPos2 = (DWORD*)(baseAddressAI + 0x28681);	
-	VirtualProtect(patchPos2,8,PAGE_EXECUTE_READWRITE,&old);
-	*patchPos2 = 0x01B8;
-	patchPos2++;
-	*patchPos2 = 0x4C200;
-	Log("Patched position 2\n");
-	patchPos2 = (DWORD*)(baseAddressAI + 0x2970A);	
-	VirtualProtect(patchPos2,6,PAGE_EXECUTE_READWRITE,&old);
-	*patchPos2 = 0x90909090;
-	patchPos2++;
-	*((WORD*)patchPos2) = 0x9090;
-	Log("Patched position 3\n");
 }
 
 void DetourFireFunctions()
