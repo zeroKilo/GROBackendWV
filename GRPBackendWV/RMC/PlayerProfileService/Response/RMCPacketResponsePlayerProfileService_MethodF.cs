@@ -13,7 +13,7 @@ namespace GRPBackendWV
 
         public RMCPacketResponsePlayerProfileService_MethodF()
         {
-            list.Add(new GR5_FaceSkinTone());
+            list = DBHelper.GetFaceSkinTones();
         }
 
         public override byte[] ToBuffer()

@@ -354,5 +354,21 @@ namespace GRPBackendWV
             }
             return result;
         }
+
+        public static List<GR5_FaceSkinTone> GetFaceSkinTones()
+        {
+            List<GR5_FaceSkinTone> result = new List<GR5_FaceSkinTone>();
+            List<List<string>> results = GetQueryResults("SELECT * FROM faceskintones");
+            foreach (List<string> entry in results)
+            {
+                GR5_FaceSkinTone mod = new GR5_FaceSkinTone();
+                mod.id = Convert.ToUInt32(entry[1]);
+                mod.objectType= Convert.ToByte(entry[2]);
+                mod.objectKey = Convert.ToUInt32(entry[3]);
+                mod.oasisName = Convert.ToUInt32(entry[4]);
+                result.Add(mod);
+            }
+            return result;
+        }
     }
 }
