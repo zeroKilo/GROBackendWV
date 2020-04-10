@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DareDebuggerWV", "DareDebug
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AICLASS_PCClient_R", "GRP_Hook\AICLASS_PCClient_R\AICLASS_PCClient_R.vcxproj", "{1B7FE665-385D-4ED9-A0FD-280F49D30B0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTBReaderWV", "DTBReaderWV\DTBReaderWV.csproj", "{26A73BFE-AF61-4EFD-8007-ED4253BF2AEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,16 @@ Global
 		{1B7FE665-385D-4ED9-A0FD-280F49D30B0C}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{1B7FE665-385D-4ED9-A0FD-280F49D30B0C}.Release|Win32.ActiveCfg = Release|Win32
 		{1B7FE665-385D-4ED9-A0FD-280F49D30B0C}.Release|Win32.Build.0 = Release|Win32
+		{26A73BFE-AF61-4EFD-8007-ED4253BF2AEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26A73BFE-AF61-4EFD-8007-ED4253BF2AEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26A73BFE-AF61-4EFD-8007-ED4253BF2AEA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{26A73BFE-AF61-4EFD-8007-ED4253BF2AEA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{26A73BFE-AF61-4EFD-8007-ED4253BF2AEA}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{26A73BFE-AF61-4EFD-8007-ED4253BF2AEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26A73BFE-AF61-4EFD-8007-ED4253BF2AEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26A73BFE-AF61-4EFD-8007-ED4253BF2AEA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{26A73BFE-AF61-4EFD-8007-ED4253BF2AEA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{26A73BFE-AF61-4EFD-8007-ED4253BF2AEA}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
