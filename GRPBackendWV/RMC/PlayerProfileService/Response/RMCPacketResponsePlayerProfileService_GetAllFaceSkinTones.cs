@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponsePlayerProfileService_MethodF : RMCPacketReply
+    public class RMCPacketResponsePlayerProfileService_GetAllFaceSkinTones : RMCPacketReply
     {
         public List<GR5_FaceSkinTone> list = new List<GR5_FaceSkinTone>();
 
-        public RMCPacketResponsePlayerProfileService_MethodF()
+        public RMCPacketResponsePlayerProfileService_GetAllFaceSkinTones()
         {
             list = DBHelper.GetFaceSkinTones();
         }
@@ -27,7 +27,7 @@ namespace GRPBackendWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponsePlayerProfileService_MethodF]";
+            return "[RMCPacketResponsePlayerProfileService_GetAllFaceSkinTones]";
         }
 
         public override string PayloadToString()

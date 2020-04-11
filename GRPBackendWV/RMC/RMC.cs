@@ -248,7 +248,7 @@ namespace GRPBackendWV
                     reply = new RMCPacketResponseEmpty();
                     break;
                 case 0xF:
-                    reply = new RMCPacketResponsePlayerProfileService_MethodF();
+                    reply = new RMCPacketResponsePlayerProfileService_GetAllFaceSkinTones();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 0x10:
