@@ -15,6 +15,7 @@ to make the game use this backend make sure following lines are set in yeti.ini
 - DTBReaderWV : converts .dtb files to .csv
 - GRPBackendWV : experimental backend for GRP
 - GRPExplorerWV : tool to browse the yeti.big file for game content
+- GRPMemoryToolWV : tool to browse various stuctures like lists and trees in memory
 - GRP_Hook : proxy dll for easy code injection, hooks currently fire script event functions
 
 [![Alt text](https://img.youtube.com/vi/7Gix54amKxk/0.jpg)](https://www.youtube.com/watch?v=7Gix54amKxk)
