@@ -28,11 +28,7 @@ namespace GRPBackendWV
 
         public RMCPacketResponseWeaponService_GetTemplateWeaponMaps()
         {
-            for (int i = 0; i < 5; i++)
-            {
-                weapons.Add(new GR5_Weapon());
-                weapons[i]._listIndex = 4 - (uint)i;
-            }
+            weapons = DBHelper.GetWeapons();
             unk1.Add(new Unknown1());
             unk2.Add(new Unknown1());
             components.Add(new GR5_Component());

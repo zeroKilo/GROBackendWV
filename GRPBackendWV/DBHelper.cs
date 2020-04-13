@@ -370,5 +370,23 @@ namespace GRPBackendWV
             }
             return result;
         }
+
+        public static List<GR5_Weapon> GetWeapons()
+        {
+            List<GR5_Weapon> result = new List<GR5_Weapon>();
+            List<List<string>> results = GetQueryResults("SELECT * FROM weapons");
+            foreach (List<string> entry in results)
+            {
+                GR5_Weapon w = new GR5_Weapon();
+                w._listIndex = Convert.ToUInt32(entry[1]);
+                w.weaponID = Convert.ToUInt32(entry[2]);
+                w.classTypeID = Convert.ToUInt32(entry[3]);
+                w.weaponType= Convert.ToUInt32(entry[4]);
+                w.equippableClassTypeID = Convert.ToUInt32(entry[5]);
+                w.flags = Convert.ToUInt32(entry[6]);
+                result.Add(w);
+            }
+            return result;
+        }
     }
 }
