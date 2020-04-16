@@ -388,5 +388,23 @@ namespace GRPBackendWV
             }
             return result;
         }
+
+        public static List<GR5_Component> GetComponents()
+        {
+            List<GR5_Component> result = new List<GR5_Component>();
+            List<List<string>> results = GetQueryResults("SELECT * FROM components");
+            foreach (List<string> entry in results)
+            {
+                GR5_Component c = new GR5_Component();
+                c._listIndex = Convert.ToUInt32(entry[1]);
+                c.componentID = Convert.ToUInt32(entry[2]);
+                c.componentKey = Convert.ToUInt32(entry[3]);
+                c.componentType = Convert.ToByte(entry[4]);
+                c.boneStructure = Convert.ToUInt32(entry[5]);
+                c.modifierListID = Convert.ToUInt32(entry[6]);
+                result.Add(c);
+            }
+            return result;
+        }
     }
 }

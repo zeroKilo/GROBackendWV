@@ -10,7 +10,7 @@ namespace GRPBackendWV
     public class GR5_Component
     {
         public uint _listIndex;
-        public uint componentID = 0x111;
+        public uint componentID = 0x999;
         public uint componentKey = 0x112;
         public byte componentType = 0x77;
         public uint boneStructure = 0x114;

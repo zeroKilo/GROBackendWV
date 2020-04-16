@@ -31,7 +31,7 @@ namespace GRPBackendWV
             weapons = DBHelper.GetWeapons();
             unk1.Add(new Unknown1());
             unk2.Add(new Unknown1());
-            components.Add(new GR5_Component());
+            components = DBHelper.GetComponents();
         }
 
         public override byte[] ToBuffer()
