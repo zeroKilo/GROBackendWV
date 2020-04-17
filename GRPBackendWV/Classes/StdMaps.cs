@@ -13,6 +13,7 @@ namespace GRPBackendWV
         public List<uint> vector = new List<uint>();
         public void toBuffer(Stream s)
         {
+            Helper.WriteU32(s, key);
             Helper.WriteU32(s, (uint)vector.Count);
             foreach (uint u in vector)
                 Helper.WriteU32(s, u);
@@ -25,6 +26,7 @@ namespace GRPBackendWV
         public List<GR5_Weapon> vector = new List<GR5_Weapon>();
         public void toBuffer(Stream s)
         {
+            Helper.WriteU32(s, key);
             Helper.WriteU32(s, (uint)vector.Count);
             foreach (GR5_Weapon w in vector)
                 w.toBuffer(s);
@@ -37,6 +39,7 @@ namespace GRPBackendWV
         public List<GR5_Component> vector = new List<GR5_Component>();
         public void toBuffer(Stream s)
         {
+            Helper.WriteU32(s, key);
             Helper.WriteU32(s, (uint)vector.Count);
             foreach (GR5_Component c in vector)
                 c.toBuffer(s);
