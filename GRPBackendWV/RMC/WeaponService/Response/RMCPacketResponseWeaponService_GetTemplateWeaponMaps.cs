@@ -9,58 +9,34 @@ namespace GRPBackendWV
 {
     public class RMCPacketResponseWeaponService_GetTemplateWeaponMaps : RMCPacketReply
     {
-        public class Unknown1
-        {
-            public uint _listIndex;
-            public List<uint> unk1 = new List<uint>();
-            public void toBuffer(Stream s)
-            {
-                Helper.WriteU32(s, (uint)unk1.Count);
-                foreach (uint u in unk1)
-                    Helper.WriteU32(s, u);
-            }
-        }
-
-        public List<GR5_Weapon> weapons = new List<GR5_Weapon>();
-        public List<Unknown1> unk1 = new List<Unknown1>();
-        public List<Unknown1> unk2 = new List<Unknown1>();
-        public List<GR5_Component> components = new List<GR5_Component>();
+        public List<Map_U32_VectorGR5_Weapon> TemplateWeaponList = new List<Map_U32_VectorGR5_Weapon>();
+        public List<Map_U32_VectorU32> WeaponCompatibilityBridge = new List<Map_U32_VectorU32>();
+        public List<Map_U32_VectorU32> TemplateComponentLists = new List<Map_U32_VectorU32>();
+        public List<Map_U32_VectorGR5_Component> Components = new List<Map_U32_VectorGR5_Component>();
 
         public RMCPacketResponseWeaponService_GetTemplateWeaponMaps()
         {
-            weapons = DBHelper.GetWeapons();
-            unk1.Add(new Unknown1());
-            unk2.Add(new Unknown1());
-            components = DBHelper.GetComponents();
+            TemplateWeaponList = DBHelper.GetTemplateWeaponList();
+            WeaponCompatibilityBridge = DBHelper.GetWeaponCompatibilityBridge();
+            TemplateComponentLists = DBHelper.GetTemplateComponentLists();
+            Components = DBHelper.GetComponents();
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)weapons.Count);
-            foreach (GR5_Weapon w in weapons)
-            {
-                Helper.WriteU32(m, w._listIndex);
+            Helper.WriteU32(m, (uint)TemplateWeaponList.Count);
+            foreach (Map_U32_VectorGR5_Weapon w in TemplateWeaponList)
                 w.toBuffer(m);
-            }
-            Helper.WriteU32(m, (uint)unk1.Count);
-            foreach (Unknown1 u in unk1)
-            {
-                Helper.WriteU32(m, u._listIndex);
+            Helper.WriteU32(m, (uint)WeaponCompatibilityBridge.Count);
+            foreach (Map_U32_VectorU32 u in WeaponCompatibilityBridge)
                 u.toBuffer(m);
-            }
-            Helper.WriteU32(m, (uint)unk2.Count);
-            foreach (Unknown1 u in unk2)
-            {
-                Helper.WriteU32(m, u._listIndex);
+            Helper.WriteU32(m, (uint)TemplateComponentLists.Count);
+            foreach (Map_U32_VectorU32 u in TemplateComponentLists)
                 u.toBuffer(m);
-            }
-            Helper.WriteU32(m, (uint)components.Count);
-            foreach (GR5_Component c in components)
-            {
-                Helper.WriteU32(m, c._listIndex);
+            Helper.WriteU32(m, (uint)Components.Count);
+            foreach (Map_U32_VectorGR5_Component c in Components)
                 c.toBuffer(m);
-            }
             return m.ToArray();
         }
 

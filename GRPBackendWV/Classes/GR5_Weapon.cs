@@ -9,7 +9,6 @@ namespace GRPBackendWV
 {
     public class GR5_Weapon
     {
-        public uint _listIndex;
         public uint weaponID = 0x112;
         public uint classTypeID = 0x113;
         public uint weaponType = 0x114;

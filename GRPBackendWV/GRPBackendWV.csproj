@@ -146,6 +146,7 @@
     <Compile Include="Classes\GR5_WeaponXPLevelInfo.cs" />
     <Compile Include="Classes\GR5_Weapon.cs" />
     <Compile Include="Classes\GR5_Component.cs" />
+    <Compile Include="Classes\StdMaps.cs" />
     <Compile Include="ClientInfo.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="DecryptTool.cs">
