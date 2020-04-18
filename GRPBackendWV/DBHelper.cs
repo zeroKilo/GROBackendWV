@@ -371,66 +371,40 @@ namespace GRPBackendWV
             return result;
         }
 
-        public static List<Map_U32_VectorGR5_Weapon> GetTemplateWeaponList()
+        public static List<Map_U32_GR5_Weapon> GetTemplateWeaponList()
         {
-            List<Map_U32_VectorGR5_Weapon> result = new List<Map_U32_VectorGR5_Weapon>();
+            List<Map_U32_GR5_Weapon> result = new List<Map_U32_GR5_Weapon>();
             List<List<string>> results = GetQueryResults("SELECT * FROM weapons");
             foreach (List<string> entry in results)
             {
-                GR5_Weapon w = new GR5_Weapon();
-                uint key = Convert.ToUInt32(entry[1]);
-                w.weaponID = Convert.ToUInt32(entry[2]);
-                w.classTypeID = Convert.ToUInt32(entry[3]);
-                w.weaponType= Convert.ToUInt32(entry[4]);
-                w.equippableClassTypeID = Convert.ToUInt32(entry[5]);
-                w.flags = Convert.ToUInt32(entry[6]);
-                bool found = false;
-                foreach(Map_U32_VectorGR5_Weapon pair in result)
-                    if (pair.key == key)
-                    {
-                        found = true;
-                        pair.vector.Add(w);
-                        break;
-                    }
-                if (!found)
-                {
-                    Map_U32_VectorGR5_Weapon pair = new Map_U32_VectorGR5_Weapon();
-                    pair.key = key;
-                    pair.vector.Add(w);
-                    result.Add(pair);
-                }
+                Map_U32_GR5_Weapon pair = new Map_U32_GR5_Weapon();
+                pair.key = Convert.ToUInt32(entry[1]);
+                pair.weapon = new GR5_Weapon();
+                pair.weapon.weaponID = Convert.ToUInt32(entry[2]);
+                pair.weapon.classTypeID = Convert.ToUInt32(entry[3]);
+                pair.weapon.weaponType = Convert.ToUInt32(entry[4]);
+                pair.weapon.equippableClassTypeID = Convert.ToUInt32(entry[5]);
+                pair.weapon.flags = Convert.ToUInt32(entry[6]);
+                result.Add(pair);
             }
             return result;
         }
 
-        public static List<Map_U32_VectorGR5_Component> GetComponents()
+        public static List<Map_U32_GR5_Component> GetComponents()
         {
-            List<Map_U32_VectorGR5_Component> result = new List<Map_U32_VectorGR5_Component>();
+            List<Map_U32_GR5_Component> result = new List<Map_U32_GR5_Component>();
             List<List<string>> results = GetQueryResults("SELECT * FROM components");
             foreach (List<string> entry in results)
             {
-                GR5_Component c = new GR5_Component();
-                uint key = Convert.ToUInt32(entry[1]);
-                c.componentID = Convert.ToUInt32(entry[2]);
-                c.componentKey = Convert.ToUInt32(entry[3]);
-                c.componentType = Convert.ToByte(entry[4]);
-                c.boneStructure = Convert.ToUInt32(entry[5]);
-                c.modifierListID = Convert.ToUInt32(entry[6]);
-                bool found = false;
-                foreach (Map_U32_VectorGR5_Component pair in result)
-                    if (pair.key == key)
-                    {
-                        found = true;
-                        pair.vector.Add(c);
-                        break;
-                    }
-                if (!found)
-                {
-                    Map_U32_VectorGR5_Component pair = new Map_U32_VectorGR5_Component();
-                    pair.key = key;
-                    pair.vector.Add(c);
-                    result.Add(pair);
-                }
+                Map_U32_GR5_Component pair = new Map_U32_GR5_Component();
+                pair.key = Convert.ToUInt32(entry[1]);
+                pair.component = new GR5_Component();
+                pair.component.componentID = Convert.ToUInt32(entry[2]);
+                pair.component.componentKey = Convert.ToUInt32(entry[3]);
+                pair.component.componentType = Convert.ToByte(entry[4]);
+                pair.component.boneStructure = Convert.ToUInt32(entry[5]);
+                pair.component.modifierListID = Convert.ToUInt32(entry[6]);
+                result.Add(pair);
             }
             return result;
         }

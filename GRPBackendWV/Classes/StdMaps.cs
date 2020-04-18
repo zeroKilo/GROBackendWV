@@ -20,29 +20,25 @@ namespace GRPBackendWV
         }
     }
 
-    public class Map_U32_VectorGR5_Weapon
+    public class Map_U32_GR5_Weapon
     {
         public uint key;
-        public List<GR5_Weapon> vector = new List<GR5_Weapon>();
+        public GR5_Weapon weapon;
         public void toBuffer(Stream s)
         {
             Helper.WriteU32(s, key);
-            Helper.WriteU32(s, (uint)vector.Count);
-            foreach (GR5_Weapon w in vector)
-                w.toBuffer(s);
+            weapon.toBuffer(s);
         }
     }
 
-    public class Map_U32_VectorGR5_Component
+    public class Map_U32_GR5_Component
     {
         public uint key;
-        public List<GR5_Component> vector = new List<GR5_Component>();
+        public GR5_Component component;
         public void toBuffer(Stream s)
         {
             Helper.WriteU32(s, key);
-            Helper.WriteU32(s, (uint)vector.Count);
-            foreach (GR5_Component c in vector)
-                c.toBuffer(s);
+            component.toBuffer(s);
         }
     }
 }
