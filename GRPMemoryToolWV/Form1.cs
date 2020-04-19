@@ -88,6 +88,21 @@ namespace GRPMemoryToolWV
             return BitConverter.ToUInt32(buff, 0);
         }
 
+        public string ReadCString(IntPtr handle, uint address)
+        {
+            string s = "";
+            uint pos = address;
+            while (s.Length < 10000)
+            {
+                byte[] buff = ReadBuffer(handle, pos, 1);
+                if (buff[0] == 0)
+                    break;
+                s += (char)buff[0];
+                pos++;
+            }
+            return s;
+        }
+
         public void GetHandle()
         {
             try
@@ -188,7 +203,7 @@ namespace GRPMemoryToolWV
                 List<uint> ids = new List<uint>();
                 bt.rootNode = ReadNode(root, ids);
                 TreeNode t = new TreeNode();
-                AddNode(t, bt.rootNode);
+                AddBTNode(t, bt.rootNode);
                 treeView1.Nodes.Add(t);
                 t.ExpandAll();
                 ids.Sort();
@@ -201,7 +216,7 @@ namespace GRPMemoryToolWV
             }
         }
 
-        private void AddNode(TreeNode tn, BTNode bn)
+        private void AddBTNode(TreeNode tn, BTNode bn)
         {
             tn.Text = bn.data0.ToString("X8") + " : " +
                       bn.data1.ToString("X8") + " : " +
@@ -209,13 +224,13 @@ namespace GRPMemoryToolWV
             if (bn.left != null)
             {
                 TreeNode t = new TreeNode();
-                AddNode(t, bn.left);
+                AddBTNode(t, bn.left);
                 tn.Nodes.Add(t);
             }
             if (bn.right != null)
             {
                 TreeNode t = new TreeNode();
-                AddNode(t, bn.right);
+                AddBTNode(t, bn.right);
                 tn.Nodes.Add(t);
             }
         }
@@ -235,6 +250,94 @@ namespace GRPMemoryToolWV
             if (right != 0)
                 result.right = ReadNode(right, ids);
             return result;
+        }
+
+        private void readPropModListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                ClearAll();
+                GetHandle();
+                GetStartAddress();
+                if (handle == IntPtr.Zero || address == 0)
+                    return;
+                GRPStaticList list = new GRPStaticList();
+                Log("Count            = " + (list.count = ReadDWORD(handle, address + 4)));
+                Log("Capacity         = " + (list.capacity = ReadDWORD(handle, address + 8)));
+                Log("List Pointer     = " + (list.pList = ReadDWORD(handle, address + 12)).ToString("X8"));
+                if (list.capacity > 100)
+                    throw new Exception("Unexpected huge capacity!");
+                if (list.count > list.capacity)
+                    list.count = list.capacity;
+                list.elements = new uint[list.capacity];
+                Log("Elements");
+                Log("========");
+                for (uint i = 0; i < list.capacity; i++)
+                {
+                    list.elements[i] = ReadDWORD(handle, list.pList + i * 4);
+                    if (list.elements[i] == 0)
+                        continue;
+                    PropNode p = ReadPropNode(handle, list.elements[i]);
+                    TreeNode t = new TreeNode();
+                    AddPropNode(t, p);
+                    treeView1.Nodes.Add(t);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log("Error : " + ex.Message);
+            }
+        }
+
+        private void AddPropNode(TreeNode t, PropNode p)
+        {
+            t.Text = p.propID.ToString("X4") + " " + p.name;
+            foreach (PropNode sp in p.list)
+            {
+                TreeNode nt = new TreeNode();
+                AddPropNode(nt, sp);
+                t.Nodes.Add(nt);
+            }
+        }  
+
+        public PropNode ReadPropNode(IntPtr handle, uint address)
+        {
+            PropNode p = new PropNode();
+            p.propID = ReadDWORD(handle, address) & 0xFFFF;
+            p.namePtr = ReadDWORD(handle, address + 4);
+            p.subCount = ReadDWORD(handle, address + 8);
+            p.listPtr = ReadDWORD(handle, address + 12);
+            p.unk1 = ReadDWORD(handle, address + 16);
+            p.unk2 = ReadDWORD(handle, address + 20);
+            p.unk3 = ReadDWORD(handle, address + 24);
+            p.unk4 = ReadDWORD(handle, address + 28);
+            if (p.namePtr != 0)
+                p.name = ReadCString(handle, p.namePtr);
+            else
+                p.name = "";
+            string s = p.propID.ToString("X4") + " " + p.name;
+            Log(s);
+            listBox1.Items.Add(s);
+            p.list = new List<PropNode>();
+            if (p.listPtr != 0)
+                for (int i = 0; i < p.subCount; i++)
+                    p.list.Add(ReadPropNode(handle, (uint)(p.listPtr + i * 0x20)));
+            return p;
+        }
+
+        public class PropNode
+        {
+            public uint propID;
+            public uint namePtr;
+            public uint subCount;
+            public uint listPtr;
+            public uint unk1;
+            public uint unk2;
+            public uint unk3;
+            public uint unk4;
+            public string name;
+            public List<PropNode> list;
         }
     }
 }

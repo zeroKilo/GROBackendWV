@@ -38,10 +38,11 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.rtb1 = new System.Windows.Forms.RichTextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.rtb1 = new System.Windows.Forms.RichTextBox();
+            this.readPropModListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -80,7 +81,8 @@
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.readStaticListToolStripMenuItem,
-            this.readBinaryTreeToolStripMenuItem});
+            this.readBinaryTreeToolStripMenuItem,
+            this.readPropModListToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -90,14 +92,14 @@
             // readStaticListToolStripMenuItem
             // 
             this.readStaticListToolStripMenuItem.Name = "readStaticListToolStripMenuItem";
-            this.readStaticListToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.readStaticListToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.readStaticListToolStripMenuItem.Text = "Read Static List";
             this.readStaticListToolStripMenuItem.Click += new System.EventHandler(this.readStaticListToolStripMenuItem_Click);
             // 
             // readBinaryTreeToolStripMenuItem
             // 
             this.readBinaryTreeToolStripMenuItem.Name = "readBinaryTreeToolStripMenuItem";
-            this.readBinaryTreeToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.readBinaryTreeToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.readBinaryTreeToolStripMenuItem.Text = "Read Binary Tree";
             this.readBinaryTreeToolStripMenuItem.Click += new System.EventHandler(this.readBinaryTreeToolStripMenuItem_Click);
             // 
@@ -141,6 +143,18 @@
             this.tabPage1.Text = "List View";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // listBox1
+            // 
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox1.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.IntegralHeight = false;
+            this.listBox1.Location = new System.Drawing.Point(3, 3);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.ScrollAlwaysVisible = true;
+            this.listBox1.Size = new System.Drawing.Size(520, 241);
+            this.listBox1.TabIndex = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.treeView1);
@@ -151,6 +165,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Tree View";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // treeView1
+            // 
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.treeView1.HideSelection = false;
+            this.treeView1.Location = new System.Drawing.Point(3, 3);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(520, 241);
+            this.treeView1.TabIndex = 0;
             // 
             // rtb1
             // 
@@ -166,27 +190,12 @@
             this.rtb1.Text = "";
             this.rtb1.WordWrap = false;
             // 
-            // listBox1
+            // readPropModListToolStripMenuItem
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.IntegralHeight = false;
-            this.listBox1.Location = new System.Drawing.Point(3, 3);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(520, 241);
-            this.listBox1.TabIndex = 0;
-            // 
-            // treeView1
-            // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.treeView1.HideSelection = false;
-            this.treeView1.Location = new System.Drawing.Point(3, 3);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(520, 241);
-            this.treeView1.TabIndex = 0;
+            this.readPropModListToolStripMenuItem.Name = "readPropModListToolStripMenuItem";
+            this.readPropModListToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.readPropModListToolStripMenuItem.Text = "Read PropModList Tree";
+            this.readPropModListToolStripMenuItem.Click += new System.EventHandler(this.readPropModListToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -227,6 +236,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.RichTextBox rtb1;
+        private System.Windows.Forms.ToolStripMenuItem readPropModListToolStripMenuItem;
     }
 }
 
