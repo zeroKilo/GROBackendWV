@@ -325,11 +325,11 @@ namespace GRPBackendWV
             foreach (List<string> entry in results)
             {
                 GR5_SkillModifier mod = new GR5_SkillModifier();
-                mod.m_ModifierID = Convert.ToUInt32(entry[1]);
-                mod.m_ModifierType = Convert.ToByte(entry[2]);
-                mod.m_PropertyType = Convert.ToByte(entry[3]);
-                mod.m_MethodType = Convert.ToByte(entry[4]);
-                mod.m_MethodValue = entry[5];
+                mod.m_ModifierID = Convert.ToUInt32(entry[2]);
+                mod.m_ModifierType = Convert.ToByte(entry[3]);
+                mod.m_PropertyType = Convert.ToByte(entry[4]);
+                mod.m_MethodType = Convert.ToByte(entry[5]);
+                mod.m_MethodValue = entry[6];
                 result.Add(mod);
             }
             return result;
@@ -339,18 +339,25 @@ namespace GRPBackendWV
         {
             List<GR5_SkillModifierList> result = new List<GR5_SkillModifierList>();
             List<uint> IDs = new List<uint>();
-            List<List<string>> results = GetQueryResults("SELECT * FROM skillmodifierlists");
+            List<List<string>> results = GetQueryResults("SELECT * FROM skillmodifiers");
             foreach (List<string> entry in results)
-                IDs.Add(Convert.ToUInt32(entry[1]));
-            foreach (uint id in IDs)
             {
-                GR5_SkillModifierList list = new GR5_SkillModifierList();
-                list.m_ID = id;
-                list.m_ModifierIDVector = new List<uint>();
-                results = GetQueryResults("SELECT * FROM skillmodifierlistentries WHERE listid=" + id);
-                foreach (List<string> entry in results)
-                    list.m_ModifierIDVector.Add(Convert.ToUInt32(entry[2]));
-                result.Add(list);
+                bool found = false;
+                GR5_SkillModifierList target = null;
+                foreach(GR5_SkillModifierList list in result)
+                    if (list.m_ID == Convert.ToUInt32(entry[1]))
+                    {
+                        found = true;
+                        target = list;
+                        break;
+                    }
+                if (!found)
+                {
+                    target = new GR5_SkillModifierList();
+                    target.m_ID = Convert.ToUInt32(entry[1]);
+                    result.Add(target);
+                }
+                target.m_ModifierIDVector.Add(Convert.ToUInt32(entry[2]));
             }
             return result;
         }
