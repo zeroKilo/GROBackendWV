@@ -9,11 +9,11 @@ namespace GRPBackendWV
 {
     public class GR5_Component
     {
-        public uint componentID = 0x999;
-        public uint componentKey = 0x112;
-        public byte componentType = 0x77;
-        public uint boneStructure = 0x114;
-        public uint modifierListID = 0x115;
+        public uint componentID;
+        public uint componentKey;
+        public byte componentType;
+        public uint boneStructure;
+        public uint modifierListID;
         public void toBuffer(Stream s)
         {
             Helper.WriteU32(s, componentID);
