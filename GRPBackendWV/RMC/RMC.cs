@@ -417,6 +417,10 @@ namespace GRPBackendWV
                     reply = new RMCPacketResponseMissionService_GetAllMissionTemplate();
                     SendReply(udp, p, rmc, client, reply);
                     break;
+                case 7:
+                    reply = new RMCPacketResponseEmpty();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 default:
                     WriteLog(1, "Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
@@ -906,7 +910,7 @@ namespace GRPBackendWV
             Send(udp, np, client);
         }
 
-        private static void SendReplyPacket(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client, RMCPacketReply reply, bool useCompression, uint error)
+        private static void SendReplyPacket(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client, RMCPacketReply reply, bool useCompression, uint error, bool setFlags = true)
         {
             MemoryStream m = new MemoryStream();
             if ((ushort)rmc.proto < 0x7F)
@@ -939,7 +943,8 @@ namespace GRPBackendWV
             m.Write(buff, 0, buff.Length);
             int total = (int)m.Length;
             QPacket np = new QPacket(p.toBuffer());
-            np.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_NEED_ACK };
+            if(setFlags)
+                np.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_NEED_ACK };
             np.m_oSourceVPort = p.m_oDestinationVPort;
             np.m_oDestinationVPort = p.m_oSourceVPort;
             np.m_uiSignature = client.IDsend;
