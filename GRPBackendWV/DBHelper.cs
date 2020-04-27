@@ -471,5 +471,120 @@ namespace GRPBackendWV
             }
             return result;
         }
+
+        public static List<GR5_AMM_Playlist> GetAMMPlaylists()
+        {
+            List<GR5_AMM_Playlist> result = new List<GR5_AMM_Playlist>();
+            List<List<string>> results = GetQueryResults("SELECT * FROM amm_playlists");
+            foreach (List<string> entry in results)
+            {
+                GR5_AMM_Playlist pl = new GR5_AMM_Playlist();
+                pl.uiId = Convert.ToUInt32(entry[1]);
+                pl.uiNodeType = Convert.ToUInt32(entry[2]);
+                pl.uiMaxTeamSize = Convert.ToUInt32(entry[3]);
+                pl.uiMinTeamSize = Convert.ToUInt32(entry[4]);
+                pl.uiOasisNameId = Convert.ToUInt32(entry[5]);
+                pl.uiOasisDescriptionId = Convert.ToUInt32(entry[6]);
+                pl.uiIsRepeatable = Convert.ToUInt32(entry[7]);
+                pl.uiIsRandom = Convert.ToUInt32(entry[8]);
+                pl.uiThumbnailId = Convert.ToUInt32(entry[9]);
+                pl.m_PlaylistEntryVector = new List<GR5_AMM_PlaylistEntry>();
+                List<List<string>> results2 = GetQueryResults("SELECT * FROM amm_playlistentries WHERE listID=" + pl.uiId);
+                foreach (List<string> entry2 in results2)
+                {
+                    GR5_AMM_PlaylistEntry ple = new GR5_AMM_PlaylistEntry();
+                    ple.uiMapId = Convert.ToUInt32(entry2[2]);
+                    ple.uiGameMode = Convert.ToUInt32(entry2[3]);
+                    ple.uiMatchDetail = Convert.ToUInt32(entry2[4]);
+                    pl.m_PlaylistEntryVector.Add(ple);
+                }
+                result.Add(pl);
+            }
+            return result;
+        }
+
+        public static List<GR5_AMM_Map> GetAMMMaps()
+        {
+            List<GR5_AMM_Map> result = new List<GR5_AMM_Map>();
+            List<List<string>> results = GetQueryResults("SELECT * FROM amm_maps");
+            foreach (List<string> entry in results)
+            {
+                GR5_AMM_Map map = new GR5_AMM_Map();
+                map.uiId = Convert.ToUInt32(entry[1]);
+                map.uiRootModifierId = Convert.ToUInt32(entry[2]);
+                map.uiMapKey = Convert.ToUInt32(entry[3]);
+                map.uiOasisNameId = Convert.ToUInt32(entry[4]);
+                map.uiOasisDescriptionId = Convert.ToUInt32(entry[5]);
+                map.uiThumbnailId = Convert.ToUInt32(entry[6]);
+                map.m_ModifierVector = new List<GR5_AMM_Modifier>();
+                List<List<string>> results2 = GetQueryResults("SELECT * FROM amm_modifiers WHERE listType=0 AND listID=" + map.uiId);
+                foreach (List<string> entry2 in results2)
+                {
+                    GR5_AMM_Modifier mm = new GR5_AMM_Modifier();
+                    mm.uiId = Convert.ToUInt32(entry2[3]);
+                    mm.uiParentId = Convert.ToUInt32(entry2[4]);
+                    mm.uiType = Convert.ToUInt32(entry2[5]);
+                    mm.uiValue = entry2[6];
+                    map.m_ModifierVector.Add(mm);
+                }
+                result.Add(map);
+            }
+            return result;
+        }
+
+        public static List<GR5_AMM_GameMode> GetAMMGameModes()
+        {
+            List<GR5_AMM_GameMode> result = new List<GR5_AMM_GameMode>();
+            List<List<string>> results = GetQueryResults("SELECT * FROM amm_gamemodes");
+            foreach (List<string> entry in results)
+            {
+                GR5_AMM_GameMode mode = new GR5_AMM_GameMode();
+                mode.uiId = Convert.ToUInt32(entry[1]);
+                mode.uiRootModifierId = Convert.ToUInt32(entry[2]);
+                mode.uiOasisNameId = Convert.ToUInt32(entry[3]);
+                mode.uiOasisDescriptionId = Convert.ToUInt32(entry[4]);
+                mode.uiThumbnailId = Convert.ToUInt32(entry[5]);
+                mode.m_ModifierVector = new List<GR5_AMM_Modifier>();
+                List<List<string>> results2 = GetQueryResults("SELECT * FROM amm_modifiers WHERE listType=1 AND listID=" + mode.uiId);
+                foreach (List<string> entry2 in results2)
+                {
+                    GR5_AMM_Modifier mm = new GR5_AMM_Modifier();
+                    mm.uiId = Convert.ToUInt32(entry2[3]);
+                    mm.uiParentId = Convert.ToUInt32(entry2[4]);
+                    mm.uiType = Convert.ToUInt32(entry2[5]);
+                    mm.uiValue = entry2[6];
+                    mode.m_ModifierVector.Add(mm);
+                }
+                result.Add(mode);
+            }
+            return result;
+        }
+
+        public static List<GR5_AMM_GameDetail> GetAMMGameDetails()
+        {
+            List<GR5_AMM_GameDetail> result = new List<GR5_AMM_GameDetail>();
+            List<List<string>> results = GetQueryResults("SELECT * FROM amm_gamedetails");
+            foreach (List<string> entry in results)
+            {
+                GR5_AMM_GameDetail detail = new GR5_AMM_GameDetail();
+                detail.uiId = Convert.ToUInt32(entry[1]);
+                detail.uiRootModifierId = Convert.ToUInt32(entry[2]);
+                detail.uiOasisNameId = Convert.ToUInt32(entry[3]);
+                detail.uiOasisDescriptionId = Convert.ToUInt32(entry[4]);
+                detail.m_ModifierVector = new List<GR5_AMM_Modifier>();
+                List<List<string>> results2 = GetQueryResults("SELECT * FROM amm_modifiers WHERE listType=2 AND listID=" + detail.uiId);
+                foreach (List<string> entry2 in results2)
+                {
+                    GR5_AMM_Modifier mm = new GR5_AMM_Modifier();
+                    mm.uiId = Convert.ToUInt32(entry2[3]);
+                    mm.uiParentId = Convert.ToUInt32(entry2[4]);
+                    mm.uiType = Convert.ToUInt32(entry2[5]);
+                    mm.uiValue = entry2[6];
+                    detail.m_ModifierVector.Add(mm);
+                }
+                result.Add(detail);
+            }
+            return result;
+        }
     }
 }

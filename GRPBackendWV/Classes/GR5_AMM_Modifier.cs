@@ -12,13 +12,13 @@ namespace GRPBackendWV
         public uint uiId;
         public uint uiParentId;
         public uint uiType;
-        public uint uiValue;
+        public string uiValue;
         public void toBuffer(Stream s)
         {
             Helper.WriteU32(s, uiId);
             Helper.WriteU32(s, uiParentId);
             Helper.WriteU32(s, uiType);
-            Helper.WriteU32(s, uiValue);
+            Helper.WriteString(s, uiValue);
         }
     }
 }

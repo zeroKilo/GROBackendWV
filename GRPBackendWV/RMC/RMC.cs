@@ -142,6 +142,13 @@ namespace GRPBackendWV
                 case 4:
                     reply = new RMCPacktResponseAMM_RequestAMMSearch();
                     SendReply(udp, p, rmc, client, reply);
+                    p.uiSeqId++;
+                    p.flags.Clear();
+                    p.flags.Add(QPacket.PACKETFLAG.FLAG_NEED_ACK);
+                    p.flags.Add(QPacket.PACKETFLAG.FLAG_RELIABLE);
+                    rmc.methodID = 1;
+                    reply = new RMCPacketResponseEmpty();
+                    SendReplyPacket(udp, p, rmc, client, reply, true, 0, false);
                     break;
                 case 7:
                     reply = new RMCPacktResponseAMM_Method7();

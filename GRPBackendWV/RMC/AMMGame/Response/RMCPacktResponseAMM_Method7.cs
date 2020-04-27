@@ -16,10 +16,10 @@ namespace GRPBackendWV
 
         public RMCPacktResponseAMM_Method7()
         {
-            amm_playlists.Add(new GR5_AMM_Playlist());
-            amm_maps.Add(new GR5_AMM_Map());
-            amm_gamemodes.Add(new GR5_AMM_GameMode());
-            amm_gamedetails.Add(new GR5_AMM_GameDetail());
+            amm_playlists = DBHelper.GetAMMPlaylists();
+            amm_maps = DBHelper.GetAMMMaps();
+            amm_gamemodes = DBHelper.GetAMMGameModes();
+            amm_gamedetails = DBHelper.GetAMMGameDetails();
         }
 
         public override byte[] ToBuffer()
