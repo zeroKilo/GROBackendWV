@@ -31,6 +31,8 @@ to make the game use this backend make sure following lines are set in yeti.ini
 
 Credits:
 
+Mimak - For doing alot of the reversing
+
 LifeCoder - For helping with reversing
 
 Kinnay - For the helpful wiki and the predone RE work
