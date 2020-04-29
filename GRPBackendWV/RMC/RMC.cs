@@ -16,10 +16,16 @@ namespace GRPBackendWV
             ClientInfo client = Global.GetClientByIDrecv(p.m_uiSignature);
             if (client == null)
                 return;
+            client.sessionID = p.m_bySessionID;
+            if (p.uiSeqId > client.seqCounter)
+                client.seqCounter = p.uiSeqId;
+            client.udp = udp;
             if (p.flags.Contains(QPacket.PACKETFLAG.FLAG_ACK))
                 return;
             WriteLog(10, "Handling packet...");
             RMCPacket rmc = new RMCPacket(p);
+            if (rmc.callID > client.callCounter)
+                client.callCounter = rmc.callID;
             WriteLog(1, "Received packet : " + rmc.ToString());
             string payload = rmc.PayLoadToString();
             if(payload != "")
@@ -984,6 +990,79 @@ namespace GRPBackendWV
                     pos += len;
                 }
                 WriteLog(10, "send response packets");
+            }
+        }
+        
+        public static void SendCustomPacket(UdpClient udp, QPacket p, RMCPacket rmc, ClientInfo client, RMCPacketReply packet, bool useCompression, uint error)
+        {
+            MemoryStream m = new MemoryStream();
+            if ((ushort)rmc.proto < 0x7F)
+            {
+                Helper.WriteU8(m, (byte)rmc.proto);
+            }
+            else
+            {
+                Helper.WriteU8(m, 0x7F);
+                Helper.WriteU16(m, (ushort)rmc.proto);
+            }
+            byte[] buff;
+            if (error == 0)
+            {
+                Helper.WriteU8(m, 0x1);
+                Helper.WriteU32(m, rmc.callID);
+                Helper.WriteU32(m, rmc.methodID | 0x8000);
+                buff = packet.ToBuffer();
+                m.Write(buff, 0, buff.Length);
+            }
+            else
+            {
+                Helper.WriteU8(m, 0);
+                Helper.WriteU32(m, error);
+                Helper.WriteU32(m, rmc.callID);
+            }
+            buff = m.ToArray();
+            m = new MemoryStream();
+            Helper.WriteU32(m, (uint)buff.Length);
+            m.Write(buff, 0, buff.Length);
+            int total = (int)m.Length;
+            QPacket np = new QPacket(p.toBuffer());
+            np.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_NEED_ACK };
+            np.m_uiSignature = client.IDsend;
+            if (total < 0x3C3)
+            {
+                np.payload = m.ToArray();
+                np.payloadSize = (ushort)np.payload.Length;
+                WriteLog(1, "send custom packet");
+                Send(udp, np, client);
+            }
+            else
+            {
+                np.flags.Add(QPacket.PACKETFLAG.FLAG_HAS_SIZE);
+                int pos = 0;
+                m.Seek(0, 0);
+                np.m_byPartNumber = 0;
+                while (pos < total)
+                {
+                    bool isLast = false;
+                    int len = 0x3C3;
+                    if (len + pos >= total)
+                    {
+                        len = total - pos;
+                        isLast = true;
+                    }
+                    if (!isLast)
+                        np.m_byPartNumber++;
+                    else
+                        np.m_byPartNumber = 0;
+                    buff = new byte[len];
+                    m.Read(buff, 0, len);
+                    np.payload = buff;
+                    np.payloadSize = (ushort)np.payload.Length;
+                    Send(udp, np, client);
+                    pos += len;
+                    np.uiSeqId++;
+                }
+                WriteLog(1, "send custom packets");
             }
         }
 

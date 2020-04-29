@@ -170,7 +170,14 @@
     <Compile Include="LogFilter.Designer.cs">
       <DependentUpon>LogFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="PacketGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PacketGenerator.Designer.cs">
+      <DependentUpon>PacketGenerator.cs</DependentUpon>
+    </Compile>
     <Compile Include="QPacketHandler.cs" />
+    <Compile Include="RMC\RMCPacketCustom.cs" />
     <Compile Include="RMC\AbilityService\Response\RMCPacketResponseAbilityService_Method2.cs" />
     <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method4.cs" />
     <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method2.cs" />
@@ -273,6 +280,9 @@
     <EmbeddedResource Include="LogFilter.resx">
       <DependentUpon>LogFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PacketGenerator.resx">
+      <DependentUpon>PacketGenerator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -296,7 +306,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Be.Windows.Forms.HexBox\Be.Windows.Forms.HexBox.csproj">
+      <Project>{26c5f25f-b450-4caf-ad8b-b8d11ae73457}</Project>
+      <Name>Be.Windows.Forms.HexBox</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

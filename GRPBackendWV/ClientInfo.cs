@@ -13,9 +13,13 @@ namespace GRPBackendWV
         public uint PID;
         public uint IDrecv;
         public uint IDsend;
+        public byte sessionID;
         public byte[] sessionKey;
+        public ushort seqCounter;
+        public uint callCounter;
         public string name;
         public string pass;
         public IPEndPoint ep;
+        public UdpClient udp;
     }
 }

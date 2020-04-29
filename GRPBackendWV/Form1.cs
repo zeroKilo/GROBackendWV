@@ -82,5 +82,10 @@ namespace GRPBackendWV
                     break;
             }
         }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            new PacketGenerator().Show();
+        }
     }
 }
