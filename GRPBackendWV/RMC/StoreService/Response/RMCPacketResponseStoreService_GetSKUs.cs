@@ -13,9 +13,7 @@ namespace GRPBackendWV
 
         public RMCPacketResponseStoreService_GetSKUs()
         {
-            GR5_SKU s = new GR5_SKU();
-            s.m_ItemVector.Add(new GR5_SKUItem());
-            skus.Add(s);
+            skus = DBHelper.GetSKUs();
         }
 
         public override byte[] ToBuffer()

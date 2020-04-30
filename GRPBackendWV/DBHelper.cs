@@ -586,5 +586,94 @@ namespace GRPBackendWV
             }
             return result;
         }
+
+        public static List<GR5_SKU> GetSKUs()
+        {
+            List<GR5_SKU> result = new List<GR5_SKU>();
+            List<List<string>> results = GetQueryResults("SELECT * FROM skus");
+            foreach(List<string> entry in results)
+            {
+                GR5_SKU sku = new GR5_SKU();
+                sku.m_ID = Convert.ToUInt32(entry[1]);
+                sku.m_Type = Convert.ToUInt32(entry[2]);
+                sku.m_AvailableStock = Convert.ToUInt32(entry[3]);
+                sku.m_TimeStart = Convert.ToUInt32(entry[4]);
+                sku.m_TimeExpired = Convert.ToUInt32(entry[5]);
+                sku.m_BuyIGCCost = Convert.ToUInt32(entry[6]);
+                sku.m_BuyGRCashCost = Convert.ToUInt32(entry[7]);
+                sku.m_AssetKey = Convert.ToUInt32(entry[8]);
+                sku.m_Name = entry[9];
+                sku.m_OasisName = Convert.ToUInt32(entry[10]);
+                sku.m_ItemVector = new List<GR5_SKUItem>();
+                List<List<string>> results2 = GetQueryResults("SELECT * FROM skuitems WHERE itemid=" + sku.m_ID);
+                foreach (List<string> entry2 in results2)
+                {
+                    GR5_SKUItem item = new GR5_SKUItem();
+                    item.m_ItemID = Convert.ToUInt32(entry2[1]);
+                    item.m_DurabilityValue = Convert.ToUInt32(entry2[2]);
+                    item.m_DurabilityValue2 = Convert.ToUInt32(entry2[3]);
+                    item.m_OasisName = Convert.ToUInt32(entry2[4]);
+                    item.m_IGCPrice = Convert.ToSingle(entry2[5]);
+                    item.m_GRCashPrice = Convert.ToSingle(entry2[6]);
+                    sku.m_ItemVector.Add(item);
+                }
+                result.Add(sku);
+            }
+            return result;
+        }
+
+        public static List<GR5_Coupon> GetCoupons()
+        {
+            List<GR5_Coupon> result = new List<GR5_Coupon>();
+            List<List<string>> results = GetQueryResults("SELECT * FROM coupons");
+            foreach(List<string> entry in results)
+            {
+                GR5_Coupon coupon = new GR5_Coupon();
+                coupon.m_ID = Convert.ToUInt32(entry[1]);
+                coupon.m_SKUModifierID = Convert.ToUInt32(entry[2]);
+                coupon.m_TimeStart = Convert.ToUInt32(entry[3]);
+                coupon.m_TimeExpired = Convert.ToUInt32(entry[4]);
+                result.Add(coupon);
+            }
+            return result;
+        }
+
+        public static List<GR5_SKUModifier> GetSKUModifiers()
+        {
+            List<GR5_SKUModifier> result = new List<GR5_SKUModifier>();
+            List<List<string>> results = GetQueryResults("SELECT * FROM skumodifiers");
+            foreach(List<string> entry in results)
+            {
+                GR5_SKUModifier mod = new GR5_SKUModifier();
+                mod.m_ID = Convert.ToUInt32(entry[1]);
+                mod.m_CouponBatchID = Convert.ToUInt32(entry[2]);
+                mod.m_TimeStart = Convert.ToUInt32(entry[3]);
+                mod.m_TimeExpired = Convert.ToUInt32(entry[4]);
+                mod.m_TargetType = Convert.ToUInt32(entry[5]);
+                mod.m_TargetValue = Convert.ToUInt32(entry[6]);
+                mod.m_Tag = entry[7];
+                List<List<string>> results2 = GetQueryResults("SELECT * FROM skumodconditions WHERE modid=" + mod.m_ID);    //modid column for reference only
+                foreach (List<string> entry2 in results2)
+                {
+                    GR5_SKUModifierCondition condition = new GR5_SKUModifierCondition();
+                    condition.m_Type = Convert.ToUInt32(entry2[2]);
+                    condition.m_Target = Convert.ToUInt32(entry2[3]);
+                    condition.m_Value = Convert.ToUInt32(entry2[4]);
+                    mod.m_ConditionVector.Add(condition);
+                }
+                results2.Clear();
+                results2 = GetQueryResults("SELECT * FROM skumodoutput WHERE modid=" + mod.m_ID);   //same, only for reference
+                foreach(List<string> entry2 in results2)
+                {
+                    GR5_SKUModifierOutput output = new GR5_SKUModifierOutput();
+                    output.m_Type = Convert.ToUInt32(entry2[2]);
+                    output.m_Target = Convert.ToUInt32(entry2[3]);
+                    output.m_Value = Convert.ToUInt32(entry2[4]);
+                    mod.m_OutputVector.Add(output);
+                }
+                result.Add(mod);
+            }
+            return result;
+        }
     }
 }

@@ -582,7 +582,7 @@ namespace GRPBackendWV
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 case 0xB:
-                    reply = new RMCPacketResponseStoreService_MethodB();
+                    reply = new RMCPacketResponseStoreService_GetShoppingDetails();
                     SendReply(udp, p, rmc, client, reply);
                     break;
                 default:

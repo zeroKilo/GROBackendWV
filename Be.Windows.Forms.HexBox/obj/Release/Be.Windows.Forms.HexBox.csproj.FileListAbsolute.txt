@@ -1,0 +1,7 @@
+D:\Programy\grp\GRPBackendWV\GRPBackendWV\Be.Windows.Forms.HexBox\bin\Release\Be.Windows.Forms.HexBox.dll
+D:\Programy\grp\GRPBackendWV\GRPBackendWV\Be.Windows.Forms.HexBox\obj\Release\Be.Windows.Forms.HexBox.csprojAssemblyReference.cache
+D:\Programy\grp\GRPBackendWV\GRPBackendWV\Be.Windows.Forms.HexBox\obj\Release\Be.Windows.Forms.HexBox.resources
+D:\Programy\grp\GRPBackendWV\GRPBackendWV\Be.Windows.Forms.HexBox\obj\Release\Be.Windows.Forms.Properties.Resources.resources
+D:\Programy\grp\GRPBackendWV\GRPBackendWV\Be.Windows.Forms.HexBox\obj\Release\Be.Windows.Forms.HexBox.csproj.GenerateResource.cache
+D:\Programy\grp\GRPBackendWV\GRPBackendWV\Be.Windows.Forms.HexBox\obj\Release\Be.Windows.Forms.HexBox.csproj.CoreCompileInputs.cache
+D:\Programy\grp\GRPBackendWV\GRPBackendWV\Be.Windows.Forms.HexBox\obj\Release\Be.Windows.Forms.HexBox.dll
