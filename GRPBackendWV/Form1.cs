@@ -87,5 +87,10 @@ namespace GRPBackendWV
         {
             new PacketGenerator().Show();
         }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            new UDPProcessor().Show();
+        }
     }
 }

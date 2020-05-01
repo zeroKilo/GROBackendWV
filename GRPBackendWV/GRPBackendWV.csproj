@@ -271,6 +271,12 @@
     <Compile Include="Server\TCPServer.cs" />
     <Compile Include="QPacket.cs" />
     <Compile Include="Server\UDPRedirectorServer.cs" />
+    <Compile Include="UDPProcessor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UDPProcessor.Designer.cs">
+      <DependentUpon>UDPProcessor.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DecryptTool.resx">
       <DependentUpon>DecryptTool.cs</DependentUpon>
     </EmbeddedResource>
@@ -293,6 +299,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UDPProcessor.resx">
+      <DependentUpon>UDPProcessor.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
