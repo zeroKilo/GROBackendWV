@@ -177,6 +177,7 @@
       <DependentUpon>PacketGenerator.cs</DependentUpon>
     </Compile>
     <Compile Include="QPacketHandler.cs" />
+    <Compile Include="RMCPacketResponseStoreService_EnterCoupons.cs" />
     <Compile Include="RMC\RMCPacketCustom.cs" />
     <Compile Include="RMC\AbilityService\Response\RMCPacketResponseAbilityService_Method2.cs" />
     <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method4.cs" />
