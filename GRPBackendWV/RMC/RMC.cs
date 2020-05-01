@@ -1007,9 +1007,7 @@ namespace GRPBackendWV
         {
             MemoryStream m = new MemoryStream();
             if ((ushort)rmc.proto < 0x7F)
-            {
                 Helper.WriteU8(m, (byte)((byte)rmc.proto | 0x80));
-            }
             else
             {
                 Helper.WriteU8(m, 0xFF);
@@ -1018,7 +1016,6 @@ namespace GRPBackendWV
             byte[] buff;
             if (error == 0)
             {
-                Helper.WriteU8(m, 0x1);
                 Helper.WriteU32(m, rmc.callID);
                 Helper.WriteU32(m, rmc.methodID);
                 buff = packet.ToBuffer();
@@ -1026,7 +1023,6 @@ namespace GRPBackendWV
             }
             else
             {
-                Helper.WriteU8(m, 0);
                 Helper.WriteU32(m, error);
                 Helper.WriteU32(m, rmc.callID);
             }
