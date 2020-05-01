@@ -11,6 +11,9 @@ namespace GRPBackendWV
     {
         public enum PROTOCOL
         {
+            NATTraversalRelayProtocol = 3,
+            GlobalNotificationEventProtocol = 0xE,
+            MessageDeliveryProtocol = 0x1B,
             Authentication = 0xA,
             Secure = 0xB,
             Telemetry = 0x24,
@@ -75,59 +78,64 @@ namespace GRPBackendWV
             }
             catch
             {
-                callID = Helper.ReadU32(m);
-                methodID = Helper.ReadU32(m); 
                 WriteLog(1, "Error: Unknown RMC packet protocol 0x" + b.ToString("X2"));
                 return;
             }
-            callID = Helper.ReadU32(m);
-            methodID = Helper.ReadU32(m);          
-            switch (proto)
+            if (isRequest)
             {
-                case PROTOCOL.Authentication:
-                    HandleAuthenticationMethods(m);
-                    break;
-                case PROTOCOL.Secure:
-                    HandleSecureMethods(m);
-                    break;
-                case PROTOCOL.Telemetry:
-                    HandleTelemetryMethods(m);
-                    break;
-                case PROTOCOL.AMMGameClient:
-                case PROTOCOL.PlayerProfileService:
-                case PROTOCOL.ArmorService:
-                case PROTOCOL.InventoryService:
-                case PROTOCOL.LootService:
-                case PROTOCOL.WeaponService:
-                case PROTOCOL.FriendsService:
-                case PROTOCOL.ChatService:
-                case PROTOCOL.MissionService:
-                case PROTOCOL.PartyService:
-                case PROTOCOL.StatisticsService:
-                case PROTOCOL.AchievementsService:
-                case PROTOCOL.ProgressionService:
-                case PROTOCOL.DBGTelemetry:
-                case PROTOCOL.RewardService:
-                case PROTOCOL.StoreService:
-                case PROTOCOL.AdvertisementsService:
-                case PROTOCOL.SkillsService:
-                case PROTOCOL.Loadout:
-                case PROTOCOL.UnlockService:
-                case PROTOCOL.AvatarService:
-                case PROTOCOL.WeaponProficiencyService:
-                case PROTOCOL.OpsProtocolService:
-                case PROTOCOL.ServerInfo:
-                case PROTOCOL.LeaderboardService:
-                case PROTOCOL.PveArchetypeService:
-                case PROTOCOL.InboxMessageService:
-                case PROTOCOL.ProfanityFilterService:
-                case PROTOCOL.AbilityService:
-                case PROTOCOL.SurveyService:
-                case PROTOCOL.OverlordNewsProtocol:
-                    break;
-                default:
-                    WriteLog(1, "Error: No reader implemented for packet protocol " + proto);
-                    break;
+                callID = Helper.ReadU32(m);
+                methodID = Helper.ReadU32(m);
+                switch (proto)
+                {
+                    case PROTOCOL.Authentication:
+                        HandleAuthenticationMethods(m);
+                        break;
+                    case PROTOCOL.Secure:
+                        HandleSecureMethods(m);
+                        break;
+                    case PROTOCOL.Telemetry:
+                        HandleTelemetryMethods(m);
+                        break;
+                    case PROTOCOL.AMMGameClient:
+                    case PROTOCOL.PlayerProfileService:
+                    case PROTOCOL.ArmorService:
+                    case PROTOCOL.InventoryService:
+                    case PROTOCOL.LootService:
+                    case PROTOCOL.WeaponService:
+                    case PROTOCOL.FriendsService:
+                    case PROTOCOL.ChatService:
+                    case PROTOCOL.MissionService:
+                    case PROTOCOL.PartyService:
+                    case PROTOCOL.StatisticsService:
+                    case PROTOCOL.AchievementsService:
+                    case PROTOCOL.ProgressionService:
+                    case PROTOCOL.DBGTelemetry:
+                    case PROTOCOL.RewardService:
+                    case PROTOCOL.StoreService:
+                    case PROTOCOL.AdvertisementsService:
+                    case PROTOCOL.SkillsService:
+                    case PROTOCOL.Loadout:
+                    case PROTOCOL.UnlockService:
+                    case PROTOCOL.AvatarService:
+                    case PROTOCOL.WeaponProficiencyService:
+                    case PROTOCOL.OpsProtocolService:
+                    case PROTOCOL.ServerInfo:
+                    case PROTOCOL.LeaderboardService:
+                    case PROTOCOL.PveArchetypeService:
+                    case PROTOCOL.InboxMessageService:
+                    case PROTOCOL.ProfanityFilterService:
+                    case PROTOCOL.AbilityService:
+                    case PROTOCOL.SurveyService:
+                    case PROTOCOL.OverlordNewsProtocol:
+                        break;
+                    default:
+                        WriteLog(1, "Error: No reader implemented for packet protocol " + proto);
+                        break;
+                }
+            }
+            else
+            {
+                WriteLog(1, "Got response for Protocol " + proto + " = " + (m.ReadByte() == 1 ? "Success" : "Fail"));
             }
         }
 
