@@ -221,7 +221,6 @@
     <Compile Include="RMC\StatisticsService\Response\RMCPacketResponseStatisticsService_Method3.cs" />
     <Compile Include="RMC\StatisticsService\Response\RMCPacketResponseStatisticsService_Method1.cs" />
     <Compile Include="RMC\StoreService\Response\RMCPacketResponseStoreService_GetShoppingDetails.cs" />
-    <Compile Include="RMC\StoreService\Response\RMCPacketResponse_EnterCoupons.cs" />
     <Compile Include="RMC\SurveyService\Response\RMCPacketResponseSurveyService_Method1.cs" />
     <Compile Include="RMC\UnlockService\Response\RMCPacketResponseUnlockService_Method3.cs" />
     <Compile Include="RMC\UnlockService\Response\RMCPacketResponseUnlockService_Method2.cs" />

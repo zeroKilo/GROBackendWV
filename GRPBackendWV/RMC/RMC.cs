@@ -581,14 +581,6 @@ namespace GRPBackendWV
                     reply = new RMCPacketResponseStoreService_GetSKUs();
                     SendReply(udp, p, rmc, client, reply);
                     break;
-                case 8:
-                    reply = new RMCPacketResponseStoreService_EnterCoupons();
-                    SendReply(udp, p, rmc, client, reply);
-                    break;
-                case 9:
-                    reply = new RMCPacketResponseEmpty();
-                    SendReply(udp, p, rmc, client, reply);
-                    break;
                 case 0xB:
                     reply = new RMCPacketResponseStoreService_GetShoppingDetails();
                     SendReply(udp, p, rmc, client, reply);
