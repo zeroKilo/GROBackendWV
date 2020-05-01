@@ -78,15 +78,13 @@ namespace GRPBackendWV
             }
             catch
             {
-                callID = Helper.ReadU32(m);
-                methodID = Helper.ReadU32(m); 
                 WriteLog(1, "Error: Unknown RMC packet protocol 0x" + b.ToString("X2"));
                 return;
             }
-            callID = Helper.ReadU32(m);
-            methodID = Helper.ReadU32(m);
             if (isRequest)
             {
+                callID = Helper.ReadU32(m);
+                methodID = Helper.ReadU32(m);
                 switch (proto)
                 {
                     case PROTOCOL.Authentication:
@@ -135,7 +133,7 @@ namespace GRPBackendWV
                         break;
                 }
             }
-            else 
+            else
             {
                 WriteLog(1, "Got response for Protocol " + proto + " = " + (m.ReadByte() == 1 ? "Success" : "Fail"));
             }
