@@ -30,7 +30,8 @@ namespace GRPBackendWV
             FLAG_ACK = 1,
             FLAG_RELIABLE = 2,
             FLAG_NEED_ACK = 4,
-            FLAG_HAS_SIZE = 8
+            FLAG_HAS_SIZE = 8,
+            FLAG_UNKNOWN = 16
         }
 
         public enum PACKETTYPE

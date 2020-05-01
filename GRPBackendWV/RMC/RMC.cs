@@ -27,6 +27,8 @@ namespace GRPBackendWV
             if (rmc.callID > client.callCounter)
                 client.callCounter = rmc.callID;
             WriteLog(1, "Received packet : " + rmc.ToString());
+            if (!rmc.isRequest)
+                return;
             string payload = rmc.PayLoadToString();
             if(payload != "")
                 WriteLog(5, payload);
@@ -581,6 +583,14 @@ namespace GRPBackendWV
                     reply = new RMCPacketResponseStoreService_GetSKUs();
                     SendReply(udp, p, rmc, client, reply);
                     break;
+                case 8:
+                    reply = new RMCPacketResponseStoreService_EnterCoupons();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
+                case 9:
+                    reply = new RMCPacketResponseEmpty();
+                    SendReply(udp, p, rmc, client, reply);
+                    break;
                 case 0xB:
                     reply = new RMCPacketResponseStoreService_GetShoppingDetails();
                     SendReply(udp, p, rmc, client, reply);
@@ -998,11 +1008,11 @@ namespace GRPBackendWV
             MemoryStream m = new MemoryStream();
             if ((ushort)rmc.proto < 0x7F)
             {
-                Helper.WriteU8(m, (byte)rmc.proto);
+                Helper.WriteU8(m, (byte)((byte)rmc.proto | 0x80));
             }
             else
             {
-                Helper.WriteU8(m, 0x7F);
+                Helper.WriteU8(m, 0xFF);
                 Helper.WriteU16(m, (ushort)rmc.proto);
             }
             byte[] buff;
@@ -1010,7 +1020,7 @@ namespace GRPBackendWV
             {
                 Helper.WriteU8(m, 0x1);
                 Helper.WriteU32(m, rmc.callID);
-                Helper.WriteU32(m, rmc.methodID | 0x8000);
+                Helper.WriteU32(m, rmc.methodID);
                 buff = packet.ToBuffer();
                 m.Write(buff, 0, buff.Length);
             }
