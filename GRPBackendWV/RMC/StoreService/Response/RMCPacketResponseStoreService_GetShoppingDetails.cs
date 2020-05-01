@@ -34,7 +34,7 @@ namespace GRPBackendWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponseStoreService_MethodB]";
+            return "[RMCPacketResponseStoreService_GetShoppingDetails]";
         }
 
         public override string PayloadToString()

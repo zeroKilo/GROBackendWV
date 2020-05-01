@@ -18,7 +18,7 @@ namespace GRPBackendWV
         public uint m_BuyGRCashCost;
         public uint m_AssetKey;
         public string m_Name;
-        public uint m_OasisName = 70870;
+        public uint m_OasisName;
         public List<GR5_SKUItem> m_ItemVector = new List<GR5_SKUItem>();
         public void toBuffer(Stream s)
         {
