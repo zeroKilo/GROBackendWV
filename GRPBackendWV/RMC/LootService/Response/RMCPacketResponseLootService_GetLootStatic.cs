@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseLootService_GetLootStatic : RMCPacketReply
+    public class RMCPacketResponseLootService_GetLootStatic : RMCPResponse
     {
         public List<GR5_LootItem> items = new List<GR5_LootItem>();
 

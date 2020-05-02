@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades : RMCPacketReply
+    public class RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades : RMCPResponse
     {
 
         public List<GR5_Ability> abs = new List<GR5_Ability>();

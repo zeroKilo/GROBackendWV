@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits : RMCPacketReply
+    public class RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits : RMCPResponse
     {
         public List<GR5_LoadoutKit> kits = new List<GR5_LoadoutKit>();
 

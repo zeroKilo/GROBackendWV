@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseSkillsService_GetModifiers : RMCPacketReply
+    public class RMCPacketResponseSkillsService_GetModifiers : RMCPResponse
     {
         public List<GR5_SkillModifier> mods = new List<GR5_SkillModifier>();
 

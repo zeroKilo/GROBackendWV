@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseLeaderboardService_Method2 : RMCPacketReply
+    public class RMCPacketResponseLeaderboardService_Method2 : RMCPResponse
     {
         public List<GR5_LeaderboardReadResult> list = new List<GR5_LeaderboardReadResult>();
 

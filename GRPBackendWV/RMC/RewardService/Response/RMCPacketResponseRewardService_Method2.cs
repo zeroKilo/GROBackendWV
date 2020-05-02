@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseRewardService_Method2 : RMCPacketReply
+    public class RMCPacketResponseRewardService_Method2 : RMCPResponse
     {
         public List<uint> unk1 = new List<uint>();
 

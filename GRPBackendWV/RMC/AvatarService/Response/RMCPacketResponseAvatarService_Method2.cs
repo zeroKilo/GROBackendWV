@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseAvatarService_Method2 : RMCPacketReply
+    public class RMCPacketResponseAvatarService_Method2 : RMCPResponse
     {
         public List<GR5_AvatarPortrait> portraits = new List<GR5_AvatarPortrait>();
         public List<uint> unk1 = new List<uint>();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseOpsProtocolService_GetAllOperatorVariables : RMCPacketReply
+    public class RMCPacketResponseOpsProtocolService_GetAllOperatorVariables : RMCPResponse
     {
         public List<GR5_OperatorVariable> ops = new List<GR5_OperatorVariable>();
 

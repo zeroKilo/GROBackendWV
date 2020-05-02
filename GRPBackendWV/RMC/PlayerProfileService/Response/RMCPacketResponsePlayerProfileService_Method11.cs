@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponsePlayerProfileService_Method11 : RMCPacketReply
+    public class RMCPacketResponsePlayerProfileService_Method11 : RMCPResponse
     {
         public List<GR5_Notification> list = new List<GR5_Notification>();
 

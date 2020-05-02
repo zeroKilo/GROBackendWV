@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseProfanityFilterService_GetAllProfaneWords : RMCPacketReply
+    public class RMCPacketResponseProfanityFilterService_GetAllProfaneWords : RMCPResponse
     {
         public List<GR5_ProfaneWord> words = new List<GR5_ProfaneWord>();
 

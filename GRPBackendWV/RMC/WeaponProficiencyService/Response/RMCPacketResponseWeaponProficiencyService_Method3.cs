@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseWeaponProficiencyService_Method3 : RMCPacketReply
+    public class RMCPacketResponseWeaponProficiencyService_Method3 : RMCPResponse
     {
         public List<GR5_WeaponXPLevelInfo> _outXPLevels = new List<GR5_WeaponXPLevelInfo>();
 

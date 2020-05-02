@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseAbilityService_Method2 : RMCPacketReply
+    public class RMCPacketResponseAbilityService_Method2 : RMCPResponse
     {
 
         public List<GR5_PersonaAbilityUpgrade> list = new List<GR5_PersonaAbilityUpgrade>();

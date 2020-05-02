@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseInventoryService_GetUserInventoryByBagType : RMCPacketReply
+    public class RMCPacketResponseInventoryService_GetUserInventoryByBagType : RMCPResponse
     {
         public List<GR5_UserItem> items = new List<GR5_UserItem>();
         public List<GR5_InventoryBag> bags = new List<GR5_InventoryBag>();

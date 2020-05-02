@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseInventoryService_Method2 : RMCPacketReply
+    public class RMCPacketResponseInventoryService_Method2 : RMCPResponse
     {
         public List<GR5_Boost> boosts = new List<GR5_Boost>();
 

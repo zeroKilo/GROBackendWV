@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponsePveArchetypeService_Method1 : RMCPacketReply
+    public class RMCPacketResponsePveArchetypeService_Method1 : RMCPResponse
     {
         public List<GR5_PveArchetype> types = new List<GR5_PveArchetype>();
 

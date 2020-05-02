@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseWeaponService_GetTemplateWeaponMaps : RMCPacketReply
+    public class RMCPacketResponseWeaponService_GetTemplateWeaponMaps : RMCPResponse
     {
         public List<Map_U32_GR5_Weapon> TemplateWeaponList = new List<Map_U32_GR5_Weapon>();
         public List<Map_U32_VectorU32> WeaponCompatibilityBridge = new List<Map_U32_VectorU32>();

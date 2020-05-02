@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseStatisticsService_Method4 : RMCPacketReply
+    public class RMCPacketResponseStatisticsService_Method4 : RMCPResponse
     {
         public List<GR5_PlayerTimedStatisticsBlock> list = new List<GR5_PlayerTimedStatisticsBlock>();
 

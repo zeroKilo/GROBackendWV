@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseAchievementsService_Method2 : RMCPacketReply
+    public class RMCPacketResponseAchievementsService_Method2 : RMCPResponse
     {
         public List<GR5_PlayerAchievement> list = new List<GR5_PlayerAchievement>();
 

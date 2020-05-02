@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseProgressionService_GetLevels : RMCPacketReply
+    public class RMCPacketResponseProgressionService_GetLevels : RMCPResponse
     {
         public List<GR5_Level> levels = new List<GR5_Level>();
 

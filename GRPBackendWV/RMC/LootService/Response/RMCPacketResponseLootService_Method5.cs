@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseLootService_Method5 : RMCPacketReply
+    public class RMCPacketResponseLootService_Method5 : RMCPResponse
     {
         public class unknown
         {

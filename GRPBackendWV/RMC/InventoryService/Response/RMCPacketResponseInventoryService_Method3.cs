@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseInventoryService_Method3 : RMCPacketReply
+    public class RMCPacketResponseInventoryService_Method3 : RMCPResponse
     {
         public List<GR5_Consumable> cons = new List<GR5_Consumable>();
 

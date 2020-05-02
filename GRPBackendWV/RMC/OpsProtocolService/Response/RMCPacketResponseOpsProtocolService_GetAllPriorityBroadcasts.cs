@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseOpsProtocolService_GetAllPriorityBroadcasts: RMCPacketReply
+    public class RMCPacketResponseOpsProtocolService_GetAllPriorityBroadcasts: RMCPResponse
     {
         public List<GR5_PriorityBroadcast> pbs = new List<GR5_PriorityBroadcast>();
 

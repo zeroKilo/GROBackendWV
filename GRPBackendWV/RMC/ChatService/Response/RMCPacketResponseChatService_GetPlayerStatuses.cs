@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseChatService_GetPlayerStatuses : RMCPacketReply
+    public class RMCPacketResponseChatService_GetPlayerStatuses : RMCPResponse
     {
         public List<GR5_BasicPersona> personas = new List<GR5_BasicPersona>();
 

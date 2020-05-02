@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseMissionService_Method3 : RMCPacketReply
+    public class RMCPacketResponseMissionService_Method3 : RMCPResponse
     {
         public List<GR5_PersonaMission> list = new List<GR5_PersonaMission>();
         public uint unk1;

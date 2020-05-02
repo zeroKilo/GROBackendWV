@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseMissionService_GetAllMissionTemplate : RMCPacketReply
+    public class RMCPacketResponseMissionService_GetAllMissionTemplate : RMCPResponse
     {
         public List<GR5_Mission> missions = new List<GR5_Mission>();
         public List<GR5_MissionArc> missionArcs = new List<GR5_MissionArc>();

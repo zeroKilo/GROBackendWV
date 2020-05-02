@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseAvatarService_Method1 : RMCPacketReply
+    public class RMCPacketResponseAvatarService_Method1 : RMCPResponse
     {
         public List<GR5_AvatarDecorator> decos = new List<GR5_AvatarDecorator>();
         public List<uint> unk1 = new List<uint>();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponsePlayerProfileService_LoadCharacterProfiles : RMCPacketReply
+    public class RMCPacketResponsePlayerProfileService_LoadCharacterProfiles : RMCPResponse
     {
         public GR5_Persona persona;
         public List<GR5_Character> characters;

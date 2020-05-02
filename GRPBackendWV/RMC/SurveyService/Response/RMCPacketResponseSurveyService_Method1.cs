@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseSurveyService_Method1 : RMCPacketReply
+    public class RMCPacketResponseSurveyService_Method1 : RMCPResponse
     {
         public List<GR5_Survey> _outSurveys = new List<GR5_Survey>();
 

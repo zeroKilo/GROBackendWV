@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseStoreService_EnterCoupons : RMCPacketReply
+    public class RMCPacketResponseStoreService_EnterCoupons : RMCPResponse
     {
         public List<GR5_Coupon> coupons = new List<GR5_Coupon>();
         public List<GR5_SKUModifier> mods = new List<GR5_SKUModifier>();

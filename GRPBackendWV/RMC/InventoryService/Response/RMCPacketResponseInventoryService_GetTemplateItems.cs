@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseInventoryService_GetTemplateItems : RMCPacketReply
+    public class RMCPacketResponseInventoryService_GetTemplateItems : RMCPResponse
     {
         public List<GR5_TemplateItem> items = new List<GR5_TemplateItem>();
 

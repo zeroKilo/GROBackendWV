@@ -24,8 +24,8 @@ namespace GRPBackendWV
 
         private void PacketGenerator_Load(object sender, EventArgs e)
         {
-            protoNames.AddRange(Enum.GetNames(typeof(RMCPacket.PROTOCOL)));
-            protoIDs.AddRange(Enum.GetValues(typeof(RMCPacket.PROTOCOL)).Cast<int>());
+            protoNames.AddRange(Enum.GetNames(typeof(RMCP.PROTOCOL)));
+            protoIDs.AddRange(Enum.GetValues(typeof(RMCP.PROTOCOL)).Cast<int>());
             while (true)
             {
                 bool found = false;
@@ -68,13 +68,13 @@ namespace GRPBackendWV
                 q.payload = new byte[0];
                 q.uiSeqId = (ushort)(++client.seqCounter);
                 q.m_bySessionID = client.sessionID;
-                RMCPacket rmc = new RMCPacket();
-                rmc.proto = (RMCPacket.PROTOCOL)protoIDs[toolStripComboBox1.SelectedIndex];
+                RMCP rmc = new RMCP();
+                rmc.proto = (RMCP.PROTOCOL)protoIDs[toolStripComboBox1.SelectedIndex];
                 rmc.methodID = Convert.ToUInt32(toolStripTextBox1.Text);
                 rmc.callID = ++client.callCounter;
-                RMCPacketCustom reply = new RMCPacketCustom();
+                RMCPCustom reply = new RMCPCustom();
                 reply.buffer = payload;
-                RMC.SendCustomPacket(client.udp, q, rmc, client, reply, true, 0);
+                RMC.SendRequestPacket(client.udp, q, rmc, client, reply, true, 0);
             }
         }
     }

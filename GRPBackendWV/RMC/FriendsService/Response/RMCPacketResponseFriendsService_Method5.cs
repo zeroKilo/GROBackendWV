@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseFriendsService_Method5 : RMCPacketReply
+    public class RMCPacketResponseFriendsService_Method5 : RMCPResponse
     {
         public List<GR5_FriendData> list = new List<GR5_FriendData>();
 

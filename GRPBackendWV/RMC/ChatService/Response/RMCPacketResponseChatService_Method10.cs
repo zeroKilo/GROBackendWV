@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseChatService_Method10 : RMCPacketReply
+    public class RMCPacketResponseChatService_Method10 : RMCPResponse
     {
         public List<GR5_ChatChannelMute> list = new List<GR5_ChatChannelMute>();
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseSkillsService_Method3 : RMCPacketReply
+    public class RMCPacketResponseSkillsService_Method3 : RMCPResponse
     {
         public List<GR5_SkillPower> list = new List<GR5_SkillPower>();
 

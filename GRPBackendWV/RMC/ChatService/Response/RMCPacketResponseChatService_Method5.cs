@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseChatService_Method5 : RMCPacketReply
+    public class RMCPacketResponseChatService_Method5 : RMCPResponse
     {
         public GR5_Gathering unk1 = new GR5_Gathering();
         public string unk2;

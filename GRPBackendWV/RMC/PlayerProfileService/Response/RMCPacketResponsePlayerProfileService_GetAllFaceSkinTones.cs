@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponsePlayerProfileService_GetAllFaceSkinTones : RMCPacketReply
+    public class RMCPacketResponsePlayerProfileService_GetAllFaceSkinTones : RMCPResponse
     {
         public List<GR5_FaceSkinTone> list = new List<GR5_FaceSkinTone>();
 

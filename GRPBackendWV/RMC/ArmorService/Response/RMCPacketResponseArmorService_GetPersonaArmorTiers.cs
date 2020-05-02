@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseArmorService_GetPersonaArmorTiers : RMCPacketReply
+    public class RMCPacketResponseArmorService_GetPersonaArmorTiers : RMCPResponse
     {
         public List<GR5_PersonaArmorTier> list = new List<GR5_PersonaArmorTier>();
 

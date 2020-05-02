@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseSkillsService_GetGameClass : RMCPacketReply
+    public class RMCPacketResponseSkillsService_GetGameClass : RMCPResponse
     {
         public List<GR5_GameClass> _GameClassVector = new List<GR5_GameClass>();
 

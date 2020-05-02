@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacketResponseUnlockService_Method3 : RMCPacketReply
+    public class RMCPacketResponseUnlockService_Method3 : RMCPResponse
     {
         public List<GR5_UserUnlockResult> results = new List<GR5_UserUnlockResult>();
 
