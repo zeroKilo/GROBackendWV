@@ -92,5 +92,10 @@ namespace GRPBackendWV
         {
             new UDPProcessor().Show();
         }
+
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+            new SendNotification().Show();
+        }
     }
 }

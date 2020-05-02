@@ -257,6 +257,12 @@
     <Compile Include="RMC\InboxMessageService\Response\RMCPacketResponseInboxMessageService_Method1.cs" />
     <Compile Include="RMC\ProfanityFilterService\Response\RMCPacketResponseProfanityFilterService_GetAllProfaneWords.cs" />
     <Compile Include="RMC\AbilityService\Response\RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades.cs" />
+    <Compile Include="SendNotification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SendNotification.Designer.cs">
+      <DependentUpon>SendNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Server\UDPMainServer.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Program.cs" />
@@ -300,6 +306,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SendNotification.resx">
+      <DependentUpon>SendNotification.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UDPProcessor.resx">
       <DependentUpon>UDPProcessor.cs</DependentUpon>
     </EmbeddedResource>
