@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace GRPBackendWV
 {
-    public class RMCPacktResponseAMM_RequestAMMSearch : RMCPResponse
+    public class RMCPacketResponseAMM_RequestAMMSearch : RMCPResponse
     {
         public uint count = 1;
 
-        public RMCPacktResponseAMM_RequestAMMSearch()
+        public RMCPacketResponseAMM_RequestAMMSearch()
         {
         }
 

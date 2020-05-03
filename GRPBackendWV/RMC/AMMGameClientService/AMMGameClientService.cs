@@ -14,12 +14,16 @@ namespace GRPBackendWV
             RMCPResponse reply;
             switch (rmc.methodID)
             {
+                case 2:
+                    reply = new RMCPacketResponseAMM_GetSessionURLs();
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    break;
                 case 4:
-                    reply = new RMCPacktResponseAMM_RequestAMMSearch();
+                    reply = new RMCPacketResponseAMM_RequestAMMSearch();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 7:
-                    reply = new RMCPacktResponseAMM_Method7();
+                    reply = new RMCPacketResponseAMM_Method7();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:
