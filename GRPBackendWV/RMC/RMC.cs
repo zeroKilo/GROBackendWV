@@ -167,6 +167,9 @@ namespace GRPBackendWV
                 case RMCP.PROTOCOL.OverlordNewsProtocolService:
                     OverlordNewsProtocolService.HandleOverlordNewsProtocolRequest(p, rmc, client);
                     break;
+                case RMCP.PROTOCOL.AMMDedicatedServerService:
+                    AMMDedicatedServerService.HandleAMMDedicatedServerServiceRequest(p, rmc, client);
+                    break;
                 default:
                     WriteLog(1, "Error: No handler implemented for packet protocol " + rmc.proto);
                     break;
@@ -221,6 +224,7 @@ namespace GRPBackendWV
                 case RMCP.PROTOCOL.AbilityService:
                 case RMCP.PROTOCOL.SurveyService:
                 case RMCP.PROTOCOL.OverlordNewsProtocolService:
+                case RMCP.PROTOCOL.AMMDedicatedServerService:
                     break;
                 default:
                     WriteLog(1, "Error: No request reader implemented for packet protocol " + rmc.proto);

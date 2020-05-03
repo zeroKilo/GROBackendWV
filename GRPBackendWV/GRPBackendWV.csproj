@@ -52,9 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\GR5_GameSessionParticipant.cs" />
     <Compile Include="RMC\AbilityService\AbilityService.cs" />
     <Compile Include="RMC\AchievementsService\AchievementsService.cs" />
     <Compile Include="RMC\AdvertisementsService\AdvertisementsService.cs" />
+    <Compile Include="RMC\AMMDedicatedServerService\Response\RMCPacktResponseAMMDS_Method6.cs" />
     <Compile Include="RMC\AMMGameClientService\AMMGameClientService.cs" />
     <Compile Include="RMC\ArmorService\ArmorService.cs" />
     <Compile Include="RMC\AuthenticationService\AuthenticationService.cs" />
@@ -252,6 +254,7 @@
     <Compile Include="RMC\StoreService\StoreService.cs" />
     <Compile Include="RMC\SurveyService\Response\RMCPacketResponseSurveyService_Method1.cs" />
     <Compile Include="RMC\SurveyService\SurveyService.cs" />
+    <Compile Include="RMC\AMMDedicatedServerService\AMMDedicatedServerService.cs" />
     <Compile Include="RMC\UnlockService\Response\RMCPacketResponseUnlockService_Method3.cs" />
     <Compile Include="RMC\UnlockService\Response\RMCPacketResponseUnlockService_Method2.cs" />
     <Compile Include="RMC\UnlockService\UnlockService.cs" />

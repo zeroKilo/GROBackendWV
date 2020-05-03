@@ -20,17 +20,21 @@ namespace GRPBackendWV
 
         private void button1_Click(object sender, EventArgs e)
         {
-            foreach (ClientInfo client in Global.clients)
+            try
             {
-                RMC.SendNotification(client,
-                    Convert.ToUInt32(textBox1.Text),
-                    Convert.ToUInt32(textBox2.Text),
-                    Convert.ToUInt32(textBox3.Text),
-                    Convert.ToUInt32(textBox4.Text),
-                    Convert.ToUInt32(textBox5.Text),
-                    Convert.ToUInt32(textBox6.Text),
-                    textBox7.Text);
+                foreach (ClientInfo client in Global.clients)
+                {
+                    RMC.SendNotification(client,
+                        Convert.ToUInt32(textBox1.Text),
+                        Convert.ToUInt32(textBox2.Text),
+                        Convert.ToUInt32(textBox3.Text),
+                        Convert.ToUInt32(textBox4.Text),
+                        Convert.ToUInt32(textBox5.Text),
+                        Convert.ToUInt32(textBox6.Text),
+                        textBox7.Text);
+                }
             }
+            catch { }
         }
     }
 }

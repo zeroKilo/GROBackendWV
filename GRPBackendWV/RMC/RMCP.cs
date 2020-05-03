@@ -18,6 +18,7 @@ namespace GRPBackendWV
             SecureService = 0xB,
             TelemetryService = 0x24,
             AMMGameClientService = 0x65,
+            AMMDedicatedServerService = 0x66,
             PlayerProfileService = 0x67,
             ArmorService = 0x68,
             InventoryService = 0x69,
