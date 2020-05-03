@@ -13,7 +13,7 @@ namespace GRPBackendWV
         {
             NATTraversalRelayProtocol = 3,            
             GlobalNotificationEventProtocol = 0xE,
-            Unknown15 = 0x15,
+            MatchMakingService = 0x15,
             MessageDeliveryProtocol = 0x1B,
             AuthenticationService = 0xA,
             SecureService = 0xB,

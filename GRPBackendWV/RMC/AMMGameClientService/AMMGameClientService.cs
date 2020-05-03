@@ -22,6 +22,10 @@ namespace GRPBackendWV
                     reply = new RMCPacketResponseAMM_RequestAMMSearch();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
+                case 5:
+                    reply = new RMCPacketResponseAMM_Method5();
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    break;
                 case 7:
                     reply = new RMCPacketResponseAMM_Method7();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
