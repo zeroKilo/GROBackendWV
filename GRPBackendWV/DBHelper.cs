@@ -675,5 +675,37 @@ namespace GRPBackendWV
             }
             return result;
         }
+
+        public static List<GR5_GameClass> GetGameClasses()
+        {
+            List<GR5_GameClass> classes = new List<GR5_GameClass>();
+            List<List<string>> results = GetQueryResults("SELECT * FROM gameclasses");
+            foreach (List<string> entry in results)
+            {
+                GR5_GameClass gclass = new GR5_GameClass();
+                gclass.m_ID = Convert.ToUInt32(entry[1]);
+                gclass.m_ModifierListID = Convert.ToUInt32(entry[2]);
+                gclass.m_OasisID = Convert.ToUInt32(entry[3]);
+                gclass.m_Name = entry[4];
+                gclass.m_LoadoutID = Convert.ToUInt32(entry[5]);
+                List<uint> equipweaponids = new List<uint>();
+                List<List<string>> results2 = GetQueryResults("SELECT * FROM equipweaponids WHERE classid=" + gclass.m_ID); //classid for reference
+                foreach (List<string> entry2 in results2)
+                {
+                    equipweaponids.Add(Convert.ToUInt32(entry2[2]));
+                }
+                gclass.m_EquippableWeaponIDVector = equipweaponids;
+                List<uint> defskillnodes = new List<uint>();
+                results2.Clear();
+                results2 = GetQueryResults("SELECT * FROM defskillnodes WHERE classid=" + gclass.m_ID);
+                foreach (List<string> entry2 in results2)
+                {
+                    defskillnodes.Add(Convert.ToUInt32(entry2[2]));
+                }
+                gclass.m_DefaultSkillNodeIDVector = defskillnodes;
+                classes.Add(gclass);
+            }
+            return classes;
+        }
     }
 }

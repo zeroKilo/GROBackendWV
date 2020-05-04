@@ -202,7 +202,7 @@
       <DependentUpon>PacketGenerator.cs</DependentUpon>
     </Compile>
     <Compile Include="QPacketHandler.cs" />
-    <Compile Include="RMCPacketResponseStoreService_EnterCoupons.cs" />
+    <Compile Include="RMC\StoreService\Response\RMCPacketResponseStoreService_EnterCoupons.cs" />
     <Compile Include="RMC\AvatarService\AvatarService.cs" />
     <Compile Include="RMC\ChatService\ChatService.cs" />
     <Compile Include="RMC\DBGTelemetryService\DBGTelemetryService.cs" />

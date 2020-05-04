@@ -14,8 +14,7 @@ namespace GRPBackendWV
 
         public RMCPacketResponseAMM_GetSessionURLs()
         {
-            string url = "prudps:/address=127.0.0.1;port=21030;CID=1;PID=4096;sid=1;stream=3;type=2";
-            urls.Add(url);
+            urls.Add(Global.sessionURL);
             sessionID = 1;
         }
 

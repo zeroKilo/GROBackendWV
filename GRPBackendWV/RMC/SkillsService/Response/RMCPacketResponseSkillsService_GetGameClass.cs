@@ -13,7 +13,7 @@ namespace GRPBackendWV
 
         public RMCPacketResponseSkillsService_GetGameClass()
         {
-            _GameClassVector.Add(new GR5_GameClass());
+            _GameClassVector = DBHelper.GetGameClasses();
         }
 
         public override byte[] ToBuffer()

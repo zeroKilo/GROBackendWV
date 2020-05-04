@@ -14,6 +14,7 @@ namespace GRPBackendWV
         public static string serverBindAddress = "127.0.0.1";
         public static uint idCounter = 0x12345678;
         public static uint pidCounter = 0x1234;
+        public static string sessionURL = "prudps:/address=127.0.0.1;port=21032;CID=1;PID=4096;sid=1;stream=3;type=2";
         public static List<ClientInfo> clients = new List<ClientInfo>();
 
         public static ClientInfo GetClientByEndPoint(IPEndPoint ep)

@@ -14,7 +14,7 @@ namespace GRPBackendWV
 
         public RMCPacketResponseMatchMakingService_Method10()
         {
-
+            stationURLs.Add(Global.sessionURL);
         }
 
         public override byte[] ToBuffer()
