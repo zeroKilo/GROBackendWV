@@ -388,6 +388,12 @@ namespace GRPBackendWV
 
         public static void SendNotification(ClientInfo client, uint source, uint type, uint subType, uint param1, uint param2, uint param3, string paramStr)
         {
+            WriteLog(1, "Send Notification: [" + source.ToString("X8") + " " 
+                                         + (type * 1000 + subType).ToString("X8") + " " 
+                                         + param1.ToString("X8") + " "
+                                         + param2.ToString("X8") + " "
+                                         + param3.ToString("X8") + " \""
+                                         + paramStr + "\"]");
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, source);
             Helper.WriteU32(m, type * 1000 + subType);

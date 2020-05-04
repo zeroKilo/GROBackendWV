@@ -21,6 +21,7 @@ namespace GRPBackendWV
                 case 4:
                     reply = new RMCPacketResponseAMM_RequestAMMSearch();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    new Thread(tEventMatchStart1).Start(client);
                     break;
                 case 5:
                     reply = new RMCPacketResponseAMM_Method5();
@@ -34,6 +35,21 @@ namespace GRPBackendWV
                     Log.WriteLine(1, "[RMC AMMGameClient] Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
+        }
+
+        public static void tEventMatchStart1(object obj)
+        {
+            ClientInfo client = (ClientInfo)obj;
+            Thread.Sleep(3000);
+            RMC.SendNotification(client, 0, 1002, 2, 1, 1, 0, "amm.new.game");
+            new Thread(tEventMatchStart2).Start(client);
+        }
+
+        public static void tEventMatchStart2(object obj)
+        {
+            ClientInfo client = (ClientInfo)obj;
+            Thread.Sleep(3000);
+            RMC.SendNotification(client, 0, 1002, 3, 1, 1, 0, "");
         }
     }
 }
