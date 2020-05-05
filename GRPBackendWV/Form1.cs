@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuazalWV;
 
 namespace GRPBackendWV
 {
@@ -15,9 +16,8 @@ namespace GRPBackendWV
     {
         public Form1()
         {
-            if (File.Exists("log.txt"))
-                File.Delete("log.txt");
             InitializeComponent();
+            Log.ClearLog();
             Log.box = richTextBox1;
             DBHelper.Init();
             toolStripComboBox1.SelectedIndex = 0;
@@ -25,6 +25,7 @@ namespace GRPBackendWV
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            timer1.Enabled = true;
             TCPServer.Start();
             UDPMainServer.Start();
             UDPRedirectorServer.Start();           
@@ -34,6 +35,7 @@ namespace GRPBackendWV
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
+            timer1.Enabled = false;
             TCPServer.Stop();
             UDPMainServer.Stop();
             UDPRedirectorServer.Stop();
@@ -96,6 +98,11 @@ namespace GRPBackendWV
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
             new SendNotification().Show();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            NotificationQuene.Update();
         }
     }
 }

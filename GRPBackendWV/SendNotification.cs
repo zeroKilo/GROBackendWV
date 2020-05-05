@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuazalWV;
 
 namespace GRPBackendWV
 {
@@ -24,14 +25,16 @@ namespace GRPBackendWV
             {
                 foreach (ClientInfo client in Global.clients)
                 {
-                    RMC.SendNotification(client,
-                        Convert.ToUInt32(textBox1.Text),
-                        Convert.ToUInt32(textBox2.Text),
-                        Convert.ToUInt32(textBox3.Text),
-                        Convert.ToUInt32(textBox4.Text),
-                        Convert.ToUInt32(textBox5.Text),
-                        Convert.ToUInt32(textBox6.Text),
-                        textBox7.Text);
+                    NotificationQuene.AddNotification(
+                        new NotificationQueneEntry(client, 
+                            0,
+                            Convert.ToUInt32(textBox1.Text),
+                            Convert.ToUInt32(textBox2.Text),
+                            Convert.ToUInt32(textBox3.Text),
+                            Convert.ToUInt32(textBox4.Text),
+                            Convert.ToUInt32(textBox5.Text),
+                            Convert.ToUInt32(textBox6.Text),
+                            textBox7.Text));
                 }
             }
             catch { }

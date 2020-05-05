@@ -6,6 +6,7 @@ using System.Net;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using QuazalWV;
 
 namespace GRPBackendWV
 {
@@ -75,7 +76,11 @@ namespace GRPBackendWV
                     break;
                 case QPacket.PACKETTYPE.CONNECT:
                     if (client != null)
+                    {
+                        client.sPID = serverPID;
+                        client.sPort = listenPort;
                         reply = QPacketHandler.ProcessCONNECT(client, p);
+                    }
                     break;
                 case QPacket.PACKETTYPE.DATA:
                     RMC.HandlePacket(listener, p);

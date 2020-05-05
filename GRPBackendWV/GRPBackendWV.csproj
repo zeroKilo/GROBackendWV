@@ -48,15 +48,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DotNetZip">
-      <HintPath>dll\DotNetZip.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite, Version=1.0.105.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>dll\System.Data.SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,113 +60,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\GR5_GameSessionParticipant.cs" />
-    <Compile Include="RMC\AbilityService\AbilityService.cs" />
-    <Compile Include="RMC\AchievementsService\AchievementsService.cs" />
-    <Compile Include="RMC\AdvertisementsService\AdvertisementsService.cs" />
-    <Compile Include="RMC\AMMGameClientService\Response\RMCPacketResponseAMM_GetSessionURLs.cs" />
-    <Compile Include="RMC\AMMDedicatedServerService\Response\RMCPacktResponseAMMDS_Method6.cs" />
-    <Compile Include="RMC\AMMGameClientService\AMMGameClientService.cs" />
-    <Compile Include="RMC\AMMGameClientService\Response\RMCPacketResponseAMM_Method5.cs" />
-    <Compile Include="RMC\ArmorService\ArmorService.cs" />
-    <Compile Include="RMC\AuthenticationService\AuthenticationService.cs" />
-    <Compile Include="Classes\GR5_Ability.cs" />
-    <Compile Include="Classes\GR5_Character.cs" />
-    <Compile Include="Classes\GR5_Coupon.cs" />
-    <Compile Include="Classes\GR5_LeaderboardReadResult.cs" />
-    <Compile Include="Classes\GR5_LeaderboardRow.cs" />
-    <Compile Include="Classes\GR5_NewsHeader.cs" />
-    <Compile Include="Classes\GR5_NewsMessage.cs" />
-    <Compile Include="Classes\GR5_Persona.cs" />
-    <Compile Include="Classes\GR5_PlayerAchievement.cs" />
-    <Compile Include="Classes\GR5_PlayerAchievementGroup.cs" />
-    <Compile Include="Classes\GR5_PlayerStatisticsBlock.cs" />
-    <Compile Include="Classes\GR5_PlayerTimedStatisticsBlock.cs" />
-    <Compile Include="Classes\GR5_SKUModifier.cs" />
-    <Compile Include="Classes\GR5_SKUModifierCondition.cs" />
-    <Compile Include="Classes\GR5_SKUModifierOutput.cs" />
-    <Compile Include="Classes\GR5_Statistic.cs" />
-    <Compile Include="Classes\GR5_TemplateItem.cs" />
-    <Compile Include="Classes\GR5_TimedStatistic.cs" />
-    <Compile Include="Classes\GR5_AbilityUpgrade.cs" />
-    <Compile Include="Classes\GR5_PassiveAbility.cs" />
-    <Compile Include="Classes\GR5_AbilityUpgradeSlot.cs" />
-    <Compile Include="Classes\GR5_PersonaAbilityUpgrade.cs" />
-    <Compile Include="Classes\GR5_Achievement.cs" />
-    <Compile Include="Classes\GR5_AchievementGroup.cs" />
-    <Compile Include="Classes\GR5_AchievementCategory.cs" />
-    <Compile Include="Classes\GR5_Advertisement.cs" />
-    <Compile Include="Classes\GR5_AdContainer.cs" />
-    <Compile Include="Classes\GR5_AdServer.cs" />
-    <Compile Include="Classes\GR5_AdStaticList.cs" />
-    <Compile Include="Classes\GR5_AdRecommender.cs" />
-    <Compile Include="Classes\GR5_AMM_PlaylistEntry.cs" />
-    <Compile Include="Classes\GR5_AMM_Playlist.cs" />
-    <Compile Include="Classes\GR5_AMM_Modifier.cs" />
-    <Compile Include="Classes\GR5_AMM_Map.cs" />
-    <Compile Include="Classes\GR5_AMM_GameMode.cs" />
-    <Compile Include="Classes\GR5_AMM_GameDetail.cs" />
-    <Compile Include="Classes\GR5_ArmorTier.cs" />
-    <Compile Include="Classes\GR5_ArmorInsert.cs" />
-    <Compile Include="Classes\GR5_ArmorItem.cs" />
-    <Compile Include="Classes\GR5_ArmorInsertSlot.cs" />
-    <Compile Include="Classes\GR5_PersonaArmorTier.cs" />
-    <Compile Include="Classes\GR5_AvatarDecorator.cs" />
-    <Compile Include="Classes\GR5_AvatarPortrait.cs" />
-    <Compile Include="Classes\GR5_BasicPersona.cs" />
-    <Compile Include="Classes\GR5_ChatChannelMute.cs" />
-    <Compile Include="Classes\GR5_Gathering.cs" />
-    <Compile Include="Classes\GR5_FriendData.cs" />
-    <Compile Include="Classes\GR5_InboxMessage.cs" />
-    <Compile Include="Classes\GR5_ApplyItem.cs" />
-    <Compile Include="Classes\GR5_LoadoutKit.cs" />
-    <Compile Include="Classes\GR5_Boost.cs" />
-    <Compile Include="Classes\GR5_Consumable.cs" />
-    <Compile Include="Classes\GR5_UserItem.cs" />
-    <Compile Include="Classes\GR5_InventoryBagSlot.cs" />
-    <Compile Include="Classes\GR5_InventoryBag.cs" />
-    <Compile Include="Classes\GR5_Leaderboard.cs" />
-    <Compile Include="Classes\GR5_RCHeader.cs" />
-    <Compile Include="Classes\GR5_LootItem.cs" />
-    <Compile Include="Classes\GR5_Mission.cs" />
-    <Compile Include="Classes\GR5_MissionArc.cs" />
-    <Compile Include="Classes\GR5_MissionSequence.cs" />
-    <Compile Include="Classes\GR5_PersonaMission.cs" />
-    <Compile Include="Classes\GR5_OperatorVariable.cs" />
-    <Compile Include="Classes\GR5_PriorityBroadcast.cs" />
-    <Compile Include="Classes\GR5_PartyMember.cs" />
-    <Compile Include="Classes\GR5_Invitee.cs" />
-    <Compile Include="Classes\GR5_Invitation.cs" />
-    <Compile Include="Classes\GR5_Notification.cs" />
-    <Compile Include="Classes\GR5_FaceSkinTone.cs" />
-    <Compile Include="Classes\GR5_ProfaneWord.cs" />
-    <Compile Include="Classes\GR5_Level.cs" />
-    <Compile Include="Classes\GR5_PveArchetype.cs" />
-    <Compile Include="Classes\GR5_Reward.cs" />
-    <Compile Include="Classes\GR5_RewardUserResult.cs" />
-    <Compile Include="Classes\GR5_TimeInfo.cs" />
-    <Compile Include="Classes\GR5_TimeZoneInfo.cs" />
-    <Compile Include="Classes\GR5_GameClass.cs" />
-    <Compile Include="Classes\GR5_SkillModifier.cs" />
-    <Compile Include="Classes\GR5_Skill.cs" />
-    <Compile Include="Classes\GR5_SkillUpgrade.cs" />
-    <Compile Include="Classes\GR5_SkillPower.cs" />
-    <Compile Include="Classes\GR5_SkillModifierList.cs" />
-    <Compile Include="Classes\GR5_DesignerStatistics.cs" />
-    <Compile Include="Classes\GR5_InstancedStatistic.cs" />
-    <Compile Include="Classes\GR5_PlayerInstancedStatisticsBlock.cs" />
-    <Compile Include="Classes\GR5_SKUItem.cs" />
-    <Compile Include="Classes\GR5_SKU.cs" />
-    <Compile Include="Classes\GR5_Survey.cs" />
-    <Compile Include="Classes\GR5_Unlock.cs" />
-    <Compile Include="Classes\GR5_UserUnlockResult.cs" />
-    <Compile Include="Classes\GR5_WeaponConfiguration.cs" />
-    <Compile Include="Classes\GR5_WeaponXPLevelInfo.cs" />
-    <Compile Include="Classes\GR5_Weapon.cs" />
-    <Compile Include="Classes\GR5_Component.cs" />
-    <Compile Include="Classes\StdMaps.cs" />
-    <Compile Include="ClientInfo.cs" />
-    <Compile Include="DBHelper.cs" />
     <Compile Include="DecryptTool.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,9 +72,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Global.cs" />
-    <Compile Include="Helper.cs" />
-    <Compile Include="Kerberos\KerberosTicket.cs" />
     <Compile Include="LogFilter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,117 +84,6 @@
     <Compile Include="PacketGenerator.Designer.cs">
       <DependentUpon>PacketGenerator.cs</DependentUpon>
     </Compile>
-    <Compile Include="QPacketHandler.cs" />
-    <Compile Include="RMC\StoreService\Response\RMCPacketResponseStoreService_EnterCoupons.cs" />
-    <Compile Include="RMC\AvatarService\AvatarService.cs" />
-    <Compile Include="RMC\ChatService\ChatService.cs" />
-    <Compile Include="RMC\DBGTelemetryService\DBGTelemetryService.cs" />
-    <Compile Include="RMC\FriendsService\FriendsService.cs" />
-    <Compile Include="RMC\InboxMessageService\InboxMessageService.cs" />
-    <Compile Include="RMC\InventoryService\InventoryService.cs" />
-    <Compile Include="RMC\LeaderboardService\LeaderboardService.cs" />
-    <Compile Include="RMC\LoadoutService\LoadoutService.cs" />
-    <Compile Include="RMC\LootService\LootService.cs" />
-    <Compile Include="RMC\MatchMakingService\Response\RMCPacketResponseMatchMakingService_Method10.cs" />
-    <Compile Include="RMC\MissionService\MissionService.cs" />
-    <Compile Include="RMC\OpsProtocolService\OpsProtocolService.cs" />
-    <Compile Include="RMC\OverlordNewsProtocolService\OverlordNewsProtocolService.cs" />
-    <Compile Include="RMC\PartyService\PartyService.cs" />
-    <Compile Include="RMC\PlayerProfileService\PlayerProfileService.cs" />
-    <Compile Include="RMC\ProfanityFilterService\ProfanityFilterService.cs" />
-    <Compile Include="RMC\ProgressionService\ProgressionService.cs" />
-    <Compile Include="RMC\PveArchetypeService\PveArchetypeService.cs" />
-    <Compile Include="RMC\RewardService\RewardService.cs" />
-    <Compile Include="RMC\RMCPCustom.cs" />
-    <Compile Include="RMC\AbilityService\Response\RMCPacketResponseAbilityService_Method2.cs" />
-    <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method4.cs" />
-    <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method2.cs" />
-    <Compile Include="RMC\AdvertisementsService\Response\RMCPacketResponseAdvertisementsService_Method2.cs" />
-    <Compile Include="RMC\AMMGameClientService\Response\RMCPacketResponseAMM_RequestAMMSearch.cs" />
-    <Compile Include="RMC\ArmorService\Response\RMCPacketResponseArmorService_GetPersonaArmorTiers.cs" />
-    <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_Method1.cs" />
-    <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_Method5.cs" />
-    <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_Method10.cs" />
-    <Compile Include="RMC\DBGTelemetryService\Response\RMCPacketResponseDBGTelemetry_DBGAMMClientInfo.cs" />
-    <Compile Include="RMC\FriendsService\Response\RMCPacketResponseFriendsService_Method5.cs" />
-    <Compile Include="RMC\InboxMessageService\Response\RMCPacketResponseInboxMessageService_Method2.cs" />
-    <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetUserInventoryByBagType.cs" />
-    <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_Method3.cs" />
-    <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_Method2.cs" />
-    <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits.cs" />
-    <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetAllApplyItems.cs" />
-    <Compile Include="RMC\ArmorService\Response\RMCPacketResponseArmorService_GetTemplateArmor.cs" />
-    <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_Method2.cs" />
-    <Compile Include="RMC\AdvertisementsService\Response\RMCPacketResponseAdvertisementsService_Method1.cs" />
-    <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_Method9.cs" />
-    <Compile Include="RMC\LeaderboardService\Response\RMCPacketResponseLeaderboardService_Method3.cs" />
-    <Compile Include="RMC\LeaderboardService\Response\RMCPacketResponseLeaderboardService_Method4.cs" />
-    <Compile Include="RMC\LeaderboardService\Response\RMCPacketResponseLeaderboardService_Method2.cs" />
-    <Compile Include="RMC\LoadoutService\Response\RMCPacketResponseLoadout_Method5.cs" />
-    <Compile Include="RMC\LootService\Response\RMCPacketResponseLootService_Method4.cs" />
-    <Compile Include="RMC\LootService\Response\RMCPacketResponseLootService_Method5.cs" />
-    <Compile Include="RMC\MissionService\Response\RMCPacketResponseMissionService_Method3.cs" />
-    <Compile Include="RMC\OverlordNewsProtocolService\Response\RMCPacketResponseOverlordNewsProtocol_Method1.cs" />
-    <Compile Include="RMC\PartyService\Response\RMCPacketResponsePartyService_GetInviteList.cs" />
-    <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_Method11.cs" />
-    <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_GetAllFaceSkinTones.cs" />
-    <Compile Include="RMC\PveArchetypeService\Response\RMCPacketResponsePveArchetypeService_Method1.cs" />
-    <Compile Include="RMC\RewardService\Response\RMCPacketResponseRewardService_Method2.cs" />
-    <Compile Include="RMC\RewardService\Response\RMCPacketResponseRewardService_Method3.cs" />
-    <Compile Include="RMC\RMCPResponseEmpty.cs" />
-    <Compile Include="RMC\ServerInfoService\ServerInfoService.cs" />
-    <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_Method3.cs" />
-    <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_Method4.cs" />
-    <Compile Include="RMC\SkillsService\SkillService.cs" />
-    <Compile Include="RMC\StatisticsService\Response\RMCPacketResponseStatisticsService_Method4.cs" />
-    <Compile Include="RMC\StatisticsService\Response\RMCPacketResponseStatisticsService_Method2.cs" />
-    <Compile Include="RMC\StatisticsService\Response\RMCPacketResponseStatisticsService_Method3.cs" />
-    <Compile Include="RMC\StatisticsService\Response\RMCPacketResponseStatisticsService_Method1.cs" />
-    <Compile Include="RMC\StatisticsService\StatisticsService.cs" />
-    <Compile Include="RMC\StoreService\Response\RMCPacketResponseStoreService_GetShoppingDetails.cs" />
-    <Compile Include="RMC\StoreService\StoreService.cs" />
-    <Compile Include="RMC\SurveyService\Response\RMCPacketResponseSurveyService_Method1.cs" />
-    <Compile Include="RMC\SurveyService\SurveyService.cs" />
-    <Compile Include="RMC\AMMDedicatedServerService\AMMDedicatedServerService.cs" />
-    <Compile Include="RMC\MatchMakingService\MatchMakingService.cs" />
-    <Compile Include="RMC\UnlockService\Response\RMCPacketResponseUnlockService_Method3.cs" />
-    <Compile Include="RMC\UnlockService\Response\RMCPacketResponseUnlockService_Method2.cs" />
-    <Compile Include="RMC\UnlockService\UnlockService.cs" />
-    <Compile Include="RMC\WeaponProficiencyService\Response\RMCPacketResponseWeaponProficiencyService_Method1.cs" />
-    <Compile Include="RMC\WeaponProficiencyService\Response\RMCPacketResponseWeaponProficiencyService_Method3.cs" />
-    <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_GetModifiers.cs" />
-    <Compile Include="RMC\StoreService\Response\RMCPacketResponseStoreService_GetSKUs.cs" />
-    <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_GetSkills.cs" />
-    <Compile Include="RMC\AchievementsService\Response\RMCPacketResponseAchievementsService_MethodD.cs" />
-    <Compile Include="RMC\OpsProtocolService\Response\RMCPacketResponseOpsProtocolService_GetAllPriorityBroadcasts.cs" />
-    <Compile Include="RMC\ServerInfoService\Response\RMCPacketResponseServerInfo_GetServerTime.cs" />
-    <Compile Include="RMC\ServerInfoService\Response\RMCPacketResponseServerInfo_Method1.cs" />
-    <Compile Include="RMC\TelemetryService\Request\RMCPacketRequestTelemetry_Method1.cs" />
-    <Compile Include="RMC\TelemetryService\Response\RMCPacketResponseTelemetry_TrackGameSession.cs" />
-    <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_LoadCharacterProfiles.cs" />
-    <Compile Include="RMC\WeaponProficiencyService\WeaponProficiencyService.cs" />
-    <Compile Include="RMC\WeaponService\Response\RMCPacketResponseWeaponService_GetTemplateWeaponMaps.cs" />
-    <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetTemplateItems.cs" />
-    <Compile Include="RMC\LootService\Response\RMCPacketResponseLootService_GetLootStatic.cs" />
-    <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_GetPlayerStatuses.cs" />
-    <Compile Include="RMC\MissionService\Response\RMCPacketResponseMissionService_GetAllMissionTemplate.cs" />
-    <Compile Include="RMC\PartyService\Response\RMCPacketResponsePartyService_GetInviteeList.cs" />
-    <Compile Include="RMC\SecureService\Request\RMCPacketRequestRegisterEx.cs" />
-    <Compile Include="RMC\SecureService\Response\RMCPacketResponseRegisterEx.cs" />
-    <Compile Include="RMC\AMMGameClientService\Response\RMCPacketResponseAMM_Method7.cs" />
-    <Compile Include="RMC\ProgressionService\Response\RMCPacketResponseProgressionService_GetLevels.cs" />
-    <Compile Include="RMC\RewardService\Response\RMCPacketResponseRewardService_GetRewards.cs" />
-    <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_GetGameClass.cs" />
-    <Compile Include="RMC\LoadoutService\Response\RMCPacketResponseLoadout_GetLoadoutPowers.cs" />
-    <Compile Include="RMC\UnlockService\Response\RMCPacketResponseUnlockService_GetCurrentUserUnlock.cs" />
-    <Compile Include="RMC\OpsProtocolService\Response\RMCPacketResponseOpsProtocolService_GetAllOperatorVariables.cs" />
-    <Compile Include="RMC\ServerInfoService\Response\RMCPacketResponseServerInfo_Method2.cs" />
-    <Compile Include="RMC\LeaderboardService\Response\RMCPacketResponseLeaderboardService_GetLeaderboards.cs" />
-    <Compile Include="RMC\InboxMessageService\Response\RMCPacketResponseInboxMessageService_Method1.cs" />
-    <Compile Include="RMC\ProfanityFilterService\Response\RMCPacketResponseProfanityFilterService_GetAllProfaneWords.cs" />
-    <Compile Include="RMC\AbilityService\Response\RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades.cs" />
-    <Compile Include="RMC\SecureService\SecureService.cs" />
-    <Compile Include="RMC\WeaponService\WeaponService.cs" />
     <Compile Include="SendNotification.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,21 +91,10 @@
       <DependentUpon>SendNotification.cs</DependentUpon>
     </Compile>
     <Compile Include="Server\UDPMainServer.cs" />
-    <Compile Include="Log.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RMC\AuthenticationService\Request\RMCPacketRequestLoginCustomData.cs" />
-    <Compile Include="RMC\AuthenticationService\Request\RMCPacketRequestRequestTicket.cs" />
-    <Compile Include="RMC\AuthenticationService\Response\RMCPacketResponseLoginCustomData.cs" />
-    <Compile Include="RMC\AuthenticationService\Response\RMCPacketResponseRequestTicket.cs" />
-    <Compile Include="RMC\RMCPRequest.cs" />
-    <Compile Include="RMC\RMC.cs" />
-    <Compile Include="RMC\RMCP.cs" />
-    <Compile Include="RMC\RMCPResponse.cs" />
     <Compile Include="Server\TCPServer.cs" />
-    <Compile Include="QPacket.cs" />
     <Compile Include="Server\UDPRedirectorServer.cs" />
-    <Compile Include="RMC\TelemetryService\TelemetryService.cs" />
     <Compile Include="UDPProcessor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -385,6 +146,10 @@
     <ProjectReference Include="..\Be.Windows.Forms.HexBox\Be.Windows.Forms.HexBox.csproj">
       <Project>{26c5f25f-b450-4caf-ad8b-b8d11ae73457}</Project>
       <Name>Be.Windows.Forms.HexBox</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QuazalWV\QuazalWV.csproj">
+      <Project>{8330545e-0887-434a-a0de-343b90aea2ce}</Project>
+      <Name>QuazalWV</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
