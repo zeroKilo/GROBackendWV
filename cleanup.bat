@@ -46,6 +46,7 @@ RD /S /Q "GRPDedicatedServerWV\bin\Debug"
 DEL /Q /F /S "GRPDedicatedServerWV\bin\Release\*.pdb"
 DEL /Q /F /S "GRPDedicatedServerWV\bin\Release\*.config"
 DEL /Q /F /S "GRPDedicatedServerWV\bin\Release\*.vshost.*"
+DEL /Q /F /S "GRPDedicatedServerWV\bin\Release\*.txt"
 DEL /Q /F /S "GRPBackendWV.sdf"
 RD /S /Q "ipch"
 streams.exe -s -d

@@ -76,6 +76,8 @@ namespace GRPDedicatedServerWV
                 case QPacket.PACKETTYPE.CONNECT:
                     if (client != null)
                     {
+                        client.sPID = 1000;
+                        client.sPort = listenPort;
                         reply = QPacketHandler.ProcessCONNECT(client, p);
                     }
                     break;
