@@ -146,6 +146,8 @@
     <Compile Include="Classes\StdMaps.cs" />
     <Compile Include="ClientInfo.cs" />
     <Compile Include="DBHelper.cs" />
+    <Compile Include="DO\DO.cs" />
+    <Compile Include="DO\DO_GetParticipantsRequest.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Kerberos\KerberosTicket.cs" />

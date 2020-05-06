@@ -40,7 +40,8 @@ namespace QuazalWV
             CONNECT,
             DATA,
             DISCONNECT,
-            PING
+            PING,
+            NATPING
         }
 
         public class VPort
@@ -110,7 +111,8 @@ namespace QuazalWV
             payloadSize = (ushort)payload.Length;
             if (payload != null && payload.Length > 0)
             {
-                payload = Helper.Decrypt(Global.keyDATA, payload);
+                if (m_oSourceVPort.type == STREAMTYPE.OldRVSec)
+                    payload = Helper.Decrypt(Global.keyDATA, payload);
                 usesCompression = payload[0] != 0;
                 if (usesCompression)
                 {
@@ -159,7 +161,8 @@ namespace QuazalWV
                     m2.WriteByte(count);
                     m2.Write(buff, 0, buff.Length);
                     tmpPayload = m2.ToArray();
-                    tmpPayload = Helper.Encrypt(Global.keyDATA, tmpPayload);
+                    if (type != PACKETTYPE.NATPING)
+                        tmpPayload = Helper.Encrypt(Global.keyDATA, tmpPayload);
 
                 }
                 else
@@ -168,7 +171,8 @@ namespace QuazalWV
                     m2.WriteByte(0);
                     m2.Write(tmpPayload, 0, tmpPayload.Length);
                     tmpPayload = m2.ToArray();
-                    tmpPayload = Helper.Encrypt(Global.keyDATA, tmpPayload);
+                    if (type != PACKETTYPE.NATPING)
+                        tmpPayload = Helper.Encrypt(Global.keyDATA, tmpPayload);
                 }
             }
             if (flags.Contains(PACKETFLAG.FLAG_HAS_SIZE))
@@ -182,11 +186,11 @@ namespace QuazalWV
             byte[] result = new byte[buff.Length + 1];
             for (int i = 0; i < buff.Length; i++)
                 result[i] = buff[i];
-            result[buff.Length] = checkSum = CalcChecksum(buff);
+            result[buff.Length] = checkSum = MakeChecksum(buff);
             return result;
         }
 
-        private byte CalcChecksum(byte[] Data)
+       /* private byte CalcChecksum(byte[] Data)
         {
             int[] Buf = new int[Data.Length >> 2];
             Buffer.BlockCopy(Data, 0, Buf, 0, Buf.Length << 2);
@@ -196,6 +200,48 @@ namespace QuazalWV
             if ((Data.Length & 3) != 0)
                 Checksum += Data.Skip(Data.Length & ~3).Sum(b => b);
             return (byte)(Checksum + Sum.Sum(b => b));
+        }*/
+
+        private byte GetProtocolSetting(byte proto)
+        {
+            switch (proto)
+            {
+                case 3:
+                    return 0xE3;
+                case 1:
+                case 5:
+                default:
+                    return 0x00;
+            }
+        }
+
+        private byte MakeChecksum(byte[] data)
+        {
+            byte result = 0;
+            byte setting = GetProtocolSetting((byte)(data[0] >> 4));
+            uint tmp = 0;
+            for (int i = 0; i < data.Length / 4; i++)
+                tmp += BitConverter.ToUInt32(data, i * 4);
+            uint leftOver = (uint)data.Length & 3;
+            uint processed = 0;
+            byte tmp2 = 0, tmp3 = 0, tmp4 = 0;
+            uint pos = (uint)data.Length - leftOver;
+            if (leftOver >= 2)
+            {
+                processed = 2;
+                tmp2 = data[pos];
+                tmp3 = data[pos + 1];
+                pos += 2;
+            }
+            if (processed >= leftOver)
+                tmp4 = setting;
+            else
+                tmp4 = (byte)(setting + data[pos]);
+            result = (byte)((byte)(tmp >> 24) +
+                     (byte)(tmp >> 16) +
+                     (byte)(tmp >> 8) +
+                     (byte)tmp + tmp2 + tmp3 + tmp4);
+            return result;
         }
 
         private void ExtractFlags()

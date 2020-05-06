@@ -67,7 +67,7 @@ namespace GRPBackendWV
             WriteLog(10, "received : " + p.ToStringDetailed());
             QPacket reply = null;
             ClientInfo client = null;
-            if (p.type != QPacket.PACKETTYPE.SYN)
+            if (p.type != QPacket.PACKETTYPE.SYN && p.type != QPacket.PACKETTYPE.NATPING)
                 client = Global.GetClientByIDrecv(p.m_uiSignature);
             switch (p.type)
             {
@@ -77,8 +77,8 @@ namespace GRPBackendWV
                 case QPacket.PACKETTYPE.CONNECT:
                     if (client != null)
                     {
-                        client.sPID = serverPID;
-                        client.sPort = listenPort;
+                        client.sPID = UDPMainServer.serverPID;
+                        client.sPort = UDPMainServer.listenPort;
                         reply = QPacketHandler.ProcessCONNECT(client, p);
                     }
                     break;
@@ -93,12 +93,15 @@ namespace GRPBackendWV
                     if (client != null)
                         reply = QPacketHandler.ProcessPING(client, p);
                     break;
+                case QPacket.PACKETTYPE.NATPING:
+                    reply = QPacketHandler.ProcessNATPING(p);
+                    break;
             }
-            if (reply != null && client != null)
-                Send(reply, client);
+            if (reply != null)
+                Send(reply, ep);
         }
 
-        public static void Send(QPacket p, ClientInfo client)
+        public static void Send(QPacket p, IPEndPoint ep)
         {
             byte[] data = p.toBuffer();
             StringBuilder sb = new StringBuilder();
@@ -107,7 +110,7 @@ namespace GRPBackendWV
             WriteLog(5, "send : " + p.ToStringShort());
             WriteLog(10, "send : " + sb.ToString());
             WriteLog(10, "send : " + p.ToStringDetailed());
-            listener.Send(data, data.Length, client.ep);
+            listener.Send(data, data.Length, ep);
         }
 
         private static void WriteLog(int priority, string s)

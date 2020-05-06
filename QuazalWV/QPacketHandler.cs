@@ -103,5 +103,23 @@ namespace QuazalWV
             reply.payload = new byte[0];
             return reply;
         }
+
+        public static QPacket ProcessNATPING(QPacket p)
+        {
+            QPacket reply = new QPacket();
+            reply.m_oSourceVPort = p.m_oDestinationVPort;
+            reply.m_oDestinationVPort = p.m_oSourceVPort;
+            reply.m_oSourceVPort.type = QPacket.STREAMTYPE.NATEcho;
+            reply.m_oDestinationVPort.type = QPacket.STREAMTYPE.NATEcho;
+            reply.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_ACK };
+            reply.type = QPacket.PACKETTYPE.NATPING;
+            reply.m_bySessionID = p.m_bySessionID;
+            reply.m_uiSignature = p.m_uiSignature;
+            reply.uiSeqId = p.uiSeqId;
+            reply.m_uiConnectionSignature = p.m_uiConnectionSignature;
+            reply.payload = p.payload;
+            reply.usesCompression = false;
+            return reply;
+        }
     }
 }

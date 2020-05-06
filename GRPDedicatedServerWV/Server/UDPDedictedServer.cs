@@ -66,7 +66,7 @@ namespace GRPDedicatedServerWV
             WriteLog(10, "received : " + p.ToStringDetailed());
             QPacket reply = null;
             ClientInfo client = null;
-            if (p.type != QPacket.PACKETTYPE.SYN)
+            if (p.type != QPacket.PACKETTYPE.SYN && p.type != QPacket.PACKETTYPE.NATPING)
                 client = Global.GetClientByIDrecv(p.m_uiSignature);
             switch (p.type)
             {
@@ -76,13 +76,16 @@ namespace GRPDedicatedServerWV
                 case QPacket.PACKETTYPE.CONNECT:
                     if (client != null)
                     {
-                        client.sPID = 1000;
-                        client.sPort = listenPort;
+                        p.payload = new byte[0];
+                        p.payloadSize = 0;
                         reply = QPacketHandler.ProcessCONNECT(client, p);
                     }
                     break;
                 case QPacket.PACKETTYPE.DATA:
-                    RMC.HandlePacket(listener, p);
+                    if(p.m_oSourceVPort.type == QPacket.STREAMTYPE.OldRVSec)
+                        RMC.HandlePacket(listener, p);
+                    if (p.m_oSourceVPort.type == QPacket.STREAMTYPE.DO)
+                        DO.HandlePacket(listener, p);
                     break;
                 case QPacket.PACKETTYPE.DISCONNECT:
                     if (client != null)
@@ -92,12 +95,15 @@ namespace GRPDedicatedServerWV
                     if (client != null)
                         reply = QPacketHandler.ProcessPING(client, p);
                     break;
+                case QPacket.PACKETTYPE.NATPING:
+                    reply = QPacketHandler.ProcessNATPING(p);
+                    break;
             }
-            if (reply != null && client != null)
-                Send(reply, client);
+            if (reply != null)
+                Send(reply, ep);
         }
 
-        public static void Send(QPacket p, ClientInfo client)
+        public static void Send(QPacket p, IPEndPoint ep)
         {
             byte[] data = p.toBuffer();
             StringBuilder sb = new StringBuilder();
@@ -106,7 +112,7 @@ namespace GRPDedicatedServerWV
             WriteLog(5, "send : " + p.ToStringShort());
             WriteLog(10, "send : " + sb.ToString());
             WriteLog(10, "send : " + p.ToStringDetailed());
-            listener.Send(data, data.Length, client.ep);
+            listener.Send(data, data.Length, ep);
         }
 
         private static void WriteLog(int priority, string s)
