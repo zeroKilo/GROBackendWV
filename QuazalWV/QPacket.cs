@@ -161,7 +161,7 @@ namespace QuazalWV
                     m2.WriteByte(count);
                     m2.Write(buff, 0, buff.Length);
                     tmpPayload = m2.ToArray();
-                    if (type != PACKETTYPE.NATPING)
+                    if (type != PACKETTYPE.NATPING && m_oSourceVPort.type != STREAMTYPE.DO)
                         tmpPayload = Helper.Encrypt(Global.keyDATA, tmpPayload);
 
                 }
@@ -189,18 +189,6 @@ namespace QuazalWV
             result[buff.Length] = checkSum = MakeChecksum(buff);
             return result;
         }
-
-       /* private byte CalcChecksum(byte[] Data)
-        {
-            int[] Buf = new int[Data.Length >> 2];
-            Buffer.BlockCopy(Data, 0, Buf, 0, Buf.Length << 2);
-            byte[] Sum = new byte[4];
-            Buffer.BlockCopy(new long[] { Buf.Sum(x => (long)x) }, 0, Sum, 0, 4);
-            int Checksum = (byte)Encoding.ASCII.GetBytes(Global.keyCheckSum).Sum(b => b);
-            if ((Data.Length & 3) != 0)
-                Checksum += Data.Skip(Data.Length & ~3).Sum(b => b);
-            return (byte)(Checksum + Sum.Sum(b => b));
-        }*/
 
         private byte GetProtocolSetting(byte proto)
         {

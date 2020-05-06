@@ -8,9 +8,10 @@ namespace QuazalWV
 {
     public static class DO_GetParticipantsRequest
     {
-        public static void HandlePacket(ClientInfo client, QPacket p)
+        public static byte[] HandlePacket(ClientInfo client, byte[] data)
         {
             Log.WriteLine(1, "[DO] Handling GetParticipantsRequest...");
+            return new byte[] { 0x15, 0x00, 0x00, 0x00, 0x00};
         }
     }
 }
