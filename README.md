@@ -14,6 +14,7 @@ to make the game use this backend make sure following lines are set in yeti.ini
 - DareParserWV : Extracts custom RTTI information found in different exe and dll
 - DTBReaderWV : converts .dtb files to .csv
 - GRPBackendWV : experimental backend for GRP
+- GRPDedicatedServerWV : experimental DS for GRP
 - GRPExplorerWV : tool to browse the yeti.big file for game content
 - GRPMemoryToolWV : tool to browse various stuctures like lists and trees in memory
 - GRP_Hook : proxy dll for easy code injection, hooks currently fire script event functions
@@ -28,6 +29,9 @@ to make the game use this backend make sure following lines are set in yeti.ini
 
 
 [![Alt text](https://img.youtube.com/vi/YsnXCel8Nso/0.jpg)](https://www.youtube.com/watch?v=YsnXCel8Nso)
+
+
+[![Alt text](https://img.youtube.com/vi/3CwcyioQDR0/0.jpg)](https://www.youtube.com/watch?v=3CwcyioQDR0)
 
 Credits:
 
