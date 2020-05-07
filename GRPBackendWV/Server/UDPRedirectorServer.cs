@@ -16,6 +16,7 @@ namespace GRPBackendWV
         public static bool _exit = false;
         public static ushort listenPort = 21030;
         private static UdpClient listener;
+        public static ushort _skipNextNAT = 0xFFFF;
 
         public static void Start()
         {
@@ -57,59 +58,7 @@ namespace GRPBackendWV
 
         public static void ProcessPacket(byte[] data, IPEndPoint ep)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in data)
-                sb.Append(b.ToString("X2") + " ");
-            QPacket p = new QPacket(data);
-            WriteLog(5, "received : " + p.ToStringShort());
-            WriteLog(10, "received : " + sb.ToString());
-            WriteLog(10, "received : " + p.ToStringDetailed());
-            QPacket reply = null;
-            ClientInfo client = null;
-            if (p.type != QPacket.PACKETTYPE.SYN && p.type != QPacket.PACKETTYPE.NATPING)
-                client = Global.GetClientByIDrecv(p.m_uiSignature);
-            switch (p.type)
-            {
-                case QPacket.PACKETTYPE.SYN:
-                    reply = QPacketHandler.ProcessSYN(p, ep, out client);
-                    break;
-                case QPacket.PACKETTYPE.CONNECT:
-                    if (client != null)
-                    {
-                        client.sPID = UDPMainServer.serverPID;
-                        client.sPort = UDPMainServer.listenPort;
-                        reply = QPacketHandler.ProcessCONNECT(client, p);
-                    }
-                    break;
-                case QPacket.PACKETTYPE.DATA:
-                    RMC.HandlePacket(listener, p);
-                    break;
-                case QPacket.PACKETTYPE.DISCONNECT:
-                    if (client != null)
-                        reply = QPacketHandler.ProcessDISCONNECT(client, p);
-                    break;
-                case QPacket.PACKETTYPE.PING:
-                    if (client != null)
-                        reply = QPacketHandler.ProcessPING(client, p);
-                    break;
-                case QPacket.PACKETTYPE.NATPING:
-                    reply = QPacketHandler.ProcessNATPING(p);
-                    break;
-            }
-            if (reply != null)
-                Send(reply, ep);
-        }
-
-        public static void Send(QPacket p, IPEndPoint ep)
-        {
-            byte[] data = p.toBuffer();
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in data)
-                sb.Append(b.ToString("X2") + " ");
-            WriteLog(5, "send : " + p.ToStringShort());
-            WriteLog(10, "send : " + sb.ToString());
-            WriteLog(10, "send : " + p.ToStringDetailed());
-            listener.Send(data, data.Length, ep);
+            QPacketHandler.ProcessPacket("UDP Redirector", data, ep, listener, UDPMainServer.serverPID, UDPMainServer.listenPort);
         }
 
         private static void WriteLog(int priority, string s)

@@ -14,7 +14,7 @@ namespace QuazalWV
         public static string serverBindAddress = "127.0.0.1";
         public static uint idCounter = 0x12345678;
         public static uint pidCounter = 0x1234;
-        public static string sessionURL = "prudp:/address=127.0.0.1;port=21032;RVCID=166202;sid=15;type=2";
+        public static string sessionURL = "prudp:/address=127.0.0.1;port=21032;RVCID=166202";
         public static List<ClientInfo> clients = new List<ClientInfo>();
 
         public static ClientInfo GetClientByEndPoint(IPEndPoint ep)

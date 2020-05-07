@@ -13,6 +13,11 @@ namespace QuazalWV
     {
         public static Random rnd = new Random();
 
+        public static ulong MakeTimestamp()
+        {
+            return (ulong)new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks;
+        }
+
         public static bool ReadBool(Stream s)
         {
             return s.ReadByte() != 0;

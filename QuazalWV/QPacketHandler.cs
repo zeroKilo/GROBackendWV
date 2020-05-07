@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net.Sockets;
 using System.Collections.Generic;
 using System.Net;
 using System.Linq;
@@ -104,22 +105,93 @@ namespace QuazalWV
             return reply;
         }
 
-        public static QPacket ProcessNATPING(QPacket p)
+
+        public static List<ulong> timeToIgnore = new List<ulong>();
+
+        public static void ProcessPacket(string source, byte[] data, IPEndPoint ep, UdpClient listener, uint serverPID, ushort listenPort, bool removeConnectPayload = false)
         {
-            QPacket reply = new QPacket();
-            reply.m_oSourceVPort = p.m_oDestinationVPort;
-            reply.m_oDestinationVPort = p.m_oSourceVPort;
-            reply.m_oSourceVPort.type = QPacket.STREAMTYPE.NATEcho;
-            reply.m_oDestinationVPort.type = QPacket.STREAMTYPE.NATEcho;
-            reply.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_ACK };
-            reply.type = QPacket.PACKETTYPE.NATPING;
-            reply.m_bySessionID = p.m_bySessionID;
-            reply.m_uiSignature = p.m_uiSignature;
-            reply.uiSeqId = p.uiSeqId;
-            reply.m_uiConnectionSignature = p.m_uiConnectionSignature;
-            reply.payload = p.payload;
-            reply.usesCompression = false;
-            return reply;
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in data)
+                sb.Append(b.ToString("X2") + " ");
+            QPacket p = new QPacket(data);
+            Log.WriteLine(5, "["+source+"] received : " + p.ToStringShort());
+            Log.WriteLine(10, "["+source+"] received : " + sb.ToString());
+            Log.WriteLine(10, "["+source+"] received : " + p.ToStringDetailed());
+            QPacket reply = null;
+            ClientInfo client = null;
+            if (p.type != QPacket.PACKETTYPE.SYN && p.type != QPacket.PACKETTYPE.NATPING)
+                client = Global.GetClientByIDrecv(p.m_uiSignature);
+            switch (p.type)
+            {
+                case QPacket.PACKETTYPE.SYN:
+                    reply = QPacketHandler.ProcessSYN(p, ep, out client);
+                    break;
+                case QPacket.PACKETTYPE.CONNECT:
+                    if (client != null)
+                    {
+                        client.sPID = serverPID;
+                        client.sPort = listenPort;
+                        if (removeConnectPayload)
+                        {
+                            p.payload = new byte[0];
+                            p.payloadSize = 0;
+                        }
+                        reply = QPacketHandler.ProcessCONNECT(client, p);
+                    }
+                    break;
+                case QPacket.PACKETTYPE.DATA:
+                    if (p.m_oSourceVPort.type == QPacket.STREAMTYPE.OldRVSec)
+                        RMC.HandlePacket(listener, p);
+                    if (p.m_oSourceVPort.type == QPacket.STREAMTYPE.DO)
+                        DO.HandlePacket(listener, p);
+                    break;
+                case QPacket.PACKETTYPE.DISCONNECT:
+                    if (client != null)
+                        reply = QPacketHandler.ProcessDISCONNECT(client, p);
+                    break;
+                case QPacket.PACKETTYPE.PING:
+                    if (client != null)
+                        reply = QPacketHandler.ProcessPING(client, p);
+                    break;
+                case QPacket.PACKETTYPE.NATPING:
+                    ulong time = BitConverter.ToUInt64(p.payload, 5);
+                    if (timeToIgnore.Contains(time))
+                        timeToIgnore.Remove(time);
+                    else
+                    {
+                        reply = p;
+                        MemoryStream m = new MemoryStream();
+                        byte b = (byte)(reply.payload[0] == 1 ? 0 : 1);
+                        m.WriteByte(b);
+                        Helper.WriteU32(m, 166202); //RVCID
+                        Helper.WriteU64(m, time);
+                        reply.payload = m.ToArray();
+                        Send(source, reply, ep, listener);
+                        m = new MemoryStream();
+                        b = (byte)(b == 1 ? 0 : 1);
+                        m.WriteByte(b);
+                        Helper.WriteU32(m, 166202); //RVCID
+                        time = Helper.MakeTimestamp();
+                        timeToIgnore.Add(time);
+                        Helper.WriteU64(m, Helper.MakeTimestamp());
+                        reply.payload = m.ToArray();
+                    }
+                    break;
+            }
+            if (reply != null)
+                Send(source, reply, ep, listener);
+        }
+
+        public static void Send(string source, QPacket p, IPEndPoint ep, UdpClient listener)
+        {
+            byte[] data = p.toBuffer();
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in data)
+                sb.Append(b.ToString("X2") + " ");
+            Log.WriteLine(5, "[" + source + "] send : " + p.ToStringShort());
+            Log.WriteLine(10, "[" + source + "] send : " + sb.ToString());
+            Log.WriteLine(10, "[" + source + "] send : " + p.ToStringDetailed());
+            listener.Send(data, data.Length, ep);
         }
     }
 }

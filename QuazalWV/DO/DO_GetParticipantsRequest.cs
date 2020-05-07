@@ -11,7 +11,7 @@ namespace QuazalWV
         public static byte[] HandlePacket(ClientInfo client, byte[] data)
         {
             Log.WriteLine(1, "[DO] Handling GetParticipantsRequest...");
-            return new byte[] { 0x15, 0x00, 0x00, 0x00, 0x00};
+            return new byte[] { 0x15, 0x01, 0x00, 0x00, 0x00, 0x00};
         }
     }
 }

@@ -109,7 +109,7 @@ namespace QuazalWV
                 pl.WriteByte(Helper.ReadU8(m));
             payload = pl.ToArray();
             payloadSize = (ushort)payload.Length;
-            if (payload != null && payload.Length > 0)
+            if (payload != null && payload.Length > 0 && type != PACKETTYPE.SYN && m_oSourceVPort.type != STREAMTYPE.NAT)
             {
                 if (m_oSourceVPort.type == STREAMTYPE.OldRVSec)
                     payload = Helper.Decrypt(Global.keyDATA, payload);
@@ -148,7 +148,7 @@ namespace QuazalWV
             if(type == PACKETTYPE.DATA)
                 Helper.WriteU8(m, m_byPartNumber);
             byte[] tmpPayload = payload;
-            if (tmpPayload != null && tmpPayload.Length > 0)
+            if (tmpPayload != null && tmpPayload.Length > 0 && type != PACKETTYPE.SYN && m_oSourceVPort.type != STREAMTYPE.NAT)
             {
                 if (usesCompression)
                 {
@@ -161,8 +161,6 @@ namespace QuazalWV
                     m2.WriteByte(count);
                     m2.Write(buff, 0, buff.Length);
                     tmpPayload = m2.ToArray();
-                    if (type != PACKETTYPE.NATPING && m_oSourceVPort.type != STREAMTYPE.DO)
-                        tmpPayload = Helper.Encrypt(Global.keyDATA, tmpPayload);
 
                 }
                 else
@@ -171,9 +169,9 @@ namespace QuazalWV
                     m2.WriteByte(0);
                     m2.Write(tmpPayload, 0, tmpPayload.Length);
                     tmpPayload = m2.ToArray();
-                    if (type != PACKETTYPE.NATPING)
-                        tmpPayload = Helper.Encrypt(Global.keyDATA, tmpPayload);
                 }
+                if (m_oSourceVPort.type == STREAMTYPE.OldRVSec)
+                    tmpPayload = Helper.Encrypt(Global.keyDATA, tmpPayload);
             }
             if (flags.Contains(PACKETFLAG.FLAG_HAS_SIZE))
                 Helper.WriteU16(m, (ushort)tmpPayload.Length);
@@ -190,7 +188,7 @@ namespace QuazalWV
             return result;
         }
 
-        private byte GetProtocolSetting(byte proto)
+        private static byte GetProtocolSetting(byte proto)
         {
             switch (proto)
             {
@@ -203,10 +201,14 @@ namespace QuazalWV
             }
         }
 
-        private byte MakeChecksum(byte[] data)
+        public static byte MakeChecksum(byte[] data, byte proto = 0xFF)
         {
             byte result = 0;
-            byte setting = GetProtocolSetting((byte)(data[0] >> 4));
+            byte setting;
+            if (proto == 0xFF)
+                setting = GetProtocolSetting((byte)(data[0] >> 4));
+            else
+                setting = proto;
             uint tmp = 0;
             for (int i = 0; i < data.Length / 4; i++)
                 tmp += BitConverter.ToUInt32(data, i * 4);

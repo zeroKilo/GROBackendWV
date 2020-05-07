@@ -31,9 +31,16 @@ namespace GRPBackendWV
                 StringBuilder sb = new StringBuilder();
                 foreach (string l in lines)
                 {
-                    byte[] data = makeArray(l.Trim());
-                    QPacket qp = new QPacket(data);
-                    sb.AppendLine(qp.ToStringDetailed());
+                    try
+                    {
+                        byte[] data = makeArray(l.Trim());
+                        QPacket qp = new QPacket(data);
+                        sb.AppendLine(qp.ToStringDetailed());
+                    }
+                    catch
+                    {
+                        sb.AppendLine("Cant process: " + l);
+                    }
                 }
                 rtb1.Text = sb.ToString();
             }
@@ -46,6 +53,16 @@ namespace GRPBackendWV
             for (int i = 0; i < s.Length / 2; i++)
                 m.WriteByte(Convert.ToByte(s.Substring(i * 2, 2), 16));
             return m.ToArray();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+               MessageBox.Show(QPacket.MakeChecksum(makeArray(toolStripTextBox1.Text.Trim().Replace(" ",""))).ToString("X2"));
+            }
+            catch
+            { }
         }
     }
 }

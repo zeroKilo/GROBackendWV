@@ -57,62 +57,7 @@ namespace GRPDedicatedServerWV
 
         public static void ProcessPacket(byte[] data, IPEndPoint ep)
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in data)
-                sb.Append(b.ToString("X2") + " ");
-            QPacket p = new QPacket(data);
-            WriteLog(5, "received : " + p.ToStringShort());
-            WriteLog(10, "received : " + sb.ToString());
-            WriteLog(10, "received : " + p.ToStringDetailed());
-            QPacket reply = null;
-            ClientInfo client = null;
-            if (p.type != QPacket.PACKETTYPE.SYN && p.type != QPacket.PACKETTYPE.NATPING)
-                client = Global.GetClientByIDrecv(p.m_uiSignature);
-            switch (p.type)
-            {
-                case QPacket.PACKETTYPE.SYN:
-                    reply = QPacketHandler.ProcessSYN(p, ep, out client);
-                    break;
-                case QPacket.PACKETTYPE.CONNECT:
-                    if (client != null)
-                    {
-                        p.payload = new byte[0];
-                        p.payloadSize = 0;
-                        reply = QPacketHandler.ProcessCONNECT(client, p);
-                    }
-                    break;
-                case QPacket.PACKETTYPE.DATA:
-                    if(p.m_oSourceVPort.type == QPacket.STREAMTYPE.OldRVSec)
-                        RMC.HandlePacket(listener, p);
-                    if (p.m_oSourceVPort.type == QPacket.STREAMTYPE.DO)
-                        DO.HandlePacket(listener, p);
-                    break;
-                case QPacket.PACKETTYPE.DISCONNECT:
-                    if (client != null)
-                        reply = QPacketHandler.ProcessDISCONNECT(client, p);
-                    break;
-                case QPacket.PACKETTYPE.PING:
-                    if (client != null)
-                        reply = QPacketHandler.ProcessPING(client, p);
-                    break;
-                case QPacket.PACKETTYPE.NATPING:
-                    reply = QPacketHandler.ProcessNATPING(p);
-                    break;
-            }
-            if (reply != null)
-                Send(reply, ep);
-        }
-
-        public static void Send(QPacket p, IPEndPoint ep)
-        {
-            byte[] data = p.toBuffer();
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in data)
-                sb.Append(b.ToString("X2") + " ");
-            WriteLog(5, "send : " + p.ToStringShort());
-            WriteLog(10, "send : " + sb.ToString());
-            WriteLog(10, "send : " + p.ToStringDetailed());
-            listener.Send(data, data.Length, ep);
+            QPacketHandler.ProcessPacket("UDP Dedicated Server", data, ep, listener, 0,0, true);
         }
 
         private static void WriteLog(int priority, string s)

@@ -64,10 +64,11 @@ namespace QuazalWV
             if (replyPayload != null)
             {
                 p.uiSeqId++;
-                p.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_NEED_ACK };
+                p.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_RELIABLE , QPacket.PACKETFLAG.FLAG_NEED_ACK, QPacket.PACKETFLAG.FLAG_HAS_SIZE };
                 m = new MemoryStream();
                 Helper.WriteU32(m, (uint)replyPayload.Length);
                 m.Write(replyPayload, 0, replyPayload.Length);
+                m.WriteByte(QPacket.MakeChecksum(m.ToArray(), 1));
                 p.payload = m.ToArray();
                 p.payloadSize = (ushort)p.payload.Length;
                 Send(p, client);
