@@ -148,6 +148,7 @@
     <Compile Include="DBHelper.cs" />
     <Compile Include="DO\DO.cs" />
     <Compile Include="DO\DO_GetParticipantsRequest.cs" />
+    <Compile Include="DO\DO_JoinResponseMessage.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Kerberos\KerberosTicket.cs" />

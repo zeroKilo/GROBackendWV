@@ -64,14 +64,14 @@ namespace GRPBackendWV
             {
                 if (line.Length == 0 || line.Trim() == "")
                     continue;
-                //bool found = false;
-                //foreach (string skip in skippers)
-                //    if (line.Contains(skip))
-                //    {
-                //        found = true;
-                //        break;
-                //    }
-                //if (!found)
+                bool found = false;
+                foreach (string skip in skippers)
+                    if (line.Contains(skip))
+                    {
+                        found = true;
+                        break;
+                    }
+                if (!found)
                     sb.AppendLine(line);
             }
             richTextBox1.Text = sb.ToString();

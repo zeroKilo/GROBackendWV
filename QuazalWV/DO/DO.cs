@@ -52,6 +52,9 @@ namespace QuazalWV
             byte[] replyPayload = null;
             switch (method)
             {
+                case METHOD.JoinRequest:
+                    replyPayload = DO_JoinResponseMessage.HandlePacket(client, data);
+                    break;
                 case METHOD.GetParticipantsRequest:
                     replyPayload = DO_GetParticipantsRequest.HandlePacket(client, data);
                     break;
