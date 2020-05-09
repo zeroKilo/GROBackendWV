@@ -201,14 +201,11 @@ namespace QuazalWV
             }
         }
 
-        public static byte MakeChecksum(byte[] data, byte proto = 0xFF)
+        public static byte MakeChecksum(byte[] data, byte setting = 0xFF)
         {
             byte result = 0;
-            byte setting;
-            if (proto == 0xFF)
+            if (setting == 0xFF)
                 setting = GetProtocolSetting((byte)(data[0] >> 4));
-            else
-                setting = proto;
             uint tmp = 0;
             for (int i = 0; i < data.Length / 4; i++)
                 tmp += BitConverter.ToUInt32(data, i * 4);

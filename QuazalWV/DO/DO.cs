@@ -48,15 +48,15 @@ namespace QuazalWV
             uint packetSize = Helper.ReadU32(m);
             byte[] data = new byte[packetSize];
             m.Read(data, 0, (int)packetSize);
-            METHOD proto = (METHOD)data[0];
+            METHOD method = (METHOD)data[0];
             byte[] replyPayload = null;
-            switch (proto)
+            switch (method)
             {
                 case METHOD.GetParticipantsRequest:
                     replyPayload = DO_GetParticipantsRequest.HandlePacket(client, data);
                     break;
                 default:
-                    Log.WriteLine(1, "[DO] Error: Unknown Method 0x" + proto.ToString("X2"), Color.Red);
+                    Log.WriteLine(1, "[DO] Error: Unknown Method 0x" + data[0].ToString("X2"), Color.Red);
                     return;
             }
             p.m_uiSignature = client.IDsend;
@@ -64,11 +64,11 @@ namespace QuazalWV
             if (replyPayload != null)
             {
                 p.uiSeqId++;
-                p.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_RELIABLE , QPacket.PACKETFLAG.FLAG_NEED_ACK, QPacket.PACKETFLAG.FLAG_HAS_SIZE };
+                p.flags = new List<QPacket.PACKETFLAG>() {QPacket.PACKETFLAG.FLAG_NEED_ACK};
                 m = new MemoryStream();
                 Helper.WriteU32(m, (uint)replyPayload.Length);
                 m.Write(replyPayload, 0, replyPayload.Length);
-                m.WriteByte(QPacket.MakeChecksum(m.ToArray(), 1));
+                m.WriteByte((byte)QPacket.MakeChecksum(m.ToArray(), 0));
                 p.payload = m.ToArray();
                 p.payloadSize = (ushort)p.payload.Length;
                 Send(p, client);

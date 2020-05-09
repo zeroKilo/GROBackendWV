@@ -45,7 +45,16 @@ namespace GRPBackendWV
             "BLOOMBERG Trace - Quitting analysis",
             "[NetZ]   Job CallContextRegister::CheckExpiredCalls",
             "[NetZ]   Period:",
-            "RENDEZVOUS => # INFO                                             -"
+            "RENDEZVOUS => # INFO                                             -",
+            "LOAD type(",
+            "[NetZ] (S:unknown) The scheduler ",
+            "[NetZ] (S:unknown)   Job ",
+            "[NetZ] (S:unknown)   	State ",
+            "[NetZ] (S:unknown)   	Execution ",
+            "EndPoint::",
+            "[NetZ] Job ",
+            "[NetZ]   Job ",
+            "[NetZ]   	Current step",
         };
 
         private void Process(string[] lines)
@@ -55,14 +64,14 @@ namespace GRPBackendWV
             {
                 if (line.Length == 0 || line.Trim() == "")
                     continue;
-                bool found = false;
-                foreach (string skip in skippers)
-                    if (line.Contains(skip))
-                    {
-                        found = true;
-                        break;
-                    }
-                if (!found)
+                //bool found = false;
+                //foreach (string skip in skippers)
+                //    if (line.Contains(skip))
+                //    {
+                //        found = true;
+                //        break;
+                //    }
+                //if (!found)
                     sb.AppendLine(line);
             }
             richTextBox1.Text = sb.ToString();
