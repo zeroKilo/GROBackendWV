@@ -147,8 +147,11 @@
     <Compile Include="ClientInfo.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="DO\DO.cs" />
+    <Compile Include="DO\DO_BundleMessage.cs" />
+    <Compile Include="DO\DO_CreateAndPromoteDuplicaMessage.cs" />
     <Compile Include="DO\DO_GetParticipantsRequest.cs" />
     <Compile Include="DO\DO_JoinResponseMessage.cs" />
+    <Compile Include="DO\DO_MigrationMessage.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Kerberos\KerberosTicket.cs" />

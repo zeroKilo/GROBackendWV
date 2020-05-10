@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,13 @@ namespace QuazalWV
         public static byte[] HandlePacket(ClientInfo client, byte[] data)
         {
             Log.WriteLine(1, "[DO] Handling JoinRequest...");
-            return new byte[] { 0x01, 0x01, 0x04, 0x00, 0xC0, 0x05, 0x78, 0x56, 0x34, 0x12, 0x00, 0x00 };
+            MemoryStream m = new MemoryStream();
+            m.WriteByte(1);
+            m.WriteByte(1);
+            Helper.WriteU32(m, 0x5c00004);
+            Helper.WriteU32(m, 0x5c00001);
+            Helper.WriteU16(m, 0);
+            return m.ToArray();
         }
     }
 }
