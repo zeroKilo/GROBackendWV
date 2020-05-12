@@ -61,7 +61,7 @@ namespace QuazalWV
                 case METHOD.JoinRequest:
                     msgs = new List<byte[]>();
                     msgs.Add(DO_JoinResponseMessage.HandlePacket(client, data));
-                    //msgs.Add(DO_CreateAndPromoteDuplicaMessage.HandlePacket(client, data));
+                    msgs.Add(DO_CreateAndPromoteDuplicaMessage.HandlePacket(client, data));
                     //msgs.Add(DO_MigrationMessage.HandlePacket(client, data));
                     replyPayload = DO_BundleMessage.Create(client, msgs, 0x923C1F07);
                     break;

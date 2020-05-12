@@ -143,6 +143,7 @@
     <Compile Include="Classes\GR5_Weapon.cs" />
     <Compile Include="Classes\GR5_WeaponConfiguration.cs" />
     <Compile Include="Classes\GR5_WeaponXPLevelInfo.cs" />
+    <Compile Include="Classes\StationInfo.cs" />
     <Compile Include="Classes\StdMaps.cs" />
     <Compile Include="ClientInfo.cs" />
     <Compile Include="DBHelper.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="DO\DO_GetParticipantsRequest.cs" />
     <Compile Include="DO\DO_JoinResponseMessage.cs" />
     <Compile Include="DO\DO_MigrationMessage.cs" />
+    <Compile Include="Classes\DS_ConnectionInfo.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Kerberos\KerberosTicket.cs" />
@@ -290,6 +292,7 @@
     <Compile Include="RMC\WeaponProficiencyService\WeaponProficiencyService.cs" />
     <Compile Include="RMC\WeaponService\Response\RMCPacketResponseWeaponService_GetTemplateWeaponMaps.cs" />
     <Compile Include="RMC\WeaponService\WeaponService.cs" />
+    <Compile Include="Classes\StationIdentification.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
