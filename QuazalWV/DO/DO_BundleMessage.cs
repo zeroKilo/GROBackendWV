@@ -15,7 +15,7 @@ namespace QuazalWV
             return new byte[0];
         }
 
-        public static byte[] Create(ClientInfo client, List<byte[]> data, uint unk1, uint unk2)
+        public static byte[] Create(ClientInfo client, List<byte[]> data, uint unk1)
         {
             MemoryStream m = new MemoryStream();
             m.WriteByte(0xF);
@@ -24,8 +24,8 @@ namespace QuazalWV
                 Helper.WriteU32(m, (uint)buff.Length);
                 m.Write(buff, 0, buff.Length);
             }
+            Helper.WriteU32(m, 0);
             Helper.WriteU32(m, unk1);
-            Helper.WriteU32(m, unk2);
             return m.ToArray();
         }
     }
