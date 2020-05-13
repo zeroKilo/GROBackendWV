@@ -62,8 +62,8 @@ namespace QuazalWV
                     msgs = new List<byte[]>();
                     msgs.Add(DO_JoinResponseMessage.HandlePacket(client, data));
                     msgs.Add(DO_CreateAndPromoteDuplicaMessage.HandlePacket(client, data));
-                    //msgs.Add(DO_MigrationMessage.HandlePacket(client, data));
-                    replyPayload = DO_BundleMessage.Create(client, msgs, 0x923C1F07);
+                    msgs.Add(DO_MigrationMessage.HandlePacket(client, data));
+                    replyPayload = DO_BundleMessage.Create(client, msgs);
                     break;
                 case METHOD.GetParticipantsRequest:
                     replyPayload = DO_GetParticipantsRequest.HandlePacket(client, data);
