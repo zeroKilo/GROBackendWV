@@ -22,7 +22,7 @@ namespace QuazalWV
                     reply = new RMCPacketResponseAMM_RequestAMMSearch();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     NotificationQuene.AddNotification(new NotificationQueneEntry(client, 3000, 0, 1002, 2, 1, 1, 0, "amm.new.game"));
-                    NotificationQuene.AddNotification(new NotificationQueneEntry(client, 6000, 0, 1002, 3, 1, 1, 0, ""));
+                    NotificationQuene.AddNotification(new NotificationQueneEntry(client, 6000, 0, 1002, 3, 1, 1, 0, "1"));
                     break;
                 case 5:
                     reply = new RMCPacketResponseAMM_Method5();

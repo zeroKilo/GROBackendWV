@@ -10,7 +10,7 @@ namespace QuazalWV
     public static class DO_JoinResponseMessage
     {
         public static byte successByte = 1;
-        public static uint clientStationID = 0x5c00004;
+        public static uint clientStationID = 0x5c00002;
         public static uint endPointConnectionID = 0x5c00001;
         public static byte[] HandlePacket(ClientInfo client, byte[] data)
         {

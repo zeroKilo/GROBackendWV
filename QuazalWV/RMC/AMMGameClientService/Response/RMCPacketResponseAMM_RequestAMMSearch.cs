@@ -9,7 +9,7 @@ namespace QuazalWV
 {
     public class RMCPacketResponseAMM_RequestAMMSearch : RMCPResponse
     {
-        public uint count = 1;
+        public uint matchID = 1;
 
         public RMCPacketResponseAMM_RequestAMMSearch()
         {
@@ -18,7 +18,7 @@ namespace QuazalWV
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, count);
+            Helper.WriteU32(m, matchID);
             return m.ToArray();
         }
 

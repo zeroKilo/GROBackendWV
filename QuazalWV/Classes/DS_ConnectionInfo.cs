@@ -9,9 +9,9 @@ namespace QuazalWV
 {
     public class DS_ConnectionInfo
     {
-        public byte m_bURLInitialized;
-        public string m_strStationURL1 = "prudp:/address=255.0.0.0;port=4";
-        public string m_strStationURL2 = "";
+        public byte m_bURLInitialized = 1;
+        public string m_strStationURL1 = "prudp:/address=127.0.0.1;port=5004;RVCID=166202";
+        public string m_strStationURL2 = "prudp:/address=127.0.0.1;port=5004;sid=15;type=2;RVCID=166202";
         public string m_strStationURL3 = "";
         public string m_strStationURL4 = "";
         public string m_strStationURL5 = "";

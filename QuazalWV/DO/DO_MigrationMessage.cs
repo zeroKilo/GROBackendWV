@@ -10,9 +10,9 @@ namespace QuazalWV
     public static class DO_MigrationMessage
     {
         public static ushort callID = 3;
-        public static uint fromStationID = 0x5C00001;
-        public static uint recipientStationID = 0x5C00004;
-        public static uint toStationID = 0x5C00004;
+        public static uint fromStationID;
+        public static uint recipientStationID;
+        public static uint toStationID;
         public static byte unknown;
 
         public static byte[] HandlePacket(ClientInfo client, byte[] data)
