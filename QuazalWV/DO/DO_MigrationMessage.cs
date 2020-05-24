@@ -10,10 +10,11 @@ namespace QuazalWV
     public static class DO_MigrationMessage
     {
         public static ushort callID = 3;
-        public static uint fromStationID;
-        public static uint recipientStationID;
-        public static uint toStationID;
-        public static byte unknown;
+        public static uint fromStationID = 0x5C00002;
+        public static uint dupObj = 0x5C00002;
+        public static uint toStationID = 0x5C00001;
+        public static byte unk = 3;
+        public static uint unk2;
 
         public static byte[] HandlePacket(ClientInfo client, byte[] data)
         {
@@ -22,9 +23,10 @@ namespace QuazalWV
             m.WriteByte(0x11);
             Helper.WriteU16(m, callID);
             Helper.WriteU32(m, fromStationID);
-            Helper.WriteU32(m, recipientStationID);
+            Helper.WriteU32(m, dupObj);
             Helper.WriteU32(m, toStationID);
-            m.WriteByte(unknown);
+            m.WriteByte(unk);
+            Helper.WriteU32(m, unk2);
             return m.ToArray();
         }
     }

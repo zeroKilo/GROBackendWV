@@ -9,7 +9,7 @@ namespace QuazalWV
 {
     public static class DupCreateMasterStation
     {
-        public static byte[] Create()
+        public static byte[] CreatePayload()
         {
             MemoryStream m = new MemoryStream(); 
             m.WriteByte(1);
