@@ -32,6 +32,21 @@ namespace QuazalWV
             EOS = 0xFF
         }
 
+        public enum CLASS
+        {
+            DOC_DefaultCell = 07,
+            DOC_SessionClock = 13,
+            DOC_SES_cl_Player_NetZ = 19,
+            DOC_SES_cl_RDVInfo_NetZ = 20,
+            DOC_SES_cl_SessionInfos = 21,
+            DOC_RootDO = 22,
+            DOC_Station = 23,
+            DOC_Session = 24,
+            DOC_IDGenerator = 25,
+            DOC_PromotionReferee = 26,
+            DOC_NET_MessageBroker = 35,
+        }
+
         public static void HandlePacket(UdpClient udp, QPacket p)
         {
             ClientInfo client = Global.GetClientByIDrecv(p.m_uiSignature);
@@ -53,25 +68,21 @@ namespace QuazalWV
 
         public static void ProcessMessage(ClientInfo client, QPacket p, byte[] data)
         {
-            List<byte[]> msgs;
             METHOD method = (METHOD)data[0];
             byte[] replyPayload = null;
             switch (method)
             {
                 case METHOD.JoinRequest:
-                    msgs = new List<byte[]>();
-                    msgs.Add(DO_JoinResponseMessage.HandlePacket(client, data));
-                    //msgs.Add(DO_CreateAndPromoteDuplicaMessage.HandlePacket(client, data));
-                    //msgs.Add(DO_CreateDuplica.Create(client, 0x5C00001, 0x5C00001, 2, DupCreateMasterStation.CreatePayload()));
-                    //msgs.Add(DO_CreateDuplica.Create(client, 0x3400001, 0x5C00001, 2, new byte[]{}));
-                    msgs.Add(DO_MigrationMessage.HandlePacket(client, data));
-                    replyPayload = DO_BundleMessage.Create(client, msgs);
+                    replyPayload = DO_JoinRequestMessage.HandleMessage(client, data);
                     break;
                 case METHOD.GetParticipantsRequest:
-                    replyPayload = DO_GetParticipantsRequest.HandlePacket(client, data);
+                    replyPayload = DO_GetParticipantsRequestMessage.HandleMessage(client, data);
+                    break;
+                case METHOD.FetchRequest:
+                    replyPayload = DO_FetchRequestMessage.HandleMessage(client, data);
                     break;
                 default:
-                    Log.WriteLine(1, "[DO] Error: Unknown Method 0x" + data[0].ToString("X2"), Color.Red);
+                    Log.WriteLine(1, "[DO] Error: Unknown Method 0x" + data[0].ToString("X2") + " (" + method +")", Color.Red);
                     return;
             }
             p.m_uiSignature = client.IDsend;

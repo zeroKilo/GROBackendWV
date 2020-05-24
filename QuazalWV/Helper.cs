@@ -13,6 +13,11 @@ namespace QuazalWV
     {
         public static Random rnd = new Random();
 
+        public static uint MakeDupObj(DO.CLASS cls, uint id)
+        {
+            return (uint)((byte)cls << 22) | id;
+        }
+
         public static ulong MakeTimestamp()
         {
             return (ulong)new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).Ticks;
