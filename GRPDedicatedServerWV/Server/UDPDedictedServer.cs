@@ -21,6 +21,7 @@ namespace GRPDedicatedServerWV
         {
             _exit = false;
             new Thread(tMainThread).Start();
+            QuazalWV.Global.uptime.Restart();
         }
 
         public static void Stop()
@@ -31,6 +32,7 @@ namespace GRPDedicatedServerWV
             }
             if (listener != null)
                 listener.Close();
+            QuazalWV.Global.uptime.Stop();
         }
 
         public static void tMainThread(object obj)

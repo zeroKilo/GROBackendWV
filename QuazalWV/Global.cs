@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace QuazalWV
@@ -16,6 +17,7 @@ namespace QuazalWV
         public static uint pidCounter = 0x1234;
         public static string sessionURL = "prudp:/address=127.0.0.1;port=21032;RVCID=166202";
         public static List<ClientInfo> clients = new List<ClientInfo>();
+        public static Stopwatch uptime = new Stopwatch();
 
         public static ClientInfo GetClientByEndPoint(IPEndPoint ep)
         {
