@@ -14,7 +14,7 @@ namespace QuazalWV
             Log.WriteLine(1, "[DO] Handling DO_JoinRequestMessage...");
             List<byte[]> msgs = new List<byte[]>();
             msgs.Add(DO_JoinResponseMessage.Create(1, Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1)));
-            msgs.Add(DO_MigrationMessage.Create(3, Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 3));
+            msgs.Add(DO_MigrationMessage.Create(1, Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 3));
             return DO_BundleMessage.Create(client, msgs);
         }
     }

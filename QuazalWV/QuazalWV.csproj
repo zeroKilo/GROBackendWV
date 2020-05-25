@@ -158,7 +158,10 @@
     <Compile Include="DO\DO_JoinResponseMessage.cs" />
     <Compile Include="DO\DO_MigrationMessage.cs" />
     <Compile Include="Classes\DS_ConnectionInfo.cs" />
+    <Compile Include="DO\DO_RMCRequestMessage.cs" />
+    <Compile Include="DO\DO_RMCResponseMessage.cs" />
     <Compile Include="DO\Payloads\Payload_Station.cs" />
+    <Compile Include="DO\Payloads\Payload_SyncResponse.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Kerberos\KerberosTicket.cs" />

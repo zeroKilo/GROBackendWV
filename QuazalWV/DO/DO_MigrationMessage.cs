@@ -17,6 +17,7 @@ namespace QuazalWV
 
         public static byte[] Create(ushort callID, uint fromStationID, uint dupObj, uint toStationID, byte version)
         {
+            Log.WriteLine(1, "[DO] Creating DO_MigrationMessage");
             MemoryStream m = new MemoryStream();
             m.WriteByte(0x11);
             Helper.WriteU16(m, callID);

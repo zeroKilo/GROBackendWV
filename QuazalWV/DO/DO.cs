@@ -63,10 +63,14 @@ namespace QuazalWV
             uint packetSize = Helper.ReadU32(m);
             byte[] data = new byte[packetSize];
             m.Read(data, 0, (int)packetSize);
-            ProcessMessage(client, p, data);
+            byte[] replyPayload = ProcessMessage(client, p, data);
+            p.m_uiSignature = client.IDsend;
+            SendACK(p, client);
+            if (replyPayload != null)
+                SendMessage(client, p, replyPayload);
         }
 
-        public static void ProcessMessage(ClientInfo client, QPacket p, byte[] data)
+        public static byte[] ProcessMessage(ClientInfo client, QPacket p, byte[] data)
         {
             METHOD method = (METHOD)data[0];
             byte[] replyPayload = null;
@@ -81,14 +85,14 @@ namespace QuazalWV
                 case METHOD.FetchRequest:
                     replyPayload = DO_FetchRequestMessage.HandleMessage(client, data);
                     break;
+                case METHOD.RMCCall:
+                    replyPayload = DO_RMCRequestMessage.HandleMessage(client, data);
+                    break;
                 default:
                     Log.WriteLine(1, "[DO] Error: Unknown Method 0x" + data[0].ToString("X2") + " (" + method +")", Color.Red);
-                    return;
+                    break;
             }
-            p.m_uiSignature = client.IDsend;
-            SendACK(p, client);
-            if (replyPayload != null)
-                SendMessage(client, p, replyPayload);
+            return replyPayload;
         }
 
 
