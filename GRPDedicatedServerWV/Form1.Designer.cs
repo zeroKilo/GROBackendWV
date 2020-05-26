@@ -48,7 +48,7 @@
             this.richTextBox1.Font = new System.Drawing.Font("Courier New", 8.25F);
             this.richTextBox1.Location = new System.Drawing.Point(0, 25);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(806, 300);
+            this.richTextBox1.Size = new System.Drawing.Size(784, 336);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
@@ -63,7 +63,7 @@
             this.toolStripButton6});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(806, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(784, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -122,7 +122,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(806, 325);
+            this.ClientSize = new System.Drawing.Size(784, 361);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "Form1";

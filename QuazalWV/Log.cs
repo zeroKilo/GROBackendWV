@@ -44,8 +44,8 @@ namespace QuazalWV
                         box.AppendText(stamp + s + "\n");
                         box.SelectionColor = box.ForeColor;
                         box.ScrollToCaret();
+                        File.AppendAllText(logFileName, stamp + s + "\n");
                     }
-                    File.AppendAllText(logFileName, stamp + s + "\n");
                 }));
             }
             catch { }
