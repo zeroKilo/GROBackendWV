@@ -63,11 +63,19 @@ namespace QuazalWV
             uint packetSize = Helper.ReadU32(m);
             byte[] data = new byte[packetSize];
             m.Read(data, 0, (int)packetSize);
+            StringBuilder sb = new StringBuilder();
+            UnpackMessage(data, 0, sb);
+            Log.WriteLine(10, "[DO] Unpacking request...\n" + sb.ToString());
             byte[] replyPayload = ProcessMessage(client, p, data);
             p.m_uiSignature = client.IDsend;
             SendACK(p, client);
             if (replyPayload != null)
+            {
                 SendMessage(client, p, replyPayload);
+                sb = new StringBuilder();
+                UnpackMessage(replyPayload, 0, sb);
+                Log.WriteLine(10, "[DO] Unpacking response...\n" + sb.ToString());
+            }
         }
 
         public static byte[] ProcessMessage(ClientInfo client, QPacket p, byte[] data)
@@ -133,6 +141,34 @@ namespace QuazalWV
             Log.WriteLine(10, "[DO] send : " + sb.ToString());
             Log.WriteLine(10, "[DO] send : " + p.ToStringDetailed());
             client.udp.Send(data, data.Length, client.ep);
+        }
+
+        public static void UnpackMessage(byte[] data, int tabs, StringBuilder sb)
+        {
+            string t = "";
+            for (int i = 0; i < tabs; i++)
+                t += "\t";
+            DO.METHOD method = (DO.METHOD)data[0];
+            sb.AppendLine(t + " DO Message method\t: " + method);
+            sb.Append(t + " DO Message data\t:");
+            for (int i = 1; i < data.Length; i++)
+                sb.Append(" " + data[i].ToString("X2"));
+            sb.AppendLine();
+            if (method == DO.METHOD.Bundle)
+            {
+                sb.AppendLine(t + " DO Sub Messages\t:");
+                MemoryStream m = new MemoryStream(data);
+                m.Seek(1, 0);
+                while (true)
+                {
+                    uint size = Helper.ReadU32(m);
+                    if (size == 0)
+                        break;
+                    byte[] buff = new byte[size];
+                    m.Read(buff, 0, (int)size);
+                    UnpackMessage(buff, tabs + 1, sb);
+                }
+            }
         }
     }
 }

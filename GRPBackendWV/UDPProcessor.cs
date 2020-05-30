@@ -84,7 +84,7 @@ namespace GRPBackendWV
                                             uint size = Helper.ReadU32(m);
                                             byte[] buff = new byte[size];
                                             m.Read(buff, 0, (int)size);
-                                            UnpackMessage(buff, 1, sb);
+                                            DO.UnpackMessage(buff, 1, sb);
                                             sb.AppendLine();
                                         }
                                         catch
@@ -113,34 +113,6 @@ namespace GRPBackendWV
                 rtb1.Text = sb.ToString();
             }
             catch { MessageBox.Show("Error"); }
-        }
-
-        private void UnpackMessage(byte[] data, int tabs, StringBuilder sb)
-        {
-            string t = "";
-            for (int i = 0; i < tabs; i++)
-                t += "\t";
-            DO.METHOD method = (DO.METHOD)data[0];
-            sb.AppendLine(t + " DO Message method\t: " + method);
-            sb.Append(t + " DO Message data\t:");
-            for (int i = 1; i < data.Length; i++)
-                sb.Append(" " + data[i].ToString("X2"));
-            sb.AppendLine();
-            if (method == DO.METHOD.Bundle)
-            {
-                sb.AppendLine(t + " DO Sub Messages\t:");
-                MemoryStream m = new MemoryStream(data);
-                m.Seek(1, 0);
-                while (true)
-                {
-                    uint size = Helper.ReadU32(m);
-                    if (size == 0)
-                        break;
-                    byte[] buff = new byte[size];
-                    m.Read(buff, 0, (int)size);
-                    UnpackMessage(buff, tabs + 1, sb);
-                }
-            }
         }
 
         private byte[] makeArray(string s)

@@ -22,9 +22,9 @@ namespace QuazalWV
                     msgs = new List<byte[]>();
                     msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new Payload_Station().Create()));
                     msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_SessionClock, 1), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new byte[] { }));
-                    msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_Session, 1), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new byte[] { 0x01, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x0E, 0x00, 0x4E, 0x30, 0x31, 0x2D, 0x47, 0x52, 0x4F, 0x2D, 0x44, 0x53, 0x30, 0x33, 0x34, 0x00, 0x3E, 0x81, 0x30, 0x9D, 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00 }));
+                    msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_Session, 4), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new Payload_Session().Create()));
                     msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_PromotionReferee, 1), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new byte[] { }));
-                    //msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_NET_MessageBroker, 1), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new byte[] { }));
+                    msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_NET_MessageBroker, 1), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new byte[] { }));
                     return DO_BundleMessage.Create(client, msgs);
                 default:
                     Log.WriteLine(1, "[DO] Handling DO_FetchRequest unknown dupObj 0x" + dupObj.ToString("X8") + "!");

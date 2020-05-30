@@ -143,6 +143,8 @@
     <Compile Include="Classes\GR5_Weapon.cs" />
     <Compile Include="Classes\GR5_WeaponConfiguration.cs" />
     <Compile Include="Classes\GR5_WeaponXPLevelInfo.cs" />
+    <Compile Include="Classes\SessionInfo.cs" />
+    <Compile Include="Classes\SharedSessionDescription.cs" />
     <Compile Include="Classes\StationInfo.cs" />
     <Compile Include="Classes\StdMaps.cs" />
     <Compile Include="ClientInfo.cs" />
@@ -166,6 +168,7 @@
     <Compile Include="Helper.cs" />
     <Compile Include="Kerberos\KerberosTicket.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="DO\Payloads\Payload_Session.cs" />
     <Compile Include="RMC\NATTraversalService\NATTraversalService.cs" />
     <Compile Include="NotificationQuene.cs" />
     <Compile Include="NotificationQueneEntry.cs" />
