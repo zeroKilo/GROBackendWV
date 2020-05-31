@@ -22,8 +22,8 @@ namespace QuazalWV
                     msgs = new List<byte[]>();
                     msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new Payload_Station().Create()));
                     Payload_Station ps = new Payload_Station();
-                    ps.connectionInfo.m_strStationURL1 = "";
-                    ps.connectionInfo.m_strStationURL2 = "";
+                    //ps.connectionInfo.m_strStationURL1 = "";
+                    //ps.connectionInfo.m_strStationURL2 = "";
                     msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, ps.Create()));
                     msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_SessionClock, 1), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new byte[] { }));
                     msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_SES_cl_SessionInfos, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new Payload_SessionInfos().Create()));

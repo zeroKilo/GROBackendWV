@@ -112,7 +112,7 @@ namespace QuazalWV
             np.m_oDestinationVPort = p.m_oSourceVPort;
             np.payload = new byte[0];
             np.payloadSize = 0;
-            Log.WriteLine(10, "send ACK packet");
+            Log.WriteLine(10, "[DO] send ACK packet");
             Send(np, client);
         }
 
@@ -124,12 +124,52 @@ namespace QuazalWV
             Helper.WriteU32(m, (uint)data.Length);
             m.Write(data, 0, data.Length);
             m.WriteByte((byte)QPacket.MakeChecksum(m.ToArray(), 0));
-            p.payload = m.ToArray();
-            p.payloadSize = (ushort)p.payload.Length;
-            Log.WriteLine(10, "send DO message packet");
-            Send(p, client);
+            Log.WriteLine(10, "sending DO message packet");
+            MakeAndSend(client, p, m.ToArray());
         }
 
+        public static void MakeAndSend(ClientInfo client, QPacket np, byte[] data)
+        {
+            MemoryStream m = new MemoryStream(data);
+            if (data.Length < 0x3C3)
+            {
+                np.uiSeqId++;
+                np.payload = data;
+                np.payloadSize = (ushort)np.payload.Length;
+                Log.WriteLine(10, "[DO] sent packet");
+                Send(np, client);
+            }
+            else
+            {
+                np.flags.Add(QPacket.PACKETFLAG.FLAG_HAS_SIZE);
+                np.flags.Add(QPacket.PACKETFLAG.FLAG_RELIABLE);
+                int pos = 0;
+                m.Seek(0, 0);
+                np.m_byPartNumber = 0;
+                while (pos < data.Length)
+                {
+                    np.uiSeqId++;
+                    bool isLast = false;
+                    int len = 0x3C3;
+                    if (len + pos >= data.Length)
+                    {
+                        len = data.Length - pos;
+                        isLast = true;
+                    }
+                    if (!isLast)
+                        np.m_byPartNumber++;
+                    else
+                        np.m_byPartNumber = 0;
+                    byte[] buff = new byte[len];
+                    m.Read(buff, 0, len);
+                    np.payload = buff;
+                    np.payloadSize = (ushort)np.payload.Length;
+                    Send(np, client);
+                    pos += len;
+                }
+                Log.WriteLine(10, "[DO] sent packets");
+            }
+        }
 
         public static void Send(QPacket p, ClientInfo client)
         {

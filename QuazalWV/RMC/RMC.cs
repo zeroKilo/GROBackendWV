@@ -344,7 +344,7 @@ namespace QuazalWV
                 np.uiSeqId++;
                 np.payload = data;
                 np.payloadSize = (ushort)np.payload.Length;
-                WriteLog(10, "send packet");
+                WriteLog(10, "sent packet");
                 Send(client.udp, np, client);
             }
             else
@@ -374,7 +374,7 @@ namespace QuazalWV
                     Send(client.udp, np, client);
                     pos += len;
                 }
-                WriteLog(10, "send packets");
+                WriteLog(10, "sent packets");
             }
         }
 
