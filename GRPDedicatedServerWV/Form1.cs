@@ -75,5 +75,11 @@ namespace GRPDedicatedServerWV
                     break;
             }
         }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            uint u = Convert.ToUInt32(toolStripTextBox1.Text.Trim(), 16);
+            MessageBox.Show(Helper.DupObjToStr(u));
+        }
     }
 }

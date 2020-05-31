@@ -64,6 +64,9 @@ namespace QuazalWV
                     Log.WriteLine(1, "[DO] Handling DOC_SyncRequest...");
                     ulong time = Helper.ReadU64(m);
                     return Create(callID, 0x83C, Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), Helper.MakeDupObj(DO.CLASS.DOC_SessionClock, 1), 6, Payload_SyncResponse.Create(time));
+                case DOC_METHOD.RequestIDRangeFromMaster:
+                    Log.WriteLine(1, "[DO] Handling DOC_RequestIDRangeFromMaster...");
+                    return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x01, 0x01, 0x00, 0x00, 0x01, 0x02, 0x00, 0x00 });
                 default:
                     Log.WriteLine(1, "[DO] Error: Unhandled DOC method: " + method + "!");
                     return new byte[0];

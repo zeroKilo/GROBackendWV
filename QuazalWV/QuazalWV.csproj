@@ -169,6 +169,7 @@
     <Compile Include="Kerberos\KerberosTicket.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="DO\Payloads\Payload_Session.cs" />
+    <Compile Include="DO\Payloads\Payload_SessionInfos.cs" />
     <Compile Include="RMC\NATTraversalService\NATTraversalService.cs" />
     <Compile Include="NotificationQuene.cs" />
     <Compile Include="NotificationQueneEntry.cs" />
