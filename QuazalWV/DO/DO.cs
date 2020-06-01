@@ -88,6 +88,7 @@ namespace QuazalWV
                     replyPayload = DO_JoinRequestMessage.HandleMessage(client, data);
                     break;
                 case METHOD.GetParticipantsRequest:
+                    client.seqCounterDO = 1;
                     replyPayload = DO_GetParticipantsRequestMessage.HandleMessage(client, data);
                     break;
                 case METHOD.FetchRequest:
@@ -118,8 +119,7 @@ namespace QuazalWV
 
         private static void SendMessage(ClientInfo client, QPacket p, byte[] data)
         {
-            p.uiSeqId++;
-            p.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_NEED_ACK };
+            p.flags = new List<QPacket.PACKETFLAG>() { QPacket.PACKETFLAG.FLAG_NEED_ACK , QPacket.PACKETFLAG.FLAG_RELIABLE, QPacket.PACKETFLAG.FLAG_HAS_SIZE};
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)data.Length);
             m.Write(data, 0, data.Length);
@@ -133,7 +133,7 @@ namespace QuazalWV
             MemoryStream m = new MemoryStream(data);
             if (data.Length < 0x3C3)
             {
-                np.uiSeqId++;
+                np.uiSeqId = client.seqCounterDO++;
                 np.payload = data;
                 np.payloadSize = (ushort)np.payload.Length;
                 Log.WriteLine(10, "[DO] sent packet");
@@ -141,14 +141,12 @@ namespace QuazalWV
             }
             else
             {
-                np.flags.Add(QPacket.PACKETFLAG.FLAG_HAS_SIZE);
-                np.flags.Add(QPacket.PACKETFLAG.FLAG_RELIABLE);
                 int pos = 0;
                 m.Seek(0, 0);
                 np.m_byPartNumber = 0;
                 while (pos < data.Length)
                 {
-                    np.uiSeqId++;
+                    np.uiSeqId = client.seqCounterDO++;
                     bool isLast = false;
                     int len = 0x3C3;
                     if (len + pos >= data.Length)

@@ -18,6 +18,7 @@ namespace QuazalWV
         public byte sessionID;
         public byte[] sessionKey;
         public ushort seqCounter;
+        public ushort seqCounterDO;
         public uint callCounter;
         public string name;
         public string pass;
