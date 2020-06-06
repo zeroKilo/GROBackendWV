@@ -127,7 +127,7 @@ namespace QuazalWV
                     reply = QPacketHandler.ProcessSYN(p, ep, out client);
                     break;
                 case QPacket.PACKETTYPE.CONNECT:
-                    if (client != null)
+                    if (client != null && !p.flags.Contains(QPacket.PACKETFLAG.FLAG_ACK))
                     {
                         client.sPID = serverPID;
                         client.sPort = listenPort;

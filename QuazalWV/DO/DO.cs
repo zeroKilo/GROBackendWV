@@ -85,7 +85,7 @@ namespace QuazalWV
             switch (method)
             {
                 case METHOD.JoinRequest:
-                    replyPayload = DO_JoinRequestMessage.HandleMessage(client, data);
+                    replyPayload = DO_JoinRequestMessage.HandleMessage(client, data, p.m_bySessionID);
                     break;
                 case METHOD.GetParticipantsRequest:
                     client.seqCounterDO = 1;
