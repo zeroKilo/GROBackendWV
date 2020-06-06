@@ -20,17 +20,17 @@ namespace QuazalWV
             {
                 case 0x5C00001:
                     msgs = new List<byte[]>();
-                    msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new Payload_Station().Create()));
                     Payload_Station ps = new Payload_Station();
-                    //ps.connectionInfo.m_strStationURL1 = "";
-                    //ps.connectionInfo.m_strStationURL2 = "";
-                    msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, ps.Create()));
+                    ps.connectionInfo.m_strStationURL1 = "";
+                    ps.connectionInfo.m_strStationURL2 = "";
+                    ps.stationState = 1;
+                    msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), 2, ps.Create()));
                     msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_SessionClock, 1), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new byte[] { }));
                     msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_SES_cl_SessionInfos, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new Payload_SessionInfos().Create()));
                     msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_PromotionReferee, 3), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new byte[] { }));
                     msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_Session, 4), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new Payload_Session().Create()));
                     msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_NET_MessageBroker, 5), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new byte[] { }));
-                    uint[] IDGeneratorIDs = { 7, 0xD, 0x13, 0x14, 0x15, 0x16, 0x18, 0x1A, 0x23};
+                    uint[] IDGeneratorIDs = { 7, 0xD, 0x13, 0x14, 0x15, 0x16, 0x18, 0x1A, 0x23 };
                     foreach (uint id in IDGeneratorIDs)
                         msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_IDGenerator, id), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new byte[] { 0x01, 0x01, 0x00, 0x00, 0x00, 0xFE, 0xFF, 0x3F, 0x00 }));
                     msgs.Add(DO_CreateDuplicaMessage.Create(client, Helper.MakeDupObj(DO.CLASS.DOC_IDGenerator, 0x17), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new byte[] { 0x01, 0x02, 0x01, 0x00, 0x00, 0xFE, 0xFF, 0x3F, 0x00 }));
