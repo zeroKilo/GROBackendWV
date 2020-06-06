@@ -15,8 +15,8 @@ namespace QuazalWV
             SendConnectionRequest(client, sessionID);
             List<byte[]> msgs = new List<byte[]>();
             msgs.Add(DO_JoinResponseMessage.Create(1, Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1)));
-            msgs.Add(DO_CreateAndPromoteDuplicaMessage.Create(3, Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new Payload_Station().Create()));
-            msgs.Add(DO_MigrationMessage.Create(1, Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 3));
+            msgs.Add(DO_CreateAndPromoteDuplicaMessage.Create(3, Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), 2, new Payload_Station().Create()));
+            msgs.Add(DO_MigrationMessage.Create(1, Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), Helper.MakeDupObj(DO.CLASS.DOC_Station, 2), 3));
             return DO_BundleMessage.Create(client, msgs);
         }
 

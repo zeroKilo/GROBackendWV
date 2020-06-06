@@ -97,6 +97,12 @@ namespace QuazalWV
                 case METHOD.RMCCall:
                     replyPayload = DO_RMCRequestMessage.HandleMessage(client, data);
                     break;
+                case METHOD.CallOutcome:
+                    Log.WriteLine(1, "[DO] Received Called Outcome 0x" + BitConverter.ToUInt32(data, 3).ToString("X") + " for call ID 0x " + BitConverter.ToUInt16(data, 1).ToString("X"));
+                    break;
+                case METHOD.Update:
+                    Log.WriteLine(1, "[DO] Received Update for 0x" + BitConverter.ToUInt32(data, 1).ToString("X") + " (" + Helper.DupObjToStr(BitConverter.ToUInt32(data, 1)) + ")");
+                    break;
                 default:
                     Log.WriteLine(1, "[DO] Error: Unknown Method 0x" + data[0].ToString("X2") + " (" + method +")", Color.Red);
                     break;
