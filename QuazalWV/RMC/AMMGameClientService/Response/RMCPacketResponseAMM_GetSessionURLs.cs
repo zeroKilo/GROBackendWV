@@ -15,7 +15,7 @@ namespace QuazalWV
         public RMCPacketResponseAMM_GetSessionURLs()
         {
             urls.Add(Global.sessionURL);
-            sessionID = 1;
+            sessionID = DO_Session.ID;
         }
 
         public override byte[] ToBuffer()

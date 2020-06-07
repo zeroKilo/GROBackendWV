@@ -57,13 +57,13 @@ namespace QuazalWV
             Log.WriteLine(2, "[DO] RMC Call ID      : 0x" + callID.ToString("X4"));
             Log.WriteLine(2, "[DO] RMC Call Flags   : 0x" + flags.ToString("X8"));
             Log.WriteLine(2, "[DO] RMC Call Station : 0x" + station.ToString("X8"));
-            Log.WriteLine(2, "[DO] RMC Call DupObj  : 0x" + targetObject.ToString("X8") + " " + Helper.DupObjToStr(targetObject));
+            Log.WriteLine(2, "[DO] RMC Call DupObj  : 0x" + targetObject.ToString("X8") + " " + new DupObj(targetObject).getDesc());
             switch (method)
             {
                 case DOC_METHOD.SyncRequest:
                     Log.WriteLine(1, "[DO] Handling DOC_SyncRequest...");
                     ulong time = Helper.ReadU64(m);
-                    return Create(callID, 0x83C, Helper.MakeDupObj(DO.CLASS.DOC_Station, 1), Helper.MakeDupObj(DO.CLASS.DOC_SessionClock, 1), 6, Payload_SyncResponse.Create(time));
+                    return Create(callID, 0x83C, new DupObj(DupObjClass.Station, 1), new DupObj(DupObjClass.SessionClock, 1), 6, new Payload_SyncResponse(time).toBuffer());
                 case DOC_METHOD.RequestIDRangeFromMaster:
                     Log.WriteLine(1, "[DO] Handling DOC_RequestIDRangeFromMaster...");
                     return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x01, 0x01, 0x00, 0x00, 0x01, 0x02, 0x00, 0x00 });

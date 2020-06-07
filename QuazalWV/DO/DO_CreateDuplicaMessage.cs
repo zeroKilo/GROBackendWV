@@ -15,14 +15,15 @@ namespace QuazalWV
             return new byte[0];
         }
 
-        public static byte[] Create(ClientInfo client, uint dupObj, uint station, byte version, byte[] payload)
+        public static byte[] Create(ClientInfo client, DupObj obj, byte version)
         {
             Log.WriteLine(1, "[DO] Creating DO_CreateDuplicaMessage");
             MemoryStream m = new MemoryStream();
             m.WriteByte(0x12);
-            Helper.WriteU32(m, dupObj);
-            Helper.WriteU32(m, station);
+            Helper.WriteU32(m, obj);
+            Helper.WriteU32(m, obj.Master);
             Helper.WriteU8(m, version);
+            byte[] payload = obj.getPayload();
             m.Write(payload, 0, payload.Length);
             return m.ToArray();
         }

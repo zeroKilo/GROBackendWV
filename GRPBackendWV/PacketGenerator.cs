@@ -72,7 +72,7 @@ namespace GRPBackendWV
                 RMCP rmc = new RMCP();
                 rmc.proto = (RMCP.PROTOCOL)protoIDs[toolStripComboBox1.SelectedIndex];
                 rmc.methodID = Convert.ToUInt32(toolStripTextBox1.Text);
-                rmc.callID = ++client.callCounter;
+                rmc.callID = ++client.callCounterRMC;
                 RMCPCustom reply = new RMCPCustom();
                 reply.buffer = payload;
                 RMC.SendRequestPacket(client.udp, q, rmc, client, reply, true, 0);

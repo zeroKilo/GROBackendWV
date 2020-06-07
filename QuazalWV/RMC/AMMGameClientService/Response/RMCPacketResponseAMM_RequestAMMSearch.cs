@@ -9,7 +9,7 @@ namespace QuazalWV
 {
     public class RMCPacketResponseAMM_RequestAMMSearch : RMCPResponse
     {
-        public uint matchID = 1;
+        public uint matchID = DO_Session.MatchID;
 
         public RMCPacketResponseAMM_RequestAMMSearch()
         {

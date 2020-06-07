@@ -57,8 +57,8 @@ namespace QuazalWV
         public static void HandleRequest(ClientInfo client, QPacket p, RMCP rmc)
         {
             ProcessRequest(client, p, rmc);
-            if (rmc.callID > client.callCounter)
-                client.callCounter = rmc.callID;
+            if (rmc.callID > client.callCounterRMC)
+                client.callCounterRMC = rmc.callID;
             WriteLog(1, "Received Request : " + rmc.ToString());
             string payload = rmc.PayLoadToString();
             if (payload != "")
@@ -421,7 +421,7 @@ namespace QuazalWV
             RMCP rmc = new RMCP();
             rmc.proto = RMCP.PROTOCOL.GlobalNotificationEventProtocol;
             rmc.methodID = 1;
-            rmc.callID = ++client.callCounter;
+            rmc.callID = ++client.callCounterRMC;
             RMCPCustom reply = new RMCPCustom();
             reply.buffer = payload;
             RMC.SendRequestPacket(client.udp, q, rmc, client, reply, true, 0);

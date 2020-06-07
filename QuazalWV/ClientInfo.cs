@@ -19,7 +19,9 @@ namespace QuazalWV
         public byte[] sessionKey;
         public ushort seqCounter;
         public ushort seqCounterDO;
-        public uint callCounter;
+        public ushort callCounterDO_RMC;
+        public uint callCounterRMC;
+        public uint stationID;
         public string name;
         public string pass;
         public IPEndPoint ep;

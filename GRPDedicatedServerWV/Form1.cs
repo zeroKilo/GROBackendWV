@@ -19,7 +19,7 @@ namespace GRPDedicatedServerWV
             InitializeComponent();
             Log.logFileName = "dslog.txt";
             Log.ClearLog();
-            Log.box = richTextBox1;
+            Log.box = rtb1;
             DBHelper.Init();
             toolStripComboBox1.SelectedIndex = 0;
         }
@@ -43,7 +43,7 @@ namespace GRPDedicatedServerWV
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = "";
+            rtb1.Text = "";
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -79,7 +79,26 @@ namespace GRPDedicatedServerWV
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             uint u = Convert.ToUInt32(toolStripTextBox1.Text.Trim(), 16);
-            MessageBox.Show(Helper.DupObjToStr(u));
+            MessageBox.Show(new DupObj(u).getDesc());
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            foreach (DupObj obj in DO_Session.DupObjs)
+                listBox1.Items.Add(obj.getDesc());
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rtb2.Text = "";
+            int n = listBox1.SelectedIndex;
+            if (n < 0 || n >= DO_Session.DupObjs.Count)
+                return;
+            if (DO_Session.DupObjs[n].Payload != null)
+                rtb2.Text = DO_Session.DupObjs[n].Payload.getDesc();
+            else
+                rtb2.Text = "No Payload";
         }
     }
 }

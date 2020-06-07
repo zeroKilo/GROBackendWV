@@ -15,7 +15,7 @@ namespace QuazalWV
             return new byte[0];
         }
 
-        public static byte[] Create(byte successByte, uint clientStationID, uint endPointConnectionID)
+        public static byte[] Create(byte successByte, DupObj clientStation)
         {
             Log.WriteLine(1, "[DO] Creating DO_JoinResponseMessage");
             MemoryStream m = new MemoryStream();
@@ -23,8 +23,8 @@ namespace QuazalWV
             m.WriteByte(successByte);
             if (successByte == 1)
             {
-                Helper.WriteU32(m, clientStationID);
-                Helper.WriteU32(m, endPointConnectionID);
+                Helper.WriteU32(m, clientStation);
+                Helper.WriteU32(m, clientStation.Master);
                 Helper.WriteU16(m, 0);
             }
             else

@@ -32,21 +32,6 @@ namespace QuazalWV
             EOS = 0xFF
         }
 
-        public enum CLASS
-        {
-            DOC_DefaultCell = 07,
-            DOC_SessionClock = 13,
-            DOC_SES_cl_Player_NetZ = 19,
-            DOC_SES_cl_RDVInfo_NetZ = 20,
-            DOC_SES_cl_SessionInfos = 21,
-            DOC_RootDO = 22,
-            DOC_Station = 23,
-            DOC_Session = 24,
-            DOC_IDGenerator = 25,
-            DOC_PromotionReferee = 26,
-            DOC_NET_MessageBroker = 35,
-        }
-
         public static void HandlePacket(UdpClient udp, QPacket p)
         {
             ClientInfo client = Global.GetClientByIDrecv(p.m_uiSignature);
@@ -89,6 +74,8 @@ namespace QuazalWV
                     break;
                 case METHOD.GetParticipantsRequest:
                     client.seqCounterDO = 1;
+                    client.callCounterDO_RMC = 1;
+                    client.stationID = 2;
                     replyPayload = DO_GetParticipantsRequestMessage.HandleMessage(client, data);
                     break;
                 case METHOD.FetchRequest:
@@ -98,10 +85,10 @@ namespace QuazalWV
                     replyPayload = DO_RMCRequestMessage.HandleMessage(client, data);
                     break;
                 case METHOD.CallOutcome:
-                    Log.WriteLine(1, "[DO] Received Called Outcome 0x" + BitConverter.ToUInt32(data, 3).ToString("X") + " for call ID 0x " + BitConverter.ToUInt16(data, 1).ToString("X"));
+                    Log.WriteLine(1, "[DO] Received Called Outcome 0x" + BitConverter.ToUInt32(data, 3).ToString("X") + " for call ID 0x" + BitConverter.ToUInt16(data, 1).ToString("X"));
                     break;
                 case METHOD.Update:
-                    Log.WriteLine(1, "[DO] Received Update for 0x" + BitConverter.ToUInt32(data, 1).ToString("X") + " (" + Helper.DupObjToStr(BitConverter.ToUInt32(data, 1)) + ")");
+                    Log.WriteLine(1, "[DO] Received Update for 0x" + BitConverter.ToUInt32(data, 1).ToString("X") + " (" + new DupObj(BitConverter.ToUInt32(data, 1)).getDesc() + ")");
                     break;
                 default:
                     Log.WriteLine(1, "[DO] Error: Unknown Method 0x" + data[0].ToString("X2") + " (" + method +")", Color.Red);

@@ -11,7 +11,7 @@ namespace QuazalWV
     {
         public uint m_dohRootMulticastGroup;
         public string sSessionName = "N01-GRO-DS034";
-        public uint m_uiSessionID = 1;
+        public uint m_uiSessionID = DO_Session.ID;
 
         public void toBuffer(Stream s)
         {
