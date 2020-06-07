@@ -19,5 +19,15 @@ namespace QuazalWV
             Helper.WriteString(s, string2);
             Helper.WriteString(s, sSessionDiscovery);
         }
+
+        public string getDesc()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("[SharedSessionDescription]");
+            sb.AppendLine(" Session Description = " + sSessionDescription);
+            sb.AppendLine(" String 2 = " + string2);
+            sb.AppendLine(" Session Discovery = " + sSessionDiscovery);
+            return sb.ToString();
+        }
     }
 }

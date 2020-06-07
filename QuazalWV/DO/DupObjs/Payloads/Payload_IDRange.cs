@@ -29,9 +29,8 @@ namespace QuazalWV
         public override string getDesc()
         {
             StringBuilder sb = new StringBuilder();
-            byte[] buff = toBuffer();
-            foreach (byte b in buff)
-                sb.Append(b.ToString("X2") + " ");
+            sb.AppendLine("Range Min = 0x" + min.ToString("X"));
+            sb.AppendLine("Range Max = 0x" + max.ToString("X"));
             return sb.ToString();
         }
     }

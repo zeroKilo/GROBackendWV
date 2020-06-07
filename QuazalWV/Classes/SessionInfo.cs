@@ -19,5 +19,15 @@ namespace QuazalWV
             Helper.WriteString(s, sSessionName);
             Helper.WriteU32(s, m_uiSessionID);
         }
+
+        public string getDesc()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("[SessionInfo]");
+            sb.AppendLine(" Root Multicast Group = 0x" + m_dohRootMulticastGroup.ToString("X8"));
+            sb.AppendLine(" Session Name = " + sSessionName);
+            sb.AppendLine(" Session ID = 0x" + m_uiSessionID.ToString("X8"));
+            return sb.ToString();
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace QuazalWV
             return new byte[0];
         }
 
-        public static byte[] Create(ushort callID, uint fromStationID, uint dupObj, uint toStationID, byte version)
+        public static byte[] Create(ushort callID, uint fromStationID, uint dupObj, uint toStationID, byte version, List<uint> handles)
         {
             Log.WriteLine(1, "[DO] Creating DO_MigrationMessage");
             MemoryStream m = new MemoryStream();
@@ -25,7 +25,9 @@ namespace QuazalWV
             Helper.WriteU32(m, dupObj);
             Helper.WriteU32(m, toStationID);
             m.WriteByte(version);
-            Helper.WriteU32(m, 0);
+            Helper.WriteU32(m, (uint)handles.Count);
+            foreach (uint u in handles)
+                Helper.WriteU32(m, u);
             return m.ToArray();
         }
     }

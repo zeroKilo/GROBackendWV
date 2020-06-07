@@ -31,9 +31,12 @@ namespace QuazalWV
         public override string getDesc()
         {
             StringBuilder sb = new StringBuilder();
-            byte[] buff = toBuffer();
-            foreach (byte b in buff)
-                sb.Append(b.ToString("X2") + " ");
+            sb.Append(sharedSesDesc.getDesc());
+            sb.Append(sessionInfo.getDesc());
+            sb.AppendLine("[SessionState]");
+            sb.AppendLine(" State = " + sessionState);
+            sb.AppendLine("[User Defined State]");
+            sb.AppendLine(" State = 0x" + userDefStateM.ToString("X"));
             return sb.ToString();
         }
     }

@@ -16,7 +16,11 @@ namespace QuazalWV
         public static void ResetObjects()
         {
             DupObjs = new List<DupObj>();
-            DupObjs.Add(new DupObj(DupObjClass.Station, 1, 1, new Payload_Station()));
+            Payload_Station ps = new Payload_Station();
+            ps.connectionInfo.m_strStationURL1 = "prudp:/address=127.0.0.1;port=5004;RVCID=166202";
+            ps.connectionInfo.m_strStationURL2 = "prudp:/address=127.0.0.1;port=5004;sid=15;type=2;RVCID=166202";
+            ps.stationState = STATIONSTATE.Participating;
+            DupObjs.Add(new DupObj(DupObjClass.Station, 1, 1, ps));
             DupObjs.Add(new DupObj(DupObjClass.SessionClock, 1, 1));
             DupObjs.Add(new DupObj(DupObjClass.SES_cl_SessionInfos, 2, 1, new Payload_SessionInfos()));
             DupObjs.Add(new DupObj(DupObjClass.PromotionReferee, 3, 1));

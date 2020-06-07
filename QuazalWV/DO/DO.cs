@@ -88,13 +88,52 @@ namespace QuazalWV
                     Log.WriteLine(1, "[DO] Received Called Outcome 0x" + BitConverter.ToUInt32(data, 3).ToString("X") + " for call ID 0x" + BitConverter.ToUInt16(data, 1).ToString("X"));
                     break;
                 case METHOD.Update:
-                    Log.WriteLine(1, "[DO] Received Update for 0x" + BitConverter.ToUInt32(data, 1).ToString("X") + " (" + new DupObj(BitConverter.ToUInt32(data, 1)).getDesc() + ")");
+                    replyPayload = UpdateDupObj(data);
                     break;
                 default:
                     Log.WriteLine(1, "[DO] Error: Unknown Method 0x" + data[0].ToString("X2") + " (" + method +")", Color.Red);
                     break;
             }
             return replyPayload;
+        }
+
+        private static byte[] UpdateDupObj(byte[] data)
+        {
+            uint handle = BitConverter.ToUInt32(data, 1);
+            byte dataset = data[5];
+            DupObj obj = DO_Session.FindObj(handle);
+            if (obj == null)
+            {
+                Log.WriteLine(1, "[DO] Update error: Can't find DupObj 0x" + handle.ToString("X") + " (" + new DupObj(handle).getDesc() + ")", Color.Red);
+                return null;
+            }            
+            Log.WriteLine(1, "[DO] Received Update for " + obj.getDesc() +  " DataSet=" + dataset);
+            MemoryStream m = new MemoryStream();
+            m.Write(data, 6, data.Length - 6);
+            m.Seek(0, 0);
+            switch (obj.Class)
+            {
+                case DupObjClass.Station:
+                    switch (dataset)
+                    {
+                        case 1:
+                            ((Payload_Station)obj.Payload).connectionInfo = new DS_ConnectionInfo(m);
+                            break;
+                        case 2:
+                            ((Payload_Station)obj.Payload).stationIdent = new StationIdentification(m);
+                            break;
+                        case 3:
+                            ((Payload_Station)obj.Payload).stationInfo = new StationInfo(m);
+                            break;
+                        case 4:
+                            ((Payload_Station)obj.Payload).stationState = (STATIONSTATE)Helper.ReadU16(m);
+                            break;
+                    }
+                    break;
+                default:
+                    return null;
+            }
+            return null;
         }
 
 
