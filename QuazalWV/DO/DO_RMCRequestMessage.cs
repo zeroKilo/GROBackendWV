@@ -61,12 +61,18 @@ namespace QuazalWV
             switch (method)
             {
                 case DOC_METHOD.SyncRequest:
-                    Log.WriteLine(1, "[DO] Handling DOC_SyncRequest...");
+                    Log.WriteLine(1, "[DO] Handling SyncRequest...");
                     ulong time = Helper.ReadU64(m);
                     return Create(callID, 0x83C, new DupObj(DupObjClass.Station, 1), new DupObj(DupObjClass.SessionClock, 1), 6, new Payload_SyncResponse(time).toBuffer());
                 case DOC_METHOD.RequestIDRangeFromMaster:
-                    Log.WriteLine(1, "[DO] Handling DOC_RequestIDRangeFromMaster...");
+                    Log.WriteLine(1, "[DO] Handling RequestIDRangeFromMaster...");
                     return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x01, 0x01, 0x00, 0x00, 0x01, 0x02, 0x00, 0x00 });
+                case DOC_METHOD.IncreasePlayerNb:
+                    Log.WriteLine(1, "[DO] Handling IncreasePlayerNb...");
+                    return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 });
+                case DOC_METHOD.AskForSettingPlayerParameters:
+                    Log.WriteLine(1, "[DO] Handling AskForSettingPlayerParameters...");
+                    return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 });
                 default:
                     Log.WriteLine(1, "[DO] Error: Unhandled DOC method: " + method + "!");
                     return new byte[0];

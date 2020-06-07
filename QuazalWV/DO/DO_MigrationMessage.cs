@@ -11,8 +11,11 @@ namespace QuazalWV
     {    
         public static byte[] HandleMessage(ClientInfo client, byte[] data)
         {
-            Log.WriteLine(1, "[DO] Handling DO_MigrationMessage... TODO!");
-            return new byte[0];
+            Log.WriteLine(1, "[DO] Handling DO_MigrationMessage");
+            MemoryStream m = new MemoryStream(data);
+            m.Seek(1, 0);
+            ushort callID = Helper.ReadU16(m);
+            return DO_Outcome.Create(callID, 0x60001);
         }
 
         public static byte[] Create(ushort callID, uint fromStationID, uint dupObj, uint toStationID, byte version, List<uint> handles)

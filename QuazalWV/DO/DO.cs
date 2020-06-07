@@ -72,6 +72,9 @@ namespace QuazalWV
                 case METHOD.JoinRequest:
                     replyPayload = DO_JoinRequestMessage.HandleMessage(client, data, p.m_bySessionID);
                     break;
+                case METHOD.JoinResponse:
+                    Log.WriteLine(1, "[DO] Received JoinResponse");
+                    break;
                 case METHOD.GetParticipantsRequest:
                     client.seqCounterDO = 1;
                     client.callCounterDO_RMC = 1;
@@ -81,14 +84,20 @@ namespace QuazalWV
                 case METHOD.FetchRequest:
                     replyPayload = DO_FetchRequestMessage.HandleMessage(client, data);
                     break;
+                case METHOD.Migration:
+                    replyPayload = DO_MigrationMessage.HandleMessage(client, data);
+                    break;
                 case METHOD.RMCCall:
                     replyPayload = DO_RMCRequestMessage.HandleMessage(client, data);
                     break;
                 case METHOD.CallOutcome:
-                    Log.WriteLine(1, "[DO] Received Called Outcome 0x" + BitConverter.ToUInt32(data, 3).ToString("X") + " for call ID 0x" + BitConverter.ToUInt16(data, 1).ToString("X"));
+                    replyPayload = DO_Outcome.HandleMessage(client, data);
                     break;
                 case METHOD.Update:
                     replyPayload = UpdateDupObj(data);
+                    break;
+                case METHOD.CreateDuplicate:
+                    replyPayload = DO_CreateDuplicaMessage.HandleMessage(client, data);
                     break;
                 default:
                     Log.WriteLine(1, "[DO] Error: Unknown Method 0x" + data[0].ToString("X2") + " (" + method +")", Color.Red);
