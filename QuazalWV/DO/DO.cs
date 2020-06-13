@@ -53,7 +53,8 @@ namespace QuazalWV
             Log.WriteLine(10, "[DO] Unpacking request...\n" + sb.ToString());
             byte[] replyPayload = ProcessMessage(client, p, data);
             p.m_uiSignature = client.IDsend;
-            SendACK(p, client);
+            if (p.flags.Contains(QPacket.PACKETFLAG.FLAG_NEED_ACK))
+                SendACK(p, client);
             if (replyPayload != null)
             {
                 SendMessage(client, p, replyPayload);
@@ -88,7 +89,7 @@ namespace QuazalWV
                     replyPayload = DO_MigrationMessage.HandleMessage(client, data);
                     break;
                 case METHOD.RMCCall:
-                    replyPayload = DO_RMCRequestMessage.HandleMessage(client, data);
+                    replyPayload = DO_RMCRequestMessage.HandleMessage(client, p, data);
                     break;
                 case METHOD.CallOutcome:
                     replyPayload = DO_Outcome.HandleMessage(client, data);

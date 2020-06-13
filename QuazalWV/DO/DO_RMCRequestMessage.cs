@@ -44,7 +44,7 @@ namespace QuazalWV
             RouteMessage = 31
         }
 
-        public static byte[] HandleMessage(ClientInfo client, byte[] data)
+        public static byte[] HandleMessage(ClientInfo client, QPacket p, byte[] data)
         {
             Log.WriteLine(1, "[DO] Handling DO_RMCRequestMessage...");
             MemoryStream m = new MemoryStream(data);
@@ -63,7 +63,16 @@ namespace QuazalWV
                 case DOC_METHOD.SyncRequest:
                     Log.WriteLine(1, "[DO] Handling SyncRequest...");
                     ulong time = Helper.ReadU64(m);
-                    return Create(callID, 0x83C, new DupObj(DupObjClass.Station, 1), new DupObj(DupObjClass.SessionClock, 1), 6, new Payload_SyncResponse(time).toBuffer());
+                    byte[] buff = Create(callID, 0x83C, new DupObj(DupObjClass.Station, 1), new DupObj(DupObjClass.SessionClock, 1), 6, new Payload_SyncResponse(time).toBuffer());
+                    MemoryStream m2 = new MemoryStream();
+                    Helper.WriteU32(m2, (uint)buff.Length);
+                    m2.Write(buff, 0, buff.Length);
+                    m2.WriteByte((byte)QPacket.MakeChecksum(m2.ToArray(), 0));
+                    p.payload = m2.ToArray();
+                    p.payloadSize = (ushort)p.payload.Length;
+                    p.m_uiSignature = client.IDsend;
+                    DO.Send(p, client);
+                    return null;
                 case DOC_METHOD.RequestIDRangeFromMaster:
                     Log.WriteLine(1, "[DO] Handling RequestIDRangeFromMaster...");
                     return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x01, 0x01, 0x00, 0x00, 0x01, 0x02, 0x00, 0x00 });
@@ -75,7 +84,7 @@ namespace QuazalWV
                     return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 });
                 default:
                     Log.WriteLine(1, "[DO] Error: Unhandled DOC method: " + method + "!");
-                    return new byte[0];
+                    return null;
             }
         }
 
