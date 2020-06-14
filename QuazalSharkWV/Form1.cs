@@ -66,14 +66,15 @@ namespace QuazalSharkWV
                 sb.Append(e.packet.m_oSourceVPort.type + "\t");
                 sb.Append(e.packet.type + "\t");
                 sb.Append(e.packet.GetFlagsString());
-                if (e.packet.m_oSourceVPort.type == QPacket.STREAMTYPE.DO && !e.packet.flags.Contains(QPacket.PACKETFLAG.FLAG_ACK))
-                {
+                if (e.packet.m_oSourceVPort.type == QPacket.STREAMTYPE.DO &&
+                    e.packet.type == QPacket.PACKETTYPE.DATA &&
+                    !e.packet.flags.Contains(QPacket.PACKETFLAG.FLAG_ACK))
                     sb.Append("(" + FindDOMethods(e.packet.payload) + ")");
-                }
-                if (e.sent && e.packet.m_oSourceVPort.type == QPacket.STREAMTYPE.OldRVSec && !e.packet.flags.Contains(QPacket.PACKETFLAG.FLAG_ACK))
-                {
+                if (e.sent &&
+                    e.packet.type == QPacket.PACKETTYPE.DATA &&
+                    e.packet.m_oSourceVPort.type == QPacket.STREAMTYPE.OldRVSec &&
+                    !e.packet.flags.Contains(QPacket.PACKETFLAG.FLAG_ACK))
                     sb.Append("(" + GetRMCDetails(e.packet) + ")");
-                }
                 listBox1.Items.Add(sb.ToString());
             }
         }
