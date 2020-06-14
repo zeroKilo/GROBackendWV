@@ -50,6 +50,7 @@ namespace GRPDedicatedServerWV
                 try
                 {
                     byte[] bytes = listener.Receive(ref ep);
+                    Log.LogPacket(false, bytes);
                     ProcessPacket(bytes, ep);
                 }
                 catch (Exception ex)

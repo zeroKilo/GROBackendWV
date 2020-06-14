@@ -104,5 +104,10 @@ namespace GRPBackendWV
         {
             NotificationQuene.Update();
         }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+            Log.enablePacketLogging = toolStripButton9.Checked;
+        }
     }
 }

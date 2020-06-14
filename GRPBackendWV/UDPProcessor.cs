@@ -34,76 +34,7 @@ namespace GRPBackendWV
                     try
                     {
                         byte[] data = makeArray(l.Trim());
-                        while (true)
-                        {
-                            QPacket qp = new QPacket(data);
-                            sb.AppendLine("##########################################################");
-                            sb.AppendLine(qp.ToStringDetailed());
-                            if (qp.type == QPacket.PACKETTYPE.DATA && qp.m_byPartNumber == 0)
-                            {
-                                switch (qp.m_oSourceVPort.type)
-                                {
-                                    case QPacket.STREAMTYPE.OldRVSec:
-                                        sb.AppendLine("Trying to process RMC packet...");
-                                        try
-                                        {
-                                            MemoryStream m = new MemoryStream(qp.payload);
-                                            RMCP p = new RMCP(qp);
-                                            m.Seek(p._afterProtocolOffset + 4, 0);
-                                            if (!p.isRequest)
-                                                m.ReadByte();
-                                            p.methodID = Helper.ReadU32(m);
-                                            sb.AppendLine("\tRMC Request  : " + p.isRequest);
-                                            sb.AppendLine("\tRMC Protocol : " + p.proto);
-                                            sb.AppendLine("\tRMC Method   : " + p.methodID.ToString("X"));
-                                            if (p.proto == RMCP.PROTOCOL.GlobalNotificationEventProtocol && p.methodID == 1)
-                                            {
-                                                sb.AppendLine("\t\tNotification :");
-                                                sb.AppendLine("\t\t\tSource".PadRight(20) + ": 0x" + Helper.ReadU32(m).ToString("X8"));
-                                                uint type = Helper.ReadU32(m);
-                                                sb.AppendLine("\t\t\tType".PadRight(20) + ": " + (type / 1000));
-                                                sb.AppendLine("\t\t\tSubType".PadRight(20) + ": " + (type % 1000));
-                                                sb.AppendLine("\t\t\tParam 1".PadRight(20) + ": 0x" + Helper.ReadU32(m).ToString("X8"));
-                                                sb.AppendLine("\t\t\tParam 2".PadRight(20) + ": 0x" + Helper.ReadU32(m).ToString("X8"));
-                                                sb.AppendLine("\t\t\tParam String".PadRight(20) + ": " + Helper.ReadString(m));
-                                                sb.AppendLine("\t\t\tParam 3".PadRight(20) + ": 0x" + Helper.ReadU32(m).ToString("X8"));
-                                            }
-                                            sb.AppendLine();
-                                        }
-                                        catch
-                                        {
-                                            sb.AppendLine("Error processing RMC packet");
-                                            sb.AppendLine();
-                                        }
-                                        break;
-                                    case QPacket.STREAMTYPE.DO:
-                                        sb.AppendLine("Trying to unpack DO messages...");
-                                        try
-                                        {
-                                            MemoryStream m = new MemoryStream(qp.payload);
-                                            uint size = Helper.ReadU32(m);
-                                            byte[] buff = new byte[size];
-                                            m.Read(buff, 0, (int)size);
-                                            DO.UnpackMessage(buff, 1, sb);
-                                            sb.AppendLine();
-                                        }
-                                        catch
-                                        {
-                                            sb.AppendLine("Error processing DO messages");
-                                            sb.AppendLine();
-                                        }
-                                        break;
-                                }
-                            }
-                            int size2 = qp.toBuffer().Length;
-                            if (size2 == data.Length)
-                                break;
-                            MemoryStream m2 = new MemoryStream(data);
-                            m2.Seek(size2, 0);
-                            size2 = (int)(m2.Length - m2.Position);
-                            data = new byte[size2];
-                            m2.Write(data, 0, size2);
-                        }
+                        sb.Append(Log.MakeDetailedPacketLog(data));
                     }
                     catch
                     {

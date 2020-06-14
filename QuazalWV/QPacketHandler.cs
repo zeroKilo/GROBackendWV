@@ -192,6 +192,7 @@ namespace QuazalWV
             Log.WriteLine(10, "[" + source + "] send : " + sb.ToString());
             Log.WriteLine(10, "[" + source + "] send : " + p.ToStringDetailed());
             listener.Send(data, data.Length, ep);
+            Log.LogPacket(true, data);
         }
     }
 }

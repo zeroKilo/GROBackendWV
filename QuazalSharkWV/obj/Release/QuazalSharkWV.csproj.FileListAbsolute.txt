@@ -1,0 +1,17 @@
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\bin\Release\QuazalSharkWV.exe.config
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\obj\Release\QuazalSharkWV.csprojResolveAssemblyReference.cache
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\obj\Release\QuazalSharkWV.Form1.resources
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\obj\Release\QuazalSharkWV.Properties.Resources.resources
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\obj\Release\QuazalSharkWV.csproj.GenerateResource.Cache
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\bin\Release\QuazalSharkWV.exe
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\bin\Release\QuazalSharkWV.pdb
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\bin\Release\QuazalWV.dll
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\bin\Release\System.Data.SQLite.dll
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\bin\Release\DotNetZip.dll
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\bin\Release\QuazalWV.pdb
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\bin\Release\System.Data.SQLite.xml
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\bin\Release\DotNetZip.pdb
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\bin\Release\DotNetZip.xml
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\obj\Release\QuazalSharkWV.exe
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\obj\Release\QuazalSharkWV.pdb
+D:\CODE\GitHub\GRPBackendWV\QuazalSharkWV\bin\Release\Be.Windows.Forms.HexBox.dll

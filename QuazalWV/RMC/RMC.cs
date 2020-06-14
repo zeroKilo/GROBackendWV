@@ -388,6 +388,7 @@ namespace QuazalWV
             WriteLog(10, "send : " + sb.ToString());
             WriteLog(10, "send : " + p.ToStringDetailed());
             udp.Send(data, data.Length, client.ep);
+            Log.LogPacket(true, data);
         }
 
         public static void SendNotification(ClientInfo client, uint source, uint type, uint subType, uint param1, uint param2, uint param3, string paramStr)

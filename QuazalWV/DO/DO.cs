@@ -221,6 +221,7 @@ namespace QuazalWV
             Log.WriteLine(10, "[DO] send : " + sb.ToString());
             Log.WriteLine(10, "[DO] send : " + p.ToStringDetailed());
             client.udp.Send(data, data.Length, client.ep);
+            Log.LogPacket(true, data);
         }
 
         public static void UnpackMessage(byte[] data, int tabs, StringBuilder sb)

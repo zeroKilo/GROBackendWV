@@ -63,7 +63,7 @@ namespace QuazalWV
                 case DOC_METHOD.SyncRequest:
                     Log.WriteLine(1, "[DO] Handling SyncRequest...");
                     ulong time = Helper.ReadU64(m);
-                    byte[] buff = Create(callID, 0x83C, new DupObj(DupObjClass.Station, 1), new DupObj(DupObjClass.SessionClock, 1), 6, new Payload_SyncResponse(time).toBuffer());
+                    byte[] buff = Create(client.callCounterDO_RMC++, 0x83C, new DupObj(DupObjClass.Station, 1), new DupObj(DupObjClass.SessionClock, 1), 6, new Payload_SyncResponse(time).toBuffer());
                     MemoryStream m2 = new MemoryStream();
                     Helper.WriteU32(m2, (uint)buff.Length);
                     m2.Write(buff, 0, buff.Length);
