@@ -226,6 +226,8 @@ namespace QuazalWV
 
         public static void UnpackMessage(byte[] data, int tabs, StringBuilder sb)
         {
+            MemoryStream m = new MemoryStream(data);
+            m.Seek(1, 0);
             string t = "";
             for (int i = 0; i < tabs; i++)
                 t += "\t";
@@ -235,11 +237,33 @@ namespace QuazalWV
             for (int i = 1; i < data.Length; i++)
                 sb.Append(" " + data[i].ToString("X2"));
             sb.AppendLine();
+            switch(method)
+            {
+                case METHOD.GetParticipantsRequest:
+                    uint count = Helper.ReadU32(m);
+                    for (uint i = 0; i < count; i++)
+                        sb.AppendLine(t + "\tURL " + i + " = " + Helper.ReadString(m));
+                    break;
+                case METHOD.JoinResponse:
+                    m.Seek(2, 0);
+                    sb.AppendLine(t + "\tSlave  = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    sb.AppendLine(t + "\tMaster = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    break;
+                case METHOD.CreateAndPromoteDuplicate:
+                    sb.AppendLine(t + "\tCall ID = 0x" + Helper.ReadU16(m).ToString("X4"));
+                    sb.AppendLine(t + "\tDupObj  = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    sb.AppendLine(t + "\tMaster  = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    break;
+                case METHOD.Migration:
+                    sb.AppendLine(t + "\tCall ID      = 0x" + Helper.ReadU16(m).ToString("X4"));
+                    sb.AppendLine(t + "\tFrom Station = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    sb.AppendLine(t + "\tDupObj       = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    sb.AppendLine(t + "\tTo Station   = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    break;
+            }
             if (method == DO.METHOD.Bundle)
             {
                 sb.AppendLine(t + " DO Sub Messages\t:");
-                MemoryStream m = new MemoryStream(data);
-                m.Seek(1, 0);
                 while (true)
                 {
                     uint size = Helper.ReadU32(m);

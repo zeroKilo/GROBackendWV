@@ -34,6 +34,13 @@ namespace QuazalWV
             ID = u & 0x3FFFFF;
         }
 
+        public DupObj(uint u, uint m)
+        {
+            Class = (DupObjClass)(u >> 22);
+            ID = u & 0x3FFFFF;
+            Master = new DupObj(m);
+        }
+
         public DupObj(DupObjClass cls, uint id)
         {
             Class = cls;
@@ -63,6 +70,11 @@ namespace QuazalWV
         public string getDesc()
         {
             return "[ID=" + ID + " Master=" + (Master == null ? 0 : Master.ID) + " " + Class + "]";
+        }
+
+        public string getDescShort()
+        {
+            return "[ID=" + ID + " " + Class + "]";
         }
 
         public byte[] getPayload()
