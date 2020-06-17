@@ -224,6 +224,50 @@ namespace QuazalWV
             Log.LogPacket(true, data);
         }
 
+        public static void UnpackDuplicaPayload(Stream s, DupObjClass c, StringBuilder sb, string t = "")
+        {
+            switch (c)
+            {
+                case DupObjClass.Station:
+                    if (s.ReadByte() == 1)
+                        sb.Append(new DS_ConnectionInfo(s).getDesc(t));
+                    if (s.ReadByte() == 1)
+                        sb.Append(new StationIdentification(s).getDesc(t));
+                    if (s.ReadByte() == 1)
+                        sb.Append(new StationInfo(s).getDesc(t));
+                    if (s.ReadByte() == 1)
+                    {
+                        sb.AppendLine(t + "[Station State]");
+                        sb.AppendLine(t + " State = " + Helper.ReadU16(s));
+                    }
+                    break;
+                case DupObjClass.Session:
+                    if (s.ReadByte() == 1)
+                        sb.Append(new SharedSessionDescription(s).getDesc(t));
+                    if (s.ReadByte() == 1)
+                        sb.Append(new SessionInfo(s).getDesc(t));
+                    if (s.ReadByte() == 1)
+                    {
+                        sb.AppendLine(t + "[Session State]");
+                        sb.AppendLine(t + " State = " + Helper.ReadU8(s));
+                    }
+                    if (s.ReadByte() == 1)
+                    {
+                        sb.AppendLine(t + "[User State]");
+                        sb.AppendLine(t + " State = " + Helper.ReadU32(s));
+                    }
+                    break;
+                case DupObjClass.IDGenerator:
+                    if (s.ReadByte() == 1)
+                    {
+                        sb.AppendLine(t + "[ID Range]");
+                        sb.AppendLine(t + " Min = " + Helper.ReadU32(s).ToString("X8"));
+                        sb.AppendLine(t + " Max = " + Helper.ReadU32(s).ToString("X8"));
+                    }
+                    break;
+            }
+        }
+
         public static void UnpackMessage(byte[] data, int tabs, StringBuilder sb)
         {
             MemoryStream m = new MemoryStream(data);
@@ -232,38 +276,73 @@ namespace QuazalWV
             for (int i = 0; i < tabs; i++)
                 t += "\t";
             DO.METHOD method = (DO.METHOD)data[0];
-            sb.AppendLine(t + " DO Message method\t: " + method);
-            sb.Append(t + " DO Message data\t:");
+            sb.AppendLine(t + "DO Message method\t: " + method);
+            sb.Append(t + "DO Message data\t:");
             for (int i = 1; i < data.Length; i++)
                 sb.Append(" " + data[i].ToString("X2"));
             sb.AppendLine();
+            t += "\t";
+            uint count;
+            DupObj obj;
             switch(method)
             {
                 case METHOD.GetParticipantsRequest:
-                    uint count = Helper.ReadU32(m);
+                    count = Helper.ReadU32(m);
                     for (uint i = 0; i < count; i++)
-                        sb.AppendLine(t + "\tURL " + i + " = " + Helper.ReadString(m));
+                        sb.AppendLine(t + "URL " + i + " = " + Helper.ReadString(m));
+                    break;
+                case METHOD.GetParticipantsResponse:
+                    m.Seek(2, 0);
+                    count = Helper.ReadU32(m);
+                    for (uint i = 0; i < count; i++)
+                        sb.AppendLine(t + "URL " + i + " = " + Helper.ReadString(m));
+                    break;
+                case METHOD.JoinRequest:
+                    sb.Append(new ProcessAuthentication(m).getDesc(t));
+                    sb.Append(new StationIdentification(m).getDesc(t));
                     break;
                 case METHOD.JoinResponse:
                     m.Seek(2, 0);
-                    sb.AppendLine(t + "\tSlave  = " + new DupObj(Helper.ReadU32(m)).getDescShort());
-                    sb.AppendLine(t + "\tMaster = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    sb.AppendLine(t + "Slave  = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    sb.AppendLine(t + "Master = " + new DupObj(Helper.ReadU32(m)).getDescShort());
                     break;
                 case METHOD.CreateAndPromoteDuplicate:
-                    sb.AppendLine(t + "\tCall ID = 0x" + Helper.ReadU16(m).ToString("X4"));
-                    sb.AppendLine(t + "\tDupObj  = " + new DupObj(Helper.ReadU32(m)).getDescShort());
-                    sb.AppendLine(t + "\tMaster  = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    sb.AppendLine(t + "Call ID = 0x" + Helper.ReadU16(m).ToString("X4"));
+                    obj = new DupObj(Helper.ReadU32(m));
+                    sb.AppendLine(t + "DupObj  = " + obj.getDescShort());
+                    sb.AppendLine(t + "Master  = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    m.Seek(5, SeekOrigin.Current);
+                    UnpackDuplicaPayload(m, obj.Class, sb, t);
+                    break;
+                case METHOD.CreateDuplicate:
+                    obj = new DupObj(Helper.ReadU32(m));
+                    sb.AppendLine(t + "DupObj  = " + obj.getDescShort());
+                    sb.AppendLine(t + "Master  = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    m.Seek(1, SeekOrigin.Current);
+                    UnpackDuplicaPayload(m, obj.Class, sb, t);
                     break;
                 case METHOD.Migration:
-                    sb.AppendLine(t + "\tCall ID      = 0x" + Helper.ReadU16(m).ToString("X4"));
-                    sb.AppendLine(t + "\tFrom Station = " + new DupObj(Helper.ReadU32(m)).getDescShort());
-                    sb.AppendLine(t + "\tDupObj       = " + new DupObj(Helper.ReadU32(m)).getDescShort());
-                    sb.AppendLine(t + "\tTo Station   = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    sb.AppendLine(t + "Call ID      = 0x" + Helper.ReadU16(m).ToString("X4"));
+                    sb.AppendLine(t + "From Station = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    sb.AppendLine(t + "DupObj       = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    sb.AppendLine(t + "To Station   = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    break;
+                case METHOD.FetchRequest:
+                    sb.AppendLine(t + "Call ID      = 0x" + Helper.ReadU16(m).ToString("X4"));
+                    sb.AppendLine(t + "DupObj       = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    sb.AppendLine(t + "From Station = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    break;
+                case METHOD.RMCCall:
+                    sb.AppendLine(t + "Call ID      = 0x" + Helper.ReadU16(m).ToString("X4"));
+                    sb.AppendLine(t + "Flags        = 0x" + Helper.ReadU32(m).ToString("X8"));
+                    sb.AppendLine(t + "From Station = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    sb.AppendLine(t + "DupObj       = " + new DupObj(Helper.ReadU32(m)).getDescShort());
+                    sb.AppendLine(t + "Method       = " + (DO_RMCRequestMessage.DOC_METHOD)Helper.ReadU8(m));
                     break;
             }
             if (method == DO.METHOD.Bundle)
             {
-                sb.AppendLine(t + " DO Sub Messages\t:");
+                sb.AppendLine(t + "DO Sub Messages\t:");
                 while (true)
                 {
                     uint size = Helper.ReadU32(m);

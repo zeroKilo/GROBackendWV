@@ -28,15 +28,15 @@ namespace QuazalWV
             return m.ToArray();
         }
 
-        public override string getDesc()
+        public override string getDesc(string tabs = "")
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(sharedSesDesc.getDesc());
-            sb.Append(sessionInfo.getDesc());
-            sb.AppendLine("[SessionState]");
-            sb.AppendLine(" State = " + sessionState);
-            sb.AppendLine("[User Defined State]");
-            sb.AppendLine(" State = 0x" + userDefStateM.ToString("X"));
+            sb.Append(sharedSesDesc.getDesc(tabs));
+            sb.Append(sessionInfo.getDesc(tabs));
+            sb.AppendLine(tabs + "[SessionState]");
+            sb.AppendLine(tabs + " State = " + sessionState);
+            sb.AppendLine(tabs + "[User Defined State]");
+            sb.AppendLine(tabs + " State = 0x" + userDefStateM.ToString("X"));
             return sb.ToString();
         }
     }

@@ -20,9 +20,10 @@ namespace QuazalWV
             return m.ToArray();
         }
 
-        public override string getDesc()
+        public override string getDesc(string tabs = "")
         {
             StringBuilder sb = new StringBuilder();
+            sb.Append(tabs);
             byte[] buff = toBuffer();
             foreach (byte b in buff)
                 sb.Append(b.ToString("X2") + " ");

@@ -13,6 +13,14 @@ namespace QuazalWV
         public string string2 = "";
         public string sSessionDiscovery = "";
 
+        public SharedSessionDescription() { }
+        public SharedSessionDescription(Stream s)
+        {
+            sSessionDescription = Helper.ReadString(s);
+            string2 = Helper.ReadString(s);
+            sSessionDiscovery = Helper.ReadString(s);
+        }
+
         public void toBuffer(Stream s)
         {
             Helper.WriteString(s, sSessionDescription);
@@ -20,13 +28,13 @@ namespace QuazalWV
             Helper.WriteString(s, sSessionDiscovery);
         }
 
-        public string getDesc()
+        public string getDesc(string tabs = "")
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[SharedSessionDescription]");
-            sb.AppendLine(" Session Description = " + sSessionDescription);
-            sb.AppendLine(" String 2 = " + string2);
-            sb.AppendLine(" Session Discovery = " + sSessionDiscovery);
+            sb.AppendLine(tabs + "[SharedSessionDescription]");
+            sb.AppendLine(tabs + " Session Description = " + sSessionDescription);
+            sb.AppendLine(tabs + " String 2            = " + string2);
+            sb.AppendLine(tabs + " Session Discovery   = " + sSessionDiscovery);
             return sb.ToString();
         }
     }

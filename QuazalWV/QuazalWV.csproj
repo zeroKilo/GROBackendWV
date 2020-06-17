@@ -143,6 +143,7 @@
     <Compile Include="Classes\GR5_Weapon.cs" />
     <Compile Include="Classes\GR5_WeaponConfiguration.cs" />
     <Compile Include="Classes\GR5_WeaponXPLevelInfo.cs" />
+    <Compile Include="Classes\ProcessAuthentication.cs" />
     <Compile Include="Classes\SessionInfo.cs" />
     <Compile Include="Classes\SharedSessionDescription.cs" />
     <Compile Include="Classes\StationInfo.cs" />

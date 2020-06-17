@@ -10,6 +10,6 @@ namespace QuazalWV
     {
         public abstract byte[] toBuffer();
 
-        public abstract string getDesc();
+        public abstract string getDesc(string tabs = "");
     }
 }

@@ -13,6 +13,14 @@ namespace QuazalWV
         public string sSessionName = "N01-GRO-DS034";
         public uint m_uiSessionID = DO_Session.ID;
 
+        public SessionInfo() { }
+        public SessionInfo(Stream s) 
+        {
+            m_dohRootMulticastGroup = Helper.ReadU32(s);
+            sSessionName = Helper.ReadString(s);
+            m_uiSessionID = Helper.ReadU32(s);
+        }
+
         public void toBuffer(Stream s)
         {
             Helper.WriteU32(s, m_dohRootMulticastGroup);
@@ -20,13 +28,13 @@ namespace QuazalWV
             Helper.WriteU32(s, m_uiSessionID);
         }
 
-        public string getDesc()
+        public string getDesc(string tabs = "")
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[SessionInfo]");
-            sb.AppendLine(" Root Multicast Group = 0x" + m_dohRootMulticastGroup.ToString("X8"));
-            sb.AppendLine(" Session Name = " + sSessionName);
-            sb.AppendLine(" Session ID = 0x" + m_uiSessionID.ToString("X8"));
+            sb.AppendLine(tabs + "[SessionInfo]");
+            sb.AppendLine(tabs + " Root Multicast Group = 0x" + m_dohRootMulticastGroup.ToString("X8"));
+            sb.AppendLine(tabs + " Session Name         = " + sSessionName);
+            sb.AppendLine(tabs + " Session ID           = 0x" + m_uiSessionID.ToString("X8"));
             return sb.ToString();
         }
     }

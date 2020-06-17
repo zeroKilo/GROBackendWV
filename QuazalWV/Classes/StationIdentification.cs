@@ -31,14 +31,14 @@ namespace QuazalWV
             Helper.WriteU32(s, m_uiProductVersion);
         }
 
-        public string getDesc()
+        public string getDesc(string tabs = "")
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[StationIdentification]");
-            sb.AppendLine(" Identification Token = " + m_strIdentificationToken);
-            sb.AppendLine(" Process Name = " + m_strProcessName);
-            sb.AppendLine(" Process Type = " + m_uiProcessType);
-            sb.AppendLine(" Product Version = " + m_uiProductVersion);
+            sb.AppendLine(tabs + "[StationIdentification]");
+            sb.AppendLine(tabs + " Identification Token = " + m_strIdentificationToken);
+            sb.AppendLine(tabs + " Process Name         = " + m_strProcessName);
+            sb.AppendLine(tabs + " Process Type         = " + m_uiProcessType);
+            sb.AppendLine(tabs + " Product Version      = " + m_uiProductVersion);
             return sb.ToString();
         }
     }

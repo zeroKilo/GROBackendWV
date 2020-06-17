@@ -9,7 +9,7 @@ namespace QuazalWV
 {
     public static class DO_RMCRequestMessage
     {
-        enum DOC_METHOD
+        public enum DOC_METHOD
         {
             AddDuplicaLocation = 1,
             DeleteDuplica = 2,

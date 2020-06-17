@@ -26,11 +26,11 @@ namespace QuazalWV
             return m.ToArray();
         }
 
-        public override string getDesc()
+        public override string getDesc(string tabs = "")
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("Range Min = 0x" + min.ToString("X"));
-            sb.AppendLine("Range Max = 0x" + max.ToString("X"));
+            sb.AppendLine(tabs + "Range Min = 0x" + min.ToString("X"));
+            sb.AppendLine(tabs + "Range Max = 0x" + max.ToString("X"));
             return sb.ToString();
         }
     }

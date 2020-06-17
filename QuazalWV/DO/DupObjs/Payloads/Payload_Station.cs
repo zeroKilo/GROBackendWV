@@ -52,14 +52,14 @@ namespace QuazalWV
             return m.ToArray();
         }
 
-        public override string getDesc()
+        public override string getDesc(string tabs = "")
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(connectionInfo.getDesc());
-            sb.Append(stationIdent.getDesc());
-            sb.Append(stationInfo.getDesc());
-            sb.AppendLine("[StationState]");
-            sb.AppendLine(" State = " + stationState);
+            sb.Append(connectionInfo.getDesc(tabs));
+            sb.Append(stationIdent.getDesc(tabs));
+            sb.Append(stationInfo.getDesc(tabs));
+            sb.AppendLine(tabs + "[StationState]");
+            sb.AppendLine(tabs + " State = " + stationState);
             return sb.ToString();
         }
     }

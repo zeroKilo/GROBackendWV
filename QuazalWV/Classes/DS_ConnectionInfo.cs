@@ -50,20 +50,20 @@ namespace QuazalWV
             Helper.WriteU32(s, m_uiOutputLatency);
         }
 
-        public string getDesc()
+        public string getDesc(string tabs = "")
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[DS_ConnectionInfo]");
-            sb.AppendLine(" URLInitialized = " + m_bURLInitialized);
-            sb.AppendLine(" Station URL 1 = " + m_strStationURL1);
-            sb.AppendLine(" Station URL 2 = " + m_strStationURL2);
-            sb.AppendLine(" Station URL 3 = " + m_strStationURL3);
-            sb.AppendLine(" Station URL 4 = " + m_strStationURL4);
-            sb.AppendLine(" Station URL 5 = " + m_strStationURL5);
-            sb.AppendLine(" Input Bandwidth = " + m_uiInputBandwidth);
-            sb.AppendLine(" Input Latency = " + m_uiInputLatency);
-            sb.AppendLine(" Output Bandwidth = " + m_uiOutputBandwidth);
-            sb.AppendLine(" Output Latency = " + m_uiOutputLatency);
+            sb.AppendLine(tabs + "[DS_ConnectionInfo]");
+            sb.AppendLine(tabs + " URLInitialized = " + m_bURLInitialized);
+            sb.AppendLine(tabs + " Station URL 1 = " + m_strStationURL1);
+            sb.AppendLine(tabs + " Station URL 2 = " + m_strStationURL2);
+            sb.AppendLine(tabs + " Station URL 3 = " + m_strStationURL3);
+            sb.AppendLine(tabs + " Station URL 4 = " + m_strStationURL4);
+            sb.AppendLine(tabs + " Station URL 5 = " + m_strStationURL5);
+            sb.AppendLine(tabs + " Input Bandwidth = " + m_uiInputBandwidth);
+            sb.AppendLine(tabs + " Input Latency = " + m_uiInputLatency);
+            sb.AppendLine(tabs + " Output Bandwidth = " + m_uiOutputBandwidth);
+            sb.AppendLine(tabs + " Output Latency = " + m_uiOutputLatency);
             return sb.ToString();
         }
     }

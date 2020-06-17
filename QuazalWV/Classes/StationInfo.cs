@@ -25,12 +25,12 @@ namespace QuazalWV
             Helper.WriteU32(s, m_uiMachineUID);
         }
 
-        public string getDesc()
+        public string getDesc(string tabs = "")
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("[StationInfo]");
-            sb.AppendLine(" Observer = 0x" + m_hObserver.ToString("X8"));
-            sb.AppendLine(" MachineUID = 0x" + m_uiMachineUID.ToString("X8"));
+            sb.AppendLine(tabs + "[StationInfo]");
+            sb.AppendLine(tabs + " Observer   = 0x" + m_hObserver.ToString("X8"));
+            sb.AppendLine(tabs + " MachineUID = 0x" + m_uiMachineUID.ToString("X8"));
             return sb.ToString();
         }
     }
