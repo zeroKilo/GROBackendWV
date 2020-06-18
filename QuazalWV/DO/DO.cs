@@ -224,6 +224,32 @@ namespace QuazalWV
             Log.LogPacket(true, data);
         }
 
+
+        public static void UnpackUpdatePayload(Stream s, DupObjClass c, int index, StringBuilder sb, string t = "")
+        {
+            switch (c)
+            {
+                case DupObjClass.Station:
+                    switch(index)
+                    {
+                        case 1:
+                            sb.Append(new DS_ConnectionInfo(s).getDesc(t));
+                            break;
+                        case 2:
+                            sb.Append(new StationIdentification(s).getDesc(t));
+                            break;
+                        case 3:
+                            sb.Append(new StationInfo(s).getDesc(t));
+                            break;
+                        case 4:
+                            sb.AppendLine(t + "[Station State]");
+                            sb.AppendLine(t + " State = " + Helper.ReadU16(s));
+                            break;
+                    }
+                    break;
+            }
+        }
+
         public static void UnpackDuplicaPayload(Stream s, DupObjClass c, StringBuilder sb, string t = "")
         {
             switch (c)
@@ -264,6 +290,21 @@ namespace QuazalWV
                         sb.AppendLine(t + " Min = " + Helper.ReadU32(s).ToString("X8"));
                         sb.AppendLine(t + " Max = " + Helper.ReadU32(s).ToString("X8"));
                     }
+                    break;
+            }
+        }
+
+        public static void UnpackRMCCallPayload(Stream s, DO_RMCRequestMessage.DOC_METHOD method, StringBuilder sb, string t = "")
+        {
+            switch (method)
+            {
+                case DO_RMCRequestMessage.DOC_METHOD.SyncRequest:
+                    sb.AppendLine(t + "Time = " + Helper.ReadU64(s).ToString("X"));
+                    break;
+                case DO_RMCRequestMessage.DOC_METHOD.SyncResponse:
+                    sb.AppendLine(t + "Time 1  = " + Helper.ReadU64(s).ToString("X"));
+                    sb.AppendLine(t + "Time 2  = " + Helper.ReadU64(s).ToString("X"));
+                    sb.AppendLine(t + "Unknown = " + Helper.ReadU32(s).ToString("X"));
                     break;
             }
         }
@@ -337,8 +378,26 @@ namespace QuazalWV
                     sb.AppendLine(t + "Flags        = 0x" + Helper.ReadU32(m).ToString("X8"));
                     sb.AppendLine(t + "From Station = " + new DupObj(Helper.ReadU32(m)).getDescShort());
                     sb.AppendLine(t + "DupObj       = " + new DupObj(Helper.ReadU32(m)).getDescShort());
-                    sb.AppendLine(t + "Method       = " + (DO_RMCRequestMessage.DOC_METHOD)Helper.ReadU8(m));
+                    DO_RMCRequestMessage.DOC_METHOD rmcm = (DO_RMCRequestMessage.DOC_METHOD)Helper.ReadU8(m);
+                    sb.AppendLine(t + "Method       = " + rmcm);
+                    UnpackRMCCallPayload(m, rmcm, sb, t);
                     break;
+                case METHOD.RMCResponse:
+                    sb.AppendLine(t + "Call ID = 0x" + Helper.ReadU16(m).ToString("X4"));
+                    sb.AppendLine(t + "Outcome = 0x" + Helper.ReadU32(m).ToString("X8"));
+                    break;
+                case METHOD.Update:
+                    obj = new DupObj(Helper.ReadU32(m));
+                    sb.AppendLine(t + "DupObj = " + obj.getDescShort());
+                    byte part = Helper.ReadU8(m);
+                    sb.AppendLine(t + "Part   = " + part);
+                    UnpackUpdatePayload(m, obj.Class, part, sb, t);
+                    break;
+                case METHOD.CallOutcome:
+                    sb.AppendLine(t + "Call ID = 0x" + Helper.ReadU16(m).ToString("X4"));
+                    sb.AppendLine(t + "Outcome = 0x" + Helper.ReadU32(m).ToString("X8"));
+                    break;
+
             }
             if (method == DO.METHOD.Bundle)
             {

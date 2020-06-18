@@ -81,6 +81,7 @@ namespace QuazalWV
         public byte[] payload;
         public byte checkSum;
         public bool usesCompression = true;
+        public uint realSize;
 
         public QPacket()
         {
@@ -104,11 +105,13 @@ namespace QuazalWV
                 m_byPartNumber = Helper.ReadU8(m);
             if (flags.Contains(PACKETFLAG.FLAG_HAS_SIZE))
                 payloadSize = Helper.ReadU16(m);
+            else
+                payloadSize = (ushort)(m.Length - m.Position - 1);
             MemoryStream pl = new MemoryStream();
-            for (int i = (int)m.Position; i < m.Length - 1; i++)
-                pl.WriteByte(Helper.ReadU8(m));
+            if (payloadSize != 0)
+                for (int i = 0; i < payloadSize; i++)
+                    pl.WriteByte(Helper.ReadU8(m));
             payload = pl.ToArray();
-            payloadSize = (ushort)payload.Length;
             if (payload != null && payload.Length > 0 && type != PACKETTYPE.SYN && m_oSourceVPort.type != STREAMTYPE.NAT)
             {
                 if (m_oSourceVPort.type == STREAMTYPE.OldRVSec)
@@ -129,6 +132,7 @@ namespace QuazalWV
                 payloadSize = (ushort)payload.Length;
             }
             checkSum = Helper.ReadU8(m);
+            realSize = (uint)m.Position;
         }
 
         public byte[] toBuffer()
@@ -244,7 +248,7 @@ namespace QuazalWV
         {
             StringBuilder sb = new StringBuilder();
             foreach (PACKETFLAG flag in flags)
-                sb.Append("[" + flag + "]");
+                sb.Append("[" + flag.ToString().Replace("FLAG_","") + "]");
             return sb.ToString();
         }
 
