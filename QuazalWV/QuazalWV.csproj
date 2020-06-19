@@ -145,6 +145,7 @@
     <Compile Include="Classes\GR5_WeaponXPLevelInfo.cs" />
     <Compile Include="Classes\ProcessAuthentication.cs" />
     <Compile Include="Classes\SessionInfo.cs" />
+    <Compile Include="Classes\SessionInfosParameter.cs" />
     <Compile Include="Classes\SharedSessionDescription.cs" />
     <Compile Include="Classes\StationInfo.cs" />
     <Compile Include="Classes\StdMaps.cs" />

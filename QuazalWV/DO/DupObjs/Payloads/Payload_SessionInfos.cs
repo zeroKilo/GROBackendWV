@@ -9,14 +9,29 @@ namespace QuazalWV
 {
     public class Payload_SessionInfos : DupObjPayload
     {
+        public byte[] sessionParams = new byte[256];
+        public List<SessionInfosParameter> SES_SessionInfosParameter = new List<SessionInfosParameter>();
+
         public override byte[] toBuffer()
         {
+            SES_SessionInfosParameter = new List<SessionInfosParameter>();
+            SessionInfosParameter info = new SessionInfosParameter();
+            info.m_bSessionParametersAreSet = true;
+            for (int i = 0; i < 256; i++)
+            {
+                info.m_cSessionParameters[i] = (byte)i;
+                sessionParams[i] = (byte)i;
+            }
+            SES_SessionInfosParameter.Add(info);
+
             MemoryStream m = new MemoryStream();
             m.WriteByte(1); // BasicUpdateProtocol<SES_SessionHeartbeat>
             Helper.WriteU32(m, 0);
-            m.WriteByte(1); // BasicUpdateProtocol<SES_SessionInfosParameter>
-            Helper.WriteU32(m, 0);
-            m.Write(new byte[256], 0, 256);
+            m.WriteByte(1); 
+            Helper.WriteU32(m, (uint)SES_SessionInfosParameter.Count);
+            foreach (SessionInfosParameter p in SES_SessionInfosParameter)
+                p.toBuffer(m);
+            m.Write(sessionParams, 0, 256);
             return m.ToArray();
         }
 
