@@ -17,11 +17,16 @@ namespace QuazalWV
             SES_SessionInfosParameter = new List<SessionInfosParameter>();
             SessionInfosParameter info = new SessionInfosParameter();
             info.m_bSessionParametersAreSet = true;
-            for (int i = 0; i < 256; i++)
+            for (int i = 5; i < 256; i++)
             {
                 info.m_cSessionParameters[i] = (byte)i;
                 sessionParams[i] = (byte)i;
             }
+            //AF020A0E
+            info.m_cSessionParameters[1] = 0xAF;
+            info.m_cSessionParameters[2] = 0x02;
+            info.m_cSessionParameters[3] = 0x0A;
+            info.m_cSessionParameters[4] = 0x0E;
             SES_SessionInfosParameter.Add(info);
 
             MemoryStream m = new MemoryStream();
