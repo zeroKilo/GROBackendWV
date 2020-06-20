@@ -22,11 +22,20 @@ namespace QuazalWV
                 info.m_cSessionParameters[i] = (byte)i;
                 sessionParams[i] = (byte)i;
             }
-            //AF020A0E
-            info.m_cSessionParameters[1] = 0xAF;
-            info.m_cSessionParameters[2] = 0x02;
-            info.m_cSessionParameters[3] = 0x0A;
-            info.m_cSessionParameters[4] = 0x0E;
+            //AF020A0E Data/99 - Standalone/Menu/TheProvingGrounds/Modelisation/World//
+            //DE139C36 Data/- 14 - Maps GRO/03_MoscowUB_City/03_MoscowUB_City_LD/Modelisation/World//
+            //9203DA88 Data/- 14 - Maps GRO/03_MoscowUB_City/03_MoscowUB_City_Global/Modelisation/World//
+            //4E100B51 Data/99 - Standalone/Menu/GlobalGUI/Modelisation/World//
+            info.m_cSessionParameters[1] = 0xDE;
+            info.m_cSessionParameters[2] = 0x13;
+            info.m_cSessionParameters[3] = 0x9C;
+            info.m_cSessionParameters[4] = 0x36;
+
+
+            info.m_cSessionParameters[0x1D] = 0x00;
+            info.m_cSessionParameters[0x1E] = 0x00;
+            info.m_cSessionParameters[0x1F] = 0x00;
+            info.m_cSessionParameters[0x20] = 0x00;
             SES_SessionInfosParameter.Add(info);
 
             MemoryStream m = new MemoryStream();
