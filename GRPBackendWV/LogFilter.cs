@@ -55,6 +55,10 @@ namespace GRPBackendWV
             "[NetZ] Job ",
             "[NetZ]   Job ",
             "[NetZ]   	Current step",
+            "(S:5c00002) The scheduler will",
+            "(S:5c00002)   Job",
+            "(S:5c00002)   	State",
+            "(S:5c00002)   	Execution"
         };
 
         private void Process(string[] lines)
