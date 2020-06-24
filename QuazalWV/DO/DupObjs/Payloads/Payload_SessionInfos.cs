@@ -15,35 +15,7 @@ namespace QuazalWV
         public override byte[] toBuffer()
         {
             SES_SessionInfosParameter = new List<SessionInfosParameter>();
-            SessionInfosParameter info = new SessionInfosParameter();
-            info.m_bSessionParametersAreSet = true;
-            for (int i = 0; i < 256; i++)
-            {
-                info.m_cSessionParameters[i] = (byte)i;
-                sessionParams[i] = (byte)i;
-            }
-            //AF020A0E Data/99 - Standalone/Menu/TheProvingGrounds/Modelisation/World//
-            //DE139C36 Data/- 14 - Maps GRO/03_MoscowUB_City/03_MoscowUB_City_LD/Modelisation/World//
-            //9203DA88 Data/- 14 - Maps GRO/03_MoscowUB_City/03_MoscowUB_City_Global/Modelisation/World//
-            //4E100B51 Data/99 - Standalone/Menu/GlobalGUI/Modelisation/World//
-            info.m_cSessionParameters[1] = 0xAF;
-            info.m_cSessionParameters[2] = 0x02;
-            info.m_cSessionParameters[3] = 0x0A;
-            info.m_cSessionParameters[4] = 0x0E;
-
-            info.m_cSessionParameters[5] = 0x01; //match id
-            info.m_cSessionParameters[6] = 0x00;
-            info.m_cSessionParameters[7] = 0x00;
-            info.m_cSessionParameters[8] = 0x00;
-
-
-            info.m_cSessionParameters[0x1D] = 0x00; //some index, used as x = index + index * 2
-            info.m_cSessionParameters[0x1E] = 0x00;
-            info.m_cSessionParameters[0x1F] = 0x00;
-            info.m_cSessionParameters[0x20] = 0x00;
-
-            SES_SessionInfosParameter.Add(info);
-
+            SES_SessionInfosParameter.Add(new SessionInfosParameter());
             MemoryStream m = new MemoryStream();
             m.WriteByte(1); // BasicUpdateProtocol<SES_SessionHeartbeat>
             Helper.WriteU32(m, 0);

@@ -26,5 +26,6 @@ namespace QuazalWV
         public string pass;
         public IPEndPoint ep;
         public UdpClient udp;
+        public bool bootStrapDone = false;
     }
 }

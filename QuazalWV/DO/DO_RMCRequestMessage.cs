@@ -58,13 +58,15 @@ namespace QuazalWV
             Log.WriteLine(2, "[DO] RMC Call Flags   : 0x" + flags.ToString("X8"));
             Log.WriteLine(2, "[DO] RMC Call Station : 0x" + station.ToString("X8"));
             Log.WriteLine(2, "[DO] RMC Call DupObj  : 0x" + targetObject.ToString("X8") + " " + new DupObj(targetObject).getDesc());
+            byte[] buff;
+            MemoryStream m2;
             switch (method)
             {
                 case DOC_METHOD.SyncRequest:
                     Log.WriteLine(1, "[DO] Handling SyncRequest...");
                     ulong time = Helper.ReadU64(m);
-                    byte[] buff = Create(client.callCounterDO_RMC++, 0x83C, new DupObj(DupObjClass.Station, 1), new DupObj(DupObjClass.SessionClock, 1), 6, new Payload_SyncResponse(time).toBuffer());
-                    MemoryStream m2 = new MemoryStream();
+                    buff = Create(client.callCounterDO_RMC++, 0x83C, new DupObj(DupObjClass.Station, 1), new DupObj(DupObjClass.SessionClock, 1), 6, new Payload_SyncResponse(time).toBuffer());
+                    m2 = new MemoryStream();
                     Helper.WriteU32(m2, (uint)buff.Length);
                     m2.Write(buff, 0, buff.Length);
                     m2.WriteByte((byte)QPacket.MakeChecksum(m2.ToArray(), 0));
@@ -78,6 +80,16 @@ namespace QuazalWV
                     return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x01, 0x01, 0x00, 0x00, 0x01, 0x02, 0x00, 0x00 });
                 case DOC_METHOD.IncreasePlayerNb:
                     Log.WriteLine(1, "[DO] Handling IncreasePlayerNb...");
+                    //buff = Create(client.callCounterDO_RMC++, 0x83C, new DupObj(DupObjClass.Station, 1), new DupObj(DupObjClass.SES_cl_SessionInfos, 2), 17, new byte[0]);
+                    //m2 = new MemoryStream();
+                    //Helper.WriteU32(m2, (uint)buff.Length);
+                    //m2.Write(buff, 0, buff.Length);
+                    //m2.WriteByte((byte)QPacket.MakeChecksum(m2.ToArray(), 0));
+                    //p.payload = m2.ToArray();
+                    //p.payloadSize = (ushort)p.payload.Length;
+                    //p.m_uiSignature = client.IDsend;
+                    //DO.Send(p, client);
+
                     return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 });
                 case DOC_METHOD.AskForSettingPlayerParameters:
                     Log.WriteLine(1, "[DO] Handling AskForSettingPlayerParameters...");

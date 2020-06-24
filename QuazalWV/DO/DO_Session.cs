@@ -17,6 +17,7 @@ namespace QuazalWV
         {
             DupObjs = new List<DupObj>();
             Payload_Station ps = new Payload_Station();
+            ps.connectionInfo.m_bURLInitialized = 1;
             ps.connectionInfo.m_strStationURL1 = "prudp:/address=127.0.0.1;port=5004;RVCID=166202";
             ps.connectionInfo.m_strStationURL2 = "prudp:/address=127.0.0.1;port=5004;sid=15;type=2;RVCID=166202";
             ps.stationState = STATIONSTATE.Participating;

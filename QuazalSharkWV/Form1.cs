@@ -59,23 +59,37 @@ namespace QuazalSharkWV
             listBox1.Items.Clear();
             foreach (LogEntry e in list)
             {
-                StringBuilder sb = new StringBuilder();
-                sb.Append(e.sent ? "---> " : "<--- ");
-                sb.Append("Size = " + e.raw.Length.ToString("X4") + " ");
-                sb.Append("Seq = " + e.packet.uiSeqId.ToString("X4") + " ");
-                sb.Append(e.packet.m_oSourceVPort.type + "\t");
-                sb.Append(e.packet.type + "\t");
-                sb.Append(e.packet.GetFlagsString());
-                if (e.packet.m_oSourceVPort.type == QPacket.STREAMTYPE.DO &&
-                    e.packet.type == QPacket.PACKETTYPE.DATA &&
-                    !e.packet.flags.Contains(QPacket.PACKETFLAG.FLAG_ACK))
-                    sb.Append("(" + FindDOMethods(e.packet.payload) + ")");
-                if (e.sent &&
-                    e.packet.type == QPacket.PACKETTYPE.DATA &&
-                    e.packet.m_oSourceVPort.type == QPacket.STREAMTYPE.OldRVSec &&
-                    !e.packet.flags.Contains(QPacket.PACKETFLAG.FLAG_ACK))
-                    sb.Append("(" + GetRMCDetails(e.packet) + ")");
-                listBox1.Items.Add(sb.ToString());
+                try
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append(e.sent ? "---> " : "<--- ");
+                    sb.Append("Size = " + e.raw.Length.ToString("X4") + " ");
+                    sb.Append("Seq = " + e.packet.uiSeqId.ToString("X4") + " ");
+                    sb.Append(e.packet.m_oSourceVPort.type + "\t");
+                    sb.Append(e.packet.type + "\t");
+                    sb.Append(e.packet.GetFlagsString());
+                    if (e.packet.m_oSourceVPort.type == QPacket.STREAMTYPE.DO &&
+                        e.packet.type == QPacket.PACKETTYPE.DATA &&
+                        !e.packet.flags.Contains(QPacket.PACKETFLAG.FLAG_ACK))
+                        sb.Append("(" + FindDOMethods(e.packet.payload) + ")");
+                    if (e.sent &&
+                        e.packet.type == QPacket.PACKETTYPE.DATA &&
+                        e.packet.m_oSourceVPort.type == QPacket.STREAMTYPE.OldRVSec &&
+                        !e.packet.flags.Contains(QPacket.PACKETFLAG.FLAG_ACK))
+                        sb.Append("(" + GetRMCDetails(e.packet) + ")");
+                    listBox1.Items.Add(sb.ToString());
+                }
+                catch (Exception ex)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append(e.sent ? "---> " : "<--- ");
+                    sb.Append("Size = " + e.raw.Length.ToString("X4") + " ");
+                    sb.Append("Seq = " + e.packet.uiSeqId.ToString("X4") + " ");
+                    sb.Append(e.packet.m_oSourceVPort.type + "\t");
+                    sb.Append(e.packet.type + "\t");
+                    sb.Append(e.packet.GetFlagsString());
+                    listBox1.Items.Add(sb.ToString() + " Cant process!");
+                }
             }
         }
 
@@ -105,6 +119,8 @@ namespace QuazalSharkWV
                 if (size == 0)
                     break;
                 method = (DO.METHOD)m.ReadByte();
+                if ((int)method > 0x15)
+                    throw new Exception();
                 sb.Append("," + method);
                 m.Seek(size - 1, SeekOrigin.Current);
             }

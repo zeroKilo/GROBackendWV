@@ -20,8 +20,12 @@ namespace QuazalWV
             {
                 case 0x5C00001:
                     msgs = new List<byte[]>();
-                    foreach (DupObj obj in DO_Session.DupObjs)
-                        msgs.Add(DO_CreateDuplicaMessage.Create(obj, 2));
+                    if (!client.bootStrapDone)
+                    {
+                        foreach (DupObj obj in DO_Session.DupObjs)
+                            msgs.Add(DO_CreateDuplicaMessage.Create(obj, 2));
+                        client.bootStrapDone = true;
+                    }
                     msgs.Add(DO_MigrationMessage.Create(client.callCounterDO_RMC++, new DupObj(DupObjClass.Station, 1), new DupObj(DupObjClass.Station, client.stationID), new DupObj(DupObjClass.Station, client.stationID), 3, new List<uint>() { new DupObj(DupObjClass.Station, client.stationID) }));
                     return DO_BundleMessage.Create(client, msgs);
                 default:
