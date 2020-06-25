@@ -58,7 +58,8 @@ namespace GRPBackendWV
             "(S:5c00002) The scheduler will",
             "(S:5c00002)   Job",
             "(S:5c00002)   	State",
-            "(S:5c00002)   	Execution"
+            "(S:5c00002)   	Execution",
+            "(S:5c00002)   Period"
         };
 
         private void Process(string[] lines)

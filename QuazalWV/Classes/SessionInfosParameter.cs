@@ -77,16 +77,19 @@ namespace QuazalWV
         public bool m_bSessionParametersAreSet;
         public SessionInfosParameter() 
         {
-            m_bSessionParametersAreSet = true;
             //AF020A0E Data/99 - Standalone/Menu/TheProvingGrounds/Modelisation/World//
             //DE139C36 Data/- 14 - Maps GRO/03_MoscowUB_City/03_MoscowUB_City_LD/Modelisation/World//
             //9203DA88 Data/- 14 - Maps GRO/03_MoscowUB_City/03_MoscowUB_City_Global/Modelisation/World//
             //4E100B51 Data/99 - Standalone/Menu/GlobalGUI/Modelisation/World//
             //B2001CDC Data/99 - Standalone/Dedicated Server/Menu/Modelisation/World//
-            sParams.mapKey = 0xDE139C36;
+            sParams.byte3 = 1;
+            sParams.mapKey = 0x9203DA88;
             sParams.matchID = 1;
-            sParams.playlistIndex = 1;
+            sParams.playlistIndex = 0;
             sParams.gameMode = 7;
+            sParams.byte25 = 2;
+
+            m_bSessionParametersAreSet = true;
         }
 
         public void toBuffer(Stream s)
