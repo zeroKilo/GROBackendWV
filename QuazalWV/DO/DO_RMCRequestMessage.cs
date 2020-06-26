@@ -87,6 +87,9 @@ namespace QuazalWV
                 case DOC_METHOD.AskForSettingPlayerParameters:
                     Log.WriteLine(1, "[DO] Handling AskForSettingPlayerParameters...");
                     return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 });
+                case DOC_METHOD.AskForSettingPlayerState:
+                    Log.WriteLine(1, "[DO] Handling AskForSettingPlayerState...");
+                    return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 });
                 default:
                     Log.WriteLine(1, "[DO] Error: Unhandled DOC method: " + method + "!");
                     return null;
