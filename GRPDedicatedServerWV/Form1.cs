@@ -31,8 +31,8 @@ namespace GRPDedicatedServerWV
             Log.WriteLine(1, "Using mapkey = 0x" + mapKey.ToString("X8"), Color.Red);
             timer1.Enabled = true;
             UDPDedicatedServer.Start();
-            toolStripButton1.Enabled = false;
             toolStripTextBox2.Enabled =
+            toolStripButton1.Enabled = false;
             toolStripButton2.Enabled = true;
 
         }
@@ -41,8 +41,8 @@ namespace GRPDedicatedServerWV
         {
             timer1.Enabled = false;
             UDPDedicatedServer.Stop();
-            toolStripButton1.Enabled = true;
             toolStripTextBox2.Enabled =
+            toolStripButton1.Enabled = true;
             toolStripButton2.Enabled = false;
         }
 

@@ -103,7 +103,16 @@ namespace QuazalWV
                     return DO_BundleMessage.Create(client, msgs);
                 case DOC_METHOD.AskForSettingPlayerState:
                     Log.WriteLine(1, "[DO] Handling AskForSettingPlayerState...");
-                    return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 });
+                    msgs = new List<byte[]>();
+                    msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
+                        0x1006,
+                        new DupObj(DupObjClass.Station, 1),
+                        new DupObj(DupObjClass.SES_cl_Player_NetZ, 257),
+                        (ushort)DO_RMCRequestMessage.DOC_METHOD.SetPlayerState,
+                        BitConverter.GetBytes(Helper.ReadU32(m))
+                        ));
+                    msgs.Add(DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 }));
+                    return DO_BundleMessage.Create(client, msgs);
                 default:
                     Log.WriteLine(1, "[DO] Error: Unhandled DOC method: " + method + "!");
                     return null;

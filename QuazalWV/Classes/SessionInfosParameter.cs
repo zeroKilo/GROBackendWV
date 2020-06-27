@@ -9,7 +9,7 @@ namespace QuazalWV
 {
     public class SessionParameters
     {
-        public uint dword0;                 //0x00
+        public uint checksum;                 //0x00
         public uint mapKey;                 //0x04
         public uint matchID;                //0x08
         public uint someOtherKey;           //0x0C
@@ -48,8 +48,9 @@ namespace QuazalWV
 
         public void toBuffer(Stream s)
         {
+            MakeCheckSum();
             byte[] buff = new byte[256];
-            CopyToBuffer(buff, 0x00, dword0);
+            CopyToBuffer(buff, 0x00, checksum);
             CopyToBuffer(buff, 0x04, mapKey, true);
             CopyToBuffer(buff, 0x08, matchID);
             CopyToBuffer(buff, 0x0C, someOtherKey);
@@ -68,6 +69,13 @@ namespace QuazalWV
             buff[0x2B] = byte2B;
             buff[0x2C] = byte2C;
             s.Write(buff, 0, 256);
+        }
+
+        public void MakeCheckSum()
+        {
+            byte[] buff = new byte[4];
+            CopyToBuffer(buff, 0, mapKey, true);
+            checksum = BitConverter.ToUInt32(buff, 0) + someOtherKey + uint10 + playlistIndex + gameMode + matchID;
         }
     }
 

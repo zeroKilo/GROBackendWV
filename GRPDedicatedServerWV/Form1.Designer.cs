@@ -177,7 +177,7 @@
             this.toolStripTextBox2.ForeColor = System.Drawing.Color.Red;
             this.toolStripTextBox2.Name = "toolStripTextBox2";
             this.toolStripTextBox2.Size = new System.Drawing.Size(100, 25);
-            this.toolStripTextBox2.Text = "DE139C36";
+            this.toolStripTextBox2.Text = "4D13CD5C";
             // 
             // toolStripLabel1
             // 

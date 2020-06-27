@@ -287,7 +287,8 @@
     <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_GetModifiers.cs" />
     <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_GetSkills.cs" />
     <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_Method3.cs" />
-    <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_Method4.cs" />
+    <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_GetModifierLists.cs" />
+    <Compile Include="RMC\SkillsService\Response\RMCPacketResponseSkillsService_Method7.cs" />
     <Compile Include="RMC\SkillsService\SkillService.cs" />
     <Compile Include="RMC\StatisticsService\Response\RMCPacketResponseStatisticsService_Method1.cs" />
     <Compile Include="RMC\StatisticsService\Response\RMCPacketResponseStatisticsService_Method2.cs" />
