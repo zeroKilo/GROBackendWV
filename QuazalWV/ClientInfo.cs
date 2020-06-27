@@ -28,5 +28,6 @@ namespace QuazalWV
         public UdpClient udp;
         public bool bootStrapDone = false;
         public bool matchStartSent = false;
+        public byte[] settings = null;
     }
 }

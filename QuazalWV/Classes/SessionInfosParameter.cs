@@ -73,7 +73,7 @@ namespace QuazalWV
 
     public class SessionInfosParameter
     {
-        public static uint defaultMapKey = 0x9203DA88;
+        public static uint defaultMapKey = 0xDE139C36;
         public SessionParameters sParams = new SessionParameters();
         public bool m_bSessionParametersAreSet;
         public SessionInfosParameter()

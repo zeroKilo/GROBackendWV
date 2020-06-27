@@ -100,6 +100,9 @@ namespace QuazalWV
                 case METHOD.CreateDuplicate:
                     replyPayload = DO_CreateDuplicaMessage.HandleMessage(client, data);
                     break;
+                case METHOD.Delete:
+                    replyPayload = DO_DeleteMessage.HandleMessage(client, data);
+                    break;
                 default:
                     Log.WriteLine(1, "[DO] Error: Unknown Method 0x" + data[0].ToString("X2") + " (" + method +")", Color.Red);
                     break;

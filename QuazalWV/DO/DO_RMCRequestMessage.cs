@@ -60,6 +60,7 @@ namespace QuazalWV
             Log.WriteLine(2, "[DO] RMC Call DupObj  : 0x" + targetObject.ToString("X8") + " " + new DupObj(targetObject).getDesc());
             byte[] buff;
             MemoryStream m2;
+            List<byte[]> msgs;
             switch (method)
             {
                 case DOC_METHOD.SyncRequest:
@@ -80,13 +81,26 @@ namespace QuazalWV
                     return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x01, 0x01, 0x00, 0x00, 0x01, 0x02, 0x00, 0x00 });
                 case DOC_METHOD.IncreasePlayerNb:
                     Log.WriteLine(1, "[DO] Handling IncreasePlayerNb...");
-                    List<byte[]> msgs = new List<byte[]>();
+                    msgs = new List<byte[]>();
                     msgs.Add(new byte[] { 0x02, 0x02, 0x00, 0x40, 0x05, 0x01, 0x01, 0x00, 0x00, 0x00 });
                     msgs.Add(DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 }));
                     return DO_BundleMessage.Create(client, msgs);
                 case DOC_METHOD.AskForSettingPlayerParameters:
                     Log.WriteLine(1, "[DO] Handling AskForSettingPlayerParameters...");
-                    return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 });
+                    int len = (int)(data.Length - m.Position);
+                    buff = new byte[len];
+                    m.Read(buff, 0, len);
+                    client.settings = buff;
+                    msgs = new List<byte[]>();
+                    msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
+                        0x1006,
+                        new DupObj(DupObjClass.Station, 1),
+                        new DupObj(DupObjClass.SES_cl_Player_NetZ, 257),
+                        (ushort)DO_RMCRequestMessage.DOC_METHOD.SetPlayerParameters,
+                        client.settings
+                        ));
+                    msgs.Add(DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 }));
+                    return DO_BundleMessage.Create(client, msgs);
                 case DOC_METHOD.AskForSettingPlayerState:
                     Log.WriteLine(1, "[DO] Handling AskForSettingPlayerState...");
                     return DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 });

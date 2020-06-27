@@ -155,6 +155,7 @@
     <Compile Include="DO\DO_BundleMessage.cs" />
     <Compile Include="DO\DO_CreateAndPromoteDuplicaMessage.cs" />
     <Compile Include="DO\DO_CreateDuplicaMessage.cs" />
+    <Compile Include="DO\DO_DeleteMessage.cs" />
     <Compile Include="DO\DO_FetchRequestMessage.cs" />
     <Compile Include="DO\DO_GetParticipantsRequestMessage.cs" />
     <Compile Include="DO\DO_GetParticipantsResponseMessage.cs" />
