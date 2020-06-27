@@ -73,6 +73,7 @@ namespace QuazalWV
 
     public class SessionInfosParameter
     {
+        public static uint defaultMapKey = 0x9203DA88;
         public SessionParameters sParams = new SessionParameters();
         public bool m_bSessionParametersAreSet;
         public SessionInfosParameter()
@@ -83,10 +84,10 @@ namespace QuazalWV
             //9203DA88 Data/- 14 - Maps GRO/03_MoscowUB_City/03_MoscowUB_City_Global/Modelisation/World//
             //4E100B51 Data/99 - Standalone/Menu/GlobalGUI/Modelisation/World//
             //B2001CDC Data/99 - Standalone/Dedicated Server/Menu/Modelisation/World//
-            sParams.mapKey = 0x9203DA88;
+            sParams.mapKey = defaultMapKey;
             sParams.matchID = 1;
             sParams.playlistIndex = 0;
-            sParams.gameMode = 7;
+            sParams.gameMode = 9;
         }
 
         public void toBuffer(Stream s)

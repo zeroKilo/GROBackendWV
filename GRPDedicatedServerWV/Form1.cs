@@ -26,9 +26,13 @@ namespace GRPDedicatedServerWV
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            uint mapKey = Convert.ToUInt32(toolStripTextBox2.Text, 16);
+            SessionInfosParameter.defaultMapKey = mapKey;
+            Log.WriteLine(1, "Using mapkey = 0x" + mapKey.ToString("X8"), Color.Red);
             timer1.Enabled = true;
             UDPDedicatedServer.Start();
             toolStripButton1.Enabled = false;
+            toolStripTextBox2.Enabled =
             toolStripButton2.Enabled = true;
 
         }
@@ -38,6 +42,7 @@ namespace GRPDedicatedServerWV
             timer1.Enabled = false;
             UDPDedicatedServer.Stop();
             toolStripButton1.Enabled = true;
+            toolStripTextBox2.Enabled =
             toolStripButton2.Enabled = false;
         }
 

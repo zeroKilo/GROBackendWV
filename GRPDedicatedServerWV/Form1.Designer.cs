@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -49,7 +50,9 @@
             this.rtb2 = new System.Windows.Forms.RichTextBox();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -72,12 +75,28 @@
             this.toolStripButton6,
             this.toolStripSeparator1,
             this.toolStripTextBox1,
-            this.toolStripButton3});
+            this.toolStripButton3,
+            this.toolStripSeparator3,
+            this.toolStripTextBox2,
+            this.toolStripLabel1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(784, 25);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButton9
+            // 
+            this.toolStripButton9.Checked = true;
+            this.toolStripButton9.CheckOnClick = true;
+            this.toolStripButton9.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
+            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton9.Name = "toolStripButton9";
+            this.toolStripButton9.Size = new System.Drawing.Size(74, 22);
+            this.toolStripButton9.Text = "Log Packets";
+            this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
             // toolStripComboBox1
             // 
@@ -259,18 +278,26 @@
             this.toolStripButton4.Text = "Refresh";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
-            // toolStripButton9
+            // toolStripSeparator3
             // 
-            this.toolStripButton9.Checked = true;
-            this.toolStripButton9.CheckOnClick = true;
-            this.toolStripButton9.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
-            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton9.Name = "toolStripButton9";
-            this.toolStripButton9.Size = new System.Drawing.Size(74, 22);
-            this.toolStripButton9.Text = "Log Packets";
-            this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripTextBox2
+            // 
+            this.toolStripTextBox2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripTextBox2.ForeColor = System.Drawing.Color.Red;
+            this.toolStripTextBox2.Name = "toolStripTextBox2";
+            this.toolStripTextBox2.Size = new System.Drawing.Size(100, 25);
+            this.toolStripTextBox2.Text = "9203DA88";
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel1.ForeColor = System.Drawing.Color.Red;
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(59, 22);
+            this.toolStripLabel1.Text = "Map Key!";
             // 
             // Form1
             // 
@@ -321,6 +348,9 @@
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButton9;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
     }
 }
 
