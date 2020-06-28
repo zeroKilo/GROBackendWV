@@ -47,7 +47,14 @@ namespace QuazalSharkWV
                     int len = (int)Helper.ReadU32(m);
                     le.raw = new byte[len];
                     m.Read(le.raw, 0, len);
-                    le.packet = new QPacket(le.raw);
+                    try
+                    {
+                        le.packet = new QPacket(le.raw);
+                    }
+                    catch 
+                    {
+                        le.packet = new QPacket(new byte[11]);
+                    }
                     list.Add(le);
                 }
                 RefreshList();

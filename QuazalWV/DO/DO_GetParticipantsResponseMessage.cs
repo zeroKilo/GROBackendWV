@@ -15,13 +15,14 @@ namespace QuazalWV
             return new byte[0];
         }
 
-        public static byte[] Create()
+        public static byte[] Create(byte[] data)
         {
             Log.WriteLine(1, "[DO] Creating DO_GetParticipantsResponseMessage");
             MemoryStream m = new MemoryStream();
             m.WriteByte(0x15);
             m.WriteByte(1);
-            Helper.WriteU32(m, 0);
+            Helper.WriteU32(m, 1);
+            m.Write(data, 1, data.Length - 1);
             return m.ToArray();
         }
     }

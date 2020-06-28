@@ -9,14 +9,14 @@ namespace QuazalWV
 {
     public class Payload_SessionInfos : DupObjPayload
     {
-        public uint SES_SessionHeartbeat = 0;
+        public uint NbPlayers = 0;
         public SessionInfosParameter SES_SessionInfosParameter = new SessionInfosParameter();
 
         public override byte[] toBuffer()
         {
             MemoryStream m = new MemoryStream();
             m.WriteByte(1);
-            Helper.WriteU32(m, SES_SessionHeartbeat);
+            Helper.WriteU32(m, NbPlayers);
             m.WriteByte(1); 
             SES_SessionInfosParameter.toBuffer(m);
             return m.ToArray();

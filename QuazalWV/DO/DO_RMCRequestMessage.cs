@@ -113,6 +113,11 @@ namespace QuazalWV
                         ));
                     msgs.Add(DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 }));
                     return DO_BundleMessage.Create(client, msgs);
+                case DOC_METHOD.ProcessMessage:
+                    Log.WriteLine(1, "[DO] Handling ProcessMessage...");
+                    msgs = new List<byte[]>();
+                    msgs.Add(DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 }));
+                    return DO_BundleMessage.Create(client, msgs);
                 default:
                     Log.WriteLine(1, "[DO] Error: Unhandled DOC method: " + method + "!");
                     return null;
