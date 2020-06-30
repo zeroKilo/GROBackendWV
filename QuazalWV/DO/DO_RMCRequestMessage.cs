@@ -90,14 +90,14 @@ namespace QuazalWV
                     int len = (int)(data.Length - m.Position);
                     buff = new byte[len];
                     m.Read(buff, 0, len);
-                    client.settings = buff;
+                    client.settings = new Payload_PlayerParameter(buff);
                     msgs = new List<byte[]>();
                     msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
                         0x1006,
                         new DupObj(DupObjClass.Station, 1),
                         new DupObj(DupObjClass.SES_cl_Player_NetZ, 257),
                         (ushort)DO_RMCRequestMessage.DOC_METHOD.SetPlayerParameters,
-                        client.settings
+                        client.settings.toBuffer()
                         ));
                     msgs.Add(DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 }));
                     return DO_BundleMessage.Create(client, msgs);

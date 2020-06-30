@@ -299,6 +299,7 @@ namespace QuazalWV
 
         public static void UnpackRMCCallPayload(Stream s, DO_RMCRequestMessage.DOC_METHOD method, StringBuilder sb, string t = "")
         {
+            byte[] buff;
             switch (method)
             {
                 case DO_RMCRequestMessage.DOC_METHOD.SyncRequest:
@@ -308,6 +309,13 @@ namespace QuazalWV
                     sb.AppendLine(t + "Time 1  = " + Helper.ReadU64(s).ToString("X"));
                     sb.AppendLine(t + "Time 2  = " + Helper.ReadU64(s).ToString("X"));
                     sb.AppendLine(t + "Unknown = " + Helper.ReadU32(s).ToString("X"));
+                    break;
+                case DO_RMCRequestMessage.DOC_METHOD.SetPlayerParameters:
+                case DO_RMCRequestMessage.DOC_METHOD.AskForSettingPlayerParameters:
+                    buff = new byte[0x40];
+                    s.ReadByte();
+                    s.Read(buff, 0, 0x40);
+                    sb.Append(new Payload_PlayerParameter(buff).getDesc(t + "\t"));
                     break;
             }
         }
