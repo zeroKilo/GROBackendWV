@@ -95,7 +95,7 @@ namespace QuazalWV
             sParams.mapKey = defaultMapKey;
             sParams.matchID = 1;
             sParams.playlistIndex = 0;
-            sParams.gameMode = 9;
+            sParams.gameMode = 7;
         }
 
         public void toBuffer(Stream s)

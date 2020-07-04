@@ -83,7 +83,7 @@ namespace QuazalWV
                     Log.WriteLine(1, "[DO] Handling IncreasePlayerNb...");
                     msgs = new List<byte[]>();
                     msgs.Add(new byte[] { 0x02, 0x02, 0x00, 0x40, 0x05, 0x01, 0x01, 0x00, 0x00, 0x00 });
-                    msgs.Add(DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 }));
+                    msgs.Add(DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 }));                    
                     return DO_BundleMessage.Create(client, msgs);
                 case DOC_METHOD.AskForSettingPlayerParameters:
                     Log.WriteLine(1, "[DO] Handling AskForSettingPlayerParameters...");
@@ -91,6 +91,16 @@ namespace QuazalWV
                     buff = new byte[len];
                     m.Read(buff, 0, len);
                     client.settings = new Payload_PlayerParameter(buff);
+
+                    client.settings.bitField14.entries[2].word = 1;//ammstatus
+                    client.settings.bitField10.entries[2].word = 2;//teamIndex
+                    if (client.settings.bitField10.entries[4].word == 1) //change state?
+                    {
+                        client.settings.bitField10.entries[4].word = 0;//change state
+                        client.settings.bitField14.entries[2].word = 1;//ammstatus
+                        client.settings.bitField14.entries[3].word = 1;//client ready
+                        client.settings.bitField14.entries[4].word = 1;//server ready
+                    }
                     msgs = new List<byte[]>();
                     msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
                         0x1006,
@@ -115,9 +125,7 @@ namespace QuazalWV
                     return DO_BundleMessage.Create(client, msgs);
                 case DOC_METHOD.ProcessMessage:
                     Log.WriteLine(1, "[DO] Handling ProcessMessage...");
-                    msgs = new List<byte[]>();
-                    msgs.Add(DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 }));
-                    return DO_BundleMessage.Create(client, msgs);
+                    return null;
                 default:
                     Log.WriteLine(1, "[DO] Error: Unhandled DOC method: " + method + "!");
                     return null;
