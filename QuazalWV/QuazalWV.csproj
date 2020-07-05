@@ -172,6 +172,7 @@
     <Compile Include="DO\DupObjs\DupObjPayload.cs" />
     <Compile Include="DO\DupObjs\Payloads\Payload_IDRange.cs" />
     <Compile Include="DO\DupObjs\Payloads\Payload_PlayerParameter.cs" />
+    <Compile Include="DO\DupObjs\Payloads\Payload_RDVInfo.cs" />
     <Compile Include="DO\DupObjs\Payloads\Payload_Station.cs" />
     <Compile Include="DO\DupObjs\Payloads\Payload_SyncResponse.cs" />
     <Compile Include="Global.cs" />

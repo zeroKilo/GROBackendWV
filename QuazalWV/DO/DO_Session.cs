@@ -26,7 +26,7 @@ namespace QuazalWV
             DupObjs.Add(new DupObj(DupObjClass.SES_cl_SessionInfos, 2, 1, new Payload_SessionInfos()));
             DupObjs.Add(new DupObj(DupObjClass.PromotionReferee, 3, 1));
             DupObjs.Add(new DupObj(DupObjClass.Session, 4, 1, new Payload_Session()));
-            DupObjs.Add(new DupObj(DupObjClass.NET_MessageBroker, 5, 1));
+            DupObjs.Add(new DupObj(DupObjClass.NET_MessageBroker, 5, 1));            
             uint[] IDGeneratorIDs = { 7, 0xD, 0x13, 0x14, 0x15, 0x16, 0x18, 0x1A, 0x23 };
             foreach (uint id in IDGeneratorIDs)
                 DupObjs.Add(new DupObj(DupObjClass.IDGenerator, id, 1, new Payload_IDRange(0x1, 0x3FFFFE)));
