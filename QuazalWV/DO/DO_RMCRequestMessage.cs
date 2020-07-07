@@ -93,7 +93,7 @@ namespace QuazalWV
                     client.settings = new Payload_PlayerParameter(buff);
 
                     client.settings.bitField14.entries[2].word = 1;//ammstatus
-                    client.settings.bitField10.entries[2].word = 2;//teamIndex
+                    //client.settings.bitField10.entries[2].word = 2;//teamIndex
                     if (client.settings.bitField10.entries[4].word == 1) //change state?
                     {
                         client.settings.bitField10.entries[4].word = 0;//change state
@@ -125,7 +125,15 @@ namespace QuazalWV
                     return DO_BundleMessage.Create(client, msgs);
                 case DOC_METHOD.ProcessMessage:
                     Log.WriteLine(1, "[DO] Handling ProcessMessage...");
-                    return null;
+                    msgs = new List<byte[]>();
+                    msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
+                        0x1006,
+                        new DupObj(DupObjClass.Station, 1),
+                        new DupObj(DupObjClass.NET_MessageBroker, 5),
+                        (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
+                        new byte[] { 0x0A, 0x00, 0x08, 0x00, 0x0A, 0x02, 0x9C, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00 }
+                        ));
+                    return DO_BundleMessage.Create(client, msgs);
                 default:
                     Log.WriteLine(1, "[DO] Error: Unhandled DOC method: " + method + "!");
                     return null;
