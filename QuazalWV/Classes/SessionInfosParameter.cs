@@ -9,7 +9,7 @@ namespace QuazalWV
 {
     public class SessionParameters
     {
-        public uint checksum;                 //0x00
+        public uint checksum;               //0x00
         public uint mapKey;                 //0x04
         public uint matchID;                //0x08
         public uint someOtherKey;           //0x0C

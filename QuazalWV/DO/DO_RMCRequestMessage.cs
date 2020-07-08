@@ -123,6 +123,23 @@ namespace QuazalWV
                         ));
                     msgs.Add(DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 }));
                     return DO_BundleMessage.Create(client, msgs);
+                case DOC_METHOD.AskForSettingSessionParameters:
+                    Log.WriteLine(1, "[DO] Handling AskForSettingSessionParameters...");
+                    len = (int)(data.Length - m.Position);
+                    buff = new byte[len];
+                    m.Read(buff, 0, len);
+                    msgs = new List<byte[]>();
+
+                    m = new MemoryStream();
+                    m.WriteByte(2);//update
+                    Helper.WriteU32(m, new DupObj(DupObjClass.SES_cl_SessionInfos, 2));
+                    m.WriteByte(2);//part
+                    m.WriteByte(1);//params set
+                    m.Write(buff, 0, len);
+                    msgs.Add(m.ToArray());
+
+                    msgs.Add(DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 }));
+                    return DO_BundleMessage.Create(client, msgs);
                 case DOC_METHOD.ProcessMessage:
                     Log.WriteLine(1, "[DO] Handling ProcessMessage...");
                     msgs = new List<byte[]>();
