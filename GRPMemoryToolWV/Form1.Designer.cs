@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -35,6 +36,7 @@
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.readStaticListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readBinaryTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readPropModListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -42,7 +44,10 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.rtb1 = new System.Windows.Forms.RichTextBox();
-            this.readPropModListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readNetBroadcastManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.expandAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.collapseAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -51,6 +56,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -82,7 +88,8 @@
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.readStaticListToolStripMenuItem,
             this.readBinaryTreeToolStripMenuItem,
-            this.readPropModListToolStripMenuItem});
+            this.readPropModListToolStripMenuItem,
+            this.readNetBroadcastManagerToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -92,16 +99,23 @@
             // readStaticListToolStripMenuItem
             // 
             this.readStaticListToolStripMenuItem.Name = "readStaticListToolStripMenuItem";
-            this.readStaticListToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.readStaticListToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.readStaticListToolStripMenuItem.Text = "Read Static List";
             this.readStaticListToolStripMenuItem.Click += new System.EventHandler(this.readStaticListToolStripMenuItem_Click);
             // 
             // readBinaryTreeToolStripMenuItem
             // 
             this.readBinaryTreeToolStripMenuItem.Name = "readBinaryTreeToolStripMenuItem";
-            this.readBinaryTreeToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.readBinaryTreeToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.readBinaryTreeToolStripMenuItem.Text = "Read Binary Tree";
             this.readBinaryTreeToolStripMenuItem.Click += new System.EventHandler(this.readBinaryTreeToolStripMenuItem_Click);
+            // 
+            // readPropModListToolStripMenuItem
+            // 
+            this.readPropModListToolStripMenuItem.Name = "readPropModListToolStripMenuItem";
+            this.readPropModListToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.readPropModListToolStripMenuItem.Text = "Read PropModList Tree";
+            this.readPropModListToolStripMenuItem.Click += new System.EventHandler(this.readPropModListToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -168,6 +182,7 @@
             // 
             // treeView1
             // 
+            this.treeView1.ContextMenuStrip = this.contextMenuStrip1;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Font = new System.Drawing.Font("Consolas", 8.25F);
             this.treeView1.HideSelection = false;
@@ -190,12 +205,34 @@
             this.rtb1.Text = "";
             this.rtb1.WordWrap = false;
             // 
-            // readPropModListToolStripMenuItem
+            // readNetBroadcastManagerToolStripMenuItem
             // 
-            this.readPropModListToolStripMenuItem.Name = "readPropModListToolStripMenuItem";
-            this.readPropModListToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.readPropModListToolStripMenuItem.Text = "Read PropModList Tree";
-            this.readPropModListToolStripMenuItem.Click += new System.EventHandler(this.readPropModListToolStripMenuItem_Click);
+            this.readNetBroadcastManagerToolStripMenuItem.Name = "readNetBroadcastManagerToolStripMenuItem";
+            this.readNetBroadcastManagerToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.readNetBroadcastManagerToolStripMenuItem.Text = "Read NetBroadcastManager";
+            this.readNetBroadcastManagerToolStripMenuItem.Click += new System.EventHandler(this.readNetBroadcastManagerToolStripMenuItem_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.expandAllToolStripMenuItem,
+            this.collapseAllToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            // 
+            // expandAllToolStripMenuItem
+            // 
+            this.expandAllToolStripMenuItem.Name = "expandAllToolStripMenuItem";
+            this.expandAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.expandAllToolStripMenuItem.Text = "Expand All";
+            this.expandAllToolStripMenuItem.Click += new System.EventHandler(this.expandAllToolStripMenuItem_Click);
+            // 
+            // collapseAllToolStripMenuItem
+            // 
+            this.collapseAllToolStripMenuItem.Name = "collapseAllToolStripMenuItem";
+            this.collapseAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.collapseAllToolStripMenuItem.Text = "Collapse All";
+            this.collapseAllToolStripMenuItem.Click += new System.EventHandler(this.collapseAllToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -216,6 +253,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,6 +275,10 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.RichTextBox rtb1;
         private System.Windows.Forms.ToolStripMenuItem readPropModListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readNetBroadcastManagerToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem expandAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem collapseAllToolStripMenuItem;
     }
 }
 

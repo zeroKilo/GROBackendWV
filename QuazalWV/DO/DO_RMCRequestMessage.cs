@@ -96,7 +96,10 @@ namespace QuazalWV
                     //client.settings.bitField10.entries[2].word = 2;//teamIndex
                     if (client.settings.bitField10.entries[4].word == 1) //change state?
                     {
-                        client.settings.bitField10.entries[4].word = 0;//change state
+                        //client.settings.bitField10.entries[4].word = 0;//change state
+                        client.settings.bitField10.entries[5].word = 1;//isSync
+                        client.settings.bitField14.entries[0].word = 1;//spawnCount
+                        client.settings.bitField14.entries[1].word = 1;//requestSpawn
                         client.settings.bitField14.entries[2].word = 1;//ammstatus
                         client.settings.bitField14.entries[3].word = 1;//client ready
                         client.settings.bitField14.entries[4].word = 1;//server ready
@@ -148,7 +151,14 @@ namespace QuazalWV
                         new DupObj(DupObjClass.Station, 1),
                         new DupObj(DupObjClass.NET_MessageBroker, 5),
                         (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
-                        new byte[] { 0x0A, 0x00, 0x08, 0x00, 0x0A, 0x02, 0x9C, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00 }
+                        new byte[] { 0x0F, 0x00, 0x0D, 0x00, 0x0A, 0x02, 0x9C, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x12, 0x34, 0x56, 0x78, 0x00, 0x00, 0x00, 0x00 }
+                        ));
+                    msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
+                        0x1006,
+                        new DupObj(DupObjClass.Station, 1),
+                        new DupObj(DupObjClass.NET_MessageBroker, 5),
+                        (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
+                        new byte[] { 0x0A, 0x00, 0x08, 0x00, 0x0A, 0x02, 0x71, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00 }
                         ));
                     return DO_BundleMessage.Create(client, msgs);
                 default:

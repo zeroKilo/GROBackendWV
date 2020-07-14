@@ -339,5 +339,155 @@ namespace GRPMemoryToolWV
             public string name;
             public List<PropNode> list;
         }
+
+        private ushort ReadWord(Stream s)
+        {
+            byte[] buff = new byte[2];
+            s.Read(buff, 0, 2);
+            return BitConverter.ToUInt16(buff, 0);
+        }
+
+        private uint ReadDword(Stream s)
+        {
+            byte[] buff = new byte[4];
+            s.Read(buff, 0, 4);
+            return BitConverter.ToUInt32(buff, 0);
+        }
+
+        private void readNetBroadcastManagerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //00000000 msgs1           BM_MSG 1000 dup(?)
+            //00001770 dword1770       dd ?
+            //00001774 msgs2           BM_MSG3 1000 dup(?)
+            //00006594 gap6594         db 46 dup(?)
+            //000065C2 MsgStackCount   db ?
+            //000065C3 MsgStackCount2  db ?
+            //000065C4 gap65C4         db 192 dup(?)
+            //00006684 msgs3           BM_MSG2 2000 dup(?)
+            //0000C444 msgs4           BM_MSG2 1000 dup(?)
+            //0000F324 wordF324        dw ?
+            //0000F326 wordF326        dw ?
+            //0000F328 paramStack      db 16 dup(?)
+            //0000F338 isDefiningMessage db ?
+            //0000F339 gapF339         db ?
+            //0000F33A gapF33A         db ?
+            //0000F33B gapF33B         db ?
+            //0000F33C pMsg            dd ?                    ; offset
+            //0000F340 paramCounter    db ?
+            //0000F341 NetBuffers      BM_MSG4 32 dup(?)
+            try
+            {
+                ClearAll();
+                GetHandle();
+                GetStartAddress();
+                if (handle == IntPtr.Zero || address == 0)
+                    return;
+                byte[] buff = ReadBuffer(handle, address, 0x2F364);
+                MemoryStream m = new MemoryStream(buff);
+
+                TreeNode tMsgs = new TreeNode("Messages 0");
+                for (int i = 0; i < 1000; i++)
+                {
+                    TreeNode t = new TreeNode("Message 0x" + i.ToString("X3"));
+                    t.Nodes.Add(" Index = 0x" + ReadWord(m).ToString("X4"));
+                    t.Nodes.Add(" Parameter Index = 0x" + ReadWord(m).ToString("X4"));
+                    t.Nodes.Add(" Parameter Count = 0x" + m.ReadByte().ToString("X2"));
+                    byte b = (byte)m.ReadByte();
+                    t.Nodes.Add(" Flags = 0x" + b.ToString("X2"));
+                    if ((b & 1) == 1)
+                        t.Text += "(Created)";
+                    if ((b & 2) == 2)
+                        t.Text += "(Defined)";
+                    tMsgs.Nodes.Add(t);
+                }
+                treeView1.Nodes.Add(tMsgs);
+
+                m.Seek(0x1774, 0);
+                tMsgs = new TreeNode("Unknown List 1774");
+                for (int i = 0; i < 1000; i++)
+                {
+                    TreeNode t = new TreeNode("Entry 0x" + i.ToString("X3"));
+                    t.Nodes.Add(" DWORD_0 = 0x" + ReadDword(m).ToString("X8"));
+                    t.Nodes.Add(" WORD_4 = 0x" + ReadWord(m).ToString("X4"));
+                    t.Nodes.Add(" WORD_6 = 0x" + ReadWord(m).ToString("X4"));
+                    t.Nodes.Add(" BYTE_8 = 0x" + m.ReadByte().ToString("X2"));
+                    t.Nodes.Add(" BYTE_9 = 0x" + m.ReadByte().ToString("X2"));
+                    t.Nodes.Add(" WORD_A = 0x" + ReadWord(m).ToString("X4"));
+                    t.Nodes.Add(" WORD_C = 0x" + ReadWord(m).ToString("X4"));
+                    t.Nodes.Add(" WORD_E = 0x" + ReadWord(m).ToString("X4"));
+                    t.Nodes.Add(" DWORD_10 = 0x" + ReadDword(m).ToString("X8"));
+                    tMsgs.Nodes.Add(t);
+                }
+                treeView1.Nodes.Add(tMsgs);
+
+                treeView1.Nodes.Add("Msg Stack Count = 0x" + buff[0x65C2].ToString("X2"));
+
+                treeView1.Nodes.Add("Msg Stack Count 2 = 0x" + buff[0x65C3].ToString("X2"));
+
+                m.Seek(0x6684, 0);
+                tMsgs = new TreeNode("Unknown List 6684");
+                for (int i = 0; i < 2000; i++)
+                {
+                    TreeNode t = new TreeNode("Entry 0x" + i.ToString("X3"));
+                    t.Nodes.Add(" WORD_0 = 0x" + ReadWord(m).ToString("X4"));
+                    t.Nodes.Add(" WORD_2 = 0x" + ReadWord(m).ToString("X4"));
+                    t.Nodes.Add(" DWORD_4 = 0x" + ReadDword(m).ToString("X8"));
+                    t.Nodes.Add(" DWORD_8 = 0x" + ReadDword(m).ToString("X8"));
+                    tMsgs.Nodes.Add(t);
+                }
+                treeView1.Nodes.Add(tMsgs);
+
+                m.Seek(0xC444, 0);
+                tMsgs = new TreeNode("Unknown List C444");
+                for (int i = 0; i < 1000; i++)
+                {
+                    TreeNode t = new TreeNode("Entry 0x" + i.ToString("X3"));
+                    t.Nodes.Add(" WORD_0 = 0x" + ReadWord(m).ToString("X4"));
+                    t.Nodes.Add(" WORD_2 = 0x" + ReadWord(m).ToString("X4"));
+                    t.Nodes.Add(" DWORD_4 = 0x" + ReadDword(m).ToString("X8"));
+                    t.Nodes.Add(" DWORD_8 = 0x" + ReadDword(m).ToString("X8"));
+                    tMsgs.Nodes.Add(t);
+                }
+                treeView1.Nodes.Add(tMsgs);
+
+                treeView1.Nodes.Add("Is defining Message = 0x" + buff[0xF338].ToString("X2"));
+
+                TreeNode pStack = new TreeNode("Param Stack");
+                for (int i = 0; i < 16; i++)
+                    pStack.Nodes.Add(buff[0xF328 + i].ToString("X2"));
+                treeView1.Nodes.Add(pStack);
+
+                treeView1.Nodes.Add("Param Counter = 0x" + buff[0xF340].ToString("X2"));
+            }
+            catch (Exception ex)
+            {
+                Log("Error : " + ex.Message);
+            }
+        }
+
+        private void expandAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode == null)
+                return;
+            treeView1.Visible = false;
+            treeView1.SelectedNode.ExpandAll();
+            treeView1.Visible = true;
+        }
+
+        private void collapseAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (treeView1.SelectedNode == null)
+                return;
+            treeView1.Visible = false;
+            Collapse(treeView1.SelectedNode);
+            treeView1.Visible = true;
+        }
+
+        private void Collapse(TreeNode t)
+        {
+            foreach (TreeNode n in t.Nodes)
+                Collapse(n);
+            t.Collapse();
+        }
     }
 }
