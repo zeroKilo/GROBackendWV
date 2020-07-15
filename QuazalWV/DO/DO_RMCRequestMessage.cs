@@ -153,6 +153,13 @@ namespace QuazalWV
                         (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
                         BM_Message.Make(new MSG_ID_NetRule_Synchronize())
                         ));
+                    msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
+                        0x1006,
+                        new DupObj(DupObjClass.Station, 1),
+                        new DupObj(DupObjClass.NET_MessageBroker, 5),
+                        (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
+                        BM_Message.Make(new MSG_ID_Net_Obj_Create())
+                        ));
                     return DO_BundleMessage.Create(client, msgs);
                 default:
                     Log.WriteLine(1, "[DO] Error: Unhandled DOC method: " + method + "!");

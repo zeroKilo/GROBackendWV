@@ -17,6 +17,7 @@ namespace QuazalWV
             MemoryStream m = new MemoryStream();
             Helper.WriteU8(m, msg.msgType);
             Helper.WriteU16LE(m, msg.msgID);
+            byte[] buff;
             foreach (BM_Param p in msg.paramList)
                 switch (p.type)
                 {
@@ -28,8 +29,14 @@ namespace QuazalWV
                         Helper.WriteU8(m, 0);
                         Helper.WriteFloatLE(m, (float)p.data);
                         break;
+                    case BM_Param.PARAM_TYPE.Buffer:
+                        buff = (byte[])p.data;
+                        Helper.WriteU8(m, 0x80);
+                        Helper.WriteU16LE(m, (ushort)buff.Length);
+                        m.Write(buff, 0, buff.Length);
+                        break;
                 }
-            byte[] buff = m.ToArray();
+            buff = m.ToArray();
             m = new MemoryStream();
             Helper.WriteU16(m, (ushort)(buff.Length + 2));
             Helper.WriteU16(m, (ushort)buff.Length);
