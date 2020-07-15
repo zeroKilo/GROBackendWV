@@ -31,11 +31,11 @@ namespace GRPMemoryToolWV
 
         public IntPtr handle = IntPtr.Zero;
         public uint address;
-        
+
         public class GRPStaticList
         {
             public uint count;
-            public uint capacity;            
+            public uint capacity;
             public uint[] elements;
             public uint pList;
         }
@@ -73,7 +73,7 @@ namespace GRPMemoryToolWV
             while (total < size)
             {
                 int read = 0;
-                if (ReadProcessMemory((int)handle,(int)( address + total), buf,(int)( size - total), ref read))
+                if (ReadProcessMemory((int)handle, (int)(address + total), buf, (int)(size - total), ref read))
                 {
                     result.Write(buf, 0, read);
                     total += (uint)read;
@@ -220,7 +220,7 @@ namespace GRPMemoryToolWV
         {
             tn.Text = bn.data0.ToString("X8") + " : " +
                       bn.data1.ToString("X8") + " : " +
-                      bn.data2.ToString("X8") ;
+                      bn.data2.ToString("X8");
             if (bn.left != null)
             {
                 TreeNode t = new TreeNode();
@@ -299,7 +299,7 @@ namespace GRPMemoryToolWV
                 AddPropNode(nt, sp);
                 t.Nodes.Add(nt);
             }
-        }  
+        }
 
         public PropNode ReadPropNode(IntPtr handle, uint address)
         {
@@ -340,18 +340,34 @@ namespace GRPMemoryToolWV
             public List<PropNode> list;
         }
 
-        private ushort ReadWord(Stream s)
+        private static ushort ReadWord(Stream s)
         {
             byte[] buff = new byte[2];
             s.Read(buff, 0, 2);
             return BitConverter.ToUInt16(buff, 0);
         }
 
-        private uint ReadDword(Stream s)
+        private static uint ReadDword(Stream s)
         {
             byte[] buff = new byte[4];
             s.Read(buff, 0, 4);
             return BitConverter.ToUInt32(buff, 0);
+        }
+
+        private class BM_MSG
+        {
+            public ushort index;
+            public ushort pIndex;
+            public byte pCount;
+            public byte flags;
+
+            public BM_MSG(Stream s)
+            {
+                index = ReadWord(s);
+                pIndex = ReadWord(s);
+                pCount = (byte)s.ReadByte();
+                flags = (byte)s.ReadByte();
+            }
         }
 
         private void readNetBroadcastManagerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -384,20 +400,23 @@ namespace GRPMemoryToolWV
                     return;
                 byte[] buff = ReadBuffer(handle, address, 0x2F364);
                 MemoryStream m = new MemoryStream(buff);
-
+                List<BM_MSG> msgs = new List<BM_MSG>();
                 TreeNode tMsgs = new TreeNode("Messages 0");
+                TreeNode copy = tMsgs;
                 for (int i = 0; i < 1000; i++)
                 {
                     TreeNode t = new TreeNode("Message 0x" + i.ToString("X3"));
-                    t.Nodes.Add(" Index = 0x" + ReadWord(m).ToString("X4"));
-                    t.Nodes.Add(" Parameter Index = 0x" + ReadWord(m).ToString("X4"));
-                    t.Nodes.Add(" Parameter Count = 0x" + m.ReadByte().ToString("X2"));
-                    byte b = (byte)m.ReadByte();
-                    t.Nodes.Add(" Flags = 0x" + b.ToString("X2"));
-                    if ((b & 1) == 1)
+                    BM_MSG msg = new BM_MSG(m);
+                    t.Nodes.Add(" Index = 0x" + msg.index.ToString("X4"));
+                    t.Nodes.Add(" Parameter Index = 0x" + msg.pIndex.ToString("X4"));
+                    t.Nodes.Add(" Parameter Count = 0x" + msg.pCount.ToString("X2"));
+                    t.Nodes.Add(" Flags = 0x" + msg.flags.ToString("X2"));
+                    t.Nodes.Add(" Parameter");
+                    if ((msg.flags & 1) == 1)
                         t.Text += "(Created)";
-                    if ((b & 2) == 2)
+                    if ((msg.flags & 2) == 2)
                         t.Text += "(Defined)";
+                    msgs.Add(msg);
                     tMsgs.Nodes.Add(t);
                 }
                 treeView1.Nodes.Add(tMsgs);
@@ -426,16 +445,58 @@ namespace GRPMemoryToolWV
 
                 m.Seek(0x6684, 0);
                 tMsgs = new TreeNode("Unknown List 6684");
+                List<byte> paramTypeList = new List<byte>();
                 for (int i = 0; i < 2000; i++)
                 {
                     TreeNode t = new TreeNode("Entry 0x" + i.ToString("X3"));
                     t.Nodes.Add(" WORD_0 = 0x" + ReadWord(m).ToString("X4"));
                     t.Nodes.Add(" WORD_2 = 0x" + ReadWord(m).ToString("X4"));
                     t.Nodes.Add(" DWORD_4 = 0x" + ReadDword(m).ToString("X8"));
-                    t.Nodes.Add(" DWORD_8 = 0x" + ReadDword(m).ToString("X8"));
+                    uint type = ReadDword(m);
+                    t.Nodes.Add(" DWORD_8 = 0x" + type.ToString("X8"));
                     tMsgs.Nodes.Add(t);
+                    paramTypeList.Add((byte)(type & 0xFF));
                 }
                 treeView1.Nodes.Add(tMsgs);
+
+                for (int i = 0; i < msgs.Count; i++)
+                {
+                    BM_MSG msg = msgs[i];
+                    if (msg.flags == 3)
+                    {
+                        Log("Message ID = 0x" + i.ToString("X3"));
+                        TreeNode t = copy.Nodes[i].Nodes[4];
+                        for (int j = 0; j < msg.pCount; j++)
+                        {
+                            int idx = msg.pIndex + j;
+                            byte type = paramTypeList[idx];
+                            string name = "Unknown 0x" + type.ToString("X2");
+                            switch (type)
+                            {
+                                case 1:
+                                    name = "Integer";
+                                    break;
+                                case 2:
+                                    name = "Float";
+                                    break;
+                                case 3:
+                                    name = "Object";
+                                    break;
+                                case 4:
+                                    name = "Vector";
+                                    break;
+                                case 5:
+                                    name = "Struct";
+                                    break;
+                            }
+                            if ((type & 0x80) != 0)
+                                name = "Buffer (Index = " + (type & 0x7F) + ")";
+                            t.Nodes.Add(j + " : " + name);
+                            Log(" " + j + " : " + name);
+                        }
+                        Log("");
+                    }
+                }
 
                 m.Seek(0xC444, 0);
                 tMsgs = new TreeNode("Unknown List C444");
