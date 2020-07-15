@@ -109,6 +109,20 @@ namespace QuazalWV
             s.WriteByte((byte)(v >> 24));
         }
 
+        public static void WriteU16LE(Stream s, ushort v)
+        {
+            s.WriteByte((byte)(v >> 8));
+            s.WriteByte((byte)v);
+        }
+
+        public static void WriteU32LE(Stream s, uint v)
+        {
+            s.WriteByte((byte)(v >> 24));
+            s.WriteByte((byte)(v >> 16));
+            s.WriteByte((byte)(v >> 8));
+            s.WriteByte((byte)v);
+        }
+
         public static void WriteU64(Stream s, ulong v)
         {
             s.WriteByte((byte)v);
@@ -125,6 +139,15 @@ namespace QuazalWV
         {
             byte[] b = BitConverter.GetBytes(v);
             s.Write(b, 0, 4);
+        }
+
+        public static void WriteFloatLE(Stream s, float v)
+        {
+            byte[] b = BitConverter.GetBytes(v);
+            s.WriteByte(b[3]);
+            s.WriteByte(b[2]);
+            s.WriteByte(b[1]);
+            s.WriteByte(b[0]);
         }
 
         public static void WriteDouble(Stream s, double v)

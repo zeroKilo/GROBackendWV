@@ -151,14 +151,7 @@ namespace QuazalWV
                         new DupObj(DupObjClass.Station, 1),
                         new DupObj(DupObjClass.NET_MessageBroker, 5),
                         (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
-                        new byte[] { 0x0F, 0x00, 0x0D, 0x00, 0x0A, 0x02, 0x9C, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x12, 0x34, 0x56, 0x78, 0x00, 0x00, 0x00, 0x00 }
-                        ));
-                    msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
-                        0x1006,
-                        new DupObj(DupObjClass.Station, 1),
-                        new DupObj(DupObjClass.NET_MessageBroker, 5),
-                        (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
-                        new byte[] { 0x14, 0x00, 0x12, 0x00, 0x0A, 0x02, 0x9C, 0x00, 0x00, 0x00, 0x00, 0x03, 0x00, 0x12, 0x34, 0x56, 0x78, 0x00, 0x00, 0x00, 0x00, 0x07, 0x00, 0x00, 0x00, 0x00 }
+                        BM_Message.Make(new MSG_ID_NetRule_Synchronize())
                         ));
                     return DO_BundleMessage.Create(client, msgs);
                 default:
