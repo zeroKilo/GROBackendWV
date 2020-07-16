@@ -1,6 +1,6 @@
-# Ghost Recon Phantoms Backend by Warranty Voider
+# Ghost Recon Online Backend by Warranty Voider
 
-this is an experimental implementation of the quazal packet protocol to emulate a backend for GRP
+this is an experimental implementation of the quazal packet protocol to emulate a backend for GRO
 
 to make the game use this backend make sure following lines are set in yeti.ini
 
@@ -13,11 +13,11 @@ to make the game use this backend make sure following lines are set in yeti.ini
 - DareDebuggerWV : tool to interface the daredebug port of the game
 - DareParserWV : Extracts custom RTTI information found in different exe and dll
 - DTBReaderWV : converts .dtb files to .csv
-- GRPBackendWV : experimental backend for GRP
-- GRPDedicatedServerWV : experimental DS for GRP
-- GRPExplorerWV : tool to browse the yeti.big file for game content
-- GRPMemoryToolWV : tool to browse various stuctures like lists and trees in memory
-- GRP_Hook : proxy dll for easy code injection, hooks currently fire script event functions
+- GROBackendWV : experimental backend for GRO
+- GRODedicatedServerWV : experimental DS for GRO
+- GROExplorerWV : tool to browse the yeti.big file for game content
+- GROMemoryToolWV : tool to browse various stuctures like lists and trees in memory
+- GRO_Hook : proxy dll for easy code injection, hooks currently fire script event functions
 
 [![Alt text](https://img.youtube.com/vi/7Gix54amKxk/0.jpg)](https://www.youtube.com/watch?v=7Gix54amKxk)
 

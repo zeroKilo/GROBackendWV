@@ -1,4 +1,4 @@
-cd GRPBackendWV\bin\Release
-start GRPBackendWV.exe
-cd ..\..\..\GRPDedicatedServerWV\bin\Release
-start GRPDedicatedServerWV.exe
+cd GROBackendWV\bin\x86\Release
+start GROBackendWV.exe
+cd ..\..\..\..\GRODedicatedServerWV\bin\x86\Release
+start GRODedicatedServerWV.exe
