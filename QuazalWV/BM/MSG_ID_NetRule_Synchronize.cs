@@ -8,12 +8,15 @@ namespace QuazalWV
 {
     public class MSG_ID_NetRule_Synchronize : BM_Message
     {
+        public uint newState = 3;
+        public uint syncro = 0x12345678;
+        public uint unk1 = 1;
         public MSG_ID_NetRule_Synchronize()
         {
             msgID = 0x29C;
-            paramList.Add(new BM_Param(BM_Param.PARAM_TYPE.Integer, 3));
-            paramList.Add(new BM_Param(BM_Param.PARAM_TYPE.Integer, 0x12345678));
-            paramList.Add(new BM_Param(BM_Param.PARAM_TYPE.Integer, 1));
+            paramList.Add(new BM_Param(BM_Param.PARAM_TYPE.Integer, (int)newState));
+            paramList.Add(new BM_Param(BM_Param.PARAM_TYPE.Integer, (int)syncro));
+            paramList.Add(new BM_Param(BM_Param.PARAM_TYPE.Integer, (int)unk1));
         }
     }
 }
