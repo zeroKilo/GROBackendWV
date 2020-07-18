@@ -37,17 +37,18 @@
             this.readStaticListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readBinaryTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readPropModListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readNetBroadcastManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.rtb1 = new System.Windows.Forms.RichTextBox();
-            this.readNetBroadcastManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.expandAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.collapseAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rtb1 = new System.Windows.Forms.RichTextBox();
+            this.readBankListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -89,7 +90,8 @@
             this.readStaticListToolStripMenuItem,
             this.readBinaryTreeToolStripMenuItem,
             this.readPropModListToolStripMenuItem,
-            this.readNetBroadcastManagerToolStripMenuItem});
+            this.readNetBroadcastManagerToolStripMenuItem,
+            this.readBankListToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -116,6 +118,13 @@
             this.readPropModListToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.readPropModListToolStripMenuItem.Text = "Read PropModList Tree";
             this.readPropModListToolStripMenuItem.Click += new System.EventHandler(this.readPropModListToolStripMenuItem_Click);
+            // 
+            // readNetBroadcastManagerToolStripMenuItem
+            // 
+            this.readNetBroadcastManagerToolStripMenuItem.Name = "readNetBroadcastManagerToolStripMenuItem";
+            this.readNetBroadcastManagerToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.readNetBroadcastManagerToolStripMenuItem.Text = "Read NetBroadcastManager";
+            this.readNetBroadcastManagerToolStripMenuItem.Click += new System.EventHandler(this.readNetBroadcastManagerToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -191,6 +200,28 @@
             this.treeView1.Size = new System.Drawing.Size(520, 241);
             this.treeView1.TabIndex = 0;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.expandAllToolStripMenuItem,
+            this.collapseAllToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 48);
+            // 
+            // expandAllToolStripMenuItem
+            // 
+            this.expandAllToolStripMenuItem.Name = "expandAllToolStripMenuItem";
+            this.expandAllToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.expandAllToolStripMenuItem.Text = "Expand All";
+            this.expandAllToolStripMenuItem.Click += new System.EventHandler(this.expandAllToolStripMenuItem_Click);
+            // 
+            // collapseAllToolStripMenuItem
+            // 
+            this.collapseAllToolStripMenuItem.Name = "collapseAllToolStripMenuItem";
+            this.collapseAllToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.collapseAllToolStripMenuItem.Text = "Collapse All";
+            this.collapseAllToolStripMenuItem.Click += new System.EventHandler(this.collapseAllToolStripMenuItem_Click);
+            // 
             // rtb1
             // 
             this.rtb1.DetectUrls = false;
@@ -205,34 +236,12 @@
             this.rtb1.Text = "";
             this.rtb1.WordWrap = false;
             // 
-            // readNetBroadcastManagerToolStripMenuItem
+            // readBankListToolStripMenuItem
             // 
-            this.readNetBroadcastManagerToolStripMenuItem.Name = "readNetBroadcastManagerToolStripMenuItem";
-            this.readNetBroadcastManagerToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
-            this.readNetBroadcastManagerToolStripMenuItem.Text = "Read NetBroadcastManager";
-            this.readNetBroadcastManagerToolStripMenuItem.Click += new System.EventHandler(this.readNetBroadcastManagerToolStripMenuItem_Click);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.expandAllToolStripMenuItem,
-            this.collapseAllToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
-            // 
-            // expandAllToolStripMenuItem
-            // 
-            this.expandAllToolStripMenuItem.Name = "expandAllToolStripMenuItem";
-            this.expandAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.expandAllToolStripMenuItem.Text = "Expand All";
-            this.expandAllToolStripMenuItem.Click += new System.EventHandler(this.expandAllToolStripMenuItem_Click);
-            // 
-            // collapseAllToolStripMenuItem
-            // 
-            this.collapseAllToolStripMenuItem.Name = "collapseAllToolStripMenuItem";
-            this.collapseAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.collapseAllToolStripMenuItem.Text = "Collapse All";
-            this.collapseAllToolStripMenuItem.Click += new System.EventHandler(this.collapseAllToolStripMenuItem_Click);
+            this.readBankListToolStripMenuItem.Name = "readBankListToolStripMenuItem";
+            this.readBankListToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.readBankListToolStripMenuItem.Text = "Read BankList";
+            this.readBankListToolStripMenuItem.Click += new System.EventHandler(this.readBankListToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -279,6 +288,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem expandAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem collapseAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readBankListToolStripMenuItem;
     }
 }
 

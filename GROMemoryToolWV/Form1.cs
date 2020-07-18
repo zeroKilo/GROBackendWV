@@ -550,5 +550,57 @@ namespace GROMemoryToolWV
                 Collapse(n);
             t.Collapse();
         }
+
+        private void readBankListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ClearAll();
+                GetHandle();
+                GetStartAddress();
+                if (handle == IntPtr.Zero || address == 0)
+                    return;
+                uint listStart = ReadDWORD(handle, address + 0xC);
+                uint listEnd = ReadDWORD(handle, address + 0x10);
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("List Start = " + listStart.ToString("X8"));
+                sb.AppendLine("List End   = " + listEnd.ToString("X8"));
+                if (listEnd - listStart > 1000)
+                    return;
+                sb.AppendLine("Reading Banks...");
+                uint count = 0;
+                for (uint p = listStart; p < listEnd; p += 4)
+                    ReadBank(ReadDWORD(handle, p), count++, sb);
+                Log(sb.ToString());
+                
+            }
+            catch (Exception ex)
+            {
+                Log("Error : " + ex.Message);
+            }
+        }
+
+        public void ReadBank(uint address, uint index, StringBuilder sb)
+        {
+            byte ID = (byte)(ReadDWORD(handle, address + 8) & 0xFF);
+            uint listStart = ReadDWORD(handle, address + 0x18);
+            uint listEnd = ReadDWORD(handle, address + 0x1C);
+            sb.AppendLine("Bank #" + index);
+            sb.AppendLine(" Address    = " + address.ToString("X8"));
+            sb.AppendLine(" ID         = " + ID.ToString("X2"));
+            sb.AppendLine(" List Start = " + listStart.ToString("X8"));
+            sb.AppendLine(" List End   = " + listEnd.ToString("X8"));
+            sb.AppendLine(" Entries:");
+            for (uint p = listStart; p < listEnd; p += 8)
+                ReadBankEntry(p, sb);
+            sb.AppendLine();
+        }
+
+        public void ReadBankEntry(uint address, StringBuilder sb)
+        {
+            byte ID = (byte)(ReadDWORD(handle, address) & 0xFF);
+            uint pointer = ReadDWORD(handle, address + 4);
+            sb.AppendLine("  " + ID.ToString("X8") + " -> " + pointer.ToString("X8"));
+        }
     }
 }
