@@ -9,8 +9,8 @@ namespace QuazalWV
 {
     public class MSG_ID_Net_Obj_Create : BM_Message
     {
-        public byte dynamicBankID = 0x4D;
-        public byte dynamicBankElementID = 0x64;
+        public byte dynamicBankID = 0x2C;
+        public byte dynamicBankElementID = 0x15;
         public float[] matrix = new float[16];
         public uint owner = 0x5c0002;
         public byte[] buffer = new byte[8];

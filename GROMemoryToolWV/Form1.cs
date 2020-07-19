@@ -601,7 +601,8 @@ namespace GROMemoryToolWV
             byte ID = (byte)(ReadDWORD(handle, address) & 0xFF);
             uint stuff = ReadDWORD(handle, address) >> 8;
             uint pointer = ReadDWORD(handle, address + 4);
-            sb.AppendLine("  BankItem " + ID.ToString("X2") + " -> " + pointer.ToString("X8") + " (" + stuff.ToString("X6") + ")");
+            uint assetKey = ReadDWORD(handle, pointer + 4);
+            sb.AppendLine("  BankItem " + ID.ToString("X2") + "=" + assetKey.ToString("X8"));
             uint listStart = ReadDWORD(handle, pointer + 0x14);
             uint listEnd = ReadDWORD(handle, pointer + 0x1C);
             uint count = 0;
