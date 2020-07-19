@@ -599,8 +599,23 @@ namespace GROMemoryToolWV
         public void ReadBankEntry(uint address, StringBuilder sb)
         {
             byte ID = (byte)(ReadDWORD(handle, address) & 0xFF);
+            uint stuff = ReadDWORD(handle, address) >> 8;
             uint pointer = ReadDWORD(handle, address + 4);
-            sb.AppendLine("  " + ID.ToString("X8") + " -> " + pointer.ToString("X8"));
+            sb.AppendLine("  BankItem " + ID.ToString("X2") + " -> " + pointer.ToString("X8") + " (" + stuff.ToString("X6") + ")");
+            uint listStart = ReadDWORD(handle, pointer + 0x14);
+            uint listEnd = ReadDWORD(handle, pointer + 0x1C);
+            uint count = 0;
+            for (uint p = listStart; p < listEnd; p += 4)
+                ReadBankEntrySub(ReadDWORD(handle,p), count++, sb);
+        }
+
+        public void ReadBankEntrySub(uint address, uint index, StringBuilder sb)
+        {
+            sb.Append("   SubItem " + index.ToString("X2") + " : ");
+            sb.Append(" " + ReadDWORD(handle, address).ToString("X8"));
+            sb.Append(" " + ReadDWORD(handle, address + 4).ToString("X8"));
+            sb.Append(" " + ReadDWORD(handle, address + 8).ToString("X8"));
+            sb.AppendLine(" " + ReadDWORD(handle, address + 0xC).ToString("X8"));
         }
     }
 }
