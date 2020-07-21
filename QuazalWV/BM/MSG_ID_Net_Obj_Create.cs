@@ -30,7 +30,7 @@ namespace QuazalWV
             paramList.Add(new BM_Param(BM_Param.PARAM_TYPE.Buffer, m.ToArray()));
         }
 
-        uint handle = 0;
+        uint handle = new DupObj(DupObjClass.SES_cl_Player_NetZ, 257);
         byte unk1 = 0x55;
         byte[] unk2 = new byte[4];
         byte[] unk3 = new byte[4];
@@ -38,10 +38,10 @@ namespace QuazalWV
         byte unk4 = 0x66;
         byte[] unk5 = new byte[4];
         byte[] unk6 = new byte[4];
-        byte unk7 = 0x77;
-        byte unk8 = 0x88;
-        byte unk9 = 0x99;
-        uint unk10 = 0x77777777;
+        byte playerLocalIndex = 0x0;
+        byte padID = 0x0;
+        byte teamID = 0x1;
+        uint rdvID = 0x1234;
         uint unk11 = 0x88888888;
 
         public byte[] MakePayload()
@@ -64,7 +64,7 @@ namespace QuazalWV
             Helper.WriteU32(m, 6);
             Helper.WriteU32(m, 7);
             Helper.WriteU16(m, 8);
-            Helper.WriteU8(m, 9);
+            Helper.WriteU8(m, 1);//class?
             Helper.WriteU16(m, 10);
             Helper.WriteU32(m, 11);
             Helper.WriteU32(m, (uint)unk3.Length);
@@ -76,10 +76,10 @@ namespace QuazalWV
             m.Write(unk2, 0, unk5.Length);
             //subStuff
             //Rest
-            Helper.WriteU8(m, unk7);
-            Helper.WriteU8(m, unk8);
-            Helper.WriteU8(m, unk9);
-            Helper.WriteU32(m, unk10);
+            Helper.WriteU8(m, playerLocalIndex);
+            Helper.WriteU8(m, padID);
+            Helper.WriteU8(m, teamID);
+            Helper.WriteU32(m, rdvID);
             Helper.WriteU32(m, unk11);
             return m.ToArray();
         }

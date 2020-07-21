@@ -44,5 +44,39 @@ namespace QuazalWV
             Helper.WriteU32(m, 0);
             return m.ToArray();
         }
+
+        public static byte[] HandleMessage(ClientInfo client, Stream s)
+        {
+            if (Helper.ReadU16(s) < 5 || Helper.ReadU16(s) < 3)
+                return null;
+            byte type = Helper.ReadU8(s);
+            if (type != 0xA)
+                return null;
+            ushort msgID = (ushort)((Helper.ReadU8(s) << 8) | Helper.ReadU8(s));
+            List<byte[]> msgs = new List<byte[]>();
+            switch(msgID)
+            {
+                case 0xA3:
+                    msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
+                        0x1006,
+                        new DupObj(DupObjClass.Station, 1),
+                        new DupObj(DupObjClass.NET_MessageBroker, 5),
+                        (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
+                        BM_Message.Make(new MSG_ID_NetRule_Synchronize())
+                        ));
+                    msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
+                        0x1006,
+                        new DupObj(DupObjClass.Station, 1),
+                        new DupObj(DupObjClass.NET_MessageBroker, 5),
+                        (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
+                        BM_Message.Make(new MSG_ID_Net_Obj_Create())
+                        ));
+                    break;
+            }
+            if (msgs.Count > 0)
+                return DO_BundleMessage.Create(client, msgs);
+            else
+                return null;
+        }
     }
 }
