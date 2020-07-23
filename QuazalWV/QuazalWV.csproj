@@ -51,7 +51,7 @@
     <Compile Include="BitFieldU32.cs" />
     <Compile Include="BM\BM_Message.cs" />
     <Compile Include="BM\BM_Param.cs" />
-    <Compile Include="BM\MSG_ID_BM_StartMatch.cs" />
+    <Compile Include="BM\MSG_ID_BM_StartRound.cs" />
     <Compile Include="BM\MSG_ID_NetRule_Synchronize.cs" />
     <Compile Include="BM\MSG_ID_Net_Obj_Create.cs" />
     <Compile Include="Classes\GR5_Ability.cs" />

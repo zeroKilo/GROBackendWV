@@ -78,7 +78,7 @@ namespace QuazalWV
                         new DupObj(DupObjClass.Station, 1),
                         new DupObj(DupObjClass.NET_MessageBroker, 5),
                         (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
-                        BM_Message.Make(new MSG_ID_BM_StartMatch())
+                        BM_Message.Make(new MSG_ID_BM_StartRound())
                         ));
                     break;
             }
