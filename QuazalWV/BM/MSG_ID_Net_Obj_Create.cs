@@ -66,7 +66,7 @@ namespace QuazalWV
             Helper.WriteU16(m, 8);
             Helper.WriteU8(m, 1);//class?
             Helper.WriteU16(m, 10);
-            Helper.WriteU32(m, 11);
+            Helper.WriteU32(m, 111);
             Helper.WriteU32(m, (uint)unk3.Length);
             m.Write(unk3, 0, unk3.Length);
 

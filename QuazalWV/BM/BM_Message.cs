@@ -71,6 +71,13 @@ namespace QuazalWV
                         (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
                         BM_Message.Make(new MSG_ID_Net_Obj_Create())
                         ));
+                    msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
+                        0x1006,
+                        new DupObj(DupObjClass.Station, 1),
+                        new DupObj(DupObjClass.NET_MessageBroker, 5),
+                        (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
+                        BM_Message.Make(new MSG_ID_Entity_Cmd())
+                        ));
                     break;
                 case 0x325:
                     msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,

@@ -100,9 +100,9 @@ namespace QuazalWV
                         client.settings.bitField10.entries[5].word = 1;//isSync
                         client.settings.bitField14.entries[0].word = 1;//spawnCount
                         client.settings.bitField14.entries[1].word = 1;//requestSpawn
-                        client.settings.bitField14.entries[2].word = 1;//ammstatus
-                        client.settings.bitField14.entries[3].word = 1;//client ready
-                        client.settings.bitField14.entries[4].word = 1;//server ready
+                        //client.settings.bitField14.entries[2].word = 1;//ammstatus
+                        client.settings.bitField14.entries[3].word = 1;//server ready
+                        //client.settings.bitField14.entries[4].word = 1;//client ready
                     }
                     msgs = new List<byte[]>();
                     msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,

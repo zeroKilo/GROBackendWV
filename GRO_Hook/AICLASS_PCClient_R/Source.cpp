@@ -60,6 +60,7 @@ void DetourEventHandlerFunctions();
 void DetourMain()
 {
 	char buffer[512];
+	if(FileExists("_debug_output_"))
 	OpenConsole();
 	ClearFile(logFilename);
 	Log("GRO Hook made by Warranty Voider\n");
@@ -81,11 +82,11 @@ void DetourMain()
 	Log(buffer);
 	DetourFireFunctions();
 	DetourEventHandlerFunctions();
-	//WORD* patchPos = (WORD*)(baseAddressAI + 0x153491);	
-	//DWORD old;
-	//VirtualProtect(patchPos,2,PAGE_EXECUTE_READWRITE,&old);
-	//*patchPos = 0x9090;
-	//Log("Patched position 1\n");
+	WORD* patchPos = (WORD*)(baseAddressAI + 0x3C384);	
+	DWORD old;
+	VirtualProtect(patchPos,2,PAGE_EXECUTE_READWRITE,&old);
+	*patchPos = 0x9090;
+	Log("Patched position for DebugScreen\n");
 }
 
 void DetourFireFunctions()
