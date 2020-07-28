@@ -18,7 +18,16 @@ namespace QuazalWV
         public byte[] MakePayload()
         {
             MemoryStream m = new MemoryStream();
-            //TODO
+            Helper.WriteU8(m, 0);
+            BitBuffer buf = new BitBuffer();
+            buf.WriteBits(0x4C00101, 32);   //handle
+            buf.WriteBits(0x33, 6);         //cmd1
+            buf.WriteBits(0x0, 2);
+            buf.WriteBits(0x33, 6);         //cmd1
+            buf.WriteBits(0x0, 2);
+            buf.WriteBits(0x3, 4);          //state
+            byte[] data = buf.toArray();
+            m.Write(data, 0, data.Length);
             return m.ToArray();
         }
     }

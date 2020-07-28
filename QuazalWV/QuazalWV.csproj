@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitBuffer.cs" />
     <Compile Include="BitFieldU32.cs" />
     <Compile Include="BM\BM_Message.cs" />
     <Compile Include="BM\BM_Param.cs" />
