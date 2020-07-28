@@ -25,7 +25,11 @@ namespace QuazalWV
 
         public byte[] toArray()
         {
-            return buffer.ToArray();
+            MemoryStream m = new MemoryStream();
+            Helper.WriteU8(m, (byte)(byteSize * 8 - bitSize));
+            byte[] data = buffer.ToArray();
+            m.Write(data, 0, data.Length);
+            return m.ToArray();
         }
 
         public void WriteBit(bool v)
