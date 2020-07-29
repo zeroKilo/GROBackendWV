@@ -28,6 +28,7 @@ namespace QuazalWV
         public UdpClient udp;
         public bool bootStrapDone = false;
         public bool matchStartSent = false;
+        public bool playerCreateStuffSent = false;
         public Payload_PlayerParameter settings = new Payload_PlayerParameter(new byte[0x40]);
     }
 }
