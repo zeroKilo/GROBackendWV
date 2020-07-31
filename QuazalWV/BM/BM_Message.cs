@@ -64,8 +64,15 @@ namespace QuazalWV
                             new DupObj(DupObjClass.Station, 1),
                             new DupObj(DupObjClass.NET_MessageBroker, 5),
                             (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
-                            BM_Message.Make(new MSG_ID_Net_Obj_Create())
+                            BM_Message.Make(new MSG_ID_Net_Obj_Create(0x2C, 0x15, MSG_ID_Net_Obj_Create.MakePayload1(1)))
                             ));
+                        msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
+                            0x1006,
+                            new DupObj(DupObjClass.Station, 1),
+                            new DupObj(DupObjClass.NET_MessageBroker, 5),
+                            (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
+                            BM_Message.Make(new MSG_ID_Net_Obj_Create(0x2A, 0x05, MSG_ID_Net_Obj_Create.MakePayload2(2)))
+                            ));    
                         msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
                             0x1006,
                             new DupObj(DupObjClass.Station, 1),
