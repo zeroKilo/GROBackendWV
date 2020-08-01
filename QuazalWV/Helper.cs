@@ -266,5 +266,13 @@ namespace QuazalWV
             HMACMD5 hmac = new HMACMD5(key);
             return hmac.ComputeHash(data);
         }
+
+        public static byte[] MakeFilledArray(int len)
+        {
+            byte[] result = new byte[len];
+            for (int i = 0; i < len; i++)
+                result[i] = (byte)i;
+            return result;
+        }
     }
 }

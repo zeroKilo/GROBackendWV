@@ -56,6 +56,8 @@
     <Compile Include="BM\MSG_ID_BM_StartRound.cs" />
     <Compile Include="BM\MSG_ID_NetRule_Synchronize.cs" />
     <Compile Include="BM\MSG_ID_Net_Obj_Create.cs" />
+    <Compile Include="BM\ObjCreatePayloads\OCP_AbstractPlayerEntity.cs" />
+    <Compile Include="BM\ObjCreatePayloads\OCP_PlayerEntity.cs" />
     <Compile Include="Classes\GR5_Ability.cs" />
     <Compile Include="Classes\GR5_AbilityUpgrade.cs" />
     <Compile Include="Classes\GR5_AbilityUpgradeSlot.cs" />
