@@ -47,7 +47,7 @@ namespace QuazalWV
             Helper.WriteU32(m, 6);
             Helper.WriteU32(m, 7);
             Helper.WriteU16(m, 8);
-            Helper.WriteU8(m, 1);//class?
+            Helper.WriteU8(m, 0);//class?
             Helper.WriteU16(m, 10);
             Helper.WriteU32(m, 111);
             Helper.WriteU32(m, (uint)unk3.Length);
@@ -62,7 +62,7 @@ namespace QuazalWV
             Helper.WriteU8(m, playerLocalIndex);
             Helper.WriteU8(m, padID);
             Helper.WriteU8(m, teamID);
-            Helper.WriteU32(m, rdvID);
+            Helper.WriteU32LE(m, rdvID);
             Helper.WriteU32(m, unk11);
             return m.ToArray();
         }

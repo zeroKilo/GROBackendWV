@@ -14,7 +14,7 @@ namespace QuazalWV
         public string clientUrl;
         public RMCPacketResponseRegisterEx(uint pid)
         {
-            clientUrl = "prudps:/address=" + Global.serverBindAddress + ";port=3074;CID=1;PID=" + pid + ";sid=1;RVCID=78;stream=3;type=2";
+            clientUrl = "prudps:/address=" + Global.serverBindAddress + ";port=3074;CID=1;PID=" + pid + ";sid=1;RVCID=4660;stream=3;type=2";
         }
 
         public override byte[] ToBuffer()
