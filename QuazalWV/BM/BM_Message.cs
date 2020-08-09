@@ -71,15 +71,15 @@ namespace QuazalWV
                             new DupObj(DupObjClass.Station, 1),
                             new DupObj(DupObjClass.NET_MessageBroker, 5),
                             (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
-                            BM_Message.Make(new MSG_ID_Net_Obj_Create(0x2A, 0x05,  new OCP_PlayerEntity(2).MakePayload()))
-                            ));    
-                        msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
-                            0x1006,
-                            new DupObj(DupObjClass.Station, 1),
-                            new DupObj(DupObjClass.NET_MessageBroker, 5),
-                            (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
-                            BM_Message.Make(new MSG_ID_Entity_Cmd())
+                            BM_Message.Make(new MSG_ID_Entity_Cmd(0x33))
                             ));
+                        //msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
+                        //    0x1006,
+                        //    new DupObj(DupObjClass.Station, 1),
+                        //    new DupObj(DupObjClass.NET_MessageBroker, 5),
+                        //    (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
+                        //    BM_Message.Make(new MSG_ID_Net_Obj_Create(0x2A, 0x05,  new OCP_PlayerEntity(2).MakePayload()))
+                        //    ));  
                         client.playerCreateStuffSent = true;
                     }
                     msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
