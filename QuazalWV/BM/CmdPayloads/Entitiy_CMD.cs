@@ -36,16 +36,16 @@ namespace QuazalWV
             {
                 case 0x34:
                     Log.WriteLine(1, "Received Spawn Request", Color.Red);
-                    client.playerAbstractState = 3;
-                    msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
-                        0x1006,
-                        new DupObj(DupObjClass.Station, 1),
-                        new DupObj(DupObjClass.NET_MessageBroker, 5),
-                        (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
-                        BM_Message.Make(new MSG_ID_Entity_Cmd(client, 0x33))
-                        ));
                     if (!client.playerCreateStuffSent2)
                     {
+                        client.playerAbstractState = 3;
+                        msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
+                            0x1006,
+                            new DupObj(DupObjClass.Station, 1),
+                            new DupObj(DupObjClass.NET_MessageBroker, 5),
+                            (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
+                            BM_Message.Make(new MSG_ID_Entity_Cmd(client, 0x33))
+                            ));
                         client.settings.bitField14.entries[3].word = 1;//server ready
                         client.settings.bitField14.entries[4].word = 1;//client ready
                         client.settings.bitField14.entries[0].word = 1;//spawnCount
@@ -63,6 +63,14 @@ namespace QuazalWV
                             new DupObj(DupObjClass.NET_MessageBroker, 5),
                             (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
                             BM_Message.Make(new MSG_ID_Net_Obj_Create(0x2A, 0x05, new OCP_PlayerEntity(2).MakePayload()))
+                            ));
+                        client.playerAbstractState = 5;
+                        msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
+                            0x1006,
+                            new DupObj(DupObjClass.Station, 1),
+                            new DupObj(DupObjClass.NET_MessageBroker, 5),
+                            (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
+                            BM_Message.Make(new MSG_ID_Entity_Cmd(client, 0x33))
                             ));
                         client.playerCreateStuffSent2 = true;
                     }

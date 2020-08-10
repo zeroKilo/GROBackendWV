@@ -87,6 +87,17 @@ void DetourMain()
 	VirtualProtect(patchPos,2,PAGE_EXECUTE_READWRITE,&old);
 	*patchPos = 0x9090;
 	Log("Patched position for DebugScreen\n");
+
+	
+	patchPos = (WORD*)(baseAddressAI + 0xECC30);	
+	VirtualProtect(patchPos,2,PAGE_EXECUTE_READWRITE,&old);
+	*patchPos = 0xC3C3;
+	Log("Patched crash position 1\n");
+	patchPos = (WORD*)(baseAddressAI + 0x1A2FB0);	
+	VirtualProtect(patchPos,2,PAGE_EXECUTE_READWRITE,&old);
+	*patchPos = 0xC3C3;
+	Log("Patched crash position 2\n");
+
 }
 
 void DetourFireFunctions()
