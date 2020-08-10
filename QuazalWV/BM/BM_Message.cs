@@ -56,8 +56,10 @@ namespace QuazalWV
             List<byte[]> msgs = new List<byte[]>();
             switch(msgID)
             {
+                case 0x96:
+                    return Entitiy_CMD.HandleMsg(client, s);
                 case 0xA3:
-                    if (!client.playerCreateStuffSent)
+                    if (!client.playerCreateStuffSent1)
                     {
                         msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
                             0x1006,
@@ -71,23 +73,16 @@ namespace QuazalWV
                             new DupObj(DupObjClass.Station, 1),
                             new DupObj(DupObjClass.NET_MessageBroker, 5),
                             (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
-                            BM_Message.Make(new MSG_ID_Entity_Cmd(0x33))
-                            ));
-                        //msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
-                        //    0x1006,
-                        //    new DupObj(DupObjClass.Station, 1),
-                        //    new DupObj(DupObjClass.NET_MessageBroker, 5),
-                        //    (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
-                        //    BM_Message.Make(new MSG_ID_Net_Obj_Create(0x2A, 0x05,  new OCP_PlayerEntity(2).MakePayload()))
-                        //    ));  
-                        client.playerCreateStuffSent = true;
+                            BM_Message.Make(new MSG_ID_Entity_Cmd(client, 0x33))
+                            )); 
+                        client.playerCreateStuffSent1 = true;
                     }
                     msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
                         0x1006,
                         new DupObj(DupObjClass.Station, 1),
                         new DupObj(DupObjClass.NET_MessageBroker, 5),
                         (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
-                        BM_Message.Make(new MSG_ID_NetRule_Synchronize())
+                        BM_Message.Make(new MSG_ID_NetRule_Synchronize(client.netRulesState))
                         ));
                     break;
                 case 0x325:

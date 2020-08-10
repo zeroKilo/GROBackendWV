@@ -9,31 +9,24 @@ namespace QuazalWV
 {
     public class MSG_ID_Entity_Cmd : BM_Message
     {
-        public MSG_ID_Entity_Cmd(byte cmdID)
+        public MSG_ID_Entity_Cmd(ClientInfo client, byte cmdID)
         {
             msgID = 0x96;
-            paramList.Add(new BM_Param(BM_Param.PARAM_TYPE.Buffer, MakePayload(cmdID)));
+            paramList.Add(new BM_Param(BM_Param.PARAM_TYPE.Buffer, MakePayload(client, cmdID)));
         }
 
-        public byte[] MakePayload(byte cmdID)
+        public byte[] MakePayload(ClientInfo client, byte cmdID)
         {
-            MemoryStream m = new MemoryStream();
-            BitBuffer buf = new BitBuffer();
-            buf.WriteBits(0x1, 32);         //handle
-            buf.WriteBits(cmdID, 6);         //cmd1
-            buf.WriteBits(0x0, 1);          //flag1
-            buf.WriteBits(0x0, 1);          //flags2
+            Entitiy_CMD cmd = null;
             switch (cmdID)
             {
                 case 0x33:
-                    buf.WriteBits(0x2, 4);          //state
+                    cmd = new ECMD_PlayerAbstractChangeState(1, client.playerAbstractState);
                     break;
-                case 0x34:
-                    break;
+                default:
+                    throw new NotImplementedException();
             }
-            byte[] data = buf.toArray();
-            m.Write(data, 0, data.Length);
-            return m.ToArray();
+            return cmd.MakePayload();
         }
     }
 }
