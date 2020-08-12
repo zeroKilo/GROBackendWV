@@ -58,6 +58,19 @@ namespace QuazalWV
             {
                 case 0x96:
                     return Entitiy_CMD.HandleMsg(client, s);
+                case 0x99:
+                    Helper.ReadU8(s);
+                    ushort size = Helper.ReadU16LE(s);
+                    byte[] payload = new byte[size];
+                    s.Read(payload, 0, size);
+                    msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
+                        0x1006,
+                        new DupObj(DupObjClass.Station, 1),
+                        new DupObj(DupObjClass.NET_MessageBroker, 5),
+                        (ushort)DO_RMCRequestMessage.DOC_METHOD.ProcessMessage,
+                        BM_Message.Make(new MSG_ID_SendReplicaData(payload))
+                        ));
+                    break;
                 case 0xA3:
                     if (!client.playerCreateStuffSent1)
                     {

@@ -32,6 +32,11 @@ namespace QuazalWV
             return (ushort)((byte)s.ReadByte() | ((byte)s.ReadByte() << 8));
         }
 
+        public static ushort ReadU16LE(Stream s)
+        {
+            return (ushort)(((byte)s.ReadByte() << 8) | (byte)s.ReadByte());
+        }
+
         public static uint ReadU32(Stream s)
         {
             return (uint)((byte)s.ReadByte() | 
