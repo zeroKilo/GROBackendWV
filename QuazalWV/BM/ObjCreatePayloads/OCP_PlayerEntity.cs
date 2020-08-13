@@ -49,6 +49,9 @@ namespace QuazalWV
             Helper.WriteU8(m, 9);
 
             Helper.WriteU8(m, 0);//count
+
+
+
             Helper.WriteU8(m, 10);
             Helper.WriteU32(m, 11);
             Helper.WriteU16(m, 12);
@@ -63,11 +66,15 @@ namespace QuazalWV
             tmp = Helper.MakeFilledArray(12);
             m.Write(tmp, 0, tmp.Length);
             Helper.WriteU8(m, 17);
-            Helper.WriteU16(m, 18);
+            Helper.WriteU16(m, 0);
 
-            Helper.WriteU16(m, 19);
-            Helper.WriteU8(m, 20);
-            Helper.WriteU8(m, 21);
+            Helper.WriteU16(m, 0);
+
+
+
+
+            Helper.WriteU8(m, 0);
+            Helper.WriteU8(m, 0);
             tmp = Helper.MakeFilledArray(13);
             m.Write(tmp, 0, tmp.Length);
 

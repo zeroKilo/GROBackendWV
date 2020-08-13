@@ -46,7 +46,7 @@ namespace QuazalWV
 
         public static byte[] HandleMessage(ClientInfo client, QPacket p, byte[] data)
         {
-            Log.WriteLine(1, "[DO] Handling DO_RMCRequestMessage...");
+            Log.WriteLine(2, "[DO] Handling DO_RMCRequestMessage...");
             MemoryStream m = new MemoryStream(data);
             m.Seek(1, 0);
             ushort callID = Helper.ReadU16(m);
@@ -64,7 +64,7 @@ namespace QuazalWV
             switch (method)
             {
                 case DOC_METHOD.SyncRequest:
-                    Log.WriteLine(1, "[DO] Handling SyncRequest...");
+                    Log.WriteLine(2, "[DO] Handling SyncRequest...");
                     ulong time = Helper.ReadU64(m);
                     buff = Create(client.callCounterDO_RMC++, 0x83C, new DupObj(DupObjClass.Station, 1), new DupObj(DupObjClass.SessionClock, 1), 6, new Payload_SyncResponse(time).toBuffer());
                     m2 = new MemoryStream();
@@ -143,7 +143,7 @@ namespace QuazalWV
                     msgs.Add(DO_RMCResponseMessage.Create(callID, 0x60001, new byte[] { 0x00 }));
                     return DO_BundleMessage.Create(client, msgs);
                 case DOC_METHOD.ProcessMessage:
-                    Log.WriteLine(1, "[DO] Handling ProcessMessage...");
+                    Log.WriteLine(2, "[DO] Handling ProcessMessage...");
                     return BM_Message.HandleMessage(client, m);
                 default:
                     Log.WriteLine(1, "[DO] Error: Unhandled DOC method: " + method + "!");

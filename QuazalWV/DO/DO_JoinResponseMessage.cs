@@ -11,13 +11,13 @@ namespace QuazalWV
     {
         public static byte[] HandleMessage(ClientInfo client, byte[] data)
         {
-            Log.WriteLine(1, "[DO] Handling DO_JoinResponseMessage... TODO!");
+            Log.WriteLine(2, "[DO] Handling DO_JoinResponseMessage... TODO!");
             return new byte[0];
         }
 
         public static byte[] Create(byte successByte, DupObj clientStation)
         {
-            Log.WriteLine(1, "[DO] Creating DO_JoinResponseMessage");
+            Log.WriteLine(2, "[DO] Creating DO_JoinResponseMessage");
             MemoryStream m = new MemoryStream();
             m.WriteByte(1);
             m.WriteByte(successByte);

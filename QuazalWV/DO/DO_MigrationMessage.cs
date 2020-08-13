@@ -12,7 +12,7 @@ namespace QuazalWV
     {    
         public static byte[] HandleMessage(ClientInfo client, byte[] data)
         {
-            Log.WriteLine(1, "[DO] Handling DO_MigrationMessage");
+            Log.WriteLine(2, "[DO] Handling DO_MigrationMessage");
             MemoryStream m = new MemoryStream(data);
             m.Seek(1, 0);
             ushort callID = Helper.ReadU16(m);
@@ -31,22 +31,6 @@ namespace QuazalWV
             msgs.Add(DO_Outcome.Create(callID, 0x60001));
             if (fobj != null && fobj.Class == DupObjClass.SES_cl_Player_NetZ && fobj.ID == 257 && !client.matchStartSent)
             {
-                /*
-                msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
-                    0x1006,
-                    new DupObj(DupObjClass.Station, 1),
-                    new DupObj(DupObjClass.SES_cl_Player_NetZ, 257),
-                    (ushort)DO_RMCRequestMessage.DOC_METHOD.SetPlayerState,
-                    new byte[] { 0x34, 0x12, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0xC0, 0x05, 0x00, 0x10, 0x00, 0x00, 0x00, 0x22, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }
-                    ));
-                msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
-                    0x1006,
-                    new DupObj(DupObjClass.Station, 1),
-                    new DupObj(DupObjClass.SES_cl_Player_NetZ, 257),
-                    (ushort)DO_RMCRequestMessage.DOC_METHOD.SetPlayerRDVInfo,
-                    new byte[] { 0x01, 0x00, 0x00, 0x00 }
-                    ));
-                 */
                 SessionInfosParameter p = new SessionInfosParameter();
                 p.sParams.byte25 = 1;
                 m = new MemoryStream();
@@ -78,7 +62,7 @@ namespace QuazalWV
 
         public static byte[] Create(ushort callID, uint fromStationID, uint dupObj, uint toStationID, byte version, List<uint> handles)
         {
-            Log.WriteLine(1, "[DO] Creating DO_MigrationMessage");
+            Log.WriteLine(2, "[DO] Creating DO_MigrationMessage");
             MemoryStream m = new MemoryStream();
             m.WriteByte(0x11);
             Helper.WriteU16(m, callID);

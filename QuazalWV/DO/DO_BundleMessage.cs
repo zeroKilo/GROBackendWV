@@ -17,7 +17,7 @@ namespace QuazalWV
 
         public static byte[] Create(ClientInfo client, List<byte[]> data)
         {
-            Log.WriteLine(1, "[DO] Creating DO_BundleMessage");
+            Log.WriteLine(2, "[DO] Creating DO_BundleMessage");
             MemoryStream m = new MemoryStream();
             m.WriteByte(0xF);
             foreach (byte[] buff in data)

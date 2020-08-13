@@ -11,7 +11,7 @@ namespace QuazalWV
     {
         public static byte[] HandleMessage(ClientInfo client, byte[] data)
         {
-            Log.WriteLine(1, "[DO] Handling DO_GetParticipantsRequestMessage...");
+            Log.WriteLine(2, "[DO] Handling DO_GetParticipantsRequestMessage...");
             return DO_GetParticipantsResponseMessage.Create(data);
         }
     }

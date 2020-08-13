@@ -13,7 +13,7 @@ namespace QuazalWV
     {
         public static byte[] HandleMessage(ClientInfo client, byte[] data)
         {
-            Log.WriteLine(1, "[DO] Handling DO_DeleteMessage");
+            Log.WriteLine(2, "[DO] Handling DO_DeleteMessage");
             uint handle = BitConverter.ToUInt32(data, 1);
             DupObj obj = DO_Session.FindObj(handle);
             if (obj == null)
@@ -27,7 +27,7 @@ namespace QuazalWV
 
         public static byte[] Create(ushort callID, uint fromStationID, uint dupObj, uint toStationID, byte version, List<uint> handles)
         {
-            Log.WriteLine(1, "[DO] Creating DO_DeleteMessage TODO");
+            Log.WriteLine(2, "[DO] Creating DO_DeleteMessage TODO");
             return null;
         }
     }

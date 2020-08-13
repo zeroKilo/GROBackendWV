@@ -11,7 +11,7 @@ namespace QuazalWV
     {        
         public static byte[] HandleMessage(ClientInfo client, byte[] data)
         {
-            Log.WriteLine(1, "[DO] Handling DO_CreateDuplicaMessage...");
+            Log.WriteLine(2, "[DO] Handling DO_CreateDuplicaMessage...");
             MemoryStream m = new MemoryStream(data);
             m.Seek(1, 0);
             DupObj obj = new DupObj(Helper.ReadU32(m));
@@ -23,7 +23,7 @@ namespace QuazalWV
 
         public static byte[] Create(DupObj obj, byte version)
         {
-            Log.WriteLine(1, "[DO] Creating DO_CreateDuplicaMessage");
+            Log.WriteLine(2, "[DO] Creating DO_CreateDuplicaMessage");
             MemoryStream m = new MemoryStream();
             m.WriteByte(0x12);
             Helper.WriteU32(m, obj);

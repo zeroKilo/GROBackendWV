@@ -11,7 +11,7 @@ namespace QuazalWV
     {
         public static byte[] HandleMessage(ClientInfo client, byte[] data, byte sessionID)
         {
-            Log.WriteLine(1, "[DO] Handling DO_JoinRequestMessage...");
+            Log.WriteLine(2, "[DO] Handling DO_JoinRequestMessage...");
             SendConnectionRequest(client, sessionID);
             List<byte[]> msgs = new List<byte[]>();
             InitSession(client);

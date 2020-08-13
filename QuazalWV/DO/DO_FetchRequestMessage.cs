@@ -12,7 +12,7 @@ namespace QuazalWV
         public static byte[] HandleMessage(ClientInfo client, byte[] data)
         {
             List<byte[]> msgs;
-            Log.WriteLine(1, "[DO] Handling DO_FetchRequestMessage...");
+            Log.WriteLine(2, "[DO] Handling DO_FetchRequestMessage...");
             MemoryStream m = new MemoryStream(data);
             m.Seek(3, 0);
             uint dupObj = Helper.ReadU32(m);
@@ -36,7 +36,7 @@ namespace QuazalWV
 
         public static byte[] Create(ushort callID, DupObj obj)
         {
-            Log.WriteLine(1, "[DO] Creating DO_FetchRequestMessage");
+            Log.WriteLine(2, "[DO] Creating DO_FetchRequestMessage");
             MemoryStream m = new MemoryStream();
             m.WriteByte(0xD);
             Helper.WriteU16(m, callID);
