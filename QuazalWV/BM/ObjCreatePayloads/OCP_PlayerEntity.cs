@@ -9,18 +9,42 @@ namespace QuazalWV
 {
     public class OCP_PlayerEntity
     {
+        public enum MoveMode
+        {
+            eMoveModeStop = 0,
+            eMoveModeFree = 1,
+            eMoveModeCover = 2,
+            eMoveModeGoToPosition = 3,
+            eMoveModeCross = 4,
+            eMoveModeAnimControl = 5,
+            eMoveModeSlide = 6,
+            eMoveModeTeleport = 7,
+        }
+        //handle
         public uint handle;
+        //replica data 1
         public byte unk1 = 0x56;
         public byte[] unk2 = new byte[4];
         public byte[] unk3 = new byte[4];
+        //sub Stuff 1
+        public MoveMode m_MoveMode = MoveMode.eMoveModeFree; 
+        public ushort m_ADSDamage = 0;
+        public ushort m_PostADSDamage = 0;
+        public byte m_bIsInADSCone = 0;
+        public byte m_BlitzShieldArmed = 0;
+        public byte m_bHealthRegenActive = 1;
+        //replica data 2
         public byte unk4 = 0x67;
         public byte[] unk5 = new byte[4];
         public byte[] unk6 = new byte[4];
+        //sub Stuff 2
+        //rest
         public byte playerLocalIndex = 0x0;
         public byte padID = 0x0;
         public byte teamID = 0x1;
+        public byte classID = 0;
         public uint rdvID = 0x1234;
-        public uint unk11 = 0x99999999;
+        public float DOB_Seconds = 0; 
 
         public OCP_PlayerEntity(uint h)
         {
@@ -52,23 +76,23 @@ namespace QuazalWV
             byte[] tmp = Helper.MakeFilledArray(0); //m_ReplicatedCamPitch
             m.Write(tmp, 0, tmp.Length);            //m_ReplicatedCamPitch
 
-            Helper.WriteU8(m, 1); //m_MoveMode
-            Helper.WriteU32(m, 11); 
+            Helper.WriteU8(m, (byte)m_MoveMode);
+            Helper.WriteU32(m, 11); //???
             Helper.WriteU16(m, 12); //m_FocusedEntityReplication
 
             Helper.WriteU16(m, 13); //m_CoverHeight
             tmp = Helper.MakeFilledArray(9); //m_CoverFlagWanted + m_CoverNormal
             m.Write(tmp, 0, tmp.Length);     //m_CoverFlagWanted + m_CoverNormal
-            Helper.WriteU32(m, 5); //m_State
-            Helper.WriteU32(m, 5); //m_StateServer
+            Helper.WriteU32(m, 14); //m_State
+            Helper.WriteU32(m, 15); //m_StateServer
             Helper.WriteU8(m, 16); //m_LaserSightStateCurr
             tmp = Helper.MakeFilledArray(12); //m_SlideVelocity
             m.Write(tmp, 0, tmp.Length);      //m_SlideVelocity
             Helper.WriteU8(m, 17); //m_SlideToRosaceAnim
-            Helper.WriteU16(m, 0); //m_ADSDamage
-            Helper.WriteU16(m, 0); //m_PostADSDamage
-            Helper.WriteU8(m, 0); //m_bIsInADSCone
-            Helper.WriteU8(m, 0); //m_BlitzShieldArmed
+            Helper.WriteU16(m, m_ADSDamage);
+            Helper.WriteU16(m, m_PostADSDamage);
+            Helper.WriteU8(m, m_bIsInADSCone);
+            Helper.WriteU8(m, m_BlitzShieldArmed);
             tmp = Helper.MakeFilledArray(13); //m_OrderStatus
             m.Write(tmp, 0, tmp.Length);      //m_OrderStatus
 
@@ -82,7 +106,7 @@ namespace QuazalWV
             Helper.WriteU32(m, 26); //m_Mood
             Helper.WriteU8(m, 27); //m_HitPart
             Helper.WriteU8(m, 28); //m_LeftHandSide
-            Helper.WriteU8(m, 0); //m_bHealthRegenActive
+            Helper.WriteU8(m, m_bHealthRegenActive);
 
             //Replica Data 2
             Helper.WriteU8(m, (byte)unk5.Length);
@@ -100,15 +124,15 @@ namespace QuazalWV
 
             //Rest
             Helper.WriteU8(m, teamID);
-            Helper.WriteU8(m, 0x0); //classID
+            Helper.WriteU8(m, classID);
             Helper.WriteU32(m, rdvID);
-            Helper.WriteU32(m, unk11);
+            Helper.WriteU32(m, 0x99999999);
             Helper.WriteU8(m, 0x22);
             Helper.WriteU8(m, 0x33);
             Helper.WriteU8(m, 0x44);
             for (int i = 0; i < 9; i++)
                 Helper.WriteU8(m, 0);//count
-            Helper.WriteU32(m, 0x55);
+            Helper.WriteFloatLE(m, DOB_Seconds);
 
             return m.ToArray();
         }
