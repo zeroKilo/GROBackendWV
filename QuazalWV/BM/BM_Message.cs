@@ -63,6 +63,8 @@ namespace QuazalWV
                     ushort size = Helper.ReadU16LE(s);
                     byte[] payload = new byte[size];
                     s.Read(payload, 0, size);
+                    payload[0x11] = 0;
+                    payload[0x12] = 0x27;
                     msgs.Add(DO_RMCRequestMessage.Create(client.callCounterDO_RMC++,
                         0x1006,
                         new DupObj(DupObjClass.Station, 1),

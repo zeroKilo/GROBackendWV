@@ -20,10 +20,10 @@ namespace QuazalWV
             MemoryStream m = new MemoryStream();
             Helper.WriteFloat(m, 111);    //startTime
             Helper.WriteU8(m, 2);       //roundID
-            Helper.WriteFloat(m, 3);    //roundStartTime
-            Helper.WriteFloat(m, 4);    //roundDuration
-            Helper.WriteU8(m, 5);       //bContested
-            Helper.WriteU8(m, 6);       //bIsCurrRoundLast
+            Helper.WriteFloat(m, 0);    //roundStartTime
+            Helper.WriteFloat(m, 9999);    //roundDuration
+            Helper.WriteU8(m, 0);       //bContested
+            Helper.WriteU8(m, 0);       //bIsCurrRoundLast
             return m.ToArray();
         }
     }

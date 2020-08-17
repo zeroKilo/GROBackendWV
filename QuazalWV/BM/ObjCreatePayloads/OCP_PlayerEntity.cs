@@ -38,57 +38,51 @@ namespace QuazalWV
             Helper.WriteU8(m, unk1);
             m.Write(unk2, 0, unk2.Length);
             //subStuff
-            Helper.WriteU32(m, 2);
-            Helper.WriteU32(m, 3);
-            Helper.WriteU32(m, 4);
-            Helper.WriteU8(m, 5);
+            Helper.WriteU32(m, 2); //m_ShootPosition
+            Helper.WriteU32(m, 3); //m_ShootTargetHandle
+            Helper.WriteU32(m, 4); //m_WhistlingBullet
+            Helper.WriteU8(m, 5);  //m_Rush
 
-            Helper.WriteU8(m, 6);
-            Helper.WriteU8(m, 7);
-            Helper.WriteU8(m, 8);
-            Helper.WriteU8(m, 9);
+            Helper.WriteU8(m, 6); //m_PlayerFire
+            Helper.WriteU8(m, 7); //m_CurrentWeaponSlot
+            Helper.WriteU8(m, 8); //m_WantedWeaponSlot
+            Helper.WriteU8(m, 9); //m_OldWeaponSlot
 
-            Helper.WriteU8(m, 0);//count
+            Helper.WriteU8(m, 0);//count,             m_ReplicatedCamPitch
+            byte[] tmp = Helper.MakeFilledArray(0); //m_ReplicatedCamPitch
+            m.Write(tmp, 0, tmp.Length);            //m_ReplicatedCamPitch
 
+            Helper.WriteU8(m, 1); //m_MoveMode
+            Helper.WriteU32(m, 11); 
+            Helper.WriteU16(m, 12); //m_FocusedEntityReplication
 
+            Helper.WriteU16(m, 13); //m_CoverHeight
+            tmp = Helper.MakeFilledArray(9); //m_CoverFlagWanted + m_CoverNormal
+            m.Write(tmp, 0, tmp.Length);     //m_CoverFlagWanted + m_CoverNormal
+            Helper.WriteU32(m, 5); //m_State
+            Helper.WriteU32(m, 5); //m_StateServer
+            Helper.WriteU8(m, 16); //m_LaserSightStateCurr
+            tmp = Helper.MakeFilledArray(12); //m_SlideVelocity
+            m.Write(tmp, 0, tmp.Length);      //m_SlideVelocity
+            Helper.WriteU8(m, 17); //m_SlideToRosaceAnim
+            Helper.WriteU16(m, 0); //m_ADSDamage
+            Helper.WriteU16(m, 0); //m_PostADSDamage
+            Helper.WriteU8(m, 0); //m_bIsInADSCone
+            Helper.WriteU8(m, 0); //m_BlitzShieldArmed
+            tmp = Helper.MakeFilledArray(13); //m_OrderStatus
+            m.Write(tmp, 0, tmp.Length);      //m_OrderStatus
 
-            Helper.WriteU8(m, 10);
-            Helper.WriteU32(m, 11);
-            Helper.WriteU16(m, 12);
+            Helper.WriteU8(m, 22); //m_FireModeType
+            Helper.WriteU8(m, 23); //m_RollAnimIndex
+            tmp = Helper.MakeFilledArray(5); //m_ReplicatedPowerPC
+            m.Write(tmp, 0, tmp.Length);     //m_ReplicatedPowerPC
+            Helper.WriteU16(m, 24); //m_CurrentEnergyPC
 
-            Helper.WriteU16(m, 13);
-            byte[] tmp = Helper.MakeFilledArray(9);
-            m.Write(tmp, 0, tmp.Length);
-            Helper.WriteU32(m, 14);
-            Helper.WriteU32(m, 15);
-
-            Helper.WriteU8(m, 16);
-            tmp = Helper.MakeFilledArray(12);
-            m.Write(tmp, 0, tmp.Length);
-            Helper.WriteU8(m, 17);
-            Helper.WriteU16(m, 0);
-
-            Helper.WriteU16(m, 0);
-
-
-
-
-            Helper.WriteU8(m, 0);
-            Helper.WriteU8(m, 0);
-            tmp = Helper.MakeFilledArray(13);
-            m.Write(tmp, 0, tmp.Length);
-
-            Helper.WriteU8(m, 22);
-            Helper.WriteU8(m, 23);
-            tmp = Helper.MakeFilledArray(5);
-            m.Write(tmp, 0, tmp.Length);
-            Helper.WriteU16(m, 24);
-
-            Helper.WriteU16(m, 25);
-            Helper.WriteU32(m, 26);
-            Helper.WriteU8(m, 27);
-            Helper.WriteU8(m, 28);
-            Helper.WriteU8(m, 29);
+            Helper.WriteU16(m, 25); //m_KikooMoveCount
+            Helper.WriteU32(m, 26); //m_Mood
+            Helper.WriteU8(m, 27); //m_HitPart
+            Helper.WriteU8(m, 28); //m_LeftHandSide
+            Helper.WriteU8(m, 0); //m_bHealthRegenActive
 
             //Replica Data 2
             Helper.WriteU8(m, (byte)unk5.Length);
@@ -113,7 +107,7 @@ namespace QuazalWV
             Helper.WriteU8(m, 0x33);
             Helper.WriteU8(m, 0x44);
             for (int i = 0; i < 9; i++)
-                Helper.WriteU8(m, 0);
+                Helper.WriteU8(m, 0);//count
             Helper.WriteU32(m, 0x55);
 
             return m.ToArray();

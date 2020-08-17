@@ -57,6 +57,20 @@ void Log(char* str)
 
 void DetourFireFunctions();
 void DetourEventHandlerFunctions();
+
+void WriteByte(DWORD address, BYTE b)
+{	
+	DWORD old;
+	VirtualProtect((LPVOID)address, 1, PAGE_EXECUTE_READWRITE, &old);
+	*(BYTE*)address = b;
+}
+
+void WriteBuffer(DWORD address, BYTE* buff, int len)
+{
+	for(int i = 0; i < len; i++)
+		WriteByte(address + i, buff[i]);
+}
+
 void DetourMain()
 {
 	char buffer[512];
@@ -97,6 +111,10 @@ void DetourMain()
 	VirtualProtect(patchPos,2,PAGE_EXECUTE_READWRITE,&old);
 	*patchPos = 0xC3C3;
 	Log("Patched crash position 2\n");
+
+
+	org_AI_EntityPlayer_UpdateWarning = (void(__fastcall*) (void*,void*)) DetourFunction((PBYTE)(baseAddressAI + 0xC86F0),(PBYTE)AI_EntityPlayer_UpdateWarning);
+	Log("Hooked AI_EntityPlayer::UpdateWarning\n");
 
 }
 

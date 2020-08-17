@@ -33,6 +33,7 @@ DWORD (__cdecl* org_FIR_GetASDataManager)();
 
 DWORD (__fastcall* org_UI_DispatchEvent)(EventCaller*, void*, int, int, int);
 DWORD (__fastcall* org_FIR_FireEvent)(void*, void*);
+void (__fastcall* org_AI_EntityPlayer_UpdateWarning)(void*, void*);
 
 typedef DWORD(__fastcall* BUSEVENTHANDLER)(void*, void*, AIEvent*);
 typedef DWORD(__fastcall* EVENTHANDLER)(void*, void*, DWORD, AIEvent*);
@@ -302,4 +303,19 @@ DWORD __fastcall FIR_FireEvent(void* THIS, void* EDX)
 	sprintf(buffer,"%s -> AIDLL::FIR_FireEvent                             ()\n\0", getCallerString());
 	Log(buffer);
 	return org_FIR_FireEvent(THIS, EDX);
+}
+
+DWORD playerAddress = 0;
+
+void __fastcall AI_EntityPlayer_UpdateWarning(void* THIS, void* EDX)
+{
+	if(playerAddress == 0)
+	{
+		playerAddress = (DWORD)THIS;
+		sprintf(buffer,"PlayerAddress=%08X\n\0", playerAddress);		
+		FILE* fp = fopen("_playerAddress.txt", "w");
+		fprintf(fp, buffer);
+		fclose(fp);
+	}
+	org_AI_EntityPlayer_UpdateWarning(THIS, EDX);
 }

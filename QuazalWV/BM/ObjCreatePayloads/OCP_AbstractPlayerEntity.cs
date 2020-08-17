@@ -37,21 +37,21 @@ namespace QuazalWV
             Helper.WriteU8(m, unk1);
             m.Write(unk2, 0, unk2.Length);
             //subStuff
-            Helper.WriteU32(m, 1);
-            Helper.WriteU32(m, 2);
-            Helper.WriteU32(m, 3);
-            Helper.WriteU32(m, 4);
-            Helper.WriteU32(m, 4);
-            Helper.WriteU32(m, 4);
-            Helper.WriteU32(m, 5);
-            Helper.WriteU32(m, 6);
-            Helper.WriteU32(m, 7);
-            Helper.WriteU16(m, 8);
-            Helper.WriteU8(m, 0);//class?
-            Helper.WriteU16(m, 0);
-            Helper.WriteU32(m, 0);
-            Helper.WriteU32(m, (uint)unk3.Length);
-            m.Write(unk3, 0, unk3.Length);
+            Helper.WriteU32(m, 1); //m_DeathCount
+            Helper.WriteU32(m, 2); //m_AbilityInventoryId
+            Helper.WriteU32(m, 3); //m_PassiveAbilityInventoryId
+            Helper.WriteU32(m, 4); //m_DesiredWeaponIds
+            Helper.WriteU32(m, 4); //m_DesiredWeaponIds
+            Helper.WriteU32(m, 4); //m_DesiredWeaponIds
+            Helper.WriteU32(m, 5); //m_AchievementPoints
+            Helper.WriteU32(m, 6); //m_HelmetInventoryId
+            Helper.WriteU32(m, 7); //m_ArmorTierInventoryId
+            Helper.WriteU16(m, 8); //m_SpawnBlockingReasons
+            Helper.WriteU8(m, 0);  //m_Class
+            Helper.WriteU16(m, 0); //m_ClassLevel
+            Helper.WriteU32(m, 0); //m_PortraitId
+            Helper.WriteU32(m, (uint)unk3.Length); //m_PersonaName
+            m.Write(unk3, 0, unk3.Length);         //m_PersonaName
 
             //Replica Data 2
             Helper.WriteU8(m, (byte)unk5.Length);
