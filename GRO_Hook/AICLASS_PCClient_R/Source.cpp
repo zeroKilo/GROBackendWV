@@ -86,6 +86,24 @@ void EnableDebugScreen2()
 	WriteBuffer(baseAddressAI + 0x1BBAD0, patch, 6);
 	Log("Patched position for DebugScreen 2\n");
 }
+void EnableDebugScreen3()
+{
+	BYTE patch[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
+	WriteBuffer(baseAddressAI + 0x3BC57, patch, 6);
+	Log("Patched position for DebugScreen 3\n");
+}
+void EnableDebugScreen4()
+{
+	BYTE patch[] = {0x90, 0x90};
+	WriteBuffer(baseAddressAI + 0x1EC256, patch, 2);
+	Log("Patched position for DebugScreen 4\n");
+}
+void EnableDebugScreen5()
+{
+	BYTE patch[] = {0x90, 0x90};
+	WriteBuffer(baseAddressAI + 0xA798E, patch, 2);
+	Log("Patched position for DebugScreen 5\n");
+}
 
 void Patch1()
 {
@@ -134,6 +152,9 @@ void DetourMain()
 	DetourEventHandlerFunctions();
 	EnableDebugScreen1();
 	EnableDebugScreen2();
+	EnableDebugScreen3();
+	EnableDebugScreen4();
+	EnableDebugScreen5();
 	Patch1();
 	Patch2();
 	ExportPlayerAddress();
