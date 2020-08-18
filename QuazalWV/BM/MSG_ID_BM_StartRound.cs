@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public  class MSG_ID_BM_StartRound : BM_Message
+    public class MSG_ID_BM_StartRound : BM_Message
     {
         public MSG_ID_BM_StartRound()
         {

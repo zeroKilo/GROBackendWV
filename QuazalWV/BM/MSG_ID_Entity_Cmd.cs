@@ -15,11 +15,20 @@ namespace QuazalWV
             paramList.Add(new BM_Param(BM_Param.PARAM_TYPE.Buffer, MakePayload(client, cmdID)));
         }
 
+        public MSG_ID_Entity_Cmd(byte[] payload)
+        {
+            msgID = 0x96;
+            paramList.Add(new BM_Param(BM_Param.PARAM_TYPE.Buffer, payload));
+        }
+
         public byte[] MakePayload(ClientInfo client, byte cmdID)
         {
             Entitiy_CMD cmd = null;
             switch (cmdID)
             {
+                case 0x1C:
+                    cmd = new ECMD_PlayerFallingDamage(2, 5.0f);
+                    break;
                 case 0x33:
                     cmd = new ECMD_PlayerAbstractChangeState(1, client.playerAbstractState);
                     break;
