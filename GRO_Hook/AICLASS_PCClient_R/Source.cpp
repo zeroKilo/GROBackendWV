@@ -71,6 +71,42 @@ void WriteBuffer(DWORD address, BYTE* buff, int len)
 		WriteByte(address + i, buff[i]);
 }
 
+void EnableDebugScreen1()
+{
+	BYTE patch[] = {0x90, 0x90};
+	WriteBuffer(baseAddressAI + 0x3C384, patch, 2);
+	Log("Patched position for DebugScreen 1\n");
+}
+void EnableDebugScreen2()
+{
+	BYTE patch[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
+	WriteBuffer(baseAddressAI + 0x1B3716, patch, 2);
+	WriteBuffer(baseAddressAI + 0x1B372C, patch, 2);
+	WriteBuffer(baseAddressAI + 0x1BBABC, patch, 6);
+	WriteBuffer(baseAddressAI + 0x1BBAD0, patch, 6);
+	Log("Patched position for DebugScreen 2\n");
+}
+
+void Patch1()
+{
+	BYTE patch[] = {0xC3};
+	WriteBuffer(baseAddressAI + 0xECC30, patch, 1);
+	Log("Patched crash position 1\n");
+}
+
+void Patch2()
+{
+	BYTE patch[] = {0xC3};
+	WriteBuffer(baseAddressAI + 0x1A2FB0, patch, 1);
+	Log("Patched crash position 2\n");
+}
+
+void ExportPlayerAddress()
+{
+	org_AI_EntityPlayer_UpdateWarning = (void(__fastcall*) (void*,void*)) DetourFunction((PBYTE)(baseAddressAI + 0xC86F0),(PBYTE)AI_EntityPlayer_UpdateWarning);
+	Log("Hooked AI_EntityPlayer::UpdateWarning\n");
+}
+
 void DetourMain()
 {
 	char buffer[512];
@@ -96,26 +132,11 @@ void DetourMain()
 	Log(buffer);
 	DetourFireFunctions();
 	DetourEventHandlerFunctions();
-	WORD* patchPos = (WORD*)(baseAddressAI + 0x3C384);	
-	DWORD old;
-	VirtualProtect(patchPos,2,PAGE_EXECUTE_READWRITE,&old);
-	*patchPos = 0x9090;
-	Log("Patched position for DebugScreen\n");
-
-	
-	patchPos = (WORD*)(baseAddressAI + 0xECC30);	
-	VirtualProtect(patchPos,2,PAGE_EXECUTE_READWRITE,&old);
-	*patchPos = 0xC3C3;
-	Log("Patched crash position 1\n");
-	patchPos = (WORD*)(baseAddressAI + 0x1A2FB0);	
-	VirtualProtect(patchPos,2,PAGE_EXECUTE_READWRITE,&old);
-	*patchPos = 0xC3C3;
-	Log("Patched crash position 2\n");
-
-
-	org_AI_EntityPlayer_UpdateWarning = (void(__fastcall*) (void*,void*)) DetourFunction((PBYTE)(baseAddressAI + 0xC86F0),(PBYTE)AI_EntityPlayer_UpdateWarning);
-	Log("Hooked AI_EntityPlayer::UpdateWarning\n");
-
+	EnableDebugScreen1();
+	EnableDebugScreen2();
+	Patch1();
+	Patch2();
+	ExportPlayerAddress();
 }
 
 void DetourFireFunctions()
