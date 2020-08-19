@@ -43,7 +43,8 @@ namespace QuazalWV
         public byte padID = 0x0;
         public byte teamID = 0x1;
         public byte classID = 0;
-        public uint rdvID = 0x1234;
+        public float Health1 = 100f;
+        public float Health2 = 100f;
         public float DOB_Seconds = 0; 
 
         public OCP_PlayerEntity(uint h)
@@ -83,11 +84,13 @@ namespace QuazalWV
             Helper.WriteU16(m, 13); //m_CoverHeight
             tmp = Helper.MakeFilledArray(9); //m_CoverFlagWanted + m_CoverNormal
             m.Write(tmp, 0, tmp.Length);     //m_CoverFlagWanted + m_CoverNormal
-            Helper.WriteU32(m, 14); //m_State
-            Helper.WriteU32(m, 15); //m_StateServer
+            Helper.WriteU32(m, 1); //m_State
+            Helper.WriteU32(m, 1); //m_StateServer
             Helper.WriteU8(m, 16); //m_LaserSightStateCurr
+            
             tmp = Helper.MakeFilledArray(12); //m_SlideVelocity
             m.Write(tmp, 0, tmp.Length);      //m_SlideVelocity
+            
             Helper.WriteU8(m, 17); //m_SlideToRosaceAnim
             Helper.WriteU16(m, m_ADSDamage);
             Helper.WriteU16(m, m_PostADSDamage);
@@ -125,8 +128,8 @@ namespace QuazalWV
             //Rest
             Helper.WriteU8(m, teamID);
             Helper.WriteU8(m, classID);
-            Helper.WriteU32(m, rdvID);
-            Helper.WriteU32(m, 0x99999999);
+            Helper.WriteFloatLE(m, Health1);
+            Helper.WriteFloatLE(m, Health2);
             Helper.WriteU8(m, 0x22);
             Helper.WriteU8(m, 0x33);
             Helper.WriteU8(m, 0x44);

@@ -152,9 +152,9 @@ void DetourMain()
 	DetourEventHandlerFunctions();
 	EnableDebugScreen1();
 	EnableDebugScreen2();
-	EnableDebugScreen3();
-	EnableDebugScreen4();
-	EnableDebugScreen5();
+	//EnableDebugScreen3();
+	//EnableDebugScreen4();
+	//EnableDebugScreen5();
 	Patch1();
 	Patch2();
 	ExportPlayerAddress();
