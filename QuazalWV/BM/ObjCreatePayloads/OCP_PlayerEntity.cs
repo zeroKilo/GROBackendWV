@@ -63,9 +63,9 @@ namespace QuazalWV
             Helper.WriteU8(m, unk1);
             m.Write(unk2, 0, unk2.Length);
             //subStuff
-            Helper.WriteU32(m, 2); //m_ShootPosition
-            Helper.WriteU32(m, 3); //m_ShootTargetHandle
-            Helper.WriteU32(m, 4); //m_WhistlingBullet
+            Helper.WriteFloatLE(m, 2); //m_ShootPosition
+            Helper.WriteFloatLE(m, 3); //m_ShootTargetHandle
+            Helper.WriteFloatLE(m, 4); //m_WhistlingBullet
             Helper.WriteU8(m, 5);  //m_Rush
 
             Helper.WriteU8(m, 6); //m_PlayerFire
@@ -84,8 +84,8 @@ namespace QuazalWV
             Helper.WriteU16(m, 13); //m_CoverHeight
             tmp = Helper.MakeFilledArray(9); //m_CoverFlagWanted + m_CoverNormal
             m.Write(tmp, 0, tmp.Length);     //m_CoverFlagWanted + m_CoverNormal
-            Helper.WriteU32(m, 1); //m_State
-            Helper.WriteU32(m, 1); //m_StateServer
+            Helper.WriteFloatLE(m, 1); //m_State
+            Helper.WriteFloatLE(m, 1); //m_StateServer
             Helper.WriteU8(m, 16); //m_LaserSightStateCurr
             
             tmp = Helper.MakeFilledArray(12); //m_SlideVelocity
@@ -106,7 +106,8 @@ namespace QuazalWV
             Helper.WriteU16(m, 24); //m_CurrentEnergyPC
 
             Helper.WriteU16(m, 25); //m_KikooMoveCount
-            Helper.WriteU32(m, 26); //m_Mood
+            byte mood = 1;
+            Helper.WriteU32LE(m, (uint)(1 << mood)); //m_Mood
             Helper.WriteU8(m, 27); //m_HitPart
             Helper.WriteU8(m, 28); //m_LeftHandSide
             Helper.WriteU8(m, m_bHealthRegenActive);

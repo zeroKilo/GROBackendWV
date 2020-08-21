@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <stdio.h>
 #include "HookedFunctions.h"
+#include "ZenStuff.h"
 
 char* logFilename = "GRO_Event_Log.txt";
 
@@ -158,6 +159,7 @@ void DetourMain()
 	Patch1();
 	Patch2();
 	ExportPlayerAddress();
+	ZEN_Init(baseAddressAI);
 }
 
 void DetourFireFunctions()

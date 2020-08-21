@@ -33,6 +33,9 @@
     <ClInclude Include="defines.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="ZenStuff.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +45,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Source.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="ZenStuff.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
