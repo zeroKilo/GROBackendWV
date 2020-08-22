@@ -120,6 +120,13 @@ void Patch2()
 	Log("Patched crash position 2\n");
 }
 
+void Patch3()
+{
+	BYTE patch[] = {0x90, 0x90};
+	WriteBuffer(baseAddressAI + 0xA735F, patch, 2);
+	Log("Patched keyboard input\n");
+}
+
 void ExportPlayerAddress()
 {
 	org_AI_EntityPlayer_UpdateWarning = (void(__fastcall*) (void*,void*)) DetourFunction((PBYTE)(baseAddressAI + 0xC86F0),(PBYTE)AI_EntityPlayer_UpdateWarning);
@@ -151,13 +158,14 @@ void DetourMain()
 	Log(buffer);
 	DetourFireFunctions();
 	DetourEventHandlerFunctions();
-	EnableDebugScreen1();
-	EnableDebugScreen2();
+	//EnableDebugScreen1();
+	//EnableDebugScreen2();
 	//EnableDebugScreen3();
 	//EnableDebugScreen4();
 	//EnableDebugScreen5();
 	Patch1();
 	Patch2();
+	Patch3();
 	ExportPlayerAddress();
 	ZEN_Init(baseAddressAI);
 }

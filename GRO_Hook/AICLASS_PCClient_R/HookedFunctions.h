@@ -307,6 +307,18 @@ DWORD __fastcall FIR_FireEvent(void* THIS, void* EDX)
 
 DWORD playerAddress = 0;
 
+DWORD WINAPI StepStepStep(LPVOID lpvParam)
+{
+	Sleep(10000);
+	DWORD* stanceFlags = (DWORD*)(playerAddress + 0x824);
+	while(true)
+	{
+		Sleep(1000);
+		*stanceFlags |= 0x40000;
+	}
+	return 0;
+}
+
 void __fastcall AI_EntityPlayer_UpdateWarning(void* THIS, void* EDX)
 {
 	if(playerAddress == 0)
@@ -316,6 +328,7 @@ void __fastcall AI_EntityPlayer_UpdateWarning(void* THIS, void* EDX)
 		FILE* fp = fopen("_playerAddress.txt", "w");
 		fprintf(fp, buffer);
 		fclose(fp);
+		StartThread(StepStepStep);
 	}
 	org_AI_EntityPlayer_UpdateWarning(THIS, EDX);
 }
