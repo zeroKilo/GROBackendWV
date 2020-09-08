@@ -133,6 +133,12 @@ void ExportPlayerAddress()
 	Log("Hooked AI_EntityPlayer::UpdateWarning\n");
 }
 
+void ReplaceVelocity()
+{
+	DetourFunction((PBYTE)(baseAddressAI + 0x79DC0),(PBYTE)GetVelocity);
+	Log("Replaced GetVelocity\n");
+}
+
 void DetourMain()
 {
 	char buffer[512];
@@ -165,9 +171,10 @@ void DetourMain()
 	//EnableDebugScreen5();
 	Patch1();
 	Patch2();
-	Patch3();
+	//Patch3();
 	ExportPlayerAddress();
-	ZEN_Init(baseAddressAI);
+	//ReplaceVelocity();
+	//ZEN_Init(baseAddressAI);
 }
 
 void DetourFireFunctions()

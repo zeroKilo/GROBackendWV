@@ -32,6 +32,7 @@ namespace QuazalWV
         public ushort m_PostADSDamage = 0;
         public byte m_bIsInADSCone = 0;
         public byte m_BlitzShieldArmed = 0;
+        public uint m_Mood = 0xCE;
         public byte m_bHealthRegenActive = 1;
         //replica data 2
         public byte unk4 = 0x67;
@@ -106,8 +107,7 @@ namespace QuazalWV
             Helper.WriteU16(m, 24); //m_CurrentEnergyPC
 
             Helper.WriteU16(m, 25); //m_KikooMoveCount
-            byte mood = 1;
-            Helper.WriteU32LE(m, (uint)(1 << mood)); //m_Mood
+            Helper.WriteU32LE(m, m_Mood);
             Helper.WriteU8(m, 27); //m_HitPart
             Helper.WriteU8(m, 28); //m_LeftHandSide
             Helper.WriteU8(m, m_bHealthRegenActive);

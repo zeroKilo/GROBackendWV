@@ -29,6 +29,7 @@ namespace GROMemoryToolWV
         [DllImport("kernel32.dll")]
         public static extern bool ReadProcessMemory(int hProcess, int lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
 
+        public Process[] process;
         public IntPtr handle = IntPtr.Zero;
         public uint address;
 
@@ -109,7 +110,7 @@ namespace GROMemoryToolWV
             {
                 if (handle != IntPtr.Zero)
                     CloseHandle(handle);
-                Process[] process = Process.GetProcessesByName("Yeti_Release");
+                process = Process.GetProcessesByName("Yeti_Release");
                 if (process == null || process.Length == 0)
                 {
                     Log("Error: Process 'Yeti_Release' not found!");
@@ -617,6 +618,93 @@ namespace GROMemoryToolWV
             sb.Append(" " + ReadDWORD(handle, address + 4).ToString("X8"));
             sb.Append(" " + ReadDWORD(handle, address + 8).ToString("X8"));
             sb.AppendLine(" " + ReadDWORD(handle, address + 0xC).ToString("X8"));
+        }
+
+        private void readZenNamespacesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ClearAll();
+                GetHandle();
+                foreach (ProcessModule m in process[0].Modules)
+                    if (Path.GetFileName(m.FileName) == "AICLASS_PCClient_R_org.dll")
+                    {
+                        uint baseAddress = (uint)m.BaseAddress.ToInt32();
+                        uint address = baseAddress + 0x73E838;
+                        uint ptrRoot = ReadDWORD(handle, address);
+                        treeView1.Nodes.Add(ReadZenNamespaceNodes(ptrRoot, true));
+                        treeView1.ExpandAll();
+                    }
+            }
+            catch (Exception ex)
+            {
+                Log("Error : " + ex.Message);
+            }
+        }
+
+        private TreeNode ReadZenNamespaceNodes(uint ptrNode, bool isRoot = false)
+        {
+            TreeNode t = new TreeNode();
+            uint ptrName = ReadDWORD(handle, ptrNode + 0x24);
+            uint ptrTypes = ReadDWORD(handle, ptrNode + 0x3C);
+            uint countTypes = ReadDWORD(handle, ptrNode + 0x40);
+            uint ptrNamespaces = ReadDWORD(handle, ptrNode + 0x44);
+            uint countNamespaces = ReadDWORD(handle, ptrNode + 0x48);
+            if (ptrName != 0)
+                t.Text = "Namespace : " + ReadCString(handle, ptrName);
+            for (uint i = 0; i < countNamespaces; i++)
+            {
+                uint ptrNext = ReadDWORD(handle, ptrNamespaces + i * 8);
+                t.Nodes.Add(ReadZenNamespaceNodes(ptrNext));
+            }
+            for (uint i = 0; i < countTypes; i++)
+            {
+                uint ptrNext = ReadDWORD(handle, ptrTypes + i * 8);
+                t.Nodes.Add(ReadZenType(ptrNext, isRoot));
+            }
+            return t;
+        }
+
+        private TreeNode ReadZenType(uint ptrNode, bool isRoot = false)
+        {
+            TreeNode t = new TreeNode();
+            uint ptrTypeName = ReadDWORD(handle, ptrNode + 0x24);
+            uint ptrMethods = ReadDWORD(handle, ptrNode + 0x48);
+            uint countMethods = ReadDWORD(handle, ptrNode + 0x4C);
+            uint ptrVariables = ReadDWORD(handle, ptrNode + 0x68);
+            uint countVariables = ReadDWORD(handle, ptrNode + 0x6C);
+            if (ptrTypeName != 0)
+                t.Text = "Type : " + ReadCString(handle, ptrTypeName);
+            for (uint i = 0; i < countMethods; i++)
+            {
+                uint ptrNext = ReadDWORD(handle, ptrMethods + i * 8);
+                t.Nodes.Add(ReadZenMethod(ptrNext));
+            }
+            if(!isRoot)
+                for (uint i = 0; i < countVariables; i++)
+                {
+                    uint ptrNext = ReadDWORD(handle, ptrVariables + i * 8);
+                    t.Nodes.Add(ReadZenVariable(ptrNext));
+                }
+            return t;
+        }
+
+        private TreeNode ReadZenMethod(uint ptrNode)
+        {
+            TreeNode t = new TreeNode();
+            uint ptrMethodName = ReadDWORD(handle, ptrNode + 0x24);;
+            if (ptrMethodName != 0)
+                t.Text = "Method : " + ReadCString(handle, ptrMethodName) + "()";
+            return t;
+        }
+
+        private TreeNode ReadZenVariable(uint ptrNode)
+        {
+            TreeNode t = new TreeNode();
+            uint ptrVarName = ReadDWORD(handle, ptrNode + 0x24); ;
+            if (ptrVarName != 0)
+                t.Text = "Variable : " + ReadCString(handle, ptrVarName);
+            return t;
         }
     }
 }

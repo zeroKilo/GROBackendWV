@@ -319,6 +319,15 @@ DWORD WINAPI StepStepStep(LPVOID lpvParam)
 	return 0;
 }
 
+float* __cdecl GetVelocity(DWORD a1, DWORD a2)
+{
+	float result[3];
+	result[0] = 0;
+	result[1] = 0;
+	result[2] = 100;
+	return result;
+}
+
 void __fastcall AI_EntityPlayer_UpdateWarning(void* THIS, void* EDX)
 {
 	if(playerAddress == 0)
@@ -328,7 +337,7 @@ void __fastcall AI_EntityPlayer_UpdateWarning(void* THIS, void* EDX)
 		FILE* fp = fopen("_playerAddress.txt", "w");
 		fprintf(fp, buffer);
 		fclose(fp);
-		StartThread(StepStepStep);
+		//StartThread(StepStepStep);
 	}
 	org_AI_EntityPlayer_UpdateWarning(THIS, EDX);
 }

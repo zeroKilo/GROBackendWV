@@ -38,6 +38,7 @@
             this.readBinaryTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readPropModListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.readNetBroadcastManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readBankListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -48,7 +49,7 @@
             this.expandAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.collapseAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rtb1 = new System.Windows.Forms.RichTextBox();
-            this.readBankListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readZenNamespacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -91,7 +92,8 @@
             this.readBinaryTreeToolStripMenuItem,
             this.readPropModListToolStripMenuItem,
             this.readNetBroadcastManagerToolStripMenuItem,
-            this.readBankListToolStripMenuItem});
+            this.readBankListToolStripMenuItem,
+            this.readZenNamespacesToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -125,6 +127,13 @@
             this.readNetBroadcastManagerToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.readNetBroadcastManagerToolStripMenuItem.Text = "Read NetBroadcastManager";
             this.readNetBroadcastManagerToolStripMenuItem.Click += new System.EventHandler(this.readNetBroadcastManagerToolStripMenuItem_Click);
+            // 
+            // readBankListToolStripMenuItem
+            // 
+            this.readBankListToolStripMenuItem.Name = "readBankListToolStripMenuItem";
+            this.readBankListToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.readBankListToolStripMenuItem.Text = "Read BankList";
+            this.readBankListToolStripMenuItem.Click += new System.EventHandler(this.readBankListToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -236,12 +245,12 @@
             this.rtb1.Text = "";
             this.rtb1.WordWrap = false;
             // 
-            // readBankListToolStripMenuItem
+            // readZenNamespacesToolStripMenuItem
             // 
-            this.readBankListToolStripMenuItem.Name = "readBankListToolStripMenuItem";
-            this.readBankListToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
-            this.readBankListToolStripMenuItem.Text = "Read BankList";
-            this.readBankListToolStripMenuItem.Click += new System.EventHandler(this.readBankListToolStripMenuItem_Click);
+            this.readZenNamespacesToolStripMenuItem.Name = "readZenNamespacesToolStripMenuItem";
+            this.readZenNamespacesToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.readZenNamespacesToolStripMenuItem.Text = "Read Zen Namespaces";
+            this.readZenNamespacesToolStripMenuItem.Click += new System.EventHandler(this.readZenNamespacesToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -289,6 +298,7 @@
         private System.Windows.Forms.ToolStripMenuItem expandAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem collapseAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem readBankListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readZenNamespacesToolStripMenuItem;
     }
 }
 
