@@ -27,12 +27,13 @@ namespace QuazalWV
         public byte[] unk2 = new byte[4];
         public byte[] unk3 = new byte[4];
         //sub Stuff 1
+        public byte m_Rush = 0;
         public MoveMode m_MoveMode = MoveMode.eMoveModeFree; 
         public ushort m_ADSDamage = 0;
         public ushort m_PostADSDamage = 0;
         public byte m_bIsInADSCone = 0;
         public byte m_BlitzShieldArmed = 0;
-        public uint m_Mood = 0xCE;
+        public uint m_Mood = 0x2CE;
         public byte m_bHealthRegenActive = 1;
         //replica data 2
         public byte unk4 = 0x67;
@@ -67,9 +68,9 @@ namespace QuazalWV
             Helper.WriteFloatLE(m, 2); //m_ShootPosition
             Helper.WriteFloatLE(m, 3); //m_ShootTargetHandle
             Helper.WriteFloatLE(m, 4); //m_WhistlingBullet
-            Helper.WriteU8(m, 5);  //m_Rush
+            Helper.WriteU8(m, 5);  
 
-            Helper.WriteU8(m, 6); //m_PlayerFire
+            Helper.WriteU8(m, m_Rush);
             Helper.WriteU8(m, 7); //m_CurrentWeaponSlot
             Helper.WriteU8(m, 8); //m_WantedWeaponSlot
             Helper.WriteU8(m, 9); //m_OldWeaponSlot
