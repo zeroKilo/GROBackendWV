@@ -40,9 +40,9 @@ namespace QuazalWV
             Helper.WriteU32(m, 1); //m_DeathCount
             Helper.WriteU32(m, 2); //m_AbilityInventoryId
             Helper.WriteU32(m, 3); //m_PassiveAbilityInventoryId
-            Helper.WriteU32(m, 4); //m_DesiredWeaponIds
-            Helper.WriteU32(m, 4); //m_DesiredWeaponIds
-            Helper.WriteU32(m, 4); //m_DesiredWeaponIds
+            Helper.WriteU32(m, 1000); //m_DesiredWeaponIds - main
+            Helper.WriteU32(m, 4); //m_DesiredWeaponIds - pistol
+            Helper.WriteU32(m, 4); //m_DesiredWeaponIds - grenade
             Helper.WriteU32(m, 5); //m_AchievementPoints
             Helper.WriteU32(m, 6); //m_HelmetInventoryId
             Helper.WriteU32(m, 7); //m_ArmorTierInventoryId

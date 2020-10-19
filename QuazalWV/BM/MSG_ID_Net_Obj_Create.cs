@@ -24,7 +24,7 @@ namespace QuazalWV
             matrix[0] = 1;
             matrix[5] = 1;
             matrix[10] = 1;
-            matrix[14] = 100; //<--Z offset
+            matrix[14] = 0; //<--Z offset
             matrix[15] = 1;
             foreach (float f in matrix)
                 Helper.WriteFloat(m, f);

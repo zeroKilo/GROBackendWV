@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Linq.Expressions;
+using System.Runtime.Remoting;
 
 namespace QuazalWV
 {
@@ -20,6 +23,20 @@ namespace QuazalWV
             eMoveModeSlide = 6,
             eMoveModeTeleport = 7,
         }
+
+        public enum ClassInfoMemBuffer
+        {
+            eMainWeapon = 0,
+            ePistol = 1,
+            eGrenade = 2,
+            eArmor = 3,
+            eHelmetKey = 4,
+            eAbility = 5,
+            ePassiveAbility = 6,
+            eWeaponBoost = 7,
+            eBody = 8
+        }
+
         //handle
         public uint handle;
         //replica data 1
@@ -32,8 +49,8 @@ namespace QuazalWV
         public ushort m_ADSDamage = 0;
         public ushort m_PostADSDamage = 0;
         public byte m_bIsInADSCone = 0;
-        public byte m_BlitzShieldArmed = 0;
-        public uint m_Mood = 0x2CE;
+        public byte m_BlitzShieldArmed = 1;
+        public uint m_Mood = 0xCE;//cool + instinct + precise + standlow + standverylow
         public byte m_bHealthRegenActive = 1;
         //replica data 2
         public byte unk4 = 0x67;
@@ -41,8 +58,8 @@ namespace QuazalWV
         public byte[] unk6 = new byte[4];
         //sub Stuff 2
         //rest
-        public byte playerLocalIndex = 0x0;
-        public byte padID = 0x0;
+        public byte playerLocalIndex = 0x0; //unused
+        public byte padID = 0x0; //unused
         public byte teamID = 0x1;
         public byte classID = 0;
         public float Health1 = 100f;
@@ -132,13 +149,89 @@ namespace QuazalWV
             Helper.WriteU8(m, classID);
             Helper.WriteFloatLE(m, Health1);
             Helper.WriteFloatLE(m, Health2);
-            Helper.WriteU8(m, 0x22);
-            Helper.WriteU8(m, 0x33);
-            Helper.WriteU8(m, 0x44);
-            for (int i = 0; i < 9; i++)
-                Helper.WriteU8(m, 0);//count
-            Helper.WriteFloatLE(m, DOB_Seconds);
+            Helper.WriteU8(m, 0x2F);
+            Helper.WriteU8(m, 0x3F);
+            Helper.WriteU8(m, 0x4F);
+            byte[] buffer;
+            // class info memBuffers
+                for (int i = 0; i < 9; i++)
+                {
+                    switch ((ClassInfoMemBuffer)i)
+                    {
+                        case ClassInfoMemBuffer.eMainWeapon:
 
+                        ClassInfo_Gun mainRifleInfo = new ClassInfo_Gun(30583);//asval
+                        int mainRifInfoSize = mainRifleInfo.MakePayload().Length - 1;
+                        mainRifleInfo.memBufferSize = Convert.ToByte(mainRifInfoSize);
+                        buffer = mainRifleInfo.MakePayload();
+                        m.Write(buffer, 0, buffer.Length);
+                            break;
+
+                        case ClassInfoMemBuffer.ePistol:
+
+                        ClassInfo_Gun pistolInfo = new ClassInfo_Gun(30583);//asval
+                        int pistolInfoSize = pistolInfo.MakePayload().Length - 1;
+                        pistolInfo.memBufferSize = Convert.ToByte(pistolInfoSize);
+                        buffer = pistolInfo.MakePayload();
+                        m.Write(buffer, 0, buffer.Length);
+                            break;
+
+                        case ClassInfoMemBuffer.eGrenade:
+
+                        ClassInfo_Grenade nadeInfo = new ClassInfo_Grenade(30583);//asval
+                        int nadeInfoSize = nadeInfo.MakePayload().Length - 1;
+                        nadeInfo.memBufferSize = Convert.ToByte(nadeInfoSize);
+                        buffer = nadeInfo.MakePayload();
+                        m.Write(buffer, 0, buffer.Length);
+                            break;
+
+                        case ClassInfoMemBuffer.eArmor:
+
+                        ClassInfo_Armor armorInfo = new ClassInfo_Armor();
+                        int armorInfoSize = armorInfo.MakePayload().Length - 1;
+                        armorInfo.memBufferSize = Convert.ToByte(armorInfoSize);
+                        buffer = armorInfo.MakePayload();
+                        m.Write(buffer, 0, buffer.Length);
+                            break;
+
+                        case ClassInfoMemBuffer.eHelmetKey:
+
+                            Helper.WriteU8(m, 4);//buffer size
+                            Helper.WriteU32LE(m, 0xF8700A85);//GRO-COM1-Helm00.gao
+                            break;
+
+                        case ClassInfoMemBuffer.eAbility:
+
+                            ClassInfo_Ability abilityInfo = new ClassInfo_Ability(6);
+                            int abInfoSize = abilityInfo.MakePayload().Length - 1;
+                            abilityInfo.memBufferSize = Convert.ToByte(abInfoSize);
+                            buffer = abilityInfo.MakePayload();//Blitz
+                            m.Write(buffer, 0, buffer.Length);
+                            break;
+
+                        case ClassInfoMemBuffer.ePassiveAbility:
+
+                            ClassInfo_PassiveAbility pasAbilityInfo = new ClassInfo_PassiveAbility(3);
+                            int pasAbInfoSize = pasAbilityInfo.MakePayload().Length - 1;
+                            pasAbilityInfo.memBufferSize = Convert.ToByte(pasAbInfoSize);
+                            buffer = pasAbilityInfo.MakePayload();//Harden
+                            m.Write(buffer, 0, buffer.Length);
+                            break;
+
+                        case ClassInfoMemBuffer.eWeaponBoost:
+
+                            buffer = new ClassInfo_Boost().MakePayload();//const size
+                            m.Write(buffer, 0, buffer.Length);
+                            break;
+
+                        case ClassInfoMemBuffer.eBody:
+
+                            buffer = new ClassInfo_Body().MakePayload();//const size
+                            m.Write(buffer, 0, buffer.Length);
+                            break;
+                    }
+                }
+            Helper.WriteFloatLE(m, DOB_Seconds);
             return m.ToArray();
         }
     }

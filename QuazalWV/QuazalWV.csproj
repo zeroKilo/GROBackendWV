@@ -61,6 +61,13 @@
     <Compile Include="BM\MSG_ID_Net_Obj_Create.cs" />
     <Compile Include="BM\MSG_ID_ReceiveReplicaData.cs" />
     <Compile Include="BM\MSG_ID_SendReplicaData.cs" />
+    <Compile Include="BM\ObjCreatePayloads\ClassInfo\ClassInfo_Ability.cs" />
+    <Compile Include="BM\ObjCreatePayloads\ClassInfo\ClassInfo_Armor.cs" />
+    <Compile Include="BM\ObjCreatePayloads\ClassInfo\ClassInfo_Body.cs" />
+    <Compile Include="BM\ObjCreatePayloads\ClassInfo\ClassInfo_Boost.cs" />
+    <Compile Include="BM\ObjCreatePayloads\ClassInfo\ClassInfo_Grenade.cs" />
+    <Compile Include="BM\ObjCreatePayloads\ClassInfo\ClassInfo_Gun.cs" />
+    <Compile Include="BM\ObjCreatePayloads\ClassInfo\ClassInfo_PassiveAbility.cs" />
     <Compile Include="BM\ObjCreatePayloads\OCP_AbstractPlayerEntity.cs" />
     <Compile Include="BM\ObjCreatePayloads\OCP_PlayerEntity.cs" />
     <Compile Include="Classes\GR5_Ability.cs" />
