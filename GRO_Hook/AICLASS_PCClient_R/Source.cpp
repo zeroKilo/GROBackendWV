@@ -127,6 +127,41 @@ void Patch3()
 	Log("Patched keyboard input\n");
 }
 
+void Patch4()
+{
+	BYTE patch[] = {0xB0, 0x01, 0xC3, 0xCC, 0xCC, 0xCC, 0xCC};//mov al, 1h; ret
+	WriteBuffer(baseAddressAI + 0x2A560, patch, 7);
+	Log("Patched cDNAManager::bCanSendEvent\n");
+}
+
+void Patch5()
+{
+	BYTE patch[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90};
+	WriteBuffer(baseAddressAI + 0xD1B55, patch, 6);
+	Log("Patched AI_EntityPlayer::InitEntity server check");
+}
+
+void Patch6()
+{
+	BYTE patch[] = {0xC3, 0xCC};//return;
+	WriteBuffer(baseAddressAI + 0x1D0CB0, patch, 2);
+}
+
+/*
+	nop x8
+	lea ecx, ds:0x0044CDC0
+	call ecx
+*/
+
+void CreateServerPatch()
+{
+	BYTE patch[] = {0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90,
+					0x8D, 0x0D, 0xC0, 0xCD, 0x44, 0x00,
+					0xFF, 0xD1 };
+	WriteBuffer(baseAddressAI + 0x116EE, patch, 16);
+	Log("The glorious server patch applied\n");
+}
+
 void ExportPlayerAddress()
 {
 	org_AI_EntityPlayer_UpdateWarning = (void(__fastcall*) (void*,void*)) DetourFunction((PBYTE)(baseAddressAI + 0xC86F0),(PBYTE)AI_EntityPlayer_UpdateWarning);
@@ -169,9 +204,13 @@ void DetourMain()
 	//EnableDebugScreen3();
 	//EnableDebugScreen4();
 	//EnableDebugScreen5();
-	Patch1();
-	Patch2();
-	//Patch3();
+	Patch1();	//crash1
+	Patch2();	//crash2
+	//Patch3();	//keyboard input
+	Patch4();	//cDNAManager::bCanSendEvent
+	//Patch5();	//AI_EntityPlayer::InitEntity server check
+	//Patch6();	//cObjectHealth::SetDefaultHitPointsServer call cancel
+	CreateServerPatch();
 	ExportPlayerAddress();
 	//ReplaceVelocity();
 	//ZEN_Init(baseAddressAI);
