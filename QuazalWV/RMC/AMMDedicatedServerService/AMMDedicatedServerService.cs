@@ -15,7 +15,7 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 6:
-                    reply = new RMCPacktResponseAMMDS_Method6();
+                    reply = new RMCPacketResponseAMM_cmn_FetchSessionParticipants();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

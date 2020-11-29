@@ -220,7 +220,7 @@
     <Compile Include="RMC\AdvertisementsService\Response\RMCPacketResponseAdvertisementsService_Method1.cs" />
     <Compile Include="RMC\AdvertisementsService\Response\RMCPacketResponseAdvertisementsService_Method2.cs" />
     <Compile Include="RMC\AMMDedicatedServerService\AMMDedicatedServerService.cs" />
-    <Compile Include="RMC\AMMDedicatedServerService\Response\RMCPacktResponseAMMDS_Method6.cs" />
+    <Compile Include="RMC\AMMDedicatedServerService\Response\RMCPacketResponseAMM_cmn_FetchSessionParticipants.cs" />
     <Compile Include="RMC\AMMGameClientService\AMMGameClientService.cs" />
     <Compile Include="RMC\AMMGameClientService\Response\RMCPacketResponseAMM_GetSessionURLs.cs" />
     <Compile Include="RMC\AMMGameClientService\Response\RMCPacketResponseAMM_Method5.cs" />
