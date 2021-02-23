@@ -15,7 +15,7 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 5:
-                    reply = new RMCPacketResponseFriendsService_Method5();
+                    reply = new RMCPacketResponseFriendsService_GetFriendsList();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

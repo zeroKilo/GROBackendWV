@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QuazalWV;
 
 namespace QuazalWV
 {
@@ -16,6 +17,10 @@ namespace QuazalWV
             {
                 case 6:
                     reply = new RMCPacketResponseAMM_cmn_FetchSessionParticipants();
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    break;
+                case 8:
+                    reply = new RMCPacketResponseAMM_ds_AddParticipantToSession();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

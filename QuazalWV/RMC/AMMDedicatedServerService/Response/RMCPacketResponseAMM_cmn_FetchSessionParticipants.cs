@@ -27,7 +27,7 @@ namespace QuazalWV
 
         public override string ToString()
         {
-            return "[RMCPacktResponseAMMDS_cmn_FetchSessionParticipants]";
+            return "[RMCPacketResponseAMMDS_cmn_FetchSessionParticipants]";
         }
 
         public override string PayloadToString()

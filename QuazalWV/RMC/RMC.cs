@@ -104,6 +104,9 @@ namespace QuazalWV
                 case RMCP.PROTOCOL.PartyService:
                     PartyService.HandlePartyServiceRequest(p, rmc, client);
                     break;
+                case RMCP.PROTOCOL.RegistrationService:
+                    WriteLog(1, "Error: No handler implemented for packet protocol RegistrationService");
+                    break;
                 case RMCP.PROTOCOL.StatisticsService:
                     StatisticsService.HandleStatisticsServiceRequest(p, rmc, client);
                     break;
@@ -131,6 +134,9 @@ namespace QuazalWV
                 case RMCP.PROTOCOL.LoadoutService:
                     LoadoutService.HandleLoadoutServiceLoadout(p, rmc, client);
                     break;
+                case RMCP.PROTOCOL.TrackingService:
+                    WriteLog(1, "Error: No handler implemented for packet protocol TrackingService");
+                    break;
                 case RMCP.PROTOCOL.UnlockService:
                     UnlockService.HandleUnlockServiceRequest(p, rmc, client);
                     break;
@@ -142,6 +148,9 @@ namespace QuazalWV
                     break;
                 case RMCP.PROTOCOL.OpsProtocolService:
                     OpsProtocolService.HandleOpsProtocolServiceRequest(p, rmc, client);
+                    break;
+                case RMCP.PROTOCOL.ProfilerService:
+                    WriteLog(1, "Error: No handler implemented for packet protocol ProfilerService");
                     break;
                 case RMCP.PROTOCOL.ServerInfoService:
                     ServerInfoService.HandleServerInfoRequest(p, rmc, client);
@@ -158,14 +167,41 @@ namespace QuazalWV
                 case RMCP.PROTOCOL.ProfanityFilterService:
                     ProfanityFilterService.HandleProfanityFilterServiceRequest(p, rmc, client);
                     break;
+                case RMCP.PROTOCOL.InspectPlayerService:
+                    WriteLog(1, "Error: No handler implemented for packet protocol InspectPlayerService");
+                    break;
                 case RMCP.PROTOCOL.AbilityService:
                     AbilityService.HandleAbilityServiceRequest(p, rmc, client);
                     break;
                 case RMCP.PROTOCOL.SurveyService:
                     SurveyService.HandleSurveyServiceRequest(p, rmc, client);
                     break;
+                case RMCP.PROTOCOL.LeaderboardProtocolService:
+                    WriteLog(1, "Error: No handler implemented for packet protocol LeaderboardProtocolService");
+                    break;
+                case RMCP.PROTOCOL.RPNEProtocolService:
+                    WriteLog(1, "Error: No handler implemented for packet protocol RPNEProtocolService");
+                    break;
                 case RMCP.PROTOCOL.OverlordNewsProtocolService:
                     OverlordNewsProtocolService.HandleOverlordNewsProtocolRequest(p, rmc, client);
+                    break;
+                case RMCP.PROTOCOL.OverlordCoreProtocolService:
+                    WriteLog(1, "Error: No handler implemented for packet protocol OverlordCoreProtocolService");
+                    break;
+                case RMCP.PROTOCOL.ExtraContentProtocolService:
+                    WriteLog(1, "Error: No handler implemented for packet protocol ExtraContentProtocolService");
+                    break;
+                case RMCP.PROTOCOL.OverlordFriendsProtocolService:
+                    WriteLog(1, "Error: No handler implemented for packet protocol OverlordFriendsProtocolService");
+                    break;
+                case RMCP.PROTOCOL.OverlordAwardsProtocolService:
+                    WriteLog(1, "Error: No handler implemented for packet protocol OverlordAwardsProtocolService");
+                    break;
+                case RMCP.PROTOCOL.OverlordChallengeProtocolService:
+                    WriteLog(1, "Error: No handler implemented for packet protocol OverlordChallengeProtocolService");
+                    break;
+                case RMCP.PROTOCOL.OverlordDareProtocolService:
+                    WriteLog(1, "Error: No handler implemented for packet protocol OverlordDareProtocolService");
                     break;
                 case RMCP.PROTOCOL.AMMDedicatedServerService:
                     AMMDedicatedServerService.HandleAMMDedicatedServerServiceRequest(p, rmc, client);
@@ -283,7 +319,7 @@ namespace QuazalWV
                 Helper.WriteU32(m, rmc.callID);
                 Helper.WriteU32(m, rmc.methodID | 0x8000);
                 buff = reply.ToBuffer();
-                m.Write(buff, 0, buff.Length);                
+                if(buff != null) m.Write(buff, 0, buff.Length);                
             }
             else
             {

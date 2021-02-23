@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using System.Xml.Linq;
 
 namespace QuazalWV
 {
@@ -96,7 +97,7 @@ namespace QuazalWV
             return result;
         }
 
-        public static List<GR5_NewsMessage> GetNews(uint pid)
+        public static List<GR5_NewsMessage> GetNews(uint pid, string body)
         {
             List<GR5_NewsMessage> result = new List<GR5_NewsMessage>();
             List<List<string>> results = GetQueryResults("SELECT * FROM news");
@@ -114,7 +115,8 @@ namespace QuazalWV
                 message.header.m_expirationTime = (ulong)DateTime.UtcNow.AddDays(5).Ticks;
                 message.header.m_title = entry[5];
                 message.header.m_link = entry[6];
-                message.m_body = entry[7];
+                //m_body is in XML format, for now i hardcoded it in GR5_NewsMessage.cs
+                message.m_body = body;
                 result.Add(message);
             }
             return result;

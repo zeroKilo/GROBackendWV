@@ -194,6 +194,21 @@ void OnPeerConnectionPatch()
 	Log("AI_NetworkManager::OnPeerConnection assertion patched\n");
 }
 
+void IsServerPatch()
+{
+	BYTE patch[] = { 0xB0, 0x01 };
+	WriteBuffer(baseAddressAI + 0x341B, patch, 2);
+	Log("Patched AI_NetworkManager::IsServer\n");
+}
+
+void GetPeerIndexPatch()
+{
+	BYTE patch[] = { 0x01 };
+	WriteBuffer(baseAddressAI + 0x1036F, patch, 1);
+	Log("Patched AI_NetworkManager::GetPeerIndex");
+}
+
+
 void ExportPlayerAddress()
 {
 	org_AI_EntityPlayer_UpdateWarning = (void(__fastcall*) (void*,void*)) DetourFunction((PBYTE)(baseAddressAI + 0xC86F0),(PBYTE)AI_EntityPlayer_UpdateWarning);
@@ -244,6 +259,8 @@ void DetourMain()
 	//Patch6();	//cObjectHealth::SetDefaultHitPointsServer call cancel
 	CreateServerPatch();
 	OnPeerConnectionPatch();
+	IsServerPatch();
+	GetPeerIndexPatch();
 	ExportPlayerAddress();
 	//ReplaceVelocity();
 	//ZEN_Init(baseAddressAI);

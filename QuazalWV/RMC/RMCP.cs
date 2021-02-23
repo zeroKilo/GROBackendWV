@@ -29,6 +29,7 @@ namespace QuazalWV
             ChatService = 0x6E,
             MissionService = 0x6F,
             PartyService = 0x70,
+            RegistrationService = 0x71,
             StatisticsService = 0x72,
             AchievementsService = 0x73,
             ProgressionService = 0x74,
@@ -38,18 +39,29 @@ namespace QuazalWV
             AdvertisementsService = 0x79,
             SkillsService = 0x7A,
             LoadoutService = 0x7B,
+            TrackingService = 0x7C,
             UnlockService = 0x7D,
             AvatarService = 0x7E,
             WeaponProficiencyService = 0x7F,
             OpsProtocolService = 0x80,
+            ProfilerService = 0x81,
             ServerInfoService = 0x82,
             LeaderboardService = 0x83,
             PveArchetypeService = 0x85,
             InboxMessageService = 0x86,
             ProfanityFilterService = 0x87,
+            InspectPlayerService = 0x88,
             AbilityService = 0x89,
             SurveyService = 0x8B,
-            OverlordNewsProtocolService = 0x138A
+            LeaderboardProtocolService = 0x1388,
+            RPNEProtocolService = 0x1389,
+            OverlordNewsProtocolService = 0x138A,
+            OverlordCoreProtocolService = 0x138B,
+            ExtraContentProtocolService = 0x138C,
+            OverlordFriendsProtocolService = 0x138D,
+            OverlordAwardsProtocolService = 0x138E,
+            OverlordChallengeProtocolService = 0x138F,
+            OverlordDareProtocolService = 0x1390
         }
 
         public PROTOCOL proto;
