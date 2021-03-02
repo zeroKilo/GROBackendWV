@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseAMM_Method5 : RMCPResponse
+    public class RMCPacketResponseAMM_LeaveAMMSearch : RMCPResponse
     {
         public uint unk = 1;
 
-        public RMCPacketResponseAMM_Method5()
+        public RMCPacketResponseAMM_LeaveAMMSearch()
         {
         }
 

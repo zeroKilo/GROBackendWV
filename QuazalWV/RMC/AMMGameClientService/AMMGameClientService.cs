@@ -25,11 +25,12 @@ namespace QuazalWV
                     NotificationQuene.AddNotification(new NotificationQueneEntry(client, 6000, 0, 1002, 3, 1, 1, 0, "1"));
                     break;
                 case 5:
-                    reply = new RMCPacketResponseAMM_Method5();
+                    reply = new RMCPacketResponseAMM_LeaveAMMSearch();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 7:
-                    reply = new RMCPacketResponseAMM_Method7();
+                    reply = new RMCPacketResponseAMM_FetchAMMPlaylists();
+                    NotificationQuene.AddNotification(new NotificationQueneEntry(client, 3000, 0, 1002, 1, 1, 1, 0, "7"));
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

@@ -236,8 +236,8 @@
     <Compile Include="RMC\AuthenticationService\Response\RMCPacketResponseLoginCustomData.cs" />
     <Compile Include="RMC\AuthenticationService\Response\RMCPacketResponseRequestTicket.cs" />
     <Compile Include="RMC\AvatarService\AvatarService.cs" />
-    <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_Method1.cs" />
-    <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_Method2.cs" />
+    <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_GetAvatarDecorators.cs" />
+    <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_GetAvatarPortraits.cs" />
     <Compile Include="RMC\ChatService\ChatService.cs" />
     <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_GetPlayerStatuses.cs" />
     <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_Method10.cs" />
