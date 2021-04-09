@@ -16,7 +16,7 @@ namespace QuazalWV
             client = Global.GetClientByEndPoint(ep);
             if (client == null)
             {
-                Log.WriteLine(2, "[QAZAL] Creating new client data...");
+                Log.WriteLine(2, "[QUAZAL] Creating new client data...");
                 client = new ClientInfo();
                 client.ep = ep;
                 client.IDrecv = Global.idCounter++;

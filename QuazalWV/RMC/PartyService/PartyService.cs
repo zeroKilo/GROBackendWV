@@ -15,7 +15,7 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponsePartyService_GetInviteeList();
+                    reply = new RMCPacketResponsePartyService_OnSignInCheckPartyStatus();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 4:
@@ -23,11 +23,17 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 7:
+                //DeclinePartyInvite
                 case 8:
+                //CancelPartyInvite
                 case 9:
+                //PromoteToLeader
                 case 0xB:
+                //RemoveFromParty
                 case 0xC:
+                //LeaveParty
                 case 0xD:
+                //DisbandParty
                     reply = new RMCPResponseEmpty();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;

@@ -7,25 +7,25 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseRewardService_Method3 : RMCPResponse
+    public class RMCPacketResponseRewardService_RewardUser : RMCPResponse
     {
-        public List<GR5_RewardUserResult> unk1 = new List<GR5_RewardUserResult>();
-        public List<GR5_UserItem> unk2 = new List<GR5_UserItem>();
+        public List<GR5_RewardUserResult> rewardResults = new List<GR5_RewardUserResult>();
+        public List<GR5_UserItem> rewardItems = new List<GR5_UserItem>();
 
-        public RMCPacketResponseRewardService_Method3()
+        public RMCPacketResponseRewardService_RewardUser()
         {
-            unk1.Add(new GR5_RewardUserResult());
-            unk2.Add(new GR5_UserItem());
+            rewardResults.Add(new GR5_RewardUserResult());
+            rewardItems.Add(new GR5_UserItem());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)unk1.Count);
-            foreach (GR5_RewardUserResult u in unk1)
+            Helper.WriteU32(m, (uint)rewardResults.Count);
+            foreach (GR5_RewardUserResult u in rewardResults)
                 u.toBuffer(m);
-            Helper.WriteU32(m, (uint)unk2.Count);
-            foreach (GR5_UserItem u in unk2)
+            Helper.WriteU32(m, (uint)rewardItems.Count);
+            foreach (GR5_UserItem u in rewardItems)
                 u.toBuffer(m);
             return m.ToArray();
         }

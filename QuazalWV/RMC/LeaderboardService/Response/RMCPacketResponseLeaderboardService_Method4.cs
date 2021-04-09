@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseLeaderboardService_Method4 : RMCPResponse
+    public class RMCPacketResponseLeaderboardService_ReadLeaderBoardStatsForRank : RMCPResponse
     {
-        public List<GR5_LeaderboardReadResult> list = new List<GR5_LeaderboardReadResult>();
+        public List<GR5_LeaderboardReadResult> readResults = new List<GR5_LeaderboardReadResult>();
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)list.Count);
-            foreach (GR5_LeaderboardReadResult r in list)
+            Helper.WriteU32(m, (uint)readResults.Count);
+            foreach (GR5_LeaderboardReadResult r in readResults)
                 r.toBuffer(m);
             return m.ToArray();
         }
 
         public override string ToString()
         {
-            return "[RMCPacketResponseLeaderboardService_Method4]";
+            return "[RMCPacketResponseLeaderboardService_ReadLeaderBoardStatsForRank]";
         }
 
         public override string PayloadToString()

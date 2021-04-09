@@ -11,7 +11,7 @@ namespace QuazalWV
     {
         public uint mId;
         public byte mType;
-        public string mWord;
+        public string mWord = "rendel";
         public void toBuffer(Stream s)
         {
             Helper.WriteU32(s, mId);

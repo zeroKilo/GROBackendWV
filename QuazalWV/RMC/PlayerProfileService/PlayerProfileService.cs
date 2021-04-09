@@ -15,6 +15,7 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 2:
+                    //ChangePersonaName, not implemented
                     reply = new RMCPResponseEmpty();
                     break;
                 case 0xF:
@@ -22,15 +23,16 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 0x10:
+                    //SetPlayerFaceSkinTone, not implemented
                     reply = new RMCPResponseEmpty();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 0x11:
-                    reply = new RMCPacketResponsePlayerProfileService_Method11();
+                    reply = new RMCPacketResponsePlayerProfileService_RetrieveOfflineNotifications();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 0x12:
-                    reply = new RMCPacketResponsePlayerProfileService_LoadCharacterProfiles(client);
+                    reply = new RMCPacketResponsePlayerProfileService_GetProfileData(client);
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

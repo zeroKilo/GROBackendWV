@@ -15,11 +15,11 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades();
+                    reply = new RMCPacketResponseAbilityService_GetTemplateAbilities();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 2:
-                    reply = new RMCPacketResponseAbilityService_Method2();
+                    reply = new RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

@@ -15,11 +15,11 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseInboxMessageService_Method1();
+                    reply = new RMCPacketResponseInboxMessageService_GetInboxMessageOasisIdDict();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 2:
-                    reply = new RMCPacketResponseInboxMessageService_Method2();
+                    reply = new RMCPacketResponseInboxMessageService_GetRecentInboxMessages();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

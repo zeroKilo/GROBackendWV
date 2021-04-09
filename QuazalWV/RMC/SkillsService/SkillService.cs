@@ -23,7 +23,7 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 3:
-                    reply = new RMCPacketResponseSkillsService_Method3();
+                    reply = new RMCPacketResponseSkillsService_GetSkillPowers();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 4:
@@ -35,7 +35,7 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 7:
-                    reply = new RMCPacketResponseSkillsService_Method7();
+                    reply = new RMCPacketResponseSkillsService_GetCharacterSkillsByID();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

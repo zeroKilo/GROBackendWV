@@ -10,13 +10,13 @@ namespace QuazalWV
     public class GR5_Skill
     {
         public uint m_ID;
-        public uint m_ParentID;
-        public uint m_ParentUnlockLevel;
+        public uint m_ParentID = 0x11;
+        public uint m_ParentUnlockLevel = 0x22;
         public uint m_MaxLevel;
         public uint m_PowerID;
         public uint m_NameOasisID = 70870;
         public uint m_DescriptionOasisID = 70870;
-        public string m_Name;
+        public string m_Name = "super duper skill";
         public string m_Description;
         public void toBuffer(Stream s)
         {

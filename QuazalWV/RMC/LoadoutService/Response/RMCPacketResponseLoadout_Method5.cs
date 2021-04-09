@@ -7,38 +7,38 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseLoadout_Method5 : RMCPResponse
+    public class RMCPacketResponseLoadout_GetLoadoutPowers : RMCPResponse
     {
-        public class unknown
+        public class GR5_Power
         {
-            public uint unk1;
-            public uint unk2;
+            public uint id;
+            public uint value;
             public void toBuffer(Stream s)
             {
-                Helper.WriteU32(s, unk1);
-                Helper.WriteU32(s, unk2);
+                Helper.WriteU32(s, id);
+                Helper.WriteU32(s, value);
             }
         }
 
-        public List<unknown> list = new List<unknown>();
+        public List<GR5_Power> list = new List<GR5_Power>();
 
-        public RMCPacketResponseLoadout_Method5()
+        public RMCPacketResponseLoadout_GetLoadoutPowers()
         {
-            list.Add(new unknown());
+            list.Add(new GR5_Power());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
             Helper.WriteU32(m, (uint)list.Count);
-            foreach (unknown u in list)
+            foreach (GR5_Power u in list)
                 u.toBuffer(m);
             return m.ToArray();
         }
 
         public override string ToString()
         {
-            return "[RMCPacketResponseLoadout_Method5]";
+            return "[RMCPacketResponseLoadout_GetLoadoutPowers]";
         }
 
         public override string PayloadToString()

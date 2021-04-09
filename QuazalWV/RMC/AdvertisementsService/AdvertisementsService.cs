@@ -15,11 +15,11 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseAdvertisementsService_Method1();
+                    reply = new RMCPacketResponseAdvertisementsService_GetAdvertisements();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 2:
-                    reply = new RMCPacketResponseAdvertisementsService_Method2();
+                    reply = new RMCPacketResponseAdvertisementsService_GetAdvertStaticData();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

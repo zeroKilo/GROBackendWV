@@ -15,15 +15,15 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseServerInfo_Method1();
+                    reply = new RMCPacketResponseServerInfo_RequestServerInfo();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 2:
-                    reply = new RMCPacketResponseServerInfo_Method2();
+                    reply = new RMCPacketResponseServerInfo_GetServerLocalTime();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 5:
-                    reply = new RMCPacketResponseServerInfo_GetServerTime();
+                    reply = new RMCPacketResponseServerInfo_GetServerUTCTime();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

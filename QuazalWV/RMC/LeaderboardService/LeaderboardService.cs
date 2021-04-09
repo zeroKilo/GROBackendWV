@@ -19,15 +19,15 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 2:
-                    reply = new RMCPacketResponseLeaderboardService_Method2();
+                    reply = new RMCPacketResponseLeaderboardService_ReadLeaderBoardStatsNearUser();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 3:
-                    reply = new RMCPacketResponseLeaderboardService_Method2();
+                    reply = new RMCPacketResponseLeaderboardService_ReadLeaderBoardStatsForPlayers();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 4:
-                    reply = new RMCPacketResponseLeaderboardService_Method4();
+                    reply = new RMCPacketResponseLeaderboardService_ReadLeaderBoardStatsForRank();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

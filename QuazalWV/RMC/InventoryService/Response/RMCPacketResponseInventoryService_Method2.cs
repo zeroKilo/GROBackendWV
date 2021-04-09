@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseInventoryService_Method2 : RMCPResponse
+    public class RMCPacketResponseInventoryService_GetAllBoosts : RMCPResponse
     {
         public List<GR5_Boost> boosts = new List<GR5_Boost>();
 
-        public RMCPacketResponseInventoryService_Method2()
+        public RMCPacketResponseInventoryService_GetAllBoosts()
         {
             boosts.Add(new GR5_Boost());
         }
@@ -27,7 +27,7 @@ namespace QuazalWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponseInventoryService_Method2]";
+            return "[RMCPacketResponseInventoryService_GetAllBoosts]";
         }
 
         public override string PayloadToString()

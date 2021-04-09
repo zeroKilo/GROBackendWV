@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseServerInfo_GetServerTime : RMCPResponse
+    public class RMCPacketResponseServerInfo_GetServerUTCTime : RMCPResponse
     {
         public double unk1;
 
@@ -20,7 +20,7 @@ namespace QuazalWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponseServerInfo_GetServerTime]";
+            return "[RMCPacketResponseServerInfo_GetServerUTCTime]";
         }
 
         public override string PayloadToString()

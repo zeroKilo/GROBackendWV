@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseInboxMessageService_Method1 : RMCPResponse
+    public class RMCPacketResponseInboxMessageService_GetInboxMessageOasisIdDict : RMCPResponse
     {
-        public class Unknown1
+        public class GR5_InboxMessageOasisId
         {
             public uint unk1;
             public uint unk2;
@@ -20,25 +20,25 @@ namespace QuazalWV
             }
         }
 
-        public List<Unknown1> unk1 = new List<Unknown1>();
+        public List<GR5_InboxMessageOasisId> inboxMsgOasisDict = new List<GR5_InboxMessageOasisId>();
 
-        public RMCPacketResponseInboxMessageService_Method1()
+        public RMCPacketResponseInboxMessageService_GetInboxMessageOasisIdDict()
         {
-            unk1.Add(new Unknown1());
+            inboxMsgOasisDict.Add(new GR5_InboxMessageOasisId());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)unk1.Count);
-            foreach (Unknown1 u in unk1)
+            Helper.WriteU32(m, (uint)inboxMsgOasisDict.Count);
+            foreach (GR5_InboxMessageOasisId u in inboxMsgOasisDict)
                 u.toBuffer(m);
             return m.ToArray();
         }
 
         public override string ToString()
         {
-            return "[RMCPacketResponseInboxMessageService_Method1]";
+            return "[RMCPacketResponseInboxMessageService_GetInboxMessageOasisIdDict]";
         }
 
         public override string PayloadToString()

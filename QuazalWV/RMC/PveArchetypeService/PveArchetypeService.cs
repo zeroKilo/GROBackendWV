@@ -15,7 +15,7 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponsePveArchetypeService_Method1();
+                    reply = new RMCPacketResponsePveArchetypeService_GetAllPveArchetypes();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

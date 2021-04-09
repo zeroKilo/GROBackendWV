@@ -15,23 +15,24 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 2:
-                    reply = new RMCPacketResponseAchievementsService_Method2();
+                    reply = new RMCPacketResponseAchievementsService_GetPlayerAchievements();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 4:
-                    reply = new RMCPacketResponseAchievementsService_Method4();
+                    reply = new RMCPacketResponseAchievementsService_GetPlayerAchievementGroups();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 9:
-                    reply = new RMCPacketResponseAchievementsService_Method9();
+                    reply = new RMCPacketResponseAchievementsService_GetAllBaseAchievementData();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 0xC:
+                    //UpdatePlayerAchievementProgress, not implemented
                     reply = new RMCPResponseEmpty();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 0xD:
-                    reply = new RMCPacketResponseAchievementsService_MethodD();
+                    reply = new RMCPacketResponseAchievementsService_GetPlayerPinnedAchievements();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

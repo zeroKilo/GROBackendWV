@@ -18,12 +18,13 @@ namespace QuazalWV
                     reply = new RMCPacketResponseLootService_GetLootStatic();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
+                //missing ds loot methods
                 case 4:
-                    reply = new RMCPacketResponseLootService_Method4();
+                    reply = new RMCPacketResponseLootService_GetLootPointQualityMap();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 5:
-                    reply = new RMCPacketResponseLootService_Method5();
+                    reply = new RMCPacketResponseLootService_GetLootAssetKeyMap();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

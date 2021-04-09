@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseChatService_GetPlayerStatuses : RMCPResponse
+    public class RMCPacketResponseChatService_GetIgnoreList : RMCPResponse
     {
         public List<GR5_BasicPersona> personas = new List<GR5_BasicPersona>();
 
-        public RMCPacketResponseChatService_GetPlayerStatuses()
+        public RMCPacketResponseChatService_GetIgnoreList()
         {
             personas.Add(new GR5_BasicPersona());
         }
@@ -27,7 +27,7 @@ namespace QuazalWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponseChatService_GetPlayerStatuses]";
+            return "[RMCPacketResponseChatService_GetIgnoreList]";
         }
 
         public override string PayloadToString()

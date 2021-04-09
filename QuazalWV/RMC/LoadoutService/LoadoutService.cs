@@ -15,11 +15,11 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 3:
-                    reply = new RMCPacketResponseLoadout_GetLoadoutPowers();
+                    reply = new RMCPacketResponseLoadout_CACHEFetch();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 5:
-                    reply = new RMCPacketResponseLoadout_Method5();
+                    reply = new RMCPacketResponseLoadout_GetLoadoutPowers();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

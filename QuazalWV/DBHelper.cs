@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Xml.Linq;
+using System.Data.SqlClient;
 
 namespace QuazalWV
 {
@@ -708,6 +709,51 @@ namespace QuazalWV
                 classes.Add(gclass);
             }
             return classes;
+        }
+
+        public static List<GR5_FriendData> GetFriends(ClientInfo client)
+        {
+            List<GR5_FriendData> friends = new List<GR5_FriendData>();
+            List<List<string>> results = GetQueryResults("SELECT * FROM friends WHERE friendofpid=" + client.PID);
+            foreach (List<string> entry in results)
+            {
+                GR5_FriendData fd = new GR5_FriendData();
+                fd.m_Person.PersonaID = Convert.ToUInt32(entry[2]);
+                fd.m_Person.PersonaName = entry[3];
+                fd.m_Person.PersonaStatus = Convert.ToByte(entry[4]);
+                fd.m_Person.AvatarPortraitID = Convert.ToUInt32(entry[5]);
+                fd.m_Person.AvatarDecoratorID = Convert.ToUInt32(entry[6]);
+                fd.m_Person.AvatarBackgroundColor = Convert.ToUInt32(entry[7]);
+                fd.m_Person.CurrentCharacterID = Convert.ToByte(entry[8]);
+                fd.m_Person.CurrentCharacterLevel = Convert.ToByte(entry[9]);
+                fd.m_Group = Convert.ToByte(entry[10]);
+                friends.Add(fd);
+            }
+            return friends;
+        }
+
+        public static bool AddFriend(ClientInfo client, GR5_FriendData friend)
+        {
+            //TODO: rewrite with an ORM for sql injection and easier mapping
+            SQLiteCommand cmd = new SQLiteCommand("INSERT INTO friends (friendofpid, pid, name, status, portraitid, decoratorid, background, classid, level, 'group') VALUES (" +
+                client.PID + ", " +
+                friend.m_Person.PersonaID + ", '" +
+                friend.m_Person.PersonaName + "', " +
+                friend.m_Person.PersonaStatus + ", " +
+                friend.m_Person.AvatarPortraitID + ", " +
+                friend.m_Person.AvatarDecoratorID + ", " +
+                friend.m_Person.AvatarBackgroundColor + ", " +
+                friend.m_Person.CurrentCharacterID + ", " +
+                friend.m_Person.CurrentCharacterLevel + ", " +
+                friend.m_Group + ");", connection);
+
+            try { 
+                return cmd.ExecuteNonQuery() > 0;
+            }
+            catch {
+                return false;
+            }
+            
         }
     }
 }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponsePlayerProfileService_Method11 : RMCPResponse
+    public class RMCPacketResponsePlayerProfileService_RetrieveOfflineNotifications : RMCPResponse
     {
         public List<GR5_Notification> list = new List<GR5_Notification>();
 
-        public RMCPacketResponsePlayerProfileService_Method11()
+        public RMCPacketResponsePlayerProfileService_RetrieveOfflineNotifications()
         {
             list.Add(new GR5_Notification());
         }
@@ -27,7 +27,7 @@ namespace QuazalWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponsePlayerProfileService_Method11]";
+            return "[RMCPacketResponsePlayerProfileService_RetrieveOfflineNotifications]";
         }
 
         public override string PayloadToString()

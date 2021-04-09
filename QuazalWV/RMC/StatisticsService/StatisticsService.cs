@@ -15,19 +15,19 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseStatisticsService_Method1();
+                    reply = new RMCPacketResponseStatisticsService_GetDesignerStatistics();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 2:
-                    reply = new RMCPacketResponseStatisticsService_Method2();
+                    reply = new RMCPacketResponseStatisticsService_GetPlayerLifetimeStatistics();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 3:
-                    reply = new RMCPacketResponseStatisticsService_Method3();
+                    reply = new RMCPacketResponseStatisticsService_GetPlayerInstancedStatistics();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 4:
-                    reply = new RMCPacketResponseStatisticsService_Method4();
+                    reply = new RMCPacketResponseStatisticsService_GetPlayerTimedStatistics();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

@@ -15,7 +15,7 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 3:
-                    reply = new RMCPacketResponseMissionService_Method3();
+                    reply = new RMCPacketResponseMissionService_GetPersonaMissions();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 4:
@@ -23,7 +23,8 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 7:
-                    reply = new RMCPResponseEmpty();
+                    //not tested yet
+                    reply = new RMCPacketResponseMissionService_CancelMission();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

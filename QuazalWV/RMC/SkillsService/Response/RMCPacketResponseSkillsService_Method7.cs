@@ -7,22 +7,27 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseSkillsService_Method7 : RMCPResponse
+    public class RMCPacketResponseSkillsService_GetCharacterSkillsByID : RMCPResponse
     {
-        public RMCPacketResponseSkillsService_Method7()
+        //not tested yet
+        List<GR5_Skill> skills = new List<GR5_Skill>();
+
+        public RMCPacketResponseSkillsService_GetCharacterSkillsByID()
         {
+            skills.Add(new GR5_Skill());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, 0);
+            foreach (GR5_Skill s in skills) s.toBuffer(m);
+            //Helper.WriteU32(m, 0);
             return m.ToArray();
         }
 
         public override string ToString()
         {
-            return "[RMCPacketResponseSkillsService_Method7]";
+            return "[RMCPacketResponseSkillsService_GetCharacterSkillsByID]";
         }
 
         public override string PayloadToString()

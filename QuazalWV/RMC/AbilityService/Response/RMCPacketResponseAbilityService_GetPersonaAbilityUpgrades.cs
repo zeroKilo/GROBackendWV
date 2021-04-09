@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades : RMCPResponse
+    public class RMCPacketResponseAbilityService_GetTemplateAbilities : RMCPResponse
     {
 
         public List<GR5_Ability> abs = new List<GR5_Ability>();
         public List<GR5_AbilityUpgrade> abups = new List<GR5_AbilityUpgrade>();
         public List<GR5_PassiveAbility> pabs = new List<GR5_PassiveAbility>();
 
-        public RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades()
+        public RMCPacketResponseAbilityService_GetTemplateAbilities()
         {
             abs = DBHelper.GetAbilities();
             abups.Add(new GR5_AbilityUpgrade());
@@ -38,7 +38,7 @@ namespace QuazalWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades]";
+            return "[RMCPacketResponseAbilityService_GetTemplateAbilities]";
         }
 
         public override string PayloadToString()

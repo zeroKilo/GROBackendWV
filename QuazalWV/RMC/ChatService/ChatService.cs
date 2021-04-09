@@ -15,20 +15,22 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 0x5:
-                    reply = new RMCPacketResponseChatService_Method5();
+                    reply = new RMCPacketResponseChatService_JoinPublicChannel();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 0x9:
+                //SetCurrentCharacter
                 case 0xA:
+                //SetStatus
                     reply = new RMCPResponseEmpty();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 0xE:
-                    reply = new RMCPacketResponseChatService_GetPlayerStatuses();
+                    reply = new RMCPacketResponseChatService_GetIgnoreList();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 0x10:
-                    reply = new RMCPacketResponseChatService_Method10();
+                    reply = new RMCPacketResponseChatService_GetMutedChannel();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

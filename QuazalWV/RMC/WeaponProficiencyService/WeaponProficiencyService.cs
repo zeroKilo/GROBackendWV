@@ -15,11 +15,11 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseWeaponProficiencyService_Method1();
+                    reply = new RMCPacketResponseWeaponProficiencyService_GetPersonaWeaponsXP();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 3:
-                    reply = new RMCPacketResponseWeaponProficiencyService_Method3();
+                    reply = new RMCPacketResponseWeaponProficiencyService_GetWeaponsXPLevelInfo();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

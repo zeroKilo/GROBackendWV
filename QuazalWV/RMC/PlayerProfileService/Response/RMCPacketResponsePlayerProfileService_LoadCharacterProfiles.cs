@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponsePlayerProfileService_LoadCharacterProfiles : RMCPResponse
+    public class RMCPacketResponsePlayerProfileService_GetProfileData : RMCPResponse
     {
         public GR5_Persona persona;
         public List<GR5_Character> characters;
 
-        public RMCPacketResponsePlayerProfileService_LoadCharacterProfiles(ClientInfo client)
+        public RMCPacketResponsePlayerProfileService_GetProfileData(ClientInfo client)
         {
             persona = DBHelper.GetPersona(client);
             characters = DBHelper.GetCharacters(client.PID);
@@ -30,7 +30,7 @@ namespace QuazalWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponsePlayerProfileService_LoadCharacterProfiles]";
+            return "[RMCPacketResponsePlayerProfileService_GetProfileData]";
         }
 
         public override string PayloadToString()

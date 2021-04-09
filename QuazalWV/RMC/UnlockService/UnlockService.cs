@@ -15,15 +15,15 @@ namespace QuazalWV
             switch (rmc.methodID)
             {
                 case 1:
-                    reply = new RMCPacketResponseUnlockService_GetCurrentUserUnlock();
+                    reply = new RMCPacketResponseUnlockService_GetUnlocks();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 2:
-                    reply = new RMCPacketResponseUnlockService_Method2();
+                    reply = new RMCPacketResponseUnlockService_GetUserUnlock();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 3:
-                    reply = new RMCPacketResponseUnlockService_Method3();
+                    reply = new RMCPacketResponseUnlockService_Unlock();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

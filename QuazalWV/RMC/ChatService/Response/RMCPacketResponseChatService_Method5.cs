@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseChatService_Method5 : RMCPResponse
+    public class RMCPacketResponseChatService_JoinPublicChannel : RMCPResponse
     {
         public GR5_Gathering unk1 = new GR5_Gathering();
         public string unk2;

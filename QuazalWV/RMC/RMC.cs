@@ -235,13 +235,15 @@ namespace QuazalWV
                 case RMCP.PROTOCOL.TelemetryService:
                     TelemetryService.ProcessTelemetryServiceRequest(m, rmc);
                     break;
+                case RMCP.PROTOCOL.FriendsService:
+                    FriendsService.ProcessFriendsServiceRequest(m, rmc);
+                    break;
                 case RMCP.PROTOCOL.AMMGameClientService:
                 case RMCP.PROTOCOL.PlayerProfileService:
                 case RMCP.PROTOCOL.ArmorService:
                 case RMCP.PROTOCOL.InventoryService:
                 case RMCP.PROTOCOL.LootService:
                 case RMCP.PROTOCOL.WeaponService:
-                case RMCP.PROTOCOL.FriendsService:
                 case RMCP.PROTOCOL.ChatService:
                 case RMCP.PROTOCOL.MissionService:
                 case RMCP.PROTOCOL.PartyService:

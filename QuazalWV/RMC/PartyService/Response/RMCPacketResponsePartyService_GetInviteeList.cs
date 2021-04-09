@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponsePartyService_GetInviteeList : RMCPResponse
+    public class RMCPacketResponsePartyService_OnSignInCheckPartyStatus : RMCPResponse
     {
+        //implementation might be wrong
         public class Unknown
         {
             public string unk1 = "";
-            public GR5_Gathering unk2 = new GR5_Gathering();
+            public GR5_Gathering session = new GR5_Gathering();
             public void toBuffer(Stream s)
             {
                 Helper.WriteString(s, unk1);
                 MemoryStream m = new MemoryStream(); 
-                unk2.toBuffer(m);
+                session.toBuffer(m);
                 byte[] buff = m.ToArray();
                 Helper.WriteU32(s, (uint)buff.Length + 4);
                 Helper.WriteU32(s, (uint)buff.Length);
@@ -29,7 +30,7 @@ namespace QuazalWV
         public List<GR5_Invitee> invitees = new List<GR5_Invitee>();
         public Unknown unk1 = new Unknown();
 
-        public RMCPacketResponsePartyService_GetInviteeList()
+        public RMCPacketResponsePartyService_OnSignInCheckPartyStatus()
         {
             members.Add(new GR5_PartyMember());
             invitees.Add(new GR5_Invitee());
@@ -50,7 +51,7 @@ namespace QuazalWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponsePartyService_GetInviteeList]";
+            return "[RMCPacketResponsePartyService_OnSignInCheckPartyStatus]";
         }
 
         public override string PayloadToString()

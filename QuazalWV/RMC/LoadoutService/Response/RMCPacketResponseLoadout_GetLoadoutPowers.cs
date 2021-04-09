@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseLoadout_GetLoadoutPowers : RMCPResponse
+    public class RMCPacketResponseLoadout_CACHEFetch : RMCPResponse
     {
         public List<GR5_RCHeader> headers = new List<GR5_RCHeader>();
 
-        public RMCPacketResponseLoadout_GetLoadoutPowers()
+        public RMCPacketResponseLoadout_CACHEFetch()
         {
             headers.Add(new GR5_RCHeader());
         }
@@ -27,7 +27,7 @@ namespace QuazalWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponseLoadout_GetLoadoutPowers]";
+            return "[RMCPacketResponseLoadout_CACHEFetch]";
         }
 
         public override string PayloadToString()

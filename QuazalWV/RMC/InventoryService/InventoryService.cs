@@ -19,11 +19,11 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 2:
-                    reply = new RMCPacketResponseInventoryService_Method2();
+                    reply = new RMCPacketResponseInventoryService_GetAllBoosts();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 3:
-                    reply = new RMCPacketResponseInventoryService_Method3();
+                    reply = new RMCPacketResponseInventoryService_GetAllConsumables();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 4:
