@@ -11,6 +11,13 @@ namespace QuazalWV
     {
         public uint mItemID;
         public uint mDecoratorID;
+
+        public GR5_AvatarDecorator(uint itemId, uint decoratorId)
+        {
+            mItemID = itemId;
+            mDecoratorID = decoratorId;
+        }
+
         public void toBuffer(Stream s)
         {
             Helper.WriteU32(s, mItemID);

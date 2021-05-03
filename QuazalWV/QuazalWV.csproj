@@ -208,6 +208,10 @@
     <Compile Include="DO\DupObjs\Payloads\Payload_Session.cs" />
     <Compile Include="DO\DupObjs\Payloads\Payload_SessionInfos.cs" />
     <Compile Include="RMC\AMMDedicatedServerService\Response\RMCPacketResponseAMM_ds_AddParticipantToSession.cs" />
+    <Compile Include="RMC\PlayerProfileService\Request\RMCPacketRequestPlayerProfileService_SetAvatarDecorator.cs" />
+    <Compile Include="RMC\PlayerProfileService\Request\RMCPacketRequestPlayerProfileService_SetAvatarPortrait.cs" />
+    <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_SetAvatarDecorator.cs" />
+    <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_SetAvatarPortrait.cs" />
     <Compile Include="RMC\FriendsService\Request\RMCPacketRequestFriendsService_AddFriendByName.cs" />
     <Compile Include="RMC\FriendsService\Response\RMCPacketResponseFriendsService_AddFriendByName.cs" />
     <Compile Include="RMC\MissionService\Response\RMCPacketResponseMissionService_CancelMission.cs" />
@@ -294,7 +298,7 @@
     <Compile Include="RMC\PlayerProfileService\PlayerProfileService.cs" />
     <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_GetAllFaceSkinTones.cs" />
     <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_LoadCharacterProfiles.cs" />
-    <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_Method11.cs" />
+    <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_RetrieveOfflineNotifications.cs" />
     <Compile Include="RMC\ProfanityFilterService\ProfanityFilterService.cs" />
     <Compile Include="RMC\ProfanityFilterService\Response\RMCPacketResponseProfanityFilterService_GetAllProfaneWords.cs" />
     <Compile Include="RMC\ProgressionService\ProgressionService.cs" />

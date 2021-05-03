@@ -14,8 +14,9 @@ namespace QuazalWV
 
         public RMCPacketResponseAvatarService_GetAvatarDecorators()
         {
-            decos.Add(new GR5_AvatarDecorator());
-            defaultDecos.Add(0);
+            decos.Add(new GR5_AvatarDecorator(1, 1));
+            decos.Add(new GR5_AvatarDecorator(2, 2));
+            defaultDecos.Add(1);
         }
 
         public override byte[] ToBuffer()

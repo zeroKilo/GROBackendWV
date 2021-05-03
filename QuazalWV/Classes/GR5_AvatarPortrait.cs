@@ -11,6 +11,13 @@ namespace QuazalWV
     {
         public uint mItemID;
         public uint mPortraitID;
+
+        public GR5_AvatarPortrait(uint itemId, uint portraitId)
+        {
+            mItemID = itemId;
+            mPortraitID = portraitId;
+        }
+
         public void toBuffer(Stream s)
         {
             Helper.WriteU32(s, mItemID);

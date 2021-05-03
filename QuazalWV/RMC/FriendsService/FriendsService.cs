@@ -30,13 +30,13 @@ namespace QuazalWV
             RMCPResponse reply;
             switch (rmc.methodID)
             {
-                /*case 2:
+                case 2:
                     RMCPacketRequestFriendsService_AddFriendByName r = (RMCPacketRequestFriendsService_AddFriendByName)rmc.request;
                     reply = new RMCPacketResponseFriendsService_AddFriendByName(client, r.name);
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 4:
-                    break;*/
+                    break;
                 case 5:
                     reply = new RMCPacketResponseFriendsService_GetFriendsList(client);
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);

@@ -22,6 +22,8 @@ namespace QuazalWV
                     reply = new RMCPacketResponseAvatarService_GetAvatarPortraits();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
+                case 8:
+                    break;
                 default:
                     Log.WriteLine(1, "[RMC AvatarService] Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;

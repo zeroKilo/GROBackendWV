@@ -9,12 +9,12 @@ namespace QuazalWV
 {
     public class GR5_OperatorVariable
     {
-        public uint unk1;
-        public string unk2;
+        public uint m_Id;
+        public string m_Value;
         public void toBuffer(Stream s)
         {
-            Helper.WriteU32(s, unk1);
-            Helper.WriteString(s, unk2);
+            Helper.WriteU32(s, m_Id);
+            Helper.WriteString(s, m_Value);
         }
     }
 }

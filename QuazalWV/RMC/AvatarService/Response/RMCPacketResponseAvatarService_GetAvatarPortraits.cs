@@ -14,8 +14,11 @@ namespace QuazalWV
 
         public RMCPacketResponseAvatarService_GetAvatarPortraits()
         {
-            portraits.Add(new GR5_AvatarPortrait());
-            defaultPortraits.Add(0);
+            for(uint i = 1; i < 36; i++)
+            {
+                portraits.Add(new GR5_AvatarPortrait(i, i));
+                defaultPortraits.Add(i);
+            }
         }
 
         public override byte[] ToBuffer()
