@@ -755,5 +755,19 @@ namespace QuazalWV
             }
             
         }
+
+        public static void SetAvatarPortrait(ClientInfo client, uint portraitId, uint backgroundColor)
+        {
+            SQLiteCommand cmd = new SQLiteCommand($"UPDATE personas SET portraitid = {portraitId}, backcolor = {backgroundColor} WHERE pid = {client.PID};" , connection);
+            try { cmd.ExecuteNonQuery(); }
+            catch { return; }
+        }
+
+        public static void SetAvatarDecorator(ClientInfo client, uint decoratorId)
+        {
+            SQLiteCommand cmd = new SQLiteCommand($"UPDATE personas SET decorid = {decoratorId} WHERE pid = {client.PID};", connection);
+            try { cmd.ExecuteNonQuery(); }
+            catch { return; }
+        }
     }
 }

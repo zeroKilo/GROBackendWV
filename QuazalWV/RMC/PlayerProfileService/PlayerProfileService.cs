@@ -42,12 +42,14 @@ namespace QuazalWV
                     reply = new RMCPResponseEmpty();
                     break;
                 case 7:
-                    RMCPacketRequestPlayerProfileService_SetAvatarPortrait setPortraitReq = (RMCPacketRequestPlayerProfileService_SetAvatarPortrait)rmc.request;
-                    reply = new RMCPacketResponsePlayerProfileService_SetAvatarPortrait(client, setPortraitReq.portraitId, setPortraitReq.backgroundColor);
+                    RMCPacketRequestPlayerProfileService_SetAvatarPortrait setPortReq = (RMCPacketRequestPlayerProfileService_SetAvatarPortrait)rmc.request;
+                    DBHelper.SetAvatarPortrait(client, setPortReq.portraitId, setPortReq.backgroundColor);
+                    reply = new RMCPacketResponsePlayerProfileService_SetAvatarPortrait(client, setPortReq.portraitId, setPortReq.backgroundColor);
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 8:
                     RMCPacketRequestPlayerProfileService_SetAvatarDecorator setDecoReq = (RMCPacketRequestPlayerProfileService_SetAvatarDecorator)rmc.request;
+                    DBHelper.SetAvatarDecorator(client, setDecoReq.decoratorId);
                     reply = new RMCPacketResponsePlayerProfileService_SetAvatarDecorator(client, setDecoReq.decoratorId);
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
