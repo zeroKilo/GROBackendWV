@@ -13,7 +13,7 @@ namespace QuazalWV
 
         public RMCPacketResponseOpsProtocolService_GetAllOperatorVariables()
         {
-            ops.Add(new GR5_OperatorVariable());
+            ops = DBHelper.GetOperatorVariables();
         }
 
         public override byte[] ToBuffer()

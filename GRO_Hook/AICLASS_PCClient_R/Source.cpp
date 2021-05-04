@@ -253,14 +253,14 @@ void DetourMain()
 	//EnableDebugScreen5();
 	Patch1();	//crash1
 	Patch2();	//crash2
-	//Patch3();	//keyboard input
+	Patch3();	//keyboard input
 	Patch4();	//cDNAManager::bCanSendEvent
-	//Patch5();	//AI_EntityPlayer::InitEntity server check
-	//Patch6();	//cObjectHealth::SetDefaultHitPointsServer call cancel
-	CreateServerPatch();
-	OnPeerConnectionPatch();
-	IsServerPatch();
-	GetPeerIndexPatch();
+	Patch5();	//AI_EntityPlayer::InitEntity server check
+	Patch6();	//cObjectHealth::SetDefaultHitPointsServer call cancel
+	//CreateServerPatch();
+	//OnPeerConnectionPatch();
+	//IsServerPatch();
+	//GetPeerIndexPatch();
 	ExportPlayerAddress();
 	//ReplaceVelocity();
 	//ZEN_Init(baseAddressAI);

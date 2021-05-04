@@ -775,5 +775,19 @@ namespace QuazalWV
             try { cmd.ExecuteNonQuery(); }
             catch { return; }
         }
+
+        public static List<GR5_OperatorVariable> GetOperatorVariables()
+        {
+            List<GR5_OperatorVariable> opVars = new List<GR5_OperatorVariable>();
+            List<List<string>> results = GetQueryResults("SELECT * FROM op_vars");
+            GR5_OperatorVariable opVar = new GR5_OperatorVariable();
+            foreach (List<string>entry in results)
+            {
+                opVar.m_Id = Convert.ToUInt32(entry[1]);
+                opVar.m_Value = entry[2];
+                opVars.Add(opVar);
+            }
+            return opVars;
+        }
     }
 }
