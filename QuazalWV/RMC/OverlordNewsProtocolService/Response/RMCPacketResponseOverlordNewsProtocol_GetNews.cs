@@ -7,67 +7,51 @@ namespace QuazalWV
 {
     public class RMCPacketResponseOverlordNewsProtocol_GetNews : RMCPResponse
     {
-        public List<GR5_NewsMessage> news = new List<GR5_NewsMessage>();
+        public List<GR5_NewsMessage> news;
 
-        public RMCPacketResponseOverlordNewsProtocol_GetNews(ClientInfo client, OverlordNewsProtocolService.REQUEST newsType)
+        public RMCPacketResponseOverlordNewsProtocol_GetNews(ClientInfo client, OverlordNewsProtocolService.REQUEST newsType, uint msgId)
         {
-            string msgBody;
-            switch(newsType)
+            if (client.systemNews.Count == 0)
+            {
+                client.systemNews.Add(
+                            new GR5_NewsMessage(NewsMessageType.WelcomeToGRO, client, msgId, client.PID)
+                        );
+            }
+
+            if (client.personaNews.Count == 0)
+            {
+                client.personaNews.Add(
+                            new GR5_NewsMessage(NewsMessageType.MissionCompleted, client, msgId, client.PID, 1)
+                        );
+            }
+
+            if (client.friendNews.Count == 0)
+            {
+                client.friendNews.Add(
+                        new GR5_NewsMessage(
+                            NewsMessageType.AvatarChanged,
+                            client,
+                            OverlordNewsProtocolService.newsMessageIdCount,
+                            client.PID)
+                        );
+            }
+
+            news = new List<GR5_NewsMessage>();
+
+            switch (newsType)
             {
                 case OverlordNewsProtocolService.REQUEST.SystemNews:
-                    msgBody = GetWelcomeMsg();
+                    foreach (GR5_NewsMessage msg in client.systemNews) news.Add(msg);
                     break;
                 case OverlordNewsProtocolService.REQUEST.PersonaNews:
-                    msgBody = GetCompletedMissionMsg();
+                    foreach (GR5_NewsMessage msg in client.personaNews) news.Add(msg);
                     break;
                 case OverlordNewsProtocolService.REQUEST.FriendsNews:
-                    msgBody = GetWelcomeMsg();
+                    foreach (GR5_NewsMessage msg in client.friendNews) news.Add(msg); 
                     break;
                 default:
-                    msgBody = GetWelcomeMsg();
                     break;
             }
-            //i dont think news should be in the database
-            news = DBHelper.GetNews(client.PID, msgBody);
-        }
-
-        public string GetWelcomeMsg()
-        {
-            //XML format, see wiki for details
-            //it might be possible that you can have multiple message tags here
-            //i guess that's why there are all the range validations etc. in rdv.dll
-            //TODO: time format isnt valid
-            return
-                new XElement("news",
-                    new XElement("message",
-                        //core attributes
-                        new XAttribute("unkattr", "somevalue"),
-                        new XAttribute("unkattrii", "somevalueii"),
-                        new XAttribute("type", 73498),
-                        new XAttribute("icon", 2),
-                        new XAttribute("oasis", 73498),
-                        new XAttribute("pid", 4660),
-                        new XAttribute("time", (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds)
-                        )
-                    ).ToString().Replace("\r", "").Replace("\n", "").Replace("\t", "");
-        }
-
-        public string GetCompletedMissionMsg()
-        {
-            return
-                new XElement("news",
-                    new XElement("message",
-                        new XAttribute("unkattr", "somevalue"),
-                        new XAttribute("unkattrii", "somevalueii"),
-                        new XAttribute("type", 73502),
-                        new XAttribute("icon", 1),
-                        new XAttribute("oasis", 73502),
-                        new XAttribute("pid", 4660),
-                        new XAttribute("time", (uint)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds),
-                        //optional message-specific attributes
-                        new XAttribute("missionid", 1)
-                        )
-                    ).ToString().Replace("\r", "").Replace("\n", "").Replace("\t", "");
         }
 
         public override byte[] ToBuffer()

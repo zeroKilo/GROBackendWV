@@ -98,6 +98,12 @@ namespace QuazalWV
             return result;
         }
 
+        /// <summary>
+        /// Gets news message headers and bodies, deprecated
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         public static List<GR5_NewsMessage> GetNews(uint pid, string body)
         {
             List<GR5_NewsMessage> result = new List<GR5_NewsMessage>();

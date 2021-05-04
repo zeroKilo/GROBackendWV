@@ -33,5 +33,24 @@ namespace QuazalWV
         public byte netRulesState = 3;
         public byte playerAbstractState = 2;
         public Payload_PlayerParameter settings = new Payload_PlayerParameter(new byte[0x40]);
+        public int newsMsgId = -1;
+        public List<GR5_NewsMessage> systemNews = new List<GR5_NewsMessage>();
+        public List<GR5_NewsMessage> personaNews = new List<GR5_NewsMessage>();
+        public List<GR5_NewsMessage> friendNews = new List<GR5_NewsMessage>();
+
+        public void ClearSystemNews()
+        {
+            systemNews = new List<GR5_NewsMessage>();
+        }
+
+        public void ClearPersonaNews()
+        {
+            personaNews = new List<GR5_NewsMessage>();
+        }
+
+        public void ClearFriendNews()
+        {
+            friendNews = new List<GR5_NewsMessage>();
+        }
     }
 }

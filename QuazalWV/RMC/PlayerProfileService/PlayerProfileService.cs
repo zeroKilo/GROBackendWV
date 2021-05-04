@@ -43,7 +43,16 @@ namespace QuazalWV
                     break;
                 case 7:
                     RMCPacketRequestPlayerProfileService_SetAvatarPortrait setPortReq = (RMCPacketRequestPlayerProfileService_SetAvatarPortrait)rmc.request;
+                    //update db
                     DBHelper.SetAvatarPortrait(client, setPortReq.portraitId, setPortReq.backgroundColor);
+                    //add a self-news message
+                    client.personaNews.Add( 
+                        new GR5_NewsMessage(
+                            NewsMessageType.AvatarChanged, 
+                            client, 
+                            OverlordNewsProtocolService.newsMessageIdCount, 
+                            client.PID)
+                        );
                     reply = new RMCPacketResponsePlayerProfileService_SetAvatarPortrait(client, setPortReq.portraitId, setPortReq.backgroundColor);
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
