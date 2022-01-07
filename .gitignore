@@ -25,4 +25,22 @@ nupkg/
 *.resources
 Be.Windows.Forms.HexBox/*
 
-DareParserWV/obj/x86/Release/DareParserWV.csproj.CopyComplete
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/*
+[Rr]eleases/
+x64/
+x86/*
+build/
+bld/
+[Bb]in/*
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio 2015
+.vs/*
+Be.Windows.Forms.HexBox/*

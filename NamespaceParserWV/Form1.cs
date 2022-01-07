@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Be.Windows.Forms;
 
-namespace DareParserWV
+namespace NamespaceParserWV
 {
     public partial class Form1 : Form
     {
@@ -134,40 +134,43 @@ namespace DareParserWV
                         ParseVariable(m, depth);
                         break;
                     case 8:
-                        ParseUnknown8(m, depth);
+                        ParseRMC(m, depth);
+                        break;
+                    case 9:
+                        ParseAction(m, depth);
                         break;
                     case 0xA:
-                        ParseUnknownA(m, depth);
+                        ParseAdapterDeclaration(m, depth);
                         break;
                     case 0xB:
                         ParsePropertyDeclaration(m, depth);
                         break;
                     case 0xC:
-                        ParseUnknownC(m, depth);
+                        ParseProtocolDeclaration(m, depth);
                         break;
                     case 0xD:
-                        ParseUnknownD(m, depth);
+                        ParseParameter(m, depth);
                         break;
                     case 0xE:
-                        ParseUnknownE(m, depth);
+                        ParseReturnValue(m, depth);
                         break;
                     case 0xF:
-                        ParseUnknownF(m, depth);
+                        ParseClassDeclaration(m, depth);
                         break;
                     case 0x10:
-                        ParseUnknown10(m, depth);
+                        ParseTemplateDeclaration(m, depth);
                         break;
                     case 0x11:
-                        ParseUnknown11(m, depth);
+                        ParseSimpleTypeDeclaration(m, depth);
                         break;
                     case 0x12:
-                        ParseUnknown12(m, depth);
+                        ParseTemplateInstance(m, depth);
                         break;
                     case 0x13:
-                        ParseUnitDeclaration(m, depth);
+                        ParseDDLUnitDeclaration(m, depth);
                         break;
                     case 0x14:
-                        ParseUnknown14(m, depth);
+                        ParseDupSpaceDeclaration(m, depth);
                         break;
                     default:
                         Log("Unknown type found: 0x" + type.ToString("X2"));
@@ -176,10 +179,10 @@ namespace DareParserWV
             }
         }
 
-        public void ParseUnitDeclaration(Stream m, int depth = 0)
+        public void ParseDDLUnitDeclaration(Stream m, int depth = 0)
         {
             string tabs = MakeTabs(depth);
-            Log(tabs + "[Unit Declaration]");
+            Log(tabs + "[DDL Unit Declaration]");
             ParseDeclaration(m, depth + 1);
             Log(tabs + "\t[" + ReadString(m) + "]");
             Log(tabs + "\t[" + ReadString(m) + "]");
@@ -209,10 +212,10 @@ namespace DareParserWV
             Parse(m, depth + 1);
         }
 
-        public void ParseUnknown12(Stream m, int depth = 0)
+        public void ParseTemplateInstance(Stream m, int depth = 0)
         {
             string tabs = MakeTabs(depth);
-            Log(tabs + "[Unknown_12]");
+            Log(tabs + "[Template Instance]");
             ParseDeclaration(m, depth + 1);
             ParseNamedStringList(m, depth + 1);
         }
@@ -229,10 +232,10 @@ namespace DareParserWV
                 Log(tabs + "\t\t[" + ReadString(m) + "]");
         }
 
-        public void ParseUnknownF(Stream m, int depth = 0)
+        public void ParseClassDeclaration(Stream m, int depth = 0)
         {
             string tabs = MakeTabs(depth);
-            Log(tabs + "[Unknown_F]");
+            Log(tabs + "[Class Declaration]");
             ParseDeclaration(m, depth + 1);
             ParseNamespace(m, depth + 1);
         }
@@ -280,53 +283,53 @@ namespace DareParserWV
                 ParseDeclarationUse(m, depth + 1);
         }
 
-        public void ParseUnknownC(Stream m, int depth = 0)
+        public void ParseProtocolDeclaration(Stream m, int depth = 0)
         {
             string tabs = MakeTabs(depth);
-            Log(tabs + "[Unknown_C]");
+            Log(tabs + "[Protocol Declaration]");
             ParseDeclaration(m, depth + 1);
             Parse(m, depth + 1);
         }
 
-        public void ParseUnknown8(Stream m, int depth = 0)
+        public void ParseRMC(Stream m, int depth = 0)
         {
             string tabs = MakeTabs(depth);
-            Log(tabs + "[Unknown_8]");
-            ParseUnknownC(m, depth + 1);
+            Log(tabs + "[RMC]");
+            ParseProtocolDeclaration(m, depth + 1);
             Parse(m, depth + 1);
         }
 
-        public void ParseUnknownD(Stream m, int depth = 0)
+        public void ParseParameter(Stream m, int depth = 0)
         {
             string tabs = MakeTabs(depth);
-            Log(tabs + "[Unknown_D]");
+            Log(tabs + "[Parameter]");
             ParseVariable(m, depth + 1);
             ParseDeclarationUse(m, depth + 1);
             Log(tabs + "\t[0x" + ReadU32(m).ToString("X8") + "]");
             Log(tabs + "\t[0x" + ((byte)m.ReadByte()).ToString("X8") + "]");
         }
 
-        public void ParseUnknownE(Stream m, int depth = 0)
+        public void ParseReturnValue(Stream m, int depth = 0)
         {
             string tabs = MakeTabs(depth);
-            Log(tabs + "[Unknown_E]");
+            Log(tabs + "[Return Value]");
             ParseVariable(m, depth + 1);
             ParseDeclarationUse(m, depth + 1);
             Log(tabs + "\t[0x" + ReadU32(m).ToString("X8") + "]");
         }
 
-        public void ParseUnknown10(Stream m, int depth = 0)
+        public void ParseTemplateDeclaration(Stream m, int depth = 0)
         {
             string tabs = MakeTabs(depth);
-            Log(tabs + "[Unknown_10]");
+            Log(tabs + "[Template Declaration]");
             ParseDeclaration(m, depth + 1);
             Log(tabs + "\t[0x" + ReadU32(m).ToString("X8") + "]");
         }
 
-        public void ParseUnknown11(Stream m, int depth = 0)
+        public void ParseSimpleTypeDeclaration(Stream m, int depth = 0)
         {
             string tabs = MakeTabs(depth);
-            Log(tabs + "[Unknown_11]");
+            Log(tabs + "[Simple Type Declaration]");
             ParseDeclaration(m, depth + 1);
         }
 
@@ -350,18 +353,26 @@ namespace DareParserWV
             Parse(m, depth + 1);
         }
 
-        public void ParseUnknownA(Stream m, int depth = 0)
+        public void ParseAdapterDeclaration(Stream m, int depth = 0)
         {
             string tabs = MakeTabs(depth);
-            Log(tabs + "[Unknown_A]");
+            Log(tabs + "[Adapter Declaration]");
             ParseDeclaration(m, depth + 1);
         }
 
-        public void ParseUnknown14(Stream m, int depth = 0)
+        public void ParseDupSpaceDeclaration(Stream m, int depth = 0)
         {
             string tabs = MakeTabs(depth);
-            Log(tabs + "[Unknown_14]");
+            Log(tabs + "[Duplicated Space Declaration]");
             ParseDeclaration(m, depth + 1);
+        }
+
+        public void ParseAction(Stream m, int depth = 0)
+        {
+            string tabs = MakeTabs(depth);
+            Log(tabs + "[Action]");
+            ParseProtocolDeclaration(m, depth + 1);
+            Parse(m, depth + 1);
         }
     }
 }
