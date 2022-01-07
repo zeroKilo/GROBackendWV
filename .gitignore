@@ -1,6 +1,28 @@
-﻿################################################################################
-# Ten plik .gitignore został utworzony automatycznie przez Microsoft(R) Visual Studio.
-################################################################################
+﻿*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
 
-/.vs/GRPBackendWV/v16/Browse.VC.opendb
+# Visual Studio Code
+.vscode
+
+# Rider
+.idea
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.pdb
+*.txt
+*.bin
+*.config
 *.ipch
+*.cache
+*.resources
+Be.Windows.Forms.HexBox/*
+
+DareParserWV/obj/x86/Release/DareParserWV.csproj.CopyComplete
