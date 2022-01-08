@@ -265,17 +265,18 @@ namespace NamespaceParserWV
         {
             string tabs = MakeTabs(depth);
             byte b = (byte)m.ReadByte();
-            Log(tabs + "[Sub Type = 0x" + b.ToString("X2") + "]");
-            if (b == 18)
-                ParseSubType18(m, depth + 1);
+            ENamespaceItem type = (ENamespaceItem)b;
+            Log(tabs + $"[{type:G}]");
+            if ((ENamespaceItem)b == ENamespaceItem.TemplateInstance)
+                ParseTemplateDeclarationUse(m, depth + 1);
             else
                 Log(tabs + "\t[" + ReadString(m) + "]");
         }
 
-        public void ParseSubType18(Stream m, int depth = 0)
+        public void ParseTemplateDeclarationUse(Stream m, int depth = 0)
         {
             string tabs = MakeTabs(depth);
-            Log(tabs + "[Sub Type 18]");
+            Log(tabs + "[TemplateInstance]");
             Log(tabs + "\t[" + ReadString(m) + "]");
             Log(tabs + "\t[" + ReadString(m) + "]");
             byte count = (byte)m.ReadByte();
