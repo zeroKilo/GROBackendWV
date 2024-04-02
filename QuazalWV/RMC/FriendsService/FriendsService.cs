@@ -20,7 +20,7 @@ namespace QuazalWV
                 case 5:
                     break;
                 default:
-                    Log.WriteLine(1, "[RMC Friends] Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    Log.WriteLine(1, "[RMC FriendsService] Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }

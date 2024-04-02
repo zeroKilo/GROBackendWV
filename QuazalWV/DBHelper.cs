@@ -155,20 +155,17 @@ namespace QuazalWV
             return result;
         }
 
-        public static List<GR5_InventoryBag> GetInventoryBags(uint pid, byte type)
+        public static List<GR5_InventoryBag> GetInventoryBags(uint pid, List<uint> bagTypes)
         {
             List<GR5_InventoryBag> result = new List<GR5_InventoryBag>();
-            List<int> bagIDs = new List<int>();
-            List<List<string>> results = GetQueryResults("SELECT * FROM inventorybags WHERE pid=" + pid + " AND bagtype =" + type);
-            foreach (List<string> entry in results)
-                bagIDs.Add(Convert.ToInt32(entry[0]));
-            foreach(int bagID in bagIDs)
+            List<List<string>> results;
+            foreach(uint bagType in bagTypes)
             {
                 GR5_InventoryBag bag = new GR5_InventoryBag();
                 bag.m_PersonaID = pid;
-                bag.m_InventoryBagType = type;
+                bag.m_InventoryBagType = bagType; //TBC
                 bag.m_InventoryBagSlotVector = new List<GR5_InventoryBagSlot>();
-                results = GetQueryResults("SELECT * FROM inventorybagslots WHERE bagid=" + bagID);
+                results = GetQueryResults("SELECT * FROM inventorybagslots WHERE bagid=" + bagType);
                 foreach (List<string> entry in results)
                 {
                     GR5_InventoryBagSlot slot = new GR5_InventoryBagSlot();
@@ -182,21 +179,40 @@ namespace QuazalWV
             return result;
         }
 
-        public static List<GR5_UserItem> GetUserItems(uint pid, byte type)
+        public static List<GR5_UserItem> GetUserItems(uint pid, List<uint> bagTypes)
         {
             List<GR5_UserItem> result = new List<GR5_UserItem>();
-            List<List<string>> results = GetQueryResults("SELECT * FROM useritems WHERE pid=" + pid + " AND itemtype =" + type);
-            foreach (List<string> entry in results)
+            List<List<string>> slots;
+            List<List<string>> userItems;
+            try
             {
-                GR5_UserItem item = new GR5_UserItem();
-                item.InventoryID = Convert.ToUInt32(entry[1]);
-                item.PersonaID = pid;
-                item.ItemType = type;
-                item.ItemID = Convert.ToUInt32(entry[4]);
-                item.OasisName = Convert.ToUInt32(entry[5]);
-                item.IGCPrice = Convert.ToUInt32(entry[6]);
-                item.GRCashPrice = Convert.ToUInt32(entry[7]);
-                result.Add(item);
+                foreach (uint bagType in bagTypes)
+                {
+                    slots = GetQueryResults("SELECT * FROM inventorybagslots WHERE bagid=" + bagType);
+                    foreach (List<string> slotEntry in slots)
+                    {
+                        uint slotInventoryId = Convert.ToUInt32(slotEntry[2]);
+                        userItems = GetQueryResults("SELECT * FROM useritems WHERE pid=" + pid + " AND inventoryid=" + slotInventoryId);
+                        foreach (List<string> itemEntry in userItems)
+                        {
+                            GR5_UserItem userItem = new GR5_UserItem
+                            {
+                                InventoryID = slotInventoryId,
+                                PersonaID = pid,
+                                ItemType = Convert.ToByte(itemEntry[3]),
+                                ItemID = Convert.ToUInt32(itemEntry[4]),
+                                OasisName = Convert.ToUInt32(itemEntry[5]),
+                                IGCPrice = Convert.ToUInt32(itemEntry[6]),
+                                GRCashPrice = Convert.ToUInt32(itemEntry[7])
+                            };
+                            result.Add(userItem);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                e.ToString();
             }
             return result;
         }
@@ -302,11 +318,11 @@ namespace QuazalWV
             List<GR5_PersonaArmorTier> result = new List<GR5_PersonaArmorTier>();
             List<int> IDs = new List<int>();
             List<uint> tierIDs = new List<uint>();
-            List<List<string>> results = GetQueryResults("SELECT * FROM personaarmortiers WHERE tierid=" + tier);
+            List<List<string>> results = GetQueryResults("SELECT * FROM personaarmortiers WHERE pid=" + pid); //WHERE tierid=" + tier);
             foreach (List<string> entry in results)
             {
-                IDs.Add(Convert.ToInt32(entry[0]));
-                tierIDs.Add(Convert.ToUInt32(entry[1]));
+                IDs.Add(Convert.ToInt32(entry[2]));
+                tierIDs.Add(Convert.ToUInt32(entry[3]));
             }
             for(int i = 0; i < IDs.Count;i++)
             {

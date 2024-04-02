@@ -66,10 +66,10 @@ namespace QuazalWV
             m.Read(buff, 0, (int)size);
             buff = Helper.Decrypt(client.sessionKey, buff);
             m = new MemoryStream(buff);
-            Helper.ReadU32(m);
-            Helper.ReadU32(m);
+            uint pid = Helper.ReadU32(m); //user pid
+            uint cid = Helper.ReadU32(m); //connection id
             uint responseCode = Helper.ReadU32(m);
-            Log.WriteLine(2, "[QAZAL] Got response code 0x" + responseCode.ToString("X8"));
+            Log.WriteLine(1, $"[UDP Secure] CONNECT: PID: 0x{pid:X8}, CID: {cid}, response code 0x{responseCode:X8}");
             m = new MemoryStream();
             Helper.WriteU32(m, 4);
             Helper.WriteU32(m, responseCode + 1);

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>QuazalWV</RootNamespace>
     <AssemblyName>QuazalWV</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -208,6 +208,7 @@
     <Compile Include="DO\DupObjs\Payloads\Payload_Session.cs" />
     <Compile Include="DO\DupObjs\Payloads\Payload_SessionInfos.cs" />
     <Compile Include="RMC\AMMDedicatedServerService\Response\RMCPacketResponseAMM_ds_AddParticipantToSession.cs" />
+    <Compile Include="RMC\InventoryService\Request\RMCPacketRequestInventoryService_GetUserInventoryByBagType.cs" />
     <Compile Include="RMC\PlayerProfileService\Request\RMCPacketRequestPlayerProfileService_SetAvatarDecorator.cs" />
     <Compile Include="RMC\PlayerProfileService\Request\RMCPacketRequestPlayerProfileService_SetAvatarPortrait.cs" />
     <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_SetAvatarDecorator.cs" />
@@ -274,8 +275,8 @@
     <Compile Include="RMC\LeaderboardService\Response\RMCPacketResponseLeaderboardService_ReadLeaderBoardStatsForPlayers.cs" />
     <Compile Include="RMC\LeaderboardService\Response\RMCPacketResponseLeaderboardService_Method4.cs" />
     <Compile Include="RMC\LoadoutService\LoadoutService.cs" />
+    <Compile Include="RMC\LoadoutService\Response\RMCPacketResponseLoadout_CACHEFetch.cs" />
     <Compile Include="RMC\LoadoutService\Response\RMCPacketResponseLoadout_GetLoadoutPowers.cs" />
-    <Compile Include="RMC\LoadoutService\Response\RMCPacketResponseLoadout_Method5.cs" />
     <Compile Include="RMC\LootService\LootService.cs" />
     <Compile Include="RMC\LootService\Response\RMCPacketResponseLootService_GetLootStatic.cs" />
     <Compile Include="RMC\LootService\Response\RMCPacketResponseLootService_GetLootPointQualityMap.cs" />

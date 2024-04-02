@@ -10,7 +10,7 @@ namespace QuazalWV
     public class GR5_Boost
     {
         public uint m_ItemID;
-        public uint m_AssetKey;
+        public uint m_AssetKey = 0x11801302; //ammo boost
         public uint m_ModifierList;
         public uint m_Type;
         public string m_Name;

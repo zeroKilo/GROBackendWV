@@ -11,11 +11,11 @@ namespace QuazalWV
     {
         public List<GR5_PersonaArmorTier> list = new List<GR5_PersonaArmorTier>();
 
-        public RMCPacketResponseArmorService_GetPersonaArmorTiers(byte[] payload)
+        public RMCPacketResponseArmorService_GetPersonaArmorTiers(ClientInfo client, byte[] payload)
         {
-            uint tierID = BitConverter.ToUInt32(payload, 0xD);
+            uint tierID = BitConverter.ToUInt32(payload, 0xD);//request is tierId vector, so this should be changed
             uint pID = BitConverter.ToUInt32(payload, 0x11);
-            list = DBHelper.GetPersonaArmorTiers(pID, tierID);
+            list = DBHelper.GetPersonaArmorTiers(client.PID, tierID);
         }
 
         public override byte[] ToBuffer()

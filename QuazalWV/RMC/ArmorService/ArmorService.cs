@@ -19,7 +19,7 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 2:
-                    reply = new RMCPacketResponseArmorService_GetPersonaArmorTiers(p.payload);
+                    reply = new RMCPacketResponseArmorService_GetPersonaArmorTiers(client, p.payload);
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

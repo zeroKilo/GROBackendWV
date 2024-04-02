@@ -9,6 +9,26 @@ namespace QuazalWV
 {
     public static class InventoryService
     {
+        public static void ProcessInventoryServiceRequest(Stream s, RMCP rmc)
+        {
+            switch (rmc.methodID)
+            {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    break;
+                case 6:
+                    rmc.request = new RMCPacketRequestInventoryService_GetUserInventoryByBagType(s);
+                    break;
+                case 16:
+                    break;
+                default:
+                    Log.WriteLine(1, "[RMC InventoryService] Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    break;
+            }
+        }
+
         public static void HandleInventoryServiceRequest(QPacket p, RMCP rmc, ClientInfo client)
         {
             RMCPResponse reply;
@@ -31,7 +51,8 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 6:
-                    reply = new RMCPacketResponseInventoryService_GetUserInventoryByBagType(p.payload[21], p.payload[17]);
+                    RMCPacketRequestInventoryService_GetUserInventoryByBagType invByBagReq = (RMCPacketRequestInventoryService_GetUserInventoryByBagType)rmc.request;
+                    reply = new RMCPacketResponseInventoryService_GetUserInventoryByBagType(invByBagReq.pid, invByBagReq.requestedBagTypes);
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 16:

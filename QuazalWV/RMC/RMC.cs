@@ -241,9 +241,11 @@ namespace QuazalWV
                 case RMCP.PROTOCOL.PlayerProfileService:
                     PlayerProfileService.ProcessPlayerProfileServiceRequest(m, rmc);
                     break;
+                case RMCP.PROTOCOL.InventoryService:
+                    InventoryService.ProcessInventoryServiceRequest(m, rmc);
+                    break;
                 case RMCP.PROTOCOL.AMMGameClientService:
                 case RMCP.PROTOCOL.ArmorService:
-                case RMCP.PROTOCOL.InventoryService:
                 case RMCP.PROTOCOL.LootService:
                 case RMCP.PROTOCOL.WeaponService:
                 case RMCP.PROTOCOL.ChatService:

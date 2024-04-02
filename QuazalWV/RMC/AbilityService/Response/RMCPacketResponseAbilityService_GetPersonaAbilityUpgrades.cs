@@ -10,28 +10,28 @@ namespace QuazalWV
     public class RMCPacketResponseAbilityService_GetTemplateAbilities : RMCPResponse
     {
 
-        public List<GR5_Ability> abs = new List<GR5_Ability>();
-        public List<GR5_AbilityUpgrade> abups = new List<GR5_AbilityUpgrade>();
-        public List<GR5_PassiveAbility> pabs = new List<GR5_PassiveAbility>();
+        public List<GR5_Ability> abilities = new List<GR5_Ability>();
+        public List<GR5_AbilityUpgrade> upgrades = new List<GR5_AbilityUpgrade>();
+        public List<GR5_PassiveAbility> passives = new List<GR5_PassiveAbility>();
 
         public RMCPacketResponseAbilityService_GetTemplateAbilities()
         {
-            abs = DBHelper.GetAbilities();
-            abups.Add(new GR5_AbilityUpgrade());
-            pabs.Add(new GR5_PassiveAbility());
+            abilities = DBHelper.GetAbilities();
+            upgrades.Add(new GR5_AbilityUpgrade());
+            passives.Add(new GR5_PassiveAbility());
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)abs.Count);
-            foreach (GR5_Ability a in abs)
+            Helper.WriteU32(m, (uint)abilities.Count);
+            foreach (GR5_Ability a in abilities)
                 a.toBuffer(m);
-            Helper.WriteU32(m, (uint)abups.Count);
-            foreach (GR5_AbilityUpgrade a in abups)
+            Helper.WriteU32(m, (uint)upgrades.Count);
+            foreach (GR5_AbilityUpgrade a in upgrades)
                 a.toBuffer(m);
-            Helper.WriteU32(m, (uint)pabs.Count);
-            foreach (GR5_PassiveAbility a in pabs)
+            Helper.WriteU32(m, (uint)passives.Count);
+            foreach (GR5_PassiveAbility a in passives)
                 a.toBuffer(m);
             return m.ToArray();
         }
