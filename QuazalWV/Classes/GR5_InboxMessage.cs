@@ -9,23 +9,46 @@ namespace QuazalWV
 {
     public class GR5_InboxMessage
     {
-        public uint unk1;
-        public uint unk2;
-        public uint unk3;
-        public uint unk4;
-        public string content;
-        public ulong date;
-        public uint unk7;
+        public enum TYPE
+        {
+            /// <summary>
+            /// 'Object received.\n Please click the Get Item button to retrieve/apply.'
+            /// </summary>
+            ItemRetrieved = 1,
+            /// <summary>
+            /// '%s added you to their friends list. If you would like to add %s to your friends list as well, please click the "Add Friend" button below.'
+            /// </summary>
+            AddedToFriendList = 2,
+            /// <summary>
+            /// 'Object received.\n Please click the Get Item button to retrieve/apply.'
+            /// </summary>
+            ItemRetrieved2 = 3,
+            /// <summary>
+            /// 'This item has been removed from your inventory.'
+            /// </summary>
+            ItemRemoved = 4
+        }
+
+        public uint Id { get; set; }
+        public uint Unk { get; set; }
+        public uint SenderId { get; set; }
+        public TYPE Type { get; set; }
+        public string Text { get; set; }
+        public ulong Date { get; set; }
+        /// <summary>
+        /// Set to 0 if new.
+        /// </summary>
+        public uint IsNew { get; set; }
 
         public void toBuffer(Stream s)
         {
-            Helper.WriteU32(s, unk1);
-            Helper.WriteU32(s, unk2);
-            Helper.WriteU32(s, unk3);
-            Helper.WriteU32(s, unk4);
-            Helper.WriteString(s, content);
-            Helper.WriteU64(s, date);
-            Helper.WriteU32(s, unk7);
+            Helper.WriteU32(s, Id);
+            Helper.WriteU32(s, Unk);
+            Helper.WriteU32(s, SenderId);
+            Helper.WriteU32(s, (uint)Type);
+            Helper.WriteString(s, Text);
+            Helper.WriteU64(s, Date);
+            Helper.WriteU32(s, IsNew);
         }
     }
 }

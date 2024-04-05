@@ -99,6 +99,7 @@
     <Compile Include="Classes\GR5_Boost.cs" />
     <Compile Include="Classes\GR5_Character.cs" />
     <Compile Include="Classes\GR5_ChatChannelMute.cs" />
+    <Compile Include="Classes\QDateTime.cs" />
     <Compile Include="Classes\RDV_AMMCommon\GR5_AMMSetting.cs" />
     <Compile Include="Classes\RDV_AMMCommon\GR5_ClusterQueue.cs" />
     <Compile Include="Classes\GR5_Component.cs" />
