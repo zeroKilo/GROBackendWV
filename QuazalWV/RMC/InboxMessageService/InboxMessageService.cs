@@ -21,6 +21,9 @@ namespace QuazalWV
                 case 4:
                     rmc.request = new RMCPacketRequestInboxMessageService_GetInboxMessagesAfterMessageId(s);
                     break;
+                case 6:
+                    rmc.request = new RMCPacketRequestInboxMessageService_DeleteInboxMessages(s);
+                    break;
                 case 7:
                     rmc.request = new RMCPacketRequestInboxMessageService_SetReadFlags(s);
                     break;
@@ -45,6 +48,10 @@ namespace QuazalWV
                     break;
                 case 4:
                     reply = new RMCPacketResponseInboxMessageService_GetInboxMessagesAfterMessageId();
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    break;
+                case 6:
+                    reply = new RMCPResponseEmpty();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 7:

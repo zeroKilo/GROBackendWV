@@ -209,6 +209,7 @@
     <Compile Include="DO\DupObjs\Payloads\Payload_SessionInfos.cs" />
     <Compile Include="RMC\AMMDedicatedServerService\Response\RMCPacketResponseAMM_ds_AddParticipantToSession.cs" />
     <Compile Include="RMC\InboxMessageService\Request\RMCPacketRequestInboxMessageService_GetInboxMessagesAfterMessageId.cs" />
+    <Compile Include="RMC\InboxMessageService\Request\RMCPacketRequestInboxMessageService_DeleteInboxMessages.cs" />
     <Compile Include="RMC\InboxMessageService\Request\RMCPacketRequestInboxMessageService_SetReadFlags.cs" />
     <Compile Include="RMC\InboxMessageService\Request\RMCPacketRequestInboxMessageService_GetRecentInboxMessages.cs" />
     <Compile Include="RMC\InboxMessageService\Response\RMCPacketResponseInboxMessageService_GetInboxMessagesAfterMessageId.cs" />
