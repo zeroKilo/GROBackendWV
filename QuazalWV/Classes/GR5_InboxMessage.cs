@@ -13,8 +13,8 @@ namespace QuazalWV
         public uint unk2;
         public uint unk3;
         public uint unk4;
-        public string unk5;
-        public ulong unk6;
+        public string content;
+        public ulong date;
         public uint unk7;
 
         public void toBuffer(Stream s)
@@ -23,8 +23,8 @@ namespace QuazalWV
             Helper.WriteU32(s, unk2);
             Helper.WriteU32(s, unk3);
             Helper.WriteU32(s, unk4);
-            Helper.WriteString(s, unk5);
-            Helper.WriteU64(s, unk6);
+            Helper.WriteString(s, content);
+            Helper.WriteU64(s, date);
             Helper.WriteU32(s, unk7);
         }
     }

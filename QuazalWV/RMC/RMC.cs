@@ -235,11 +235,14 @@ namespace QuazalWV
                 case RMCP.PROTOCOL.TelemetryService:
                     TelemetryService.ProcessTelemetryServiceRequest(m, rmc);
                     break;
+                case RMCP.PROTOCOL.PlayerProfileService:
+                    PlayerProfileService.ProcessPlayerProfileServiceRequest(m, rmc);
+                    break;
                 case RMCP.PROTOCOL.FriendsService:
                     FriendsService.ProcessFriendsServiceRequest(m, rmc);
                     break;
-                case RMCP.PROTOCOL.PlayerProfileService:
-                    PlayerProfileService.ProcessPlayerProfileServiceRequest(m, rmc);
+                case RMCP.PROTOCOL.InboxMessageService:
+                    InboxMessageService.ProcessInboxMessageServiceRequest(m, rmc);
                     break;
                 case RMCP.PROTOCOL.AMMGameClientService:
                 case RMCP.PROTOCOL.ArmorService:
@@ -265,7 +268,6 @@ namespace QuazalWV
                 case RMCP.PROTOCOL.ServerInfoService:
                 case RMCP.PROTOCOL.LeaderboardService:
                 case RMCP.PROTOCOL.PveArchetypeService:
-                case RMCP.PROTOCOL.InboxMessageService:
                 case RMCP.PROTOCOL.ProfanityFilterService:
                 case RMCP.PROTOCOL.AbilityService:
                 case RMCP.PROTOCOL.SurveyService:

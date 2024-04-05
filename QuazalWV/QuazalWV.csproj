@@ -208,6 +208,8 @@
     <Compile Include="DO\DupObjs\Payloads\Payload_Session.cs" />
     <Compile Include="DO\DupObjs\Payloads\Payload_SessionInfos.cs" />
     <Compile Include="RMC\AMMDedicatedServerService\Response\RMCPacketResponseAMM_ds_AddParticipantToSession.cs" />
+    <Compile Include="RMC\InboxMessageService\Request\RMCPacketRequestInboxMessageService_SetReadFlags.cs" />
+    <Compile Include="RMC\InboxMessageService\Request\RMCPacketRequestInboxMessageService_GetRecentInboxMessages.cs" />
     <Compile Include="RMC\PlayerProfileService\Request\RMCPacketRequestPlayerProfileService_SetAvatarDecorator.cs" />
     <Compile Include="RMC\PlayerProfileService\Request\RMCPacketRequestPlayerProfileService_SetAvatarPortrait.cs" />
     <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_SetAvatarDecorator.cs" />
@@ -259,7 +261,7 @@
     <Compile Include="RMC\FriendsService\FriendsService.cs" />
     <Compile Include="RMC\FriendsService\Response\RMCPacketResponseFriendsService_GetFriendsList.cs" />
     <Compile Include="RMC\InboxMessageService\InboxMessageService.cs" />
-    <Compile Include="RMC\InboxMessageService\Response\RMCPacketResponseInboxMessageService_Method1.cs" />
+    <Compile Include="RMC\InboxMessageService\Response\RMCPacketResponseInboxMessageService_GetInboxMessageOasisIdDict.cs" />
     <Compile Include="RMC\InboxMessageService\Response\RMCPacketResponseInboxMessageService_GetRecentInboxMessages.cs" />
     <Compile Include="RMC\InventoryService\InventoryService.cs" />
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetAllApplyItems.cs" />
