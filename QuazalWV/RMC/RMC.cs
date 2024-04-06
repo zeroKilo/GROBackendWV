@@ -96,7 +96,7 @@ namespace QuazalWV
                     FriendsService.HandleFriendsServiceRequest(p, rmc, client);
                     break;
                 case RMCP.PROTOCOL.ChatService:
-                    ChatService.ProcessChatServiceRequest(p, rmc, client);
+                    ChatService.HandleChatServiceRequest(p, rmc, client);
                     break;
                 case RMCP.PROTOCOL.MissionService:
                     MissionService.HandleMissionServiceRequest(p, rmc, client);
@@ -241,6 +241,9 @@ namespace QuazalWV
                 case RMCP.PROTOCOL.FriendsService:
                     FriendsService.ProcessFriendsServiceRequest(m, rmc);
                     break;
+                case RMCP.PROTOCOL.ChatService:
+                    ChatService.ProcessChatServiceRequest(m, rmc);
+                    break;
                 case RMCP.PROTOCOL.InboxMessageService:
                     InboxMessageService.ProcessInboxMessageServiceRequest(m, rmc);
                     break;
@@ -249,7 +252,6 @@ namespace QuazalWV
                 case RMCP.PROTOCOL.InventoryService:
                 case RMCP.PROTOCOL.LootService:
                 case RMCP.PROTOCOL.WeaponService:
-                case RMCP.PROTOCOL.ChatService:
                 case RMCP.PROTOCOL.MissionService:
                 case RMCP.PROTOCOL.PartyService:
                 case RMCP.PROTOCOL.StatisticsService:

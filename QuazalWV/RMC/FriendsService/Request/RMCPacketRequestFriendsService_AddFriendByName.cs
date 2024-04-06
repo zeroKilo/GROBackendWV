@@ -9,20 +9,21 @@ namespace QuazalWV
 {
     public class RMCPacketRequestFriendsService_AddFriendByName : RMCPRequest
     {
-        public uint unk1;
-        public string name;
+        public List<string> Names { get; set; }
 
         public RMCPacketRequestFriendsService_AddFriendByName(Stream s)
         {
-            unk1 = Helper.ReadU32(s);
-            name = Helper.ReadString(s);
+            Names = new List<string>();
+            uint count = Helper.ReadU32(s);
+            for (uint i = 0; i < count; i++)
+                Names.Add(Helper.ReadString(s));
         }
 
         public override string PayloadToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine("\t[Friend's name: " + name + "]");
-            return "";
+            sb.AppendLine($"\t[Friend: {Names[0]}]");
+            return sb.ToString();
         }
 
         public override byte[] ToBuffer()
@@ -32,7 +33,7 @@ namespace QuazalWV
 
         public override string ToString()
         {
-            return "[AddFriendByName Request: name=" + name + "]";
+            return "[AddFriendByName Request]";
         }
     }
 }

@@ -99,6 +99,7 @@
     <Compile Include="Classes\GR5_Boost.cs" />
     <Compile Include="Classes\GR5_Character.cs" />
     <Compile Include="Classes\GR5_ChatChannelMute.cs" />
+    <Compile Include="Classes\GR5_ChatRoom.cs" />
     <Compile Include="Classes\QDateTime.cs" />
     <Compile Include="Classes\RDV_AMMCommon\GR5_AMMSetting.cs" />
     <Compile Include="Classes\RDV_AMMCommon\GR5_ClusterQueue.cs" />
@@ -209,6 +210,15 @@
     <Compile Include="DO\DupObjs\Payloads\Payload_Session.cs" />
     <Compile Include="DO\DupObjs\Payloads\Payload_SessionInfos.cs" />
     <Compile Include="RMC\AMMDedicatedServerService\Response\RMCPacketResponseAMM_ds_AddParticipantToSession.cs" />
+    <Compile Include="RMC\ChatService\Request\RMCPacketRequestChatService_JoinPublicChannel.cs" />
+    <Compile Include="RMC\ChatService\Request\RMCPacketRequestChatService_IgnorePlayer.cs" />
+    <Compile Include="RMC\ChatService\Request\RMCPacketRequestChatService_UnignorePlayer.cs" />
+    <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_IgnorePlayer.cs" />
+    <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_UnignorePlayer.cs" />
+    <Compile Include="RMC\FriendsService\Request\RMCPacketRequestFriendsService_AddFriendByID.cs" />
+    <Compile Include="RMC\FriendsService\Request\RMCPacketRequestFriendsService_RemoveFriend.cs" />
+    <Compile Include="RMC\FriendsService\Request\RMCPacketRequestFriendsService_MoveFriendToGroup.cs" />
+    <Compile Include="RMC\FriendsService\Response\RMCPacketResponseFriendsService_AddFriendByID.cs" />
     <Compile Include="RMC\InboxMessageService\Request\RMCPacketRequestInboxMessageService_GetInboxMessagesAfterMessageId.cs" />
     <Compile Include="RMC\InboxMessageService\Request\RMCPacketRequestInboxMessageService_DeleteInboxMessages.cs" />
     <Compile Include="RMC\InboxMessageService\Request\RMCPacketRequestInboxMessageService_SetReadFlags.cs" />
@@ -257,9 +267,9 @@
     <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_GetAvatarDecorators.cs" />
     <Compile Include="RMC\AvatarService\Response\RMCPacketResponseAvatarService_GetAvatarPortraits.cs" />
     <Compile Include="RMC\ChatService\ChatService.cs" />
-    <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_GetPlayerStatuses.cs" />
+    <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_GetIgnoreList.cs" />
     <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_CallGetMutedChannel.cs" />
-    <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_Method5.cs" />
+    <Compile Include="RMC\ChatService\Response\RMCPacketResponseChatService_JoinPublicChannel.cs" />
     <Compile Include="RMC\DBGTelemetryService\DBGTelemetryService.cs" />
     <Compile Include="RMC\DBGTelemetryService\Response\RMCPacketResponseDBGTelemetry_DBGAMMClientInfo.cs" />
     <Compile Include="RMC\FriendsService\FriendsService.cs" />

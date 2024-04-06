@@ -9,18 +9,30 @@ namespace QuazalWV
 {
     public class RMCPacketResponseChatService_GetIgnoreList : RMCPResponse
     {
-        public List<GR5_BasicPersona> personas = new List<GR5_BasicPersona>();
+        public List<GR5_BasicPersona> Personas { get; set; }
 
         public RMCPacketResponseChatService_GetIgnoreList()
         {
-            personas.Add(new GR5_BasicPersona());
+            Personas = new List<GR5_BasicPersona>();
+            var example = new GR5_BasicPersona()
+            {
+                PersonaID = 123456,
+                PersonaName = "a bad guy",
+                PersonaStatus = GR5_BasicPersona.STATUS.Offline,
+                AvatarPortraitID = 1,
+                AvatarDecoratorID = 1,
+                AvatarBackgroundColor = 0,
+                CurrentCharacterID = 0,
+                CurrentCharacterLevel = 13
+            };
+            Personas.Add(example);
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)personas.Count);
-            foreach (GR5_BasicPersona p in personas)
+            Helper.WriteU32(m, (uint)Personas.Count);
+            foreach (GR5_BasicPersona p in Personas)
                 p.toBuffer(m);
             return m.ToArray();
         }
