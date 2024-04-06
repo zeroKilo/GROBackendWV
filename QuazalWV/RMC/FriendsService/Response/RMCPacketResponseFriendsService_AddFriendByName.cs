@@ -21,7 +21,7 @@ namespace QuazalWV
             {
                 PersonaID = Global.dummyFriendPidCounter++, 
                 PersonaName = friendName,
-                PersonaStatus = 0x1,
+                PersonaStatus = GR5_BasicPersona.STATUS.Online,
                 AvatarPortraitID = 0,
                 AvatarDecoratorID = 0,
                 AvatarBackgroundColor = 0,

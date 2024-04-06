@@ -13,10 +13,18 @@ namespace QuazalWV
         {
             switch (rmc.methodID)
             {
+                case 1:
+                    rmc.request = new RMCPacketRequestFriendsService_AddFriendByID(s);
+                    break;
                 case 2:
                     rmc.request = new RMCPacketRequestFriendsService_AddFriendByName(s);
                     break;
+                case 3:
+                    rmc.request = new RMCPacketRequestFriendsService_MoveFriendToGroup(s);
+                    break;
                 case 4:
+                    rmc.request = new RMCPacketRequestFriendsService_RemoveFriend(s);
+                    break;
                 case 5:
                     break;
                 default:
@@ -30,12 +38,22 @@ namespace QuazalWV
             RMCPResponse reply;
             switch (rmc.methodID)
             {
+                case 1:
+                    reply = new ;
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    break;
                 case 2:
                     RMCPacketRequestFriendsService_AddFriendByName r = (RMCPacketRequestFriendsService_AddFriendByName)rmc.request;
                     reply = new RMCPacketResponseFriendsService_AddFriendByName(client, r.name);
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
+                case 3:
+                    reply = new RMCPResponseEmpty();
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    break;
                 case 4:
+                    reply = new RMCPResponseEmpty();
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 5:
                     reply = new RMCPacketResponseFriendsService_GetFriendsList(client);

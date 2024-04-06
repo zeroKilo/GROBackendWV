@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseFriendsService_GetFriendsList : RMCPResponse
+    public class RMCPacketResponseFriendsService_AddFriendByID : RMCPResponse
     {
         public List<GR5_FriendData> friends = new List<GR5_FriendData>();
 
-        public RMCPacketResponseFriendsService_GetFriendsList(ClientInfo client)
+        public RMCPacketResponseFriendsService_AddFriendByID(ClientInfo client)
         {
             friends = DBHelper.GetFriends(client);
         }
@@ -27,7 +27,7 @@ namespace QuazalWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponseFriendsService_GetFriendsList]";
+            return "[AddFriendByID Response]";
         }
 
         public override string PayloadToString()

@@ -726,7 +726,7 @@ namespace QuazalWV
                 GR5_FriendData fd = new GR5_FriendData();
                 fd.m_Person.PersonaID = Convert.ToUInt32(entry[2]);
                 fd.m_Person.PersonaName = entry[3];
-                fd.m_Person.PersonaStatus = Convert.ToByte(entry[4]);
+                fd.m_Person.PersonaStatus = GR5_BasicPersona.STATUS.Online;
                 fd.m_Person.AvatarPortraitID = Convert.ToUInt32(entry[5]);
                 fd.m_Person.AvatarDecoratorID = Convert.ToUInt32(entry[6]);
                 fd.m_Person.AvatarBackgroundColor = Convert.ToUInt32(entry[7]);
