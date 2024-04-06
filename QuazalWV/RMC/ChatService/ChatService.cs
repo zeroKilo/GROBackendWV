@@ -17,8 +17,10 @@ namespace QuazalWV
                     rmc.request = new RMCPacketRequestChatService_JoinPublicChannel(s);
                     break;
                 case 9:
+                    rmc.request = new RMCPacketRequestChatService_SetCurrentCharacter(s);
                     break;
                 case 10:
+                    rmc.request = new RMCPacketRequestChatService_SetStatus(s);
                     break;
                 case 12:
                     rmc.request = new RMCPacketRequestChatService_IgnorePlayer(s);
