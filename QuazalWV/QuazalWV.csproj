@@ -210,6 +210,8 @@
     <Compile Include="DO\DupObjs\Payloads\Payload_Session.cs" />
     <Compile Include="DO\DupObjs\Payloads\Payload_SessionInfos.cs" />
     <Compile Include="RMC\AMMDedicatedServerService\Response\RMCPacketResponseAMM_ds_AddParticipantToSession.cs" />
+    <Compile Include="RMC\ChatService\Request\RMCPacketRequestChatService_SetStatus.cs" />
+    <Compile Include="RMC\ChatService\Request\RMCPacketRequestChatService_SetCurrentCharacter.cs" />
     <Compile Include="RMC\ChatService\Request\RMCPacketRequestChatService_JoinPublicChannel.cs" />
     <Compile Include="RMC\ChatService\Request\RMCPacketRequestChatService_IgnorePlayer.cs" />
     <Compile Include="RMC\ChatService\Request\RMCPacketRequestChatService_UnignorePlayer.cs" />
@@ -224,6 +226,8 @@
     <Compile Include="RMC\InboxMessageService\Request\RMCPacketRequestInboxMessageService_SetReadFlags.cs" />
     <Compile Include="RMC\InboxMessageService\Request\RMCPacketRequestInboxMessageService_GetRecentInboxMessages.cs" />
     <Compile Include="RMC\InboxMessageService\Response\RMCPacketResponseInboxMessageService_GetInboxMessagesAfterMessageId.cs" />
+    <Compile Include="RMC\PartyService\Request\RMCPacketRequestPartyService_InviteByID.cs" />
+    <Compile Include="RMC\PartyService\Response\RMCPacketResponsePartyService_InviteByID.cs" />
     <Compile Include="RMC\PlayerProfileService\Request\RMCPacketRequestPlayerProfileService_SetAvatarDecorator.cs" />
     <Compile Include="RMC\PlayerProfileService\Request\RMCPacketRequestPlayerProfileService_SetAvatarPortrait.cs" />
     <Compile Include="RMC\PlayerProfileService\Response\RMCPacketResponsePlayerProfileService_SetAvatarDecorator.cs" />
