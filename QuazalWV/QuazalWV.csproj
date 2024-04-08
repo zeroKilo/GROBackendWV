@@ -294,8 +294,8 @@
     <Compile Include="RMC\LeaderboardService\Response\RMCPacketResponseLeaderboardService_ReadLeaderBoardStatsForPlayers.cs" />
     <Compile Include="RMC\LeaderboardService\Response\RMCPacketResponseLeaderboardService_Method4.cs" />
     <Compile Include="RMC\LoadoutService\LoadoutService.cs" />
+    <Compile Include="RMC\LoadoutService\Response\RMCPacketResponseLoadout_CACHEFetch.cs" />
     <Compile Include="RMC\LoadoutService\Response\RMCPacketResponseLoadout_GetLoadoutPowers.cs" />
-    <Compile Include="RMC\LoadoutService\Response\RMCPacketResponseLoadout_Method5.cs" />
     <Compile Include="RMC\LootService\LootService.cs" />
     <Compile Include="RMC\LootService\Response\RMCPacketResponseLootService_GetLootStatic.cs" />
     <Compile Include="RMC\LootService\Response\RMCPacketResponseLootService_GetLootPointQualityMap.cs" />

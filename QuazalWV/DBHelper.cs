@@ -487,24 +487,28 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM amm_playlists");
             foreach (List<string> entry in results)
             {
-                GR5_AMM_Playlist pl = new GR5_AMM_Playlist();
-                pl.uiId = Convert.ToUInt32(entry[1]);
-                pl.uiNodeType = Convert.ToUInt32(entry[2]);
-                pl.uiMaxTeamSize = Convert.ToUInt32(entry[3]);
-                pl.uiMinTeamSize = Convert.ToUInt32(entry[4]);
-                pl.uiOasisNameId = Convert.ToUInt32(entry[5]);
-                pl.uiOasisDescriptionId = Convert.ToUInt32(entry[6]);
-                pl.uiIsRepeatable = Convert.ToUInt32(entry[7]);
-                pl.uiIsRandom = Convert.ToUInt32(entry[8]);
-                pl.uiThumbnailId = Convert.ToUInt32(entry[9]);
-                pl.m_PlaylistEntryVector = new List<GR5_AMM_PlaylistEntry>();
+                GR5_AMM_Playlist pl = new GR5_AMM_Playlist
+                {
+                    uiId = Convert.ToUInt32(entry[1]),
+                    uiNodeType = Convert.ToUInt32(entry[2]),
+                    uiMaxTeamSize = Convert.ToUInt32(entry[3]),
+                    uiMinTeamSize = Convert.ToUInt32(entry[4]),
+                    uiOasisNameId = Convert.ToUInt32(entry[5]),
+                    uiOasisDescriptionId = Convert.ToUInt32(entry[6]),
+                    uiIsRepeatable = Convert.ToUInt32(entry[7]),
+                    uiIsRandom = Convert.ToUInt32(entry[8]),
+                    uiThumbnailId = Convert.ToUInt32(entry[9]),
+                    m_PlaylistEntryVector = new List<GR5_AMM_PlaylistEntry>()
+                };
                 List<List<string>> results2 = GetQueryResults("SELECT * FROM amm_playlistentries WHERE listID=" + pl.uiId);
                 foreach (List<string> entry2 in results2)
                 {
-                    GR5_AMM_PlaylistEntry ple = new GR5_AMM_PlaylistEntry();
-                    ple.uiMapId = Convert.ToUInt32(entry2[2]);
-                    ple.uiGameMode = Convert.ToUInt32(entry2[3]);
-                    ple.uiMatchDetail = Convert.ToUInt32(entry2[4]);
+                    GR5_AMM_PlaylistEntry ple = new GR5_AMM_PlaylistEntry
+                    {
+                        uiMapId = Convert.ToUInt32(entry2[2]),
+                        uiGameMode = Convert.ToUInt32(entry2[3]),
+                        uiMatchDetail = Convert.ToUInt32(entry2[4])
+                    };
                     pl.m_PlaylistEntryVector.Add(ple);
                 }
                 result.Add(pl);
@@ -518,22 +522,26 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM amm_maps");
             foreach (List<string> entry in results)
             {
-                GR5_AMM_Map map = new GR5_AMM_Map();
-                map.uiId = Convert.ToUInt32(entry[1]);
-                map.uiRootModifierId = Convert.ToUInt32(entry[2]);
-                map.uiMapKey = Convert.ToUInt32(entry[3]);
-                map.uiOasisNameId = Convert.ToUInt32(entry[4]);
-                map.uiOasisDescriptionId = Convert.ToUInt32(entry[5]);
-                map.uiThumbnailId = Convert.ToUInt32(entry[6]);
-                map.m_ModifierVector = new List<GR5_AMM_Modifier>();
+                GR5_AMM_Map map = new GR5_AMM_Map
+                {
+                    uiId = Convert.ToUInt32(entry[1]),
+                    uiRootModifierId = Convert.ToUInt32(entry[2]),
+                    uiMapKey = Convert.ToUInt32(entry[3]),
+                    uiOasisNameId = Convert.ToUInt32(entry[4]),
+                    uiOasisDescriptionId = Convert.ToUInt32(entry[5]),
+                    uiThumbnailId = Convert.ToUInt32(entry[6]),
+                    m_ModifierVector = new List<GR5_AMM_Modifier>()
+                };
                 List<List<string>> results2 = GetQueryResults("SELECT * FROM amm_modifiers WHERE listType=0 AND listID=" + map.uiId);
                 foreach (List<string> entry2 in results2)
                 {
-                    GR5_AMM_Modifier mm = new GR5_AMM_Modifier();
-                    mm.uiId = Convert.ToUInt32(entry2[3]);
-                    mm.uiParentId = Convert.ToUInt32(entry2[4]);
-                    mm.uiType = Convert.ToUInt32(entry2[5]);
-                    mm.uiValue = entry2[6];
+                    GR5_AMM_Modifier mm = new GR5_AMM_Modifier
+                    {
+                        uiId = Convert.ToUInt32(entry2[3]),
+                        uiParentId = Convert.ToUInt32(entry2[4]),
+                        uiType = Convert.ToUInt32(entry2[5]),
+                        uiValue = entry2[6]
+                    };
                     map.m_ModifierVector.Add(mm);
                 }
                 result.Add(map);
@@ -547,21 +555,26 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM amm_gamemodes");
             foreach (List<string> entry in results)
             {
-                GR5_AMM_GameMode mode = new GR5_AMM_GameMode();
-                mode.uiId = Convert.ToUInt32(entry[1]);
-                mode.uiRootModifierId = Convert.ToUInt32(entry[2]);
-                mode.uiOasisNameId = Convert.ToUInt32(entry[3]);
-                mode.uiOasisDescriptionId = Convert.ToUInt32(entry[4]);
-                mode.uiThumbnailId = Convert.ToUInt32(entry[5]);
-                mode.m_ModifierVector = new List<GR5_AMM_Modifier>();
+                GR5_AMM_GameMode mode = new GR5_AMM_GameMode
+                {
+                    uiId = Convert.ToUInt32(entry[1]),
+                    uiRootModifierId = Convert.ToUInt32(entry[2]),
+                    uiType = Convert.ToUInt32(entry[3]),
+                    uiOasisNameId = Convert.ToUInt32(entry[4]),
+                    uiOasisDescriptionId = Convert.ToUInt32(entry[5]),
+                    uiThumbnailId = Convert.ToUInt32(entry[6]),
+                    m_ModifierVector = new List<GR5_AMM_Modifier>()
+                };
                 List<List<string>> results2 = GetQueryResults("SELECT * FROM amm_modifiers WHERE listType=1 AND listID=" + mode.uiId);
                 foreach (List<string> entry2 in results2)
                 {
-                    GR5_AMM_Modifier mm = new GR5_AMM_Modifier();
-                    mm.uiId = Convert.ToUInt32(entry2[3]);
-                    mm.uiParentId = Convert.ToUInt32(entry2[4]);
-                    mm.uiType = Convert.ToUInt32(entry2[5]);
-                    mm.uiValue = entry2[6];
+                    GR5_AMM_Modifier mm = new GR5_AMM_Modifier
+                    {
+                        uiId = Convert.ToUInt32(entry2[3]),
+                        uiParentId = Convert.ToUInt32(entry2[4]),
+                        uiType = Convert.ToUInt32(entry2[5]),
+                        uiValue = entry2[6]
+                    };
                     mode.m_ModifierVector.Add(mm);
                 }
                 result.Add(mode);
@@ -575,20 +588,24 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM amm_gamedetails");
             foreach (List<string> entry in results)
             {
-                GR5_AMM_GameDetail detail = new GR5_AMM_GameDetail();
-                detail.uiId = Convert.ToUInt32(entry[1]);
-                detail.uiRootModifierId = Convert.ToUInt32(entry[2]);
-                detail.uiOasisNameId = Convert.ToUInt32(entry[3]);
-                detail.uiOasisDescriptionId = Convert.ToUInt32(entry[4]);
-                detail.m_ModifierVector = new List<GR5_AMM_Modifier>();
+                GR5_AMM_GameDetail detail = new GR5_AMM_GameDetail
+                {
+                    uiId = Convert.ToUInt32(entry[1]),
+                    uiRootModifierId = Convert.ToUInt32(entry[2]),
+                    uiOasisNameId = Convert.ToUInt32(entry[3]),
+                    uiOasisDescriptionId = Convert.ToUInt32(entry[4]),
+                    m_ModifierVector = new List<GR5_AMM_Modifier>()
+                };
                 List<List<string>> results2 = GetQueryResults("SELECT * FROM amm_modifiers WHERE listType=2 AND listID=" + detail.uiId);
                 foreach (List<string> entry2 in results2)
                 {
-                    GR5_AMM_Modifier mm = new GR5_AMM_Modifier();
-                    mm.uiId = Convert.ToUInt32(entry2[3]);
-                    mm.uiParentId = Convert.ToUInt32(entry2[4]);
-                    mm.uiType = Convert.ToUInt32(entry2[5]);
-                    mm.uiValue = entry2[6];
+                    GR5_AMM_Modifier mm = new GR5_AMM_Modifier
+                    {
+                        uiId = Convert.ToUInt32(entry2[3]),
+                        uiParentId = Convert.ToUInt32(entry2[4]),
+                        uiType = Convert.ToUInt32(entry2[5]),
+                        uiValue = entry2[6]
+                    };
                     detail.m_ModifierVector.Add(mm);
                 }
                 result.Add(detail);
@@ -602,28 +619,32 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM skus");
             foreach(List<string> entry in results)
             {
-                GR5_SKU sku = new GR5_SKU();
-                sku.m_ID = Convert.ToUInt32(entry[1]);
-                sku.m_Type = Convert.ToUInt32(entry[2]);
-                sku.m_AvailableStock = Convert.ToUInt32(entry[3]);
-                sku.m_TimeStart = Convert.ToUInt32(entry[4]);
-                sku.m_TimeExpired = Convert.ToUInt32(entry[5]);
-                sku.m_BuyIGCCost = Convert.ToUInt32(entry[6]);
-                sku.m_BuyGRCashCost = Convert.ToUInt32(entry[7]);
-                sku.m_AssetKey = Convert.ToUInt32(entry[8]);
-                sku.m_Name = entry[9];
-                sku.m_OasisName = Convert.ToUInt32(entry[10]);
-                sku.m_ItemVector = new List<GR5_SKUItem>();
+                GR5_SKU sku = new GR5_SKU
+                {
+                    m_ID = Convert.ToUInt32(entry[1]),
+                    m_Type = Convert.ToUInt32(entry[2]),
+                    m_AvailableStock = Convert.ToUInt32(entry[3]),
+                    m_TimeStart = Convert.ToUInt32(entry[4]),
+                    m_TimeExpired = Convert.ToUInt32(entry[5]),
+                    m_BuyIGCCost = Convert.ToUInt32(entry[6]),
+                    m_BuyGRCashCost = Convert.ToUInt32(entry[7]),
+                    m_AssetKey = Convert.ToUInt32(entry[8]),
+                    m_Name = entry[9],
+                    m_OasisName = Convert.ToUInt32(entry[10]),
+                    m_ItemVector = new List<GR5_SKUItem>()
+                };
                 List<List<string>> results2 = GetQueryResults("SELECT * FROM skuitems WHERE itemid=" + sku.m_ID);
                 foreach (List<string> entry2 in results2)
                 {
-                    GR5_SKUItem item = new GR5_SKUItem();
-                    item.m_ItemID = Convert.ToUInt32(entry2[1]);
-                    item.m_DurabilityValue = Convert.ToUInt32(entry2[2]);
-                    item.m_DurabilityValue2 = Convert.ToUInt32(entry2[3]);
-                    item.m_OasisName = Convert.ToUInt32(entry2[4]);
-                    item.m_IGCPrice = Convert.ToSingle(entry2[5]);
-                    item.m_GRCashPrice = Convert.ToSingle(entry2[6]);
+                    GR5_SKUItem item = new GR5_SKUItem
+                    {
+                        m_ItemID = Convert.ToUInt32(entry2[1]),
+                        m_DurabilityValue = Convert.ToUInt32(entry2[2]),
+                        m_DurabilityValue2 = Convert.ToUInt32(entry2[3]),
+                        m_OasisName = Convert.ToUInt32(entry2[4]),
+                        m_IGCPrice = Convert.ToSingle(entry2[5]),
+                        m_GRCashPrice = Convert.ToSingle(entry2[6])
+                    };
                     sku.m_ItemVector.Add(item);
                 }
                 result.Add(sku);
@@ -637,11 +658,13 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM coupons");
             foreach(List<string> entry in results)
             {
-                GR5_Coupon coupon = new GR5_Coupon();
-                coupon.m_ID = Convert.ToUInt32(entry[1]);
-                coupon.m_SKUModifierID = Convert.ToUInt32(entry[2]);
-                coupon.m_TimeStart = Convert.ToUInt32(entry[3]);
-                coupon.m_TimeExpired = Convert.ToUInt32(entry[4]);
+                GR5_Coupon coupon = new GR5_Coupon
+                {
+                    m_ID = Convert.ToUInt32(entry[1]),
+                    m_SKUModifierID = Convert.ToUInt32(entry[2]),
+                    m_TimeStart = Convert.ToUInt32(entry[3]),
+                    m_TimeExpired = Convert.ToUInt32(entry[4])
+                };
                 result.Add(coupon);
             }
             return result;
@@ -653,14 +676,16 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM skumodifiers");
             foreach(List<string> entry in results)
             {
-                GR5_SKUModifier mod = new GR5_SKUModifier();
-                mod.m_ID = Convert.ToUInt32(entry[1]);
-                mod.m_CouponBatchID = Convert.ToUInt32(entry[2]);
-                mod.m_TimeStart = Convert.ToUInt32(entry[3]);
-                mod.m_TimeExpired = Convert.ToUInt32(entry[4]);
-                mod.m_TargetType = Convert.ToUInt32(entry[5]);
-                mod.m_TargetValue = Convert.ToUInt32(entry[6]);
-                mod.m_Tag = entry[7];
+                GR5_SKUModifier mod = new GR5_SKUModifier
+                {
+                    m_ID = Convert.ToUInt32(entry[1]),
+                    m_CouponBatchID = Convert.ToUInt32(entry[2]),
+                    m_TimeStart = Convert.ToUInt32(entry[3]),
+                    m_TimeExpired = Convert.ToUInt32(entry[4]),
+                    m_TargetType = Convert.ToUInt32(entry[5]),
+                    m_TargetValue = Convert.ToUInt32(entry[6]),
+                    m_Tag = entry[7]
+                };
                 List<List<string>> results2 = GetQueryResults("SELECT * FROM skumodconditions WHERE modid=" + mod.m_ID);    //modid column for reference only
                 foreach (List<string> entry2 in results2)
                 {

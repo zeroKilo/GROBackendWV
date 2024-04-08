@@ -9,13 +9,13 @@ namespace QuazalWV
 {
     public class GR5_PersonaAbilityUpgrade
     {
-        public uint unk1;
-        public List<GR5_AbilityUpgradeSlot> slots = new List<GR5_AbilityUpgradeSlot>();
+        public uint AbilityId { get; set; }
+        public List<GR5_AbilityUpgradeSlot> Upgrades = new List<GR5_AbilityUpgradeSlot>();
         public void toBuffer(Stream s)
         {
-            Helper.WriteU32(s, unk1);
-            Helper.WriteU32(s, (uint)slots.Count);
-            foreach (GR5_AbilityUpgradeSlot a in slots)
+            Helper.WriteU32(s, AbilityId);
+            Helper.WriteU32(s, (uint)Upgrades.Count);
+            foreach (GR5_AbilityUpgradeSlot a in Upgrades)
                 a.toBuffer(s);
         }
     }

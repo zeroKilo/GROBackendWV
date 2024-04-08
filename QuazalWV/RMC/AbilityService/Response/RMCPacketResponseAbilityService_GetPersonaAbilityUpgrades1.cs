@@ -15,7 +15,7 @@ namespace QuazalWV
         public RMCPacketResponseAbilityService_GetPersonaAbilityUpgrades()
         {
             GR5_PersonaAbilityUpgrade p = new GR5_PersonaAbilityUpgrade();
-            p.slots.Add(new GR5_AbilityUpgradeSlot());
+            p.Upgrades.Add(new GR5_AbilityUpgradeSlot());
             list.Add(p);
         }
 

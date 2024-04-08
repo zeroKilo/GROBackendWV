@@ -9,16 +9,15 @@ namespace QuazalWV
 {
     public class RMCPacketResponsePartyService_OnSignInCheckPartyStatus : RMCPResponse
     {
-        //implementation might be wrong
-        public class Unknown
+        public class Party
         {
-            public string unk1 = "";
-            public GR5_Gathering session = new GR5_Gathering();
+            public string className = "";
+            public GR5_Gathering gathering = new GR5_Gathering();
             public void toBuffer(Stream s)
             {
-                Helper.WriteString(s, unk1);
+                Helper.WriteString(s, className);
                 MemoryStream m = new MemoryStream(); 
-                session.toBuffer(m);
+                gathering.toBuffer(m);
                 byte[] buff = m.ToArray();
                 Helper.WriteU32(s, (uint)buff.Length + 4);
                 Helper.WriteU32(s, (uint)buff.Length);
@@ -28,7 +27,7 @@ namespace QuazalWV
 
         public List<GR5_PartyMember> members = new List<GR5_PartyMember>();
         public List<GR5_Invitee> invitees = new List<GR5_Invitee>();
-        public Unknown unk1 = new Unknown();
+        public Party party = new Party();
 
         public RMCPacketResponsePartyService_OnSignInCheckPartyStatus()
         {
@@ -39,7 +38,7 @@ namespace QuazalWV
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            unk1.toBuffer(m);
+            party.toBuffer(m);
             Helper.WriteU32(m, (uint)members.Count);
             foreach (GR5_PartyMember mem in members)
                 mem.toBuffer(m);
