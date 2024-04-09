@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseAMM_FetchAMMPlaylists : RMCPResponse
+    public class RMCPacketResponseAMMGameClientService_GetActiveAMMPlaylists : RMCPResponse
     {
         public List<GR5_AMM_Playlist> amm_playlists = new List<GR5_AMM_Playlist>();
         public List<GR5_AMM_Map> amm_maps = new List<GR5_AMM_Map>();
         public List<GR5_AMM_GameMode> amm_gamemodes = new List<GR5_AMM_GameMode>();
         public List<GR5_AMM_GameDetail> amm_gamedetails = new List<GR5_AMM_GameDetail>();
 
-        public RMCPacketResponseAMM_FetchAMMPlaylists()
+        public RMCPacketResponseAMMGameClientService_GetActiveAMMPlaylists()
         {
             amm_playlists = DBHelper.GetAMMPlaylists();
             amm_maps = DBHelper.GetAMMMaps();
@@ -42,7 +42,7 @@ namespace QuazalWV
 
         public override string ToString()
         {
-            return "[RMCPacketResponseAMM_Method7]";
+            return "[GetActiveAMMPlaylists Response]";
         }
 
         public override string PayloadToString()

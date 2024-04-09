@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace QuazalWV
 {
-    public class RMCPacketResponseAMM_LeaveAMMSearch : RMCPResponse
+    public class RMCPacketResponseAMMGameClientService_LeaveAMMSearch : RMCPResponse
     {
-        public uint unk = 1;
+        public uint matchRequestId = 1;
 
-        public RMCPacketResponseAMM_LeaveAMMSearch()
+        public RMCPacketResponseAMMGameClientService_LeaveAMMSearch()
         {
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, unk);
+            Helper.WriteU32(m, matchRequestId);
             return m.ToArray();
         }
 
         public override string ToString()
         {
-            return "[RMCPacketResponseAMM_Method5]";
+            return "[LeaveAMMSearch Response]";
         }
 
         public override string PayloadToString()

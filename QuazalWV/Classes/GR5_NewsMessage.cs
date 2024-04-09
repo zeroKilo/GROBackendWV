@@ -19,8 +19,8 @@ namespace QuazalWV
         AchievementCompleted = 73501,
         MissionCompleted = 73502,
         WeaponLevelUp = 73503,
-        Kills = 73504,
-        Headshots = 73505,
+        WeaponKills = 73504,
+        WeaponHeadshots = 73505,
         RewardReceived = 73506
     }
 
@@ -46,40 +46,39 @@ namespace QuazalWV
                     m_body = GetWelcomeMsg(publisher.PID);
                     break;
                 case NewsMessageType.AvatarChanged:
-                    m_body = GetAvatarChangedMsg(arg1, arg2);
+                    m_body = GetAvatarChangedMsg(publisher.PID, arg1, arg2);
                     break;
                 case NewsMessageType.LevelUp:
-                    m_body = "";
+                    m_body = GetLevelUpMsg(publisher.PID, arg1, arg2);
                     break;
                 case NewsMessageType.AchievementCompleted:
-                    m_body = "";
+                    m_body = GetAchievementCompletedMsg(publisher.PID, arg1);
                     break;
                 case NewsMessageType.MissionCompleted:
                     m_body = GetMissionCompletedMsg(publisher.PID, arg1);
                     break;
                 case NewsMessageType.WeaponLevelUp:
-                    m_body = "";
+                    m_body = GetWeaponLevelUpMsg(publisher.PID, arg1, arg2);
                     break;
-                case NewsMessageType.Kills:
-                    m_body = "";
+                case NewsMessageType.WeaponKills:
+                    m_body = GetWeaponKillsMsg(publisher.PID, arg1, arg2);
                     break;
-                case NewsMessageType.Headshots:
-                    m_body = "";
+                case NewsMessageType.WeaponHeadshots:
+                    m_body = GetWeaponKillsMsg(publisher.PID, arg1, arg2);
                     break;
                 case NewsMessageType.RewardReceived:
-                    m_body = "";
+                    m_body = GetRewardReceivedMsg(publisher.PID, arg1);
                     break;
             }
         }
 
-        //TODO: time format isnt valid
         public string GetWelcomeMsg(uint pid)
         {
             return
             new XElement("news",
                 new XElement("message",
-                    new XAttribute("unkattr", "somevalue"),
-                    new XAttribute("unkattrii", "somevalueii"),
+                    new XAttribute("unkattr", ""),
+                    new XAttribute("unkattrii", ""),
                     new XAttribute("type", (uint)type),
                     new XAttribute("icon", 11),
                     new XAttribute("oasis", (uint)type),
@@ -94,8 +93,8 @@ namespace QuazalWV
             return
             new XElement("news",
                 new XElement("message",
-                    new XAttribute("unkattr", "somevalue"),
-                    new XAttribute("unkattrii", "somevalueii"),
+                    new XAttribute("unkattr", ""),
+                    new XAttribute("unkattrii", ""),
                     new XAttribute("type", (uint)type),
                     new XAttribute("icon", 1),
                     new XAttribute("oasis", (uint)type),
@@ -106,20 +105,115 @@ namespace QuazalWV
             ).ToString().Replace("\r", "").Replace("\n", "").Replace("\t", "");
         }
 
-        public string GetAvatarChangedMsg(uint portraitId, uint bgColor)
+        public string GetAvatarChangedMsg(uint pid, uint portraitId, uint bgColor)
+        {
+            pid = 4661;
+            return
+            new XElement("news",
+                new XElement("message",
+                    new XAttribute("unkattr", ""),
+                    new XAttribute("unkattrii", ""),
+                    new XAttribute("type", (uint)type),
+                    new XAttribute("icon", 11),
+                    new XAttribute("oasis", (uint)type),
+                    // a friend's PID
+                    new XAttribute("pid", pid),
+                    new XAttribute("time", GetCurrentTime()),
+                    // the new avatar
+                    new XAttribute("avatar", portraitId),
+                    new XAttribute("bgcolor", bgColor)
+                )
+            ).ToString().Replace("\r", "").Replace("\n", "").Replace("\t", "");
+        }
+
+        public string GetLevelUpMsg(uint pid, uint classId, uint level)
         {
             return
             new XElement("news",
                 new XElement("message",
-                    new XAttribute("unkattr", "somevalue"),
-                    new XAttribute("unkattrii", "somevalueii"),
+                    new XAttribute("unkattr", ""),
+                    new XAttribute("unkattrii", ""),
                     new XAttribute("type", (uint)type),
                     new XAttribute("icon", 11),
                     new XAttribute("oasis", (uint)type),
-                    new XAttribute("pid", 0),//pid must be zero
+                    new XAttribute("pid", pid),
                     new XAttribute("time", GetCurrentTime()),
-                    new XAttribute("avatar", portraitId),
-                    new XAttribute("bgcolor", bgColor)
+                    new XAttribute("class", classId),
+                    new XAttribute("level", level)
+                )
+            ).ToString().Replace("\r", "").Replace("\n", "").Replace("\t", "");
+        }
+
+        public string GetAchievementCompletedMsg(uint pid, uint achievementId)
+        {
+            return
+            new XElement("news",
+                new XElement("message",
+                    new XAttribute("unkattr", ""),
+                    new XAttribute("unkattrii", ""),
+                    new XAttribute("type", (uint)type),
+                    new XAttribute("icon", 1),
+                    new XAttribute("oasis", (uint)type),
+                    new XAttribute("pid", pid),
+                    new XAttribute("time", GetCurrentTime()),
+                    new XAttribute("achievementid", achievementId)
+                )
+            ).ToString().Replace("\r", "").Replace("\n", "").Replace("\t", "");
+        }
+
+        public string GetWeaponLevelUpMsg(uint pid, uint weaponId, uint level)
+        {
+            return
+            new XElement("news",
+                new XElement("message",
+                    new XAttribute("unkattr", ""),
+                    new XAttribute("unkattrii", ""),
+                    new XAttribute("type", (uint)type),
+                    new XAttribute("icon", 1),
+                    new XAttribute("oasis", (uint)type),
+                    new XAttribute("pid", pid),
+                    new XAttribute("time", GetCurrentTime()),
+                    new XAttribute("weaponid", weaponId),
+                    new XAttribute("level", level)
+                )
+            ).ToString().Replace("\r", "").Replace("\n", "").Replace("\t", "");
+        }
+
+        public string GetWeaponKillsMsg(uint pid, uint weaponId, uint kills)
+        {
+            pid = 4661;
+            return
+            new XElement("news",
+                new XElement("message",
+                    new XAttribute("unkattr", ""),
+                    new XAttribute("unkattrii", ""),
+                    new XAttribute("type", (uint)type),
+                    new XAttribute("icon", 1),
+                    new XAttribute("oasis", (uint)type),
+                    // a friend's PID
+                    new XAttribute("pid", pid),
+                    new XAttribute("time", GetCurrentTime()),
+                    new XAttribute("weaponid", weaponId),
+                    new XAttribute("kills", kills)
+                )
+            ).ToString().Replace("\r", "").Replace("\n", "").Replace("\t", "");
+        }
+
+        public string GetRewardReceivedMsg(uint pid, uint accoladeId)
+        {
+            pid = 4661;
+            return
+            new XElement("news",
+                new XElement("message",
+                    new XAttribute("unkattr", ""),
+                    new XAttribute("unkattrii", ""),
+                    new XAttribute("type", (uint)type),
+                    new XAttribute("icon", 1),
+                    new XAttribute("oasis", (uint)type),
+                    // a friend's PID
+                    new XAttribute("pid", pid),
+                    new XAttribute("time", GetCurrentTime()),
+                    new XAttribute("accoladeid", accoladeId)
                 )
             ).ToString().Replace("\r", "").Replace("\n", "").Replace("\t", "");
         }
@@ -130,7 +224,10 @@ namespace QuazalWV
             Helper.WriteString(s, m_body);
         }
 
-        //The format is for SYSTEMTIME structure, read as follows: %u-%u-%u %u:%u:%f
+        /// <summary>
+        /// The format is for SYSTEMTIME structure, read as follows: %u-%u-%u %u:%u:%f
+        /// </summary>
+        /// <returns></returns>
         public string GetCurrentTime()
         {
             DateTime now = DateTime.UtcNow;

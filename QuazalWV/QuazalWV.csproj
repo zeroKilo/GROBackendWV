@@ -256,8 +256,8 @@
     <Compile Include="RMC\AMMDedicatedServerService\Response\RMCPacketResponseAMM_cmn_FetchSessionParticipants.cs" />
     <Compile Include="RMC\AMMGameClientService\AMMGameClientService.cs" />
     <Compile Include="RMC\AMMGameClientService\Response\RMCPacketResponseAMM_GetSessionURLs.cs" />
-    <Compile Include="RMC\AMMGameClientService\Response\RMCPacketResponseAMM_Method5.cs" />
-    <Compile Include="RMC\AMMGameClientService\Response\RMCPacketResponseAMM_Method7.cs" />
+    <Compile Include="RMC\AMMGameClientService\Response\RMCPacketResponseAMMGameClientService_LeaveAMMSearch.cs" />
+    <Compile Include="RMC\AMMGameClientService\Response\RMCPacketResponseAMMGameClientService_GetActiveAMMPlaylists.cs" />
     <Compile Include="RMC\AMMGameClientService\Response\RMCPacketResponseAMM_RequestAMMSearch.cs" />
     <Compile Include="RMC\ArmorService\ArmorService.cs" />
     <Compile Include="RMC\ArmorService\Response\RMCPacketResponseArmorService_GetPersonaArmorTiers.cs" />
@@ -304,7 +304,7 @@
     <Compile Include="RMC\MatchMakingService\Response\RMCPacketResponseMatchMakingService_Method10.cs" />
     <Compile Include="RMC\MissionService\MissionService.cs" />
     <Compile Include="RMC\MissionService\Response\RMCPacketResponseMissionService_GetAllMissionTemplate.cs" />
-    <Compile Include="RMC\MissionService\Response\RMCPacketResponseMissionService_Method3.cs" />
+    <Compile Include="RMC\MissionService\Response\RMCPacketResponseMissionService_GetPersonaMissions.cs" />
     <Compile Include="RMC\OpsProtocolService\OpsProtocolService.cs" />
     <Compile Include="RMC\OpsProtocolService\Response\RMCPacketResponseOpsProtocolService_GetAllOperatorVariables.cs" />
     <Compile Include="RMC\OpsProtocolService\Response\RMCPacketResponseOpsProtocolService_GetAllPriorityBroadcasts.cs" />

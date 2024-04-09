@@ -11,8 +11,8 @@ namespace QuazalWV
     {
         public List<GR5_PersonaMission> missions = new List<GR5_PersonaMission>();
         public uint missionSeed;
-        public uint missionStartTime1;//can be 64-bit value, idk
-        public uint missionStartTime2;
+        public uint _outTodayDailyMissionDateTime;
+        public uint _outNextDailyMissionDateTime;
 
         public RMCPacketResponseMissionService_GetPersonaMissions()
         {
@@ -26,8 +26,8 @@ namespace QuazalWV
             foreach (GR5_PersonaMission pm in missions)
                 pm.toBuffer(m);
             Helper.WriteU32(m, missionSeed);
-            Helper.WriteU32(m, missionStartTime1);
-            Helper.WriteU32(m, missionStartTime2);
+            Helper.WriteU32(m, _outTodayDailyMissionDateTime);
+            Helper.WriteU32(m, _outNextDailyMissionDateTime);
             return m.ToArray();
         }
 
