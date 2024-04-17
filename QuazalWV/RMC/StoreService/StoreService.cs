@@ -23,6 +23,12 @@ namespace QuazalWV
                     break;
                 case 11:
                     break;
+                case 17:
+                    rmc.request = new RMCPacketRequestStoreService_InitiateBuyItem(s);
+                    break;
+                case 18:
+                    rmc.request = new RMCPacketRequestStoreService_CompleteBuyItem(s);
+                    break;
                 case 20:
                     rmc.request = new RMCPacketRequestStoreService_InitiateBuyWeaponAndAttachComponents(s);
                     break;
@@ -56,6 +62,26 @@ namespace QuazalWV
                     break;
                 case 11:
                     reply = new RMCPacketResponseStoreService_GetShoppingDetails();
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    break;
+                case 17:
+                    var buyItemInitReq = (RMCPacketRequestStoreService_InitiateBuyItem)rmc.request;
+                    trId = TransactionModel.SaveTransaction(
+                        client.PID,
+                        buyItemInitReq.CartItems[0].SkuId,
+                        TransactionType.BuyItem,
+                        buyItemInitReq.CartItems[0].VirtualCurrencyType
+                    );
+                    reply = new RMCPacketResponseStoreService_InitiateBuyItem(trId);
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    // send complete transaction notif on success
+                    if (trId > 0)
+                        NotificationQuene.AddNotification(new NotificationQueneEntry(client, 3000, 0, 1022, 1, trId, trId, 0, ""));
+                    break;
+                case 18:
+                    var buyItemComplReq = (RMCPacketRequestStoreService_CompleteBuyItem)rmc.request;
+                    TransactionModel.CompleteTransaction(buyItemComplReq.TransactionId);
+                    reply = new RMCPacketResponseStoreService_CompleteBuyItem();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 20:
