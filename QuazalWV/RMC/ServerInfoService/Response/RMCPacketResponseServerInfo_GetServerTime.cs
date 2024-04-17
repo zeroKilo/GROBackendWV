@@ -9,12 +9,12 @@ namespace QuazalWV
 {
     public class RMCPacketResponseServerInfo_GetServerUTCTime : RMCPResponse
     {
-        public double unk1;
+        public double UtcTime { get; set; }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteDouble(m, unk1);
+            Helper.WriteDouble(m, UtcTime);
             return m.ToArray();
         }
 

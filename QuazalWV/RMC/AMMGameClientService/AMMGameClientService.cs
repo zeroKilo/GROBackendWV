@@ -21,8 +21,16 @@ namespace QuazalWV
                 case 4:
                     reply = new RMCPacketResponseAMM_RequestAMMSearch();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
-                    NotificationQuene.AddNotification(new NotificationQueneEntry(client, 3000, 0, 1002, 2, 1, 1, 0, "amm.new.game"));
-                    NotificationQuene.AddNotification(new NotificationQueneEntry(client, 6000, 0, 1002, 3, 1, 1, 0, "1"));
+                    uint matchReqId = 1;
+                    uint sesId = 1;
+                    var joinType = "amm.new.game";
+                    // RDV_E_AMM_EVENT_SESSION_FOUND
+                    NotificationQuene.AddNotification(new NotificationQueneEntry(client, 3000, 0, 1002, 2, matchReqId, sesId, 0, joinType));
+                    sesId = 1;
+                    uint teamId = 1;
+                    var gameMode = "1";
+                    // CallGetSessionURLs
+                    NotificationQuene.AddNotification(new NotificationQueneEntry(client, 6000, 0, 1002, 3, sesId, teamId, 0, gameMode));
                     break;
                 case 5:
                     reply = new RMCPacketResponseAMMGameClientService_LeaveAMMSearch();
@@ -30,6 +38,7 @@ namespace QuazalWV
                     break;
                 case 7:
                     reply = new RMCPacketResponseAMMGameClientService_GetActiveAMMPlaylists();
+                    // RDV_E_AMM_NOTIFICATION_SESSIONTAPPED
                     NotificationQuene.AddNotification(new NotificationQueneEntry(client, 3000, 0, 1002, 1, 1, 1, 0, "7"));
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;

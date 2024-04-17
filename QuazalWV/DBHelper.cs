@@ -135,21 +135,23 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM templateitems");
             foreach (List<string> entry in results)
             {
-                GR5_TemplateItem item = new GR5_TemplateItem();
-                item.m_ItemID = Convert.ToUInt32(entry[1]);
-                item.m_ItemType = Convert.ToByte(entry[2]);
-                item.m_ItemName = entry[3];
-                item.m_DurabilityType = Convert.ToByte(entry[4]);
-                item.m_IsInInventory = entry[5] == "True";
-                item.m_IsSellable = entry[6] == "True";
-                item.m_IsLootable = entry[7] == "True";
-                item.m_IsRewardable = entry[8] == "True";
-                item.m_IsUnlockable = entry[9] == "True";
-                item.m_MaxItemInSlot = Convert.ToUInt32(entry[10]);
-                item.m_GearScore = Convert.ToUInt32(entry[11]);
-                item.m_IGCValue = Convert.ToUInt32(entry[12]) / 100f;
-                item.m_OasisName = Convert.ToUInt32(entry[13]);
-                item.m_OasisDesc = Convert.ToUInt32(entry[14]);
+                GR5_TemplateItem item = new GR5_TemplateItem
+                {
+                    m_ItemID = Convert.ToUInt32(entry[1]),
+                    m_ItemType = Convert.ToByte(entry[2]),
+                    m_ItemName = entry[3],
+                    m_DurabilityType = Convert.ToByte(entry[4]),
+                    m_IsInInventory = entry[5] == "True",
+                    m_IsSellable = entry[6] == "True",
+                    m_IsLootable = entry[7] == "True",
+                    m_IsRewardable = entry[8] == "True",
+                    m_IsUnlockable = entry[9] == "True",
+                    m_MaxItemInSlot = Convert.ToUInt32(entry[10]),
+                    m_GearScore = Convert.ToUInt32(entry[11]),
+                    m_IGCValue = Convert.ToUInt32(entry[12]) / 100f,
+                    m_OasisName = Convert.ToUInt32(entry[13]),
+                    m_OasisDesc = Convert.ToUInt32(entry[14])
+                };
                 result.Add(item);
             }
             return result;
@@ -459,7 +461,6 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM weaponcompatbridge");
             foreach (List<string> entry in results)
             {
-                GR5_Component c = new GR5_Component();
                 uint key = Convert.ToUInt32(entry[1]);
                 uint value = Convert.ToUInt32(entry[2]);
                 bool found = false;
@@ -619,6 +620,7 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM skus");
             foreach(List<string> entry in results)
             {
+                var skuId = Convert.ToUInt32(entry[0]);
                 GR5_SKU sku = new GR5_SKU
                 {
                     m_ID = Convert.ToUInt32(entry[1]),
@@ -633,7 +635,7 @@ namespace QuazalWV
                     m_OasisName = Convert.ToUInt32(entry[10]),
                     m_ItemVector = new List<GR5_SKUItem>()
                 };
-                List<List<string>> results2 = GetQueryResults("SELECT * FROM skuitems WHERE itemid=" + sku.m_ID);
+                List<List<string>> results2 = GetQueryResults("SELECT * FROM skuitems WHERE skuid=" + skuId);
                 foreach (List<string> entry2 in results2)
                 {
                     GR5_SKUItem item = new GR5_SKUItem

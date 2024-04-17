@@ -11,9 +11,21 @@ namespace QuazalWV
     {
         public List<GR5_GameSessionParticipant> participants = new List<GR5_GameSessionParticipant>();
 
-        public RMCPacketResponseAMM_cmn_FetchSessionParticipants()
+        public RMCPacketResponseAMM_cmn_FetchSessionParticipants(ClientInfo client)
         {
-            participants.Add(new GR5_GameSessionParticipant());
+            var participant = new GR5_GameSessionParticipant()
+            {
+                m_PId = client.PID,
+                m_CgId = 1,
+                m_SessionId = 1,
+                m_TeamId = 1,
+                m_Class = 0,
+                m_Level = 16,
+                m_GhostRank = 8,
+                m_Status = 2,
+                msz_KeyName = ""
+            };
+            participants.Add(participant);
         }
 
         public override byte[] ToBuffer()
