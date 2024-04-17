@@ -395,14 +395,18 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM weapons");
             foreach (List<string> entry in results)
             {
-                Map_U32_GR5_Weapon pair = new Map_U32_GR5_Weapon();
-                pair.key = Convert.ToUInt32(entry[1]);
-                pair.weapon = new GR5_Weapon();
-                pair.weapon.weaponID = Convert.ToUInt32(entry[2]);
-                pair.weapon.classTypeID = Convert.ToUInt32(entry[3]);
-                pair.weapon.weaponType = Convert.ToUInt32(entry[4]);
-                pair.weapon.equippableClassTypeID = Convert.ToUInt32(entry[5]);
-                pair.weapon.flags = Convert.ToUInt32(entry[6]);
+                Map_U32_GR5_Weapon pair = new Map_U32_GR5_Weapon
+                {
+                    key = Convert.ToUInt32(entry[1]),
+                    weapon = new GR5_Weapon
+                    {
+                        weaponID = Convert.ToUInt32(entry[2]),
+                        classTypeID = Convert.ToUInt32(entry[3]),
+                        weaponType = Convert.ToUInt32(entry[4]),
+                        equippableClassTypeID = Convert.ToUInt32(entry[5]),
+                        flags = Convert.ToUInt32(entry[6])
+                    }
+                };
                 result.Add(pair);
             }
             return result;
@@ -433,7 +437,6 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM tempcomponentlists");
             foreach (List<string> entry in results)
             {
-                GR5_Component c = new GR5_Component();
                 uint key = Convert.ToUInt32(entry[1]);
                 uint value = Convert.ToUInt32(entry[2]);
                 bool found = false;
@@ -718,12 +721,14 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM gameclasses");
             foreach (List<string> entry in results)
             {
-                GR5_GameClass gclass = new GR5_GameClass();
-                gclass.m_ID = Convert.ToUInt32(entry[1]);
-                gclass.m_ModifierListID = Convert.ToUInt32(entry[2]);
-                gclass.m_OasisID = Convert.ToUInt32(entry[3]);
-                gclass.m_Name = entry[4];
-                gclass.m_LoadoutID = Convert.ToUInt32(entry[5]);
+                GR5_GameClass gclass = new GR5_GameClass
+                {
+                    m_ID = Convert.ToUInt32(entry[1]),
+                    m_ModifierListID = Convert.ToUInt32(entry[2]),
+                    m_OasisID = Convert.ToUInt32(entry[3]),
+                    m_Name = entry[4],
+                    m_LoadoutID = Convert.ToUInt32(entry[5])
+                };
                 List<uint> equipweaponids = new List<uint>();
                 List<List<string>> results2 = GetQueryResults("SELECT * FROM equipweaponids WHERE classid=" + gclass.m_ID); //classid for reference
                 foreach (List<string> entry2 in results2)
