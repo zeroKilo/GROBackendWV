@@ -13,7 +13,7 @@ namespace QuazalWV
 
         public RMCPacketResponseSkillsService_GetModifiers()
         {
-            mods = DBHelper.GetSkillModefiers();
+            mods = DBHelper.GetSkillModifiers();
         }
 
         public override byte[] ToBuffer()

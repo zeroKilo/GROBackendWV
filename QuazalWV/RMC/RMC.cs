@@ -247,6 +247,9 @@ namespace QuazalWV
                 case RMCP.PROTOCOL.PartyService:
                     PartyService.ProcessPartyServiceRequest(m, rmc);
                     break;
+                case RMCP.PROTOCOL.StoreService:
+                    StoreService.ProcessStoreServiceRequest(m, rmc);
+                    break;
                 case RMCP.PROTOCOL.InboxMessageService:
                     InboxMessageService.ProcessInboxMessageServiceRequest(m, rmc);
                     break;
@@ -261,7 +264,6 @@ namespace QuazalWV
                 case RMCP.PROTOCOL.ProgressionService:
                 case RMCP.PROTOCOL.DBGTelemetryService:
                 case RMCP.PROTOCOL.RewardService:
-                case RMCP.PROTOCOL.StoreService:
                 case RMCP.PROTOCOL.AdvertisementsService:
                 case RMCP.PROTOCOL.SkillsService:
                 case RMCP.PROTOCOL.LoadoutService:

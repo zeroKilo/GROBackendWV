@@ -329,27 +329,28 @@ namespace QuazalWV
             return result;
         }
 
-        public static List<GR5_SkillModifier> GetSkillModefiers()
+        public static List<GR5_SkillModifier> GetSkillModifiers()
         {
             List<GR5_SkillModifier> result = new List<GR5_SkillModifier>();
             List<List<string>> results = GetQueryResults("SELECT * FROM skillmodifiers");
             foreach (List<string> entry in results)
             {
-                GR5_SkillModifier mod = new GR5_SkillModifier();
-                mod.m_ModifierID = Convert.ToUInt32(entry[2]);
-                mod.m_ModifierType = Convert.ToByte(entry[3]);
-                mod.m_PropertyType = Convert.ToByte(entry[4]);
-                mod.m_MethodType = Convert.ToByte(entry[5]);
-                mod.m_MethodValue = entry[6];
+                GR5_SkillModifier mod = new GR5_SkillModifier
+                {
+                    m_ModifierID = Convert.ToUInt32(entry[2]),
+                    m_ModifierType = Convert.ToByte(entry[3]),
+                    m_PropertyType = Convert.ToByte(entry[4]),
+                    m_MethodType = Convert.ToByte(entry[5]),
+                    m_MethodValue = entry[6]
+                };
                 result.Add(mod);
             }
             return result;
         }
 
-        public static List<GR5_SkillModifierList> GetSkillModefierLists()
+        public static List<GR5_SkillModifierList> GetSkillModifierLists()
         {
             List<GR5_SkillModifierList> result = new List<GR5_SkillModifierList>();
-            List<uint> IDs = new List<uint>();
             List<List<string>> results = GetQueryResults("SELECT * FROM skillmodifiers");
             foreach (List<string> entry in results)
             {
@@ -623,7 +624,6 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM skus");
             foreach(List<string> entry in results)
             {
-                var skuId = Convert.ToUInt32(entry[0]);
                 GR5_SKU sku = new GR5_SKU
                 {
                     m_ID = Convert.ToUInt32(entry[1]),
@@ -638,7 +638,7 @@ namespace QuazalWV
                     m_OasisName = Convert.ToUInt32(entry[10]),
                     m_ItemVector = new List<GR5_SKUItem>()
                 };
-                List<List<string>> results2 = GetQueryResults("SELECT * FROM skuitems WHERE skuid=" + skuId);
+                List<List<string>> results2 = GetQueryResults("SELECT * FROM skuitems WHERE skuid=" + sku.m_ID);
                 foreach (List<string> entry2 in results2)
                 {
                     GR5_SKUItem item = new GR5_SKUItem
