@@ -18,6 +18,10 @@ namespace QuazalWV
         public byte sessionID;
         public byte[] sessionKey;
         public ushort seqCounter;
+        /// <summary>
+        /// Reliable substream sequence ID.
+        /// </summary>
+        public ushort seqCounterReliable = 1;
         public ushort seqCounterDO;
         public ushort callCounterDO_RMC;
         public uint callCounterRMC;

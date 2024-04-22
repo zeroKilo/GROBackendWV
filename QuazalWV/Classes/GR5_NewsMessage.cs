@@ -218,7 +218,7 @@ namespace QuazalWV
             ).ToString().Replace("\r", "").Replace("\n", "").Replace("\t", "");
         }
 
-        public void toBuffer(Stream s)
+        public void ToBuffer(Stream s)
         {
             header.toBuffer(s);
             Helper.WriteString(s, m_body);
