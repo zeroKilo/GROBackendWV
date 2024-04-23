@@ -10,7 +10,7 @@ using QuazalWV;
 
 namespace GROBackendWV
 {
-    public static class UDPMainServer
+    public static class RdvServer
     {
         public static readonly uint serverPID = 0x1000;
         public static readonly object _sync = new object();
@@ -59,12 +59,12 @@ namespace GROBackendWV
 
         public static void ProcessPacket(byte[] data, IPEndPoint ep)
         {
-            QPacketHandler.ProcessPacket("UDP Backend", data, ep, listener, UDPMainServer.serverPID, UDPMainServer.listenPort);
+            QPacketHandler.ProcessPacket("RDV", data, ep, listener, serverPID, listenPort);
         }
 
         private static void WriteLog(int priority, string s)
         {
-            Log.WriteLine(priority, "[UDP Main] " + s);
+            Log.WriteLine(priority, "[RDV] " + s);
         }
     }
 }

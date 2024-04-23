@@ -90,11 +90,11 @@
     <Compile Include="SendNotification.Designer.cs">
       <DependentUpon>SendNotification.cs</DependentUpon>
     </Compile>
-    <Compile Include="Server\UDPMainServer.cs" />
+    <Compile Include="Server\RdvServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\TCPServer.cs" />
-    <Compile Include="Server\UDPRedirectorServer.cs" />
+    <Compile Include="Server\OnlineConfigServer.cs" />
+    <Compile Include="Server\AuthServer.cs" />
     <Compile Include="UDPProcessor.cs">
       <SubType>Form</SubType>
     </Compile>

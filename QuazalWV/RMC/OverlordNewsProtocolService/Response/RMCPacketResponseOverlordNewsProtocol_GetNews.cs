@@ -20,7 +20,7 @@ namespace QuazalWV
                     new GR5_NewsMessage(NewsMessageType.LevelUp, client, msgId, client.PID, 0, 16)
                 );
                 client.systemNews.Add(
-                    new GR5_NewsMessage(NewsMessageType.WeaponLevelUp, client, msgId, client.PID, 1000, 5)
+                    new GR5_NewsMessage(NewsMessageType.WeaponLevelUp, client, msgId, client.PID, 1, 5)
                 );
                 client.systemNews.Add(
                     new GR5_NewsMessage(NewsMessageType.MissionCompleted, client, msgId, client.PID, 1)
@@ -35,7 +35,7 @@ namespace QuazalWV
                     new GR5_NewsMessage(NewsMessageType.AvatarChanged, client, msgId, client.PID, 8, 1)
                 );
                 client.systemNews.Add(
-                    new GR5_NewsMessage(NewsMessageType.WeaponKills, client, msgId, client.PID, 1000, 100)
+                    new GR5_NewsMessage(NewsMessageType.WeaponKills, client, msgId, client.PID, 1, 100)
                 );
                 client.systemNews.Add(
                     new GR5_NewsMessage(NewsMessageType.WeaponHeadshots, client, msgId, client.PID, 1, 50)

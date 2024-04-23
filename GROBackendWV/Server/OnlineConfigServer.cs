@@ -10,7 +10,7 @@ using QuazalWV;
 
 namespace GROBackendWV
 {
-    public static class TCPServer
+    public static class OnlineConfigServer
     {
         public static readonly object _sync = new object();
         public static bool _exit = false;
@@ -39,7 +39,7 @@ namespace GROBackendWV
         {
             listener = new TcpListener(IPAddress.Parse(ip), listenPort);
             listener.Start();
-            Log.WriteLine(1, "[TCP Webserver] Server started");
+            Log.WriteLine(1, "[OnlineConfigSvc] Server started");
             while (true)
             {
                 lock (_sync)
@@ -50,12 +50,12 @@ namespace GROBackendWV
                 try
                 {
                     TcpClient client = listener.AcceptTcpClient();
-                    Log.WriteLine(1, "[TCP] Client connected");
+                    Log.WriteLine(1, "[OnlineConfigSvc] Client connected");
                     new Thread(tClientHandler).Start(client);
                 }
                 catch { }
             }
-            Log.WriteLine(1, "[TCP Webserver] Server stopped");
+            Log.WriteLine(1, "[OnlineConfigSvc] Server stopped");
         }
 
         public static void tClientHandler(object obj)
@@ -67,7 +67,7 @@ namespace GROBackendWV
             //Read Content
             while (ns.DataAvailable)
                 m.WriteByte((byte)ns.ReadByte());
-            Log.WriteLine(2, "[TCP Webserver] Received " + m.Length + " bytes");
+            Log.WriteLine(2, "[OnlineConfigSvc] Received " + m.Length + " bytes");
             //Create Response
             StringBuilder sb = new StringBuilder();
             sb.Append("[");
@@ -89,7 +89,7 @@ namespace GROBackendWV
             ns.Write(buff, 0, buff.Length);
             ns.Flush();
             ns.Close();
-            Log.WriteLine(2, "[TCP Webserver] Send " + buff.Length + " bytes");
+            Log.WriteLine(2, "[OnlineConfigSvc] Send " + buff.Length + " bytes");
         }
 
         private static void AddHttpHeader(StringBuilder sb, int contentlen)
