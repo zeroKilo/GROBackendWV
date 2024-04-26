@@ -19,9 +19,9 @@ namespace QuazalWV
                 client.systemNews.Add(
                     new GR5_NewsMessage(NewsMessageType.LevelUp, client, msgId, client.PID, 0, 16)
                 );
-                client.systemNews.Add(
+                /*client.systemNews.Add(
                     new GR5_NewsMessage(NewsMessageType.WeaponLevelUp, client, msgId, client.PID, 1, 5)
-                );
+                );*/
                 client.systemNews.Add(
                     new GR5_NewsMessage(NewsMessageType.MissionCompleted, client, msgId, client.PID, 1)
                 );
@@ -34,12 +34,12 @@ namespace QuazalWV
                 client.systemNews.Add(
                     new GR5_NewsMessage(NewsMessageType.AvatarChanged, client, msgId, client.PID, 8, 1)
                 );
-                client.systemNews.Add(
+                /*client.systemNews.Add(
                     new GR5_NewsMessage(NewsMessageType.WeaponKills, client, msgId, client.PID, 1, 100)
                 );
                 client.systemNews.Add(
                     new GR5_NewsMessage(NewsMessageType.WeaponHeadshots, client, msgId, client.PID, 1, 50)
-                );
+                );*/
             }
 
             if (client.personaNews.Count == 0)
@@ -60,12 +60,12 @@ namespace QuazalWV
                 client.friendNews.Add(
                     new GR5_NewsMessage(NewsMessageType.AvatarChanged, client, msgId, client.PID, 8, 1)
                 );
-                client.friendNews.Add(
+                /*client.friendNews.Add(
                     new GR5_NewsMessage(NewsMessageType.WeaponKills, client, msgId, client.PID, 1000, 100)
                 );
                 client.friendNews.Add(
                     new GR5_NewsMessage(NewsMessageType.WeaponHeadshots, client, msgId, client.PID, 1, 50)
-                );
+                );*/
             }
 
             News = new List<GR5_NewsMessage>();
