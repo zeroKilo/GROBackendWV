@@ -289,7 +289,7 @@
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetAllDefaultLoadoutKits.cs" />
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetTemplateItems.cs" />
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetUserInventoryByBagType.cs" />
-    <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_Method2.cs" />
+    <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetAllBoosts.cs" />
     <Compile Include="RMC\InventoryService\Response\RMCPacketResponseInventoryService_GetAllConsumables.cs" />
     <Compile Include="RMC\LeaderboardService\LeaderboardService.cs" />
     <Compile Include="RMC\LeaderboardService\Response\RMCPacketResponseLeaderboardService_GetLeaderboards.cs" />
