@@ -181,6 +181,8 @@
     <Compile Include="Classes\StationInfo.cs" />
     <Compile Include="Classes\StdMaps.cs" />
     <Compile Include="ClientInfo.cs" />
+    <Compile Include="DB\AbilityUpgradeModel.cs" />
+    <Compile Include="DB\ConsumableModel.cs" />
     <Compile Include="DB\DBHelper.cs" />
     <Compile Include="DB\TransactionModel.cs" />
     <Compile Include="DO\DO.cs" />

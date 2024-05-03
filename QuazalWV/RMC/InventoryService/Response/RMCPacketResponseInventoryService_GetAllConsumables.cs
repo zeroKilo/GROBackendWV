@@ -1,33 +1,30 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuazalWV
 {
     public class RMCPacketResponseInventoryService_GetAllConsumables : RMCPResponse
     {
-        public List<GR5_Consumable> cons = new List<GR5_Consumable>();
+        public List<GR5_Consumable> Consumables { get; set; }
 
         public RMCPacketResponseInventoryService_GetAllConsumables()
         {
-            cons.Add(new GR5_Consumable());
+            Consumables = DB.ConsumableModel.GetConsumables();
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)cons.Count);
-            foreach (GR5_Consumable c in cons)
+            Helper.WriteU32(m, (uint)Consumables.Count);
+            foreach (GR5_Consumable c in Consumables)
                 c.toBuffer(m);
             return m.ToArray();
         }
 
         public override string ToString()
         {
-            return "[RMCPacketResponseInventoryService_GetAllConsumables]";
+            return "[GetAllConsumables Response]";
         }
 
         public override string PayloadToString()
