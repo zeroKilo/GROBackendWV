@@ -18,7 +18,7 @@ namespace QuazalWV
         {
             abs = DBHelper.GetAbilities();
             abups = AbilityUpgradeModel.GetUpgrades();
-            pabs.Add(new GR5_PassiveAbility());
+            pabs = PassiveAbilityModel.GetTemplates();
         }
 
         public override byte[] ToBuffer()

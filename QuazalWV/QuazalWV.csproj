@@ -184,6 +184,7 @@
     <Compile Include="DB\AbilityUpgradeModel.cs" />
     <Compile Include="DB\ConsumableModel.cs" />
     <Compile Include="DB\DBHelper.cs" />
+    <Compile Include="DB\PassiveAbilityModel.cs" />
     <Compile Include="DB\TransactionModel.cs" />
     <Compile Include="DO\DO.cs" />
     <Compile Include="DO\DO_BundleMessage.cs" />
