@@ -35,6 +35,12 @@ namespace QuazalWV
                 case 21:
                     rmc.request = new RMCPacketRequestStoreService_CompleteBuyWeaponAndAttachComponents(s);
                     break;
+                case 30:
+                    rmc.request = new RMCPacketRequestStoreService_InitiateBuyArmourAndAttachInserts(s);
+                    break;
+                case 31:
+                    rmc.request = new RMCPacketRequestStoreService_CompleteBuyArmourAndAttachInserts(s);
+                    break;
                 default:
                     Log.WriteLine(1, "[RMC Store] Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
@@ -102,6 +108,27 @@ namespace QuazalWV
                     var buyWeapComplReq = (RMCPacketRequestStoreService_CompleteBuyWeaponAndAttachComponents)rmc.request;
                     TransactionModel.CompleteTransaction(buyWeapComplReq.TransactionId);
                     reply = new RMCPacketResponseStoreService_CompleteBuyWeaponAndAttachComponents();
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    break;
+                case 30:
+                    var buyArmorWithInsertsInitReq = (RMCPacketRequestStoreService_InitiateBuyArmourAndAttachInserts)rmc.request;
+                    trId = TransactionModel.SaveMultiItemTransaction(
+                        client.PID,
+                        buyArmorWithInsertsInitReq.ArmorSkuData.SkuId,
+                        TransactionType.BuyArmourAndAttachInserts,
+                        buyArmorWithInsertsInitReq.ArmorSkuData.VirtualCurrencyType,
+                        buyArmorWithInsertsInitReq.InsertSKUIdSlots
+                    );
+                    reply = new RMCPacketResponseStoreService_InitiateBuyArmourAndAttachInserts(trId);
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    // send complete transaction notif on success
+                    if (trId > 0)
+                        NotificationQuene.AddNotification(new NotificationQueneEntry(client, 3000, 0, 1022, 1, trId, trId, 0, ""));
+                    break;
+                case 31:
+                    var buyArmorWithInsertsComplReq = (RMCPacketRequestStoreService_CompleteBuyArmourAndAttachInserts)rmc.request;
+                    TransactionModel.CompleteTransaction(buyArmorWithInsertsComplReq.TransactionId);
+                    reply = new RMCPacketResponseStoreService_CompleteBuyArmourAndAttachInserts();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:

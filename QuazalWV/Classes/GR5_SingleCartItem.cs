@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuazalWV.Classes
+namespace QuazalWV
 {
     public class GR5_SingleCartItem
     {
