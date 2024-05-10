@@ -1,20 +1,16 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace QuazalWV
 {
     public class GR5_AdRecommender
     {
-        public uint unk1;
-        public uint unk2;
-        public void toBuffer(Stream s)
+        public uint m_AdServerId;
+        public uint m_AdCount;
+
+        public void ToBuffer(Stream s)
         {
-            Helper.WriteU32(s, unk1);
-            Helper.WriteU32(s, unk2);
+            Helper.WriteU32(s, m_AdServerId);
+            Helper.WriteU32(s, m_AdCount);
         }
     }
 }

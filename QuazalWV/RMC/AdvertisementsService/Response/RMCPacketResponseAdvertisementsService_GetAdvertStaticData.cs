@@ -1,62 +1,63 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QuazalWV.DB;
 
 namespace QuazalWV
 {
     public class RMCPacketResponseAdvertisementsService_GetAdvertStaticData : RMCPResponse
     {
-        //probably unnecessary
         public class StaticLists
         {
-            public List<GR5_AdStaticList> list = new List<GR5_AdStaticList>();
-            public void toBuffer(Stream s)
+            public List<GR5_AdStaticList> Lists { get; set; }
+
+            public StaticLists()
             {
-                Helper.WriteU32(s, (uint)list.Count);
-                foreach (GR5_AdStaticList a in list)
-                    a.toBuffer(s);
+                Lists = AdModel.GetAdStaticLists();
+            }
+
+            public void ToBuffer(Stream s)
+            {
+                Helper.WriteU32(s, (uint)Lists.Count);
+                foreach (GR5_AdStaticList a in Lists)
+                    a.ToBuffer(s);
             }
         }
 
-        public List<GR5_AdContainer> adContainers = new List<GR5_AdContainer>();
-        public List<GR5_AdServer> adServers = new List<GR5_AdServer>();
-        public List<StaticLists> staticLists = new List<StaticLists>();
-        public List<GR5_AdRecommender> adRecommenders = new List<GR5_AdRecommender>();
+        public List<GR5_AdContainer> AdContainers { get; set; }
+        public List<GR5_AdServer> AdServers { get; set; }
+        public List<StaticLists> StaticAdLists { get; set; }
+        public List<GR5_AdRecommender> AdRecommenders { get; set; }
 
         public RMCPacketResponseAdvertisementsService_GetAdvertStaticData()
         {
-            adContainers.Add(new GR5_AdContainer());
-            adServers.Add(new GR5_AdServer());
-            StaticLists u = new StaticLists();
-            u.list.Add(new GR5_AdStaticList());
-            staticLists.Add(u);
-            adRecommenders.Add(new GR5_AdRecommender());
+            
+            AdContainers = AdModel.GetAdContainers();
+            AdServers = AdModel.GetAdServers();
+            StaticAdLists = new List<StaticLists> { new StaticLists() };
+            AdRecommenders = AdModel.GetAdRecommenders();
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)adContainers.Count);
-            foreach (GR5_AdContainer u in adContainers)
-                u.toBuffer(m);
-            Helper.WriteU32(m, (uint)adServers.Count);
-            foreach (GR5_AdServer u in adServers)
-                u.toBuffer(m);
-            Helper.WriteU32(m, (uint)staticLists.Count);
-            foreach (StaticLists u in staticLists)
-                u.toBuffer(m);
-            Helper.WriteU32(m, (uint)adRecommenders.Count);
-            foreach (GR5_AdRecommender u in adRecommenders)
-                u.toBuffer(m);
+            Helper.WriteU32(m, (uint)AdContainers.Count);
+            foreach (GR5_AdContainer u in AdContainers)
+                u.ToBuffer(m);
+            Helper.WriteU32(m, (uint)AdServers.Count);
+            foreach (GR5_AdServer u in AdServers)
+                u.ToBuffer(m);
+            Helper.WriteU32(m, (uint)StaticAdLists.Count);
+            foreach (StaticLists u in StaticAdLists)
+                u.ToBuffer(m);
+            Helper.WriteU32(m, (uint)AdRecommenders.Count);
+            foreach (GR5_AdRecommender u in AdRecommenders)
+                u.ToBuffer(m);
             return m.ToArray();
         }
 
         public override string ToString()
         {
-            return "[RMCPacketResponseAdvertisementsService_GetAdvertStaticData]";
+            return "[GetAdvertStaticData Response]";
         }
 
         public override string PayloadToString()

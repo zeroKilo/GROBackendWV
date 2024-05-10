@@ -23,7 +23,7 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 default:
-                    Log.WriteLine(1, "[RMC AdvertisementsService] Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
+                    Log.WriteLine(1, "[RMC Ads] Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
         }

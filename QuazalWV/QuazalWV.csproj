@@ -183,6 +183,7 @@
     <Compile Include="Classes\StdMaps.cs" />
     <Compile Include="ClientInfo.cs" />
     <Compile Include="DB\AbilityUpgradeModel.cs" />
+    <Compile Include="DB\AdModel.cs" />
     <Compile Include="DB\ConsumableModel.cs" />
     <Compile Include="DB\DBHelper.cs" />
     <Compile Include="DB\PassiveAbilityModel.cs" />

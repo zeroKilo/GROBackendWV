@@ -1,24 +1,20 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace QuazalWV
 {
     public class GR5_AdStaticList
     {
-        public uint unk1;
-        public uint unk2;
-        public byte unk3;
-        public byte unk4;
-        public void toBuffer(Stream s)
+        public uint m_AdServerId;
+        public uint m_AdvertId;
+        public byte m_AdType;
+        public byte m_Priority;
+
+        public void ToBuffer(Stream s)
         {
-            Helper.WriteU32(s, unk1);
-            Helper.WriteU32(s, unk2);
-            Helper.WriteU8(s, unk3);
-            Helper.WriteU8(s, unk4);
+            Helper.WriteU32(s, m_AdServerId);
+            Helper.WriteU32(s, m_AdvertId);
+            Helper.WriteU8(s, m_AdType);
+            Helper.WriteU8(s, m_Priority);
         }
     }
 }

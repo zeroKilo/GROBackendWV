@@ -1,9 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace QuazalWV
 {
@@ -14,8 +9,9 @@ namespace QuazalWV
         public uint m_AssetId;
         public byte m_Layout;
         public byte m_Action;
-        public uint m_OasisName = 70870;
+        public uint m_OasisName;
         public string m_Criteria;
+
         public void toBuffer(Stream s)
         {
             Helper.WriteU32(s, m_ID);

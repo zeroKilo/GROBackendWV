@@ -1,33 +1,30 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QuazalWV.DB;
 
 namespace QuazalWV
 {
     public class RMCPacketResponseAdvertisementsService_GetAdvertisements : RMCPResponse
     {
-        public List<GR5_Advertisement> ads = new List<GR5_Advertisement>();
+        public List<GR5_Advertisement> Ads { get; set; }
 
         public RMCPacketResponseAdvertisementsService_GetAdvertisements()
         {
-            ads.Add(new GR5_Advertisement());
+            Ads = AdModel.GetAds();
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)ads.Count);
-            foreach (GR5_Advertisement a in ads)
+            Helper.WriteU32(m, (uint)Ads.Count);
+            foreach (GR5_Advertisement a in Ads)
                 a.toBuffer(m);
             return m.ToArray();
         }
 
         public override string ToString()
         {
-            return "[RMCPacketResponseAdvertisementsService_GetAdvertisements]";
+            return "[GetAdvertisements Response]";
         }
 
         public override string PayloadToString()
