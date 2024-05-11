@@ -1,33 +1,30 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QuazalWV.DB;
 
 namespace QuazalWV
 {
     public class RMCPacketResponseUnlockService_GetUnlocks : RMCPResponse
     {
-        List<GR5_Unlock> _outUnlockList = new List<GR5_Unlock>();
+        List<GR5_Unlock> Unlocks { get; set; }
 
         public RMCPacketResponseUnlockService_GetUnlocks()
         {
-            _outUnlockList.Add(new GR5_Unlock());
+            Unlocks = UnlockModel.GetUnlocks();
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)_outUnlockList.Count);
-            foreach (GR5_Unlock u in _outUnlockList)
+            Helper.WriteU32(m, (uint)Unlocks.Count);
+            foreach (GR5_Unlock u in Unlocks)
                 u.toBuffer(m);
             return m.ToArray();
         }
 
         public override string ToString()
         {
-            return "[RMCPacketResponseUnlockService_GetUnlocks]";
+            return "[GetUnlocks Response]";
         }
 
         public override string PayloadToString()

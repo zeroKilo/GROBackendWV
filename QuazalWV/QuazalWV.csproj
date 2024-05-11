@@ -188,6 +188,7 @@
     <Compile Include="DB\DBHelper.cs" />
     <Compile Include="DB\PassiveAbilityModel.cs" />
     <Compile Include="DB\TransactionModel.cs" />
+    <Compile Include="DB\UnlockModel.cs" />
     <Compile Include="DO\DO.cs" />
     <Compile Include="DO\DO_BundleMessage.cs" />
     <Compile Include="DO\DO_CreateAndPromoteDuplicaMessage.cs" />
