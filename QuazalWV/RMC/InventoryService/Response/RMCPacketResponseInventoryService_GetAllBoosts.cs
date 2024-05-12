@@ -1,33 +1,30 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using QuazalWV.DB;
 
 namespace QuazalWV
 {
     public class RMCPacketResponseInventoryService_GetAllBoosts : RMCPResponse
     {
-        public List<GR5_Boost> boosts = new List<GR5_Boost>();
+        public List<GR5_Boost> Boosts { get; set; }
 
         public RMCPacketResponseInventoryService_GetAllBoosts()
         {
-            boosts.Add(new GR5_Boost());
+            Boosts = BoostModel.GetBoosts();
         }
 
         public override byte[] ToBuffer()
         {
             MemoryStream m = new MemoryStream();
-            Helper.WriteU32(m, (uint)boosts.Count);
-            foreach (GR5_Boost b in boosts)
-                b.toBuffer(m);
+            Helper.WriteU32(m, (uint)Boosts.Count);
+            foreach (GR5_Boost b in Boosts)
+                b.ToBuffer(m);
             return m.ToArray();
         }
 
         public override string ToString()
         {
-            return "[RMCPacketResponseInventoryService_GetAllBoosts]";
+            return "[GetAllBoosts Response]";
         }
 
         public override string PayloadToString()

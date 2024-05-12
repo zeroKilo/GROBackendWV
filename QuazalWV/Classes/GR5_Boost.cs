@@ -14,7 +14,8 @@ namespace QuazalWV
         public uint m_ModifierList;
         public uint m_Type;
         public string m_Name;
-        public void toBuffer(Stream s)
+
+        public void ToBuffer(Stream s)
         {
             Helper.WriteU32(s, m_ItemID);
             Helper.WriteU32(s, m_AssetKey);
