@@ -1,11 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using QuazalWV.DB;
-using System.Drawing;
 
 namespace QuazalWV
 {
@@ -35,6 +29,12 @@ namespace QuazalWV
                 case 21:
                     rmc.request = new RMCPacketRequestStoreService_CompleteBuyWeaponAndAttachComponents(s);
                     break;
+                case 26:
+                    rmc.request = new RMCPacketRequestStoreService_InitiateBuyAbilityWithUpgrades(s);
+                    break;
+                case 27:
+                    rmc.request = new RMCPacketRequestStoreService_CompleteBuyAbilityWithUpgrades(s);
+                    break;
                 case 30:
                     rmc.request = new RMCPacketRequestStoreService_InitiateBuyArmourAndAttachInserts(s);
                     break;
@@ -62,7 +62,6 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 9:
-                    //RemoveUnusedCoupons
                     reply = new RMCPResponseEmpty();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
@@ -82,7 +81,7 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     // send complete transaction notif on success
                     if (trId > 0)
-                        NotificationQuene.AddNotification(new NotificationQueneEntry(client, 3000, 0, 1022, 1, trId, trId, 0, ""));
+                        SendCompleteNotif(client, trId);
                     break;
                 case 18:
                     var buyItemComplReq = (RMCPacketRequestStoreService_CompleteBuyItem)rmc.request;
@@ -102,12 +101,33 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     // send complete transaction notif on success
                     if (trId > 0)
-                        NotificationQuene.AddNotification(new NotificationQueneEntry(client, 3000, 0, 1022, 1, trId, trId, 0, ""));
+                        SendCompleteNotif(client, trId);
                     break;
                 case 21:
                     var buyWeapComplReq = (RMCPacketRequestStoreService_CompleteBuyWeaponAndAttachComponents)rmc.request;
                     TransactionModel.CompleteTransaction(buyWeapComplReq.TransactionId);
                     reply = new RMCPacketResponseStoreService_CompleteBuyWeaponAndAttachComponents();
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    break;
+                case 26:
+                    var buyAbilityInitReq = (RMCPacketRequestStoreService_InitiateBuyAbilityWithUpgrades)rmc.request;
+                    trId = TransactionModel.SaveMultiItemTransaction(
+                        client.PID,
+                        buyAbilityInitReq.AbilitySkuData.SkuId,
+                        TransactionType.BuyAbilityWithUpgrades,
+                        buyAbilityInitReq.AbilitySkuData.VirtualCurrencyType,
+                        buyAbilityInitReq.UpgradeSKUIdSlots
+                    );
+                    reply = new RMCPacketResponseStoreService_InitiateBuyAbilityWithUpgrades(trId);
+                    RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
+                    // send complete transaction notif on success
+                    if (trId > 0)
+                        SendCompleteNotif(client, trId);
+                    break;
+                case 27:
+                    var buyAbilityComplReq = (RMCPacketRequestStoreService_CompleteBuyAbilityWithUpgrades)rmc.request;
+                    TransactionModel.CompleteTransaction(buyAbilityComplReq.TransactionId);
+                    reply = new RMCPacketResponseStoreService_CompleteBuyAbilityWithUpgrades();
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     break;
                 case 30:
@@ -123,7 +143,7 @@ namespace QuazalWV
                     RMC.SendResponseWithACK(client.udp, p, rmc, client, reply);
                     // send complete transaction notif on success
                     if (trId > 0)
-                        NotificationQuene.AddNotification(new NotificationQueneEntry(client, 3000, 0, 1022, 1, trId, trId, 0, ""));
+                        SendCompleteNotif(client, trId);
                     break;
                 case 31:
                     var buyArmorWithInsertsComplReq = (RMCPacketRequestStoreService_CompleteBuyArmourAndAttachInserts)rmc.request;
@@ -135,6 +155,16 @@ namespace QuazalWV
                     Log.WriteLine(1, "[RMC Store] Error: Unknown Method 0x" + rmc.methodID.ToString("X"));
                     break;
             }
+        }
+
+        /// <summary>
+        /// Signals transaction completion to the game to initiate a completion request.
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="trId"></param>
+        private static void SendCompleteNotif(ClientInfo client, uint trId)
+        {
+            NotificationQuene.AddNotification(new NotificationQueneEntry(client, 3000, 0, 1022, 1, trId, trId, 0, ""));
         }
 
         public enum VirtualCurrencyType
