@@ -419,14 +419,18 @@ namespace QuazalWV
             List<List<string>> results = GetQueryResults("SELECT * FROM components");
             foreach (List<string> entry in results)
             {
-                Map_U32_GR5_Component pair = new Map_U32_GR5_Component();
-                pair.key = Convert.ToUInt32(entry[1]);
-                pair.component = new GR5_Component();
-                pair.component.componentID = Convert.ToUInt32(entry[2]);
-                pair.component.componentKey = Convert.ToUInt32(entry[3]);
-                pair.component.componentType = Convert.ToByte(entry[4]);
-                pair.component.boneStructure = Convert.ToUInt32(entry[5]);
-                pair.component.modifierListID = Convert.ToUInt32(entry[6]);
+                Map_U32_GR5_Component pair = new Map_U32_GR5_Component
+                {
+                    key = Convert.ToUInt32(entry[1]),
+                    component = new GR5_Component
+                    {
+                        componentID = Convert.ToUInt32(entry[2]),
+                        componentKey = Convert.ToUInt32(entry[3]),
+                        componentType = Convert.ToByte(entry[4]),
+                        boneStructure = Convert.ToUInt32(entry[5]),
+                        modifierListID = Convert.ToUInt32(entry[6])
+                    }
+                };
                 result.Add(pair);
             }
             return result;
