@@ -45,10 +45,13 @@ namespace NamespaceParserWV
             }
         }
 
-        private void scanDLLEXEToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ScanExecutable(object sender, EventArgs e)
         {
-            OpenFileDialog d = new OpenFileDialog();
-            d.Filter = "*.exe,*.dll|*.exe;*.dll";
+            var filter = "*.exe,*.dll,*.xexdump";
+            OpenFileDialog d = new OpenFileDialog
+            {
+                Filter = $"{filter}|{filter.Replace(",", ";")}"
+            };
             if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 byte[] data = File.ReadAllBytes(d.FileName);

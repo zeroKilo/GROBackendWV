@@ -126,8 +126,8 @@
             // 
             this.scanDLLEXEToolStripMenuItem.Name = "scanDLLEXEToolStripMenuItem";
             this.scanDLLEXEToolStripMenuItem.Size = new System.Drawing.Size(84, 20);
-            this.scanDLLEXEToolStripMenuItem.Text = "Scan DLL/EXE";
-            this.scanDLLEXEToolStripMenuItem.Click += new System.EventHandler(this.scanDLLEXEToolStripMenuItem_Click);
+            this.scanDLLEXEToolStripMenuItem.Text = "Scan executable";
+            this.scanDLLEXEToolStripMenuItem.Click += new System.EventHandler(this.ScanExecutable);
             // 
             // Form1
             // 
