@@ -21,7 +21,7 @@ OnlineAccessKey=8dtRv2oj
 - GROBackendWV - experimental backend for GRO
 - GRODedicatedServerWV - experimental DS for GRO
 - GROExplorerWV - tool to browse the yeti.big file for game content
-- GROMemoryToolWV - tool to browse various stuctures like lists and trees in memory
+- GROMemoryToolWV - tool to browse various structures like lists and trees in memory
 - GRO_Hook - proxy dll for easy code injection, hooks currently fire script event functions
 - NamespaceParserWV - extracts custom RTTI information found in different exe and dll
 
