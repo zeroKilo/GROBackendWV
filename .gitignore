@@ -45,3 +45,4 @@ msbuild.wrn
 .vs/*
 Be.Windows.Forms.HexBox/*
 *.dtbcache.json
+*.tlog
