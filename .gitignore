@@ -40,6 +40,8 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+packages/*
+DDLParserWV/bin/*
 
 # Visual Studio 2015
 .vs/*
