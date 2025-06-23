@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Be.Windows.Forms.HexBox", "Be.Windows.Forms.HexBox\Be.Windows.Forms.HexBox.csproj", "{26C5F25F-B450-4CAF-AD8B-B8D11AE73457}"
 EndProject
@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GROExplorerWV", "GROExplore
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GROMemoryToolWV", "GROMemoryToolWV\GROMemoryToolWV.csproj", "{7E9024F6-CCDF-4EC3-A3F2-FBDDA9C82D84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NamespaceParserWV", "NamespaceParserWV\NamespaceParserWV.csproj", "{AD68E5AD-5306-4B36-8D11-13B9D0A439D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDLParserWV", "DDLParserWV\DDLParserWV.csproj", "{C671E0DB-C4F7-4D03-9C5A-08DCC0B4E8C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,10 +71,10 @@ Global
 		{7E9024F6-CCDF-4EC3-A3F2-FBDDA9C82D84}.Debug|Win32.Build.0 = Debug|x86
 		{7E9024F6-CCDF-4EC3-A3F2-FBDDA9C82D84}.Release|Win32.ActiveCfg = Release|x86
 		{7E9024F6-CCDF-4EC3-A3F2-FBDDA9C82D84}.Release|Win32.Build.0 = Release|x86
-		{AD68E5AD-5306-4B36-8D11-13B9D0A439D1}.Debug|Win32.ActiveCfg = Debug|x86
-		{AD68E5AD-5306-4B36-8D11-13B9D0A439D1}.Debug|Win32.Build.0 = Debug|x86
-		{AD68E5AD-5306-4B36-8D11-13B9D0A439D1}.Release|Win32.ActiveCfg = Release|x86
-		{AD68E5AD-5306-4B36-8D11-13B9D0A439D1}.Release|Win32.Build.0 = Release|x86
+		{C671E0DB-C4F7-4D03-9C5A-08DCC0B4E8C6}.Debug|Win32.ActiveCfg = Debug|x86
+		{C671E0DB-C4F7-4D03-9C5A-08DCC0B4E8C6}.Debug|Win32.Build.0 = Debug|x86
+		{C671E0DB-C4F7-4D03-9C5A-08DCC0B4E8C6}.Release|Win32.ActiveCfg = Release|x86
+		{C671E0DB-C4F7-4D03-9C5A-08DCC0B4E8C6}.Release|Win32.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
