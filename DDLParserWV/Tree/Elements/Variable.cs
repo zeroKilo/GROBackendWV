@@ -26,5 +26,15 @@ namespace DDLParserWV
             log.AppendLine($"{tabs}\t[arraySize: {ArraySize}]");
             return this;
         }
+
+        public string GetName()
+        {
+            return NsItem.NsItemName;
+        }
+
+        public string GetFullType()
+        {
+            return DeclarationUse.TypeName;
+        }
     }
 }

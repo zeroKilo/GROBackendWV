@@ -25,5 +25,10 @@ namespace DDLParserWV
             NameSpace = new NameSpace(s, log, depth + 1);
             return this;
         }
+
+        public string GetName()
+        {
+            return TypeDeclaration.NsItem.NsItemName;
+        }
     }
 }

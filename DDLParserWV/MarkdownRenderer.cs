@@ -1,4 +1,6 @@
-﻿namespace DDLParserWV
+﻿using System.Collections.Generic;
+
+namespace DDLParserWV
 {
     public static class MarkdownRenderer
     {
@@ -145,6 +147,71 @@
         public static string RenderReturnValue(ReturnValue retVal)
         {
             return $"| {retVal.GetFullType()} | {retVal.GetName()} |\n";
+        }
+
+        public static string RenderClasses(List<ClassDeclaration> classes)
+        {
+            if (classes.Count == 0)
+                return "";
+
+            string output = "# Types\n\n";
+            foreach (var type in classes)
+                output += RenderClass(type);
+            return output;
+        }
+
+        public static string RenderClass(ClassDeclaration type)
+        {
+            uint vars = 0;
+            foreach (var item in type.NameSpace.Items)
+            {
+                switch (item.Type)
+                {
+                    case EParseTreeElement.Variable:
+                        vars++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            string output = $"## {type.GetName()} ([Structure](https://github.com/kinnay/NintendoClients/wiki/NEX-Common-Types#structure))\n";
+
+            if (type.ParentNamespaceName != "")
+            {
+                output += $"Extends `{type.ParentNamespaceName}`.\n";
+                if (vars == 0)
+                    output += "\n";
+            }
+
+            // PropertyDeclaration-only class
+            if (vars == 0)
+            {
+                output += "This class does not declare any variables.\n\n";
+                return output;
+            }
+
+            output += @"
+| Type | Name |
+|------|------|
+";
+            foreach (var item in type.NameSpace.Items)
+            {
+                switch (item.Type)
+                {
+                    case EParseTreeElement.Variable:
+                        output += RenderVariable((Variable)item);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return output + "\n";
+        }
+
+        public static string RenderVariable(Variable variable)
+        {
+            return $"| {variable.GetFullType()} | {variable.GetName()} |\n";
         }
     }
 }
